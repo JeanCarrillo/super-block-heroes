@@ -9,17 +9,14 @@ import { Block } from '../../../models/block';
 })
 export class BoardComponent implements OnInit, OnDestroy {
   board: Board;
-  blocks: Block[];
+  currentBlocks: Block[];
   interval: any;
 
   constructor() {
     const rowNumbers = 10;
     const colNumbers = 20;
     this.board = new Board(rowNumbers, colNumbers);
-    // this.board.blocks[5][5] = new Block(1, true);
-    this.blocks = [];
-    this.blocks.push(new Block(1, 0, 0, true));
-    this.blocks.push(new Block(2, 5, 0, true));
+    this.currentBlocks = [];
   }
 
   ngOnInit() {
@@ -27,14 +24,20 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   private gameLoop(): void {
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.blocks.length; i++) {
-      if (this.blocks[i].isMoving) {
-        if (!this.isColliding(this.blocks[i].x, this.blocks[i].y, 0, 1)) {
-          this.blocks[i].y += 1;
-        } else {
-          this.blocks[i].isMoving = false;
-        }
+    this.currentBlocks.push(
+      new Block(
+        Math.floor(Math.random() * 5),
+        Math.floor(Math.random() * 10),
+        0
+      )
+    );
+    for (let i = 0; i < this.currentBlocks.length; i++) {
+      const block = this.currentBlocks[i];
+      if (!this.isColliding(block.x, block.y, 0, 1)) {
+        block.y += 1;
+      } else {
+        this.board.tiles[block.y][block.x] = block.color;
+        this.currentBlocks.splice(i, 1);
       }
     }
   }
@@ -48,14 +51,20 @@ export class BoardComponent implements OnInit, OnDestroy {
     ) {
       return true;
     }
+    if (this.board.tiles[y + dirY][x + dirX] !== 0) {
+      return true;
+    }
     return false;
   }
 
   public getBlock(y: number, x: number) {
+    if (this.board.tiles[y][x] !== 0) {
+      return this.board.tiles[y][x];
+    }
     // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.blocks.length; i++) {
-      if (this.blocks[i].x === x && this.blocks[i].y === y) {
-        return this.blocks[i].color;
+    for (let i = 0; i < this.currentBlocks.length; i++) {
+      if (this.currentBlocks[i].x === x && this.currentBlocks[i].y === y) {
+        return this.currentBlocks[i].color;
       }
     }
     return false;
