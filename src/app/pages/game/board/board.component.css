@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  width: 25px;
+  height: 25px;
+  border: 1px dotted lightgray;
+}
+
+.block {
+  width: 100%;
+  height: auto;
+}
