@@ -18,7 +18,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   board: Board;
   currentBlocks: Block[];
   interval: any;
-  tempInterval: any;
+  fallingSpeed: number;
 
   // Listens to keyboard events
   @HostListener('window:keydown', ['$event'])
@@ -34,6 +34,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   constructor() {
+    this.fallingSpeed = 200;
     const rowNumbers = 10;
     const colNumbers = 20;
     this.board = new Board(rowNumbers, colNumbers);
@@ -41,31 +42,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.interval = setInterval(() => this.gameLoop(), 200);
-    this.tempInterval = setInterval(() => this.tempMethod(), 1000);
-  }
-
-  tempMethod(): void {
-    // Random block spawning
-    // this.currentBlocks.push(
-    //   new Block(
-    //     Math.floor(Math.random() * 5),
-    //     Math.floor(Math.random() * 10),
-    //     0
-    //   )
-    // );
-    if (this.currentBlocks.length > 0) {
-      return;
-    }
-    const newPiece = new Piece();
-    for (let i = 0; i < newPiece.shape.length; i++) {
-      for (let j = 0; j < newPiece.shape[i].length; j++) {
-        const color = newPiece.shape[i][j];
-        if (color !== 0) {
-          this.currentBlocks.push(new Block(color, 5 + i, 0 + j));
-        }
-      }
-    }
+    this.interval = setInterval(() => this.gameLoop(), this.fallingSpeed);
   }
 
   private gameLoop(): void {
@@ -83,6 +60,22 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.handleCollision();
     } else {
       this.letCurrentBlocksFall();
+    }
+    this.createPiece();
+  }
+
+  private createPiece() {
+    if (this.currentBlocks.length > 0) {
+      return;
+    }
+    const newPiece = new Piece();
+    for (let i = 0; i < newPiece.shape.length; i++) {
+      for (let j = 0; j < newPiece.shape[i].length; j++) {
+        const color = newPiece.shape[i][j];
+        if (color !== 0) {
+          this.currentBlocks.push(new Block(color, 5 + i, 0 + j));
+        }
+      }
     }
   }
 
