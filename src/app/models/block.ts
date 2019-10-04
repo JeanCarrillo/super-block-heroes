@@ -4,7 +4,7 @@ export class Block {
   x: number;
   y: number;
 
-  constructor(color, x, y) {
+  constructor(color: number, x: number, y: number) {
     this.color = color;
     this.x = x;
     this.y = y;
