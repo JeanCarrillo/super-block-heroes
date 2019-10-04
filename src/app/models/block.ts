@@ -1,13 +1,13 @@
 export class Block {
   color: number;
-  isMoving: boolean;
+  // isMoving: boolean;
   x: number;
   y: number;
 
-  constructor(color, x, y, isMoving) {
+  constructor(color: number, x: number, y: number) {
     this.color = color;
     this.x = x;
     this.y = y;
-    this.isMoving = isMoving;
+    // this.isMoving = isMoving;
   }
 }
