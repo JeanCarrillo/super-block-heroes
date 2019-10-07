@@ -1,0 +1,8 @@
+.boardMonster {
+    position: absolute;
+    border: 2px solid black;
+    width: 253px;
+    height: 253px;
+    background: dimgray;
+    top: 544px; 
+}

@@ -1,10 +1,12 @@
-<p>Score: {{ score }}</p>
-<div class="row" *ngFor="let row of board.tiles; index as i">
-  <div class="col" *ngFor="let block of row; index as j">
-    <img
-      *ngIf="getBlock(i, j)"
-      class="block"
-      src="../../assets/blocks/{{ getBlock(i, j) }}.png"
-    />
+<div [ngClass]="player" class="offset-5">
+  <div class="boardRow" *ngFor="let row of board.tiles; index as i">
+    <div class="boardCol" *ngFor="let block of row; index as j">
+      <img
+        *ngIf="getBlock(i, j)"
+        class="block"
+        src="../../assets/blocks/{{ getBlock(i, j) }}.png"
+      />
+    </div>
   </div>
 </div>
+<p>{{ player }}: {{ score }}</p>
