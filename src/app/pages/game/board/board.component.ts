@@ -6,7 +6,10 @@ import { Piece } from '../../../models/piece';
 // Keyboard buttons
 export enum KEY_CODE {
   RIGHT_ARROW = 39,
-  LEFT_ARROW = 37
+  LEFT_ARROW = 37,
+  UP_ARROW = 38,
+  DOWN_ARROW = 40,
+  SPACEBAR = 32
 }
 
 @Component({
@@ -15,8 +18,11 @@ export enum KEY_CODE {
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit, OnDestroy {
+  score: number;
   board: Board;
   currentBlocks: Block[];
+  currentPiece: Piece;
+  // currentShape: any;
   interval: any;
   fallingSpeed: number;
 
@@ -31,10 +37,15 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (event.keyCode === KEY_CODE.LEFT_ARROW) {
       this.moveCurrentBlocks(-1);
     }
+    // tslint:disable-next-line: deprecation
+    if (event.keyCode === KEY_CODE.SPACEBAR) {
+      this.rotateCurrentPiece(1);
+    }
   }
 
   constructor() {
     this.fallingSpeed = 200;
+    this.score = 0;
     const rowNumbers = 10;
     const colNumbers = 20;
     this.board = new Board(rowNumbers, colNumbers);
@@ -68,12 +79,29 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (this.currentBlocks.length > 0) {
       return;
     }
-    const newPiece = new Piece();
-    for (let i = 0; i < newPiece.shape.length; i++) {
-      for (let j = 0; j < newPiece.shape[i].length; j++) {
-        const color = newPiece.shape[i][j];
+    this.currentPiece = new Piece(5, 0);
+    for (let i = 0; i < this.currentPiece.shape.length; i++) {
+      for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
+        const color = this.currentPiece.shape[i][j];
         if (color !== 0) {
           this.currentBlocks.push(new Block(color, 5 + i, 0 + j));
+        }
+      }
+    }
+  }
+
+  // direction: number of indexes to rotate
+  // => direction 1 : rotate right, direction -1 : rotate left
+  private rotateCurrentPiece(direction: number) {
+    this.currentPiece.rotate(direction);
+    this.currentBlocks = [];
+    for (let i = 0; i < this.currentPiece.shape.length; i++) {
+      for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
+        const color = this.currentPiece.shape[i][j];
+        if (color !== 0) {
+          this.currentBlocks.push(
+            new Block(color, this.currentPiece.x + i, this.currentPiece.y + j)
+          );
         }
       }
     }
@@ -83,14 +111,41 @@ export class BoardComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.currentBlocks.length; i++) {
       this.currentBlocks[i].y += 1;
     }
+    console.log(this.currentPiece);
+    if (this.currentPiece) {
+      this.currentPiece.y += 1;
+    }
   }
 
   private handleCollision(): void {
     for (let i = 0; i < this.currentBlocks.length; i++) {
       const block = this.currentBlocks[i];
+      // Current block is now part of the board matrix
       this.board.tiles[block.y][block.x] = block.color;
     }
     this.currentBlocks = [];
+    this.checkCompletedLines();
+  }
+
+  private checkCompletedLines() {
+    for (let i = 0; i < this.board.tiles.length; i++) {
+      let completed = true;
+      for (let j = 0; j < this.board.tiles[i].length; j++) {
+        if (this.board.tiles[i][j] === 0) {
+          completed = false;
+          break;
+        }
+      }
+      if (completed) {
+        this.deleteRow(i);
+      }
+    }
+  }
+
+  private deleteRow(index: number) {
+    for (let i = 0; i < this.board.tiles[index].length; i++) {
+      this.board.tiles[index][i] === 0;
+    }
   }
 
   // Returns true if something is colliding
@@ -139,6 +194,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (canMove) {
       for (const block of this.currentBlocks) {
         block.x += x;
+      }
+      if (this.currentPiece) {
+        this.currentPiece.x += x;
       }
     }
   }
