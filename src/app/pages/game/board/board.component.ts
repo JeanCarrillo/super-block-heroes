@@ -20,6 +20,8 @@ export enum KEY_CODE {
 export class BoardComponent implements OnInit, OnDestroy {
   score: number;
   board: Board;
+  rowNumbers = 10;
+  colNumbers = 20;
   currentBlocks: Block[];
   currentPiece: Piece;
   // currentShape: any;
@@ -46,9 +48,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   constructor() {
     this.fallingSpeed = 200;
     this.score = 0;
-    const rowNumbers = 10;
-    const colNumbers = 20;
-    this.board = new Board(rowNumbers, colNumbers);
+    this.board = new Board(this.rowNumbers, this.colNumbers);
     this.currentBlocks = [];
   }
 
@@ -94,6 +94,18 @@ export class BoardComponent implements OnInit, OnDestroy {
   // => direction 1 : rotate right, direction -1 : rotate left
   private rotateCurrentPiece(direction: number) {
     this.currentPiece.rotate(direction);
+    // TO DO : CHECK COLLISIONS BEFORE ROTATING
+
+    // for (let i = 0; i < this.currentPiece.shape.length; i++) {
+    //   for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
+    //     const color = this.currentPiece.shape[i][j];
+    //     if (color !== 0) {
+    //       this.currentBlocks.push(
+    //         new Block(color, this.currentPiece.x + i, this.currentPiece.y + j)
+    //       );
+    //     }
+    //   }
+    // }
     this.currentBlocks = [];
     for (let i = 0; i < this.currentPiece.shape.length; i++) {
       for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
@@ -128,6 +140,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   private checkCompletedLines() {
+    const rowsToDelete = [];
     for (let i = 0; i < this.board.tiles.length; i++) {
       let completed = true;
       for (let j = 0; j < this.board.tiles[i].length; j++) {
@@ -137,15 +150,20 @@ export class BoardComponent implements OnInit, OnDestroy {
         }
       }
       if (completed) {
-        this.deleteRow(i);
+        rowsToDelete.push(i);
       }
     }
+    this.deleteRows(rowsToDelete);
   }
 
-  private deleteRow(index: number) {
-    for (let i = 0; i < this.board.tiles[index].length; i++) {
-      this.board.tiles[index][i] === 0;
+  private deleteRows(rowsToDelete: number[]) {
+    // TO DO : REFACTOR TO GET NEW LINE FROM board.ts
+    const emptyRow = new Array(this.rowNumbers).fill(0);
+    for (let i = 0; i < rowsToDelete.length; i++) {
+      this.board.tiles.splice(rowsToDelete[i], 1);
+      this.board.tiles.splice(0, 0, emptyRow);
     }
+    this.score += rowsToDelete.length * 10;
   }
 
   // Returns true if something is colliding
