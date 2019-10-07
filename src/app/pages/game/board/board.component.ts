@@ -95,17 +95,23 @@ export class BoardComponent implements OnInit, OnDestroy {
   private rotateCurrentPiece(direction: number) {
     this.currentPiece.rotate(direction);
     // TO DO : CHECK COLLISIONS BEFORE ROTATING
-
-    // for (let i = 0; i < this.currentPiece.shape.length; i++) {
-    //   for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
-    //     const color = this.currentPiece.shape[i][j];
-    //     if (color !== 0) {
-    //       this.currentBlocks.push(
-    //         new Block(color, this.currentPiece.x + i, this.currentPiece.y + j)
-    //       );
-    //     }
-    //   }
-    // }
+    let rotationCollide = false;
+    for (let i = 0; i < this.currentPiece.shape.length; i++) {
+      for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
+        const color = this.currentPiece.shape[i][j];
+        if (
+          color !== 0 &&
+          this.board.tiles[this.currentPiece.y + j][this.currentPiece.x + i] !==
+            0
+        ) {
+          rotationCollide = true;
+        }
+      }
+    }
+    if (rotationCollide) {
+      this.currentPiece.rotate(-direction);
+      return;
+    }
     this.currentBlocks = [];
     for (let i = 0; i < this.currentPiece.shape.length; i++) {
       for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
