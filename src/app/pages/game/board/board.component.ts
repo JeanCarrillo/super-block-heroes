@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy, Input } from '@angular/core';
 import { Board } from '../../../models/board';
 import { Block } from '../../../models/block';
 import { Piece } from '../../../models/piece';
@@ -19,6 +19,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   currentBlocks: Block[];
   interval: any;
   fallingSpeed: number;
+  @Input() player: string; 
 
   // Listens to keyboard events
   @HostListener('window:keydown', ['$event'])
