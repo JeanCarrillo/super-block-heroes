@@ -11,6 +11,8 @@ import { MainComponent } from './pages/main/main.component';
 import { LobbyComponent } from './pages/main/lobby/lobby.component';
 import { MenuComponent } from './pages/main/menu/menu.component';
 import { GameComponent } from './pages/game/game.component';
+import { BoardComponent } from './pages/game/board/board.component';
+import { MonsterComponent } from './pages/game/monster/monster.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { GameComponent } from './pages/game/game.component';
     MainComponent,
     LobbyComponent,
     MenuComponent,
-    GameComponent
+    GameComponent,
+    BoardComponent,
+    MonsterComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
