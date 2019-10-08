@@ -208,14 +208,14 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.score += nbOfRows * 10;
   }
 
-  private handleGameOver() {
+  private handleGameOver(): void {
     this.gameOver = true;
     clearInterval(this.interval);
   }
 
   // Returns true if something is colliding
   // Y axis only
-  private isColliding(x: number, y: number, dirY: number) {
+  private isColliding(x: number, y: number, dirY: number): boolean {
     if (y + dirY < 0 || y + dirY >= this.board.tiles.length) {
       return true;
     }
@@ -226,7 +226,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   // Method used in render template: returns color (img) to display (an integer)
-  public getBlock(y: number, x: number) {
+  public getBlock(y: number, x: number): any {
     if (this.board.tiles[y][x] !== 0) {
       return this.board.tiles[y][x];
     }
@@ -240,7 +240,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   // Linked to Keyboard events : actions
   // Moves current blocks left/right, X axis only, no Y axis checks
-  private moveCurrentBlocks(x: number) {
+  private moveCurrentBlocks(x: number): void {
     let canMove = true;
     for (const block of this.currentBlocks) {
       if (!this.canMove(block.x, block.y, x)) {
@@ -260,7 +260,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   // Method used when moving current blocks (key pressed)
   // checks left and right, returns false if illegal move (out of matrix or existing block)
   // X axis only
-  private canMove(x: number, y: number, dirX: number) {
+  private canMove(x: number, y: number, dirX: number): boolean {
     if (x + dirX < 0 || x + dirX >= this.board.tiles[0].length) {
       return false;
     }
@@ -273,7 +273,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   // When key is pressed
   // => current blocks fall until collision (fast forward)
   // TO DO: DEBUG
-  private dropCurrentBlocks() {
+  private dropCurrentBlocks(): void {
     let didCollide = false;
     while (!didCollide) {
       for (let i = 0; i < this.currentBlocks.length; i++) {
