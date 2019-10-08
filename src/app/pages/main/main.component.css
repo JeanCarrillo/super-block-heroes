@@ -1,0 +1,137 @@
+.logo{
+    max-width: 35%;
+    position: relative;
+}
+
+.rectangle1{
+    height: 100px;
+    width: 200px;
+    border-radius: 10%;
+    bottom: 0;
+    margin-left: 15%;
+    background-color: #a39a9a;
+    border: 3px solid black;
+    position: fixed;
+}
+
+.rectangle2{
+    height: 100px;
+    width: 200px;
+    border-radius: 10%;
+    bottom: 0;
+    margin-left: 29%;
+    background-color: #a39a9a;
+    border: 3px solid black;
+    position: fixed;
+}
+.rectangle3{
+    height: 100px;
+    width: 200px;
+    border-radius: 10%;
+    bottom: 0;
+    margin-left: 43%;
+    background-color: #a39a9a;
+    border: 3px solid black;
+    position: fixed;
+}
+.rectangle4{
+    height: 100px;
+    width: 200px;
+    border-radius: 10%;
+    bottom: 0;
+    margin-left: 57%;
+    background-color: #a39a9a;
+    border: 3px solid black;
+    position: fixed;
+}
+.rectangle5{
+    height: 100px;
+    width: 200px;
+    border-radius: 10%;
+    bottom: 0;
+    margin-left: 71%;
+    background-color: #a39a9a;
+    border: 3px solid black;
+    position: fixed;
+}
+
+.store{
+    height:20px; 
+    width:100px; 
+    margin: -20px -50px; 
+    position:relative;
+    top:45%; 
+    left:50%;
+    background-color: #fafa44;
+}
+
+.social{
+    height:20px; 
+    width:100px; 
+    margin: -20px -50px; 
+    position:relative;
+    top:45%; 
+    left:50%;
+    background-color: #fafa44;
+}
+
+.myaccount{
+    height:20px; 
+    width:100px; 
+    margin: -20px -50px; 
+    position:relative;
+    top:45%; 
+    left:50%;
+    background-color: #fafa44;
+}
+
+.ranking{
+    height:20px; 
+    width:100px; 
+    margin: -20px -50px; 
+    position:relative;
+    top:45%; 
+    left:50%;
+    background-color: #fafa44;
+}
+
+.collection{
+    height:20px; 
+    width:100px; 
+    margin: -20px -50px; 
+    position:relative;
+    top:45%; 
+    left:50%;
+    background-color: #fafa44;
+}
+
+.square{
+    height: 200px;
+    width: 300px;
+    border-radius: 10%;
+    margin-left: 15%;
+    margin-top: 5%;
+    background-color: #fafa44;
+    border: 3px solid black;
+    position: fixed;
+}
+
+.lootbox{
+    height: 95%;
+    width: 90%;
+    position:relative;
+    top: 2%;
+    left: 5%;
+    border-radius: 5%
+}
+
+.gameboy{
+    position: absolute;
+    left: 50%,
+}
+
+.playbutton{
+    position: absolute;
+    right: 0;
+    top: 0;
+}

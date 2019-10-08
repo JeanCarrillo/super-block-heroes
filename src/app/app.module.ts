@@ -32,4 +32,4 @@ import { MonsterComponent } from './pages/game/monster/monster.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
