@@ -8,17 +8,9 @@ import {
 import { Board } from '../../../models/board';
 import { Block } from '../../../models/block';
 import { Piece } from '../../../models/piece';
+import { KEY_CODE } from '../../../constants/keyboard';
 // tslint:disable: prefer-for-of
 // tslint:disable: deprecation
-
-// Keyboard buttons
-export enum KEY_CODE {
-  RIGHT_ARROW = 39,
-  LEFT_ARROW = 37,
-  UP_ARROW = 38,
-  DOWN_ARROW = 40,
-  SPACEBAR = 32
-}
 
 @Component({
   selector: 'app-board',
@@ -32,9 +24,11 @@ export class BoardComponent implements OnInit, OnDestroy {
   rowNumbers = 10;
   colNumbers = 20;
   currentBlocks: Block[];
+  ghostBlocks: Block[];
   currentPiece: Piece;
   interval: any;
   fallingSpeed: number;
+  gameOver = false;
 
   // Listens to keyboard events
   @HostListener('window:keydown', ['$event'])
@@ -67,6 +61,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   // MAIN LOOP
   // Loop through current active blocks
   // => each block falls (y + 1) if it doesn't collide
+  // => called every this.fallingSpeed ms
   private gameLoop(): void {
     let didCollide = false;
     for (let i = 0; i < this.currentBlocks.length; i++) {
@@ -84,7 +79,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.createPiece();
   }
 
-  private createPiece() {
+  // If there is no currentBlocks, creates a new piece
+  // => calls Piece constructor to get the shape and color
+  // => then recreates it with individual blocks (added to currentBlocks)
+  // Piece and currentBlocks are two different entities sharing the same coordinates and updated at the same times
+  private createPiece(): void {
     if (this.currentBlocks.length > 0) {
       return;
     }
@@ -101,7 +100,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   // direction: number of indexes to rotate
   // => direction 1 : rotate right, direction -1 : rotate left
-  private rotateCurrentPiece(direction: number) {
+  private rotateCurrentPiece(direction: number): void {
     this.currentPiece.rotate(direction);
     // Check collisions after rotating piece
     let rotationCollide = false;
@@ -149,21 +148,31 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   // When current blocks collide with matrix or existing blocks
   // => add them to the board.tiles matrix permanently
+  // => game over check
   // => reset current blocks
   private handleCollision(): void {
+    let gameOver = false;
     for (let i = 0; i < this.currentBlocks.length; i++) {
       const block = this.currentBlocks[i];
+      // If there is already a block where current block is, then it is likely we are on top of the board
+      // => game over
+      if (this.board.tiles[block.y][block.x] !== 0) {
+        gameOver = true;
+      }
       // Current block is now part of the board matrix
       this.board.tiles[block.y][block.x] = block.color;
     }
     this.currentBlocks = [];
+    if (gameOver) {
+      this.handleGameOver();
+    }
     this.checkCompletedLines();
   }
 
   // Checks board.tiles matrix for full lines
   // => add all indexes to an array
   // => call deleteRows method to clear them
-  private checkCompletedLines() {
+  private checkCompletedLines(): void {
     const rowsToDelete = [];
     for (let i = 0; i < this.board.tiles.length; i++) {
       let completed = true;
@@ -182,17 +191,26 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
-  // delete all lines in the rowsToDelete array
+  // delete all lines in the rowsToDelete array from the board.tiles matrix
   // => replace them by empty lines (filled by 0) at the 0 index of the matrix (top)
-  // => update score
-  private deleteRows(rowsToDelete: number[]) {
-    // TO DO : refactor to get new line from board.ts ?
+  private deleteRows(rowsToDelete: number[]): void {
     const emptyRow = new Array(this.rowNumbers).fill(0);
     for (let i = 0; i < rowsToDelete.length; i++) {
       this.board.tiles.splice(rowsToDelete[i], 1);
       this.board.tiles.splice(0, 0, emptyRow);
     }
-    this.score += rowsToDelete.length * 10;
+    this.handleScore(rowsToDelete.length);
+  }
+
+  // Score calculation
+  // TO DO: something smarter ;-)
+  private handleScore(nbOfRows: number): void {
+    this.score += nbOfRows * 10;
+  }
+
+  private handleGameOver() {
+    this.gameOver = true;
+    clearInterval(this.interval);
   }
 
   // Returns true if something is colliding
@@ -221,6 +239,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   // Linked to Keyboard events : actions
+  // Moves current blocks left/right, X axis only, no Y axis checks
   private moveCurrentBlocks(x: number) {
     let canMove = true;
     for (const block of this.currentBlocks) {
@@ -240,6 +259,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   // Method used when moving current blocks (key pressed)
   // checks left and right, returns false if illegal move (out of matrix or existing block)
+  // X axis only
   private canMove(x: number, y: number, dirX: number) {
     if (x + dirX < 0 || x + dirX >= this.board.tiles[0].length) {
       return false;
