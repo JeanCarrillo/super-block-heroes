@@ -24,10 +24,10 @@ import { BoardComponent } from './pages/game/board/board.component';
     LobbyComponent,
     MenuComponent,
     GameComponent,
-    BoardComponent
+    BoardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

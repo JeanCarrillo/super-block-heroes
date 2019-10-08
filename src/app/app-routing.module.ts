@@ -6,8 +6,9 @@ import { GameComponent } from './pages/game/game.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'main', component: MainComponent },
+  { path: 'accueil', component: MainComponent },
   { path: 'game', component: GameComponent },
+  //{ path: 'accueil', component: AccueilComponent },
   { path: '**', redirectTo: '' }
 ];
 
@@ -15,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

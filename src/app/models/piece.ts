@@ -79,7 +79,7 @@ const pieces = [
 
   {
     type: 'I',
-    shapes:[
+    shapes: [
       //default
       [0, 1, 0, 0], [0, 1, 0, 0], [0, 1, 0, 0], [0, 1, 0, 0],
       //rotation 1 right
@@ -100,10 +100,10 @@ export class Piece {
     const color = Math.ceil(Math.random() * 4);
     const rdm = Math.floor(Math.random() * pieces.length);
     const shape = [];
-    for (let i = 0; i < pieces[rdm].shape.length; i++) {
+    for (let i = 0; i < pieces[rdm].shapes.length; i++) {
       shape.push([]);
-      for (let j = 0; j < pieces[rdm].shape[i].length; j++) {
-        shape[i].push(pieces[rdm].shape[i][j] === 0 ? 0 : color);
+      for (let j = 0; j < pieces[rdm].shapes[i].length; j++) {
+        shape[i].push(pieces[rdm].shapes[i][j] === 0 ? 0 : color);
       }
     }
     this.shape = shape;
