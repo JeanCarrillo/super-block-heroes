@@ -1,16 +1,16 @@
-import { Component, HostListener, OnInit, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  OnDestroy,
+  Input
+} from '@angular/core';
 import { Board } from '../../../models/board';
 import { Block } from '../../../models/block';
 import { Piece } from '../../../models/piece';
-
-// Keyboard buttons
-export enum KEY_CODE {
-  RIGHT_ARROW = 39,
-  LEFT_ARROW = 37,
-  UP_ARROW = 38,
-  DOWN_ARROW = 40,
-  SPACEBAR = 32
-}
+import { KEY_CODE } from '../../../constants/keyboard';
+// tslint:disable: prefer-for-of
+// tslint:disable: deprecation
 
 @Component({
   selector: 'app-board',
@@ -18,31 +18,32 @@ export enum KEY_CODE {
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit, OnDestroy {
+  @Input() player: string;
   score: number;
   board: Board;
   rowNumbers = 10;
   colNumbers = 20;
   currentBlocks: Block[];
+  ghostBlocks: Block[];
   currentPiece: Piece;
-  // currentShape: any;
   interval: any;
   fallingSpeed: number;
-  @Input() player: string; 
+  gameOver = false;
 
   // Listens to keyboard events
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    // tslint:disable-next-line: deprecation
     if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
       this.moveCurrentBlocks(1);
     }
-    // tslint:disable-next-line: deprecation
     if (event.keyCode === KEY_CODE.LEFT_ARROW) {
       this.moveCurrentBlocks(-1);
     }
-    // tslint:disable-next-line: deprecation
     if (event.keyCode === KEY_CODE.SPACEBAR) {
       this.rotateCurrentPiece(1);
+    }
+    if (event.keyCode === KEY_CODE.UP_ARROW) {
+      this.dropCurrentBlocks();
     }
   }
 
@@ -57,9 +58,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.interval = setInterval(() => this.gameLoop(), this.fallingSpeed);
   }
 
+  // MAIN LOOP
+  // Loop through current active blocks
+  // => each block falls (y + 1) if it doesn't collide
+  // => called every this.fallingSpeed ms
   private gameLoop(): void {
-    // Loop through current active blocks
-    // => each block falls (y + 1) if it doesn't collide
     let didCollide = false;
     for (let i = 0; i < this.currentBlocks.length; i++) {
       const block = this.currentBlocks[i];
@@ -76,7 +79,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.createPiece();
   }
 
-  private createPiece() {
+  // If there is no currentBlocks, creates a new piece
+  // => calls Piece constructor to get the shape and color
+  // => then recreates it with individual blocks (added to currentBlocks)
+  // Piece and currentBlocks are two different entities sharing the same coordinates and updated at the same times
+  private createPiece(): void {
     if (this.currentBlocks.length > 0) {
       return;
     }
@@ -93,9 +100,9 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   // direction: number of indexes to rotate
   // => direction 1 : rotate right, direction -1 : rotate left
-  private rotateCurrentPiece(direction: number) {
+  private rotateCurrentPiece(direction: number): void {
     this.currentPiece.rotate(direction);
-    // TO DO : CHECK COLLISIONS BEFORE ROTATING
+    // Check collisions after rotating piece
     let rotationCollide = false;
     for (let i = 0; i < this.currentPiece.shape.length; i++) {
       for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
@@ -109,10 +116,13 @@ export class BoardComponent implements OnInit, OnDestroy {
         }
       }
     }
+    // If piece collides after rotating, rotate back and return
+    // TO DO : handle different scenarios ?
     if (rotationCollide) {
       this.currentPiece.rotate(-direction);
       return;
     }
+    // If no collision: clear currentBlocks and replace by new blocks (rotated piece)
     this.currentBlocks = [];
     for (let i = 0; i < this.currentPiece.shape.length; i++) {
       for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
@@ -126,27 +136,43 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Y + 1 to all currentBlocks and currentPiece (fall by 1)
   private letCurrentBlocksFall(): void {
     for (let i = 0; i < this.currentBlocks.length; i++) {
       this.currentBlocks[i].y += 1;
     }
-    console.log(this.currentPiece);
     if (this.currentPiece) {
       this.currentPiece.y += 1;
     }
   }
 
+  // When current blocks collide with matrix or existing blocks
+  // => add them to the board.tiles matrix permanently
+  // => game over check
+  // => reset current blocks
   private handleCollision(): void {
+    let gameOver = false;
     for (let i = 0; i < this.currentBlocks.length; i++) {
       const block = this.currentBlocks[i];
+      // If there is already a block where current block is, then it is likely we are on top of the board
+      // => game over
+      if (this.board.tiles[block.y][block.x] !== 0) {
+        gameOver = true;
+      }
       // Current block is now part of the board matrix
       this.board.tiles[block.y][block.x] = block.color;
     }
     this.currentBlocks = [];
+    if (gameOver) {
+      this.handleGameOver();
+    }
     this.checkCompletedLines();
   }
 
-  private checkCompletedLines() {
+  // Checks board.tiles matrix for full lines
+  // => add all indexes to an array
+  // => call deleteRows method to clear them
+  private checkCompletedLines(): void {
     const rowsToDelete = [];
     for (let i = 0; i < this.board.tiles.length; i++) {
       let completed = true;
@@ -160,21 +186,36 @@ export class BoardComponent implements OnInit, OnDestroy {
         rowsToDelete.push(i);
       }
     }
-    this.deleteRows(rowsToDelete);
+    if (rowsToDelete.length > 0) {
+      this.deleteRows(rowsToDelete);
+    }
   }
 
-  private deleteRows(rowsToDelete: number[]) {
-    // TO DO : REFACTOR TO GET NEW LINE FROM board.ts
+  // delete all lines in the rowsToDelete array from the board.tiles matrix
+  // => replace them by empty lines (filled by 0) at the 0 index of the matrix (top)
+  private deleteRows(rowsToDelete: number[]): void {
     const emptyRow = new Array(this.rowNumbers).fill(0);
     for (let i = 0; i < rowsToDelete.length; i++) {
       this.board.tiles.splice(rowsToDelete[i], 1);
       this.board.tiles.splice(0, 0, emptyRow);
     }
-    this.score += rowsToDelete.length * 10;
+    this.handleScore(rowsToDelete.length);
+  }
+
+  // Score calculation
+  // TO DO: something smarter ;-)
+  private handleScore(nbOfRows: number): void {
+    this.score += nbOfRows * 10;
+  }
+
+  private handleGameOver(): void {
+    this.gameOver = true;
+    clearInterval(this.interval);
   }
 
   // Returns true if something is colliding
-  private isColliding(x: number, y: number, dirY: number) {
+  // Y axis only
+  private isColliding(x: number, y: number, dirY: number): boolean {
     if (y + dirY < 0 || y + dirY >= this.board.tiles.length) {
       return true;
     }
@@ -184,22 +225,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  private canMove(x: number, y: number, dirX: number) {
-    if (x + dirX < 0 || x + dirX >= this.board.tiles[0].length) {
-      return false;
-    }
-    if (this.board.tiles[y][x + dirX] !== 0) {
-      return false;
-    }
-    return true;
-  }
-
-  // Method used in render : returns color (img) to display
-  public getBlock(y: number, x: number) {
+  // Method used in render template: returns color (img) to display (an integer)
+  public getBlock(y: number, x: number): any {
     if (this.board.tiles[y][x] !== 0) {
       return this.board.tiles[y][x];
     }
-    // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.currentBlocks.length; i++) {
       if (this.currentBlocks[i].x === x && this.currentBlocks[i].y === y) {
         return this.currentBlocks[i].color;
@@ -209,7 +239,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   // Linked to Keyboard events : actions
-  private moveCurrentBlocks(x: number) {
+  // Moves current blocks left/right, X axis only, no Y axis checks
+  private moveCurrentBlocks(x: number): void {
     let canMove = true;
     for (const block of this.currentBlocks) {
       if (!this.canMove(block.x, block.y, x)) {
@@ -222,6 +253,40 @@ export class BoardComponent implements OnInit, OnDestroy {
       }
       if (this.currentPiece) {
         this.currentPiece.x += x;
+      }
+    }
+  }
+
+  // Method used when moving current blocks (key pressed)
+  // checks left and right, returns false if illegal move (out of matrix or existing block)
+  // X axis only
+  private canMove(x: number, y: number, dirX: number): boolean {
+    if (x + dirX < 0 || x + dirX >= this.board.tiles[0].length) {
+      return false;
+    }
+    if (this.board.tiles[y][x + dirX] !== 0) {
+      return false;
+    }
+    return true;
+  }
+
+  // When key is pressed
+  // => current blocks fall until collision (fast forward)
+  // TO DO: DEBUG
+  private dropCurrentBlocks(): void {
+    let didCollide = false;
+    while (!didCollide) {
+      for (let i = 0; i < this.currentBlocks.length; i++) {
+        const block = this.currentBlocks[i];
+        if (this.isColliding(block.x, block.y, 1)) {
+          didCollide = true;
+          break;
+        }
+      }
+      if (didCollide) {
+        this.handleCollision();
+      } else {
+        this.letCurrentBlocksFall();
       }
     }
   }

@@ -1,10 +1,13 @@
 import { pieces } from './pieces';
+import { rdmFloor, rdmCeil } from '../helpers/functions';
+// tslint:disable: prefer-for-of
 
 export class Piece {
   x: number;
   y: number;
   shape: number[][];
   rotationIndex: number;
+  // index in the pieces.js array
   pieceIndex: number;
   color: any;
 
@@ -12,16 +15,22 @@ export class Piece {
     this.x = x;
     this.y = y;
     this.rotationIndex = 0;
-    this.color = Math.ceil(Math.random() * 4);
+    this.color = rdmCeil(4);
     // random piece index, T = 1, Z = 2 etc.
-    this.pieceIndex = Math.floor(Math.random() * pieces.length);
+    this.pieceIndex = rdmFloor(pieces.length);
     this.createShape();
     // type (string), (example: "J")
   }
 
   public rotate(num: number) {
     let index = this.rotationIndex + num;
-    if (!pieces[this.pieceIndex].shapes[this.rotationIndex + num]) {
+    // Out of bounds checks
+    if (index < 0) {
+      index = pieces[this.pieceIndex].shapes.length - 1;
+    } else if (
+      index >= pieces[this.pieceIndex].shapes.length ||
+      !pieces[this.pieceIndex].shapes[index]
+    ) {
       index = 0;
     }
     this.rotationIndex = index;
@@ -36,7 +45,6 @@ export class Piece {
       i++
     ) {
       shape.push([]);
-      // tslint:disable-next-line: prefer-for-of
       for (
         let j = 0;
         j < pieces[this.pieceIndex].shapes[this.rotationIndex][i].length;
