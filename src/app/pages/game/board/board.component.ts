@@ -13,9 +13,7 @@ export class BoardComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.currentBlocks);
-  }
+  ngOnInit() {}
 
   public getBlock(y: number, x: number): any {
     const { board, currentBlocks } = this;
