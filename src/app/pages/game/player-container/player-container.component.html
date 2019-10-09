@@ -1,11 +1,12 @@
-<app-board
-  [board]="player.board"
-  [currentBlocks]="player.currentBlocks"
-  class="col-3"
-></app-board>
 <app-score
   [name]="player.name"
   [score]="player.score"
   [gameOver]="player.gameOver"
   class="col-3"
 ></app-score>
+
+<app-board
+  [board]="player.board"
+  [currentBlocks]="player.currentBlocks"
+  class=" mx-auto d-block board"
+></app-board>
