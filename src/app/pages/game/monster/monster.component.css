@@ -2,5 +2,16 @@
   border: 2px solid black;
   width: 100%;
   height: 100px;
-  background: dimgray;
+  background: url('/assets/img/backgroundMonster.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+.monster {
+  vertical-align: middle;
+  border-style: none;
+  height: auto;
+  width: 2.5%;
+  bottom: 2%;
+  position: absolute;
 }
