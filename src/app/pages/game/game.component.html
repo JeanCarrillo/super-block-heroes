@@ -1,11 +1,9 @@
 <div class="container-fluid pr-5 pl-5">
-  <div class="row mt-5">
-    <img src="assets/img/SPB-Logo.png" class="col-4 offset-4" alt="logo" />
-  </div>
   <div class="gameContainer row mt-5">
     <app-player-container
       *ngFor="let player of players"
       [player]="player"
+      class="col-3"
     ></app-player-container>
     <app-monster monster="monster1" class="col-12"></app-monster>
   </div>
