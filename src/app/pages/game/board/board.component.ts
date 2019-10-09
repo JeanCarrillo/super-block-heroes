@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Board } from '../../../models/board';
-import { Player } from '../player';
+import { Block } from '../../../models/block';
 
 @Component({
   selector: 'app-board',
@@ -9,15 +9,16 @@ import { Player } from '../player';
 })
 export class BoardComponent implements OnInit {
   @Input() board: Board;
-  @Input() player: Player;
+  @Input() currentBlocks: Block[];
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.currentBlocks);
+  }
 
   public getBlock(y: number, x: number): any {
-    const { board } = this;
-    const { currentBlocks } = this.player;
+    const { board, currentBlocks } = this;
     if (board.tiles[y][x] !== 0) {
       return board.tiles[y][x];
     }

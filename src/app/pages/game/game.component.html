@@ -2,7 +2,7 @@
   <app-board
     *ngFor="let player of players"
     [board]="player.board"
-    [player]="player"
+    [currentBlocks]="player.currentBlocks"
   ></app-board>
   <app-monster monster="monster1"></app-monster>
   <app-score
