@@ -8,7 +8,7 @@ export class Player {
   name: string;
   score: number;
   board: Board;
-  rowNumbers = 10;
+  rowNumbers = 20;
   colNumbers = 20;
   currentBlocks: Block[];
   currentPiece: Piece;

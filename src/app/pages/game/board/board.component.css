@@ -6,8 +6,8 @@
 .boardCol {
   display: flex;
   flex-direction: column;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   /* width: 2vw;
   height: 2vw; */
   /* border: 1px dotted lightgray; */
@@ -15,39 +15,21 @@
 
 .block {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .player1 {
   border: 2px solid rgb(124, 2, 2);
-  position: absolute;
-  /* top: 5vw; */
 }
 
 .player2 {
   border: 2px solid rgb(43, 105, 43);
-  transform: rotate(90deg);
-  position: absolute;
-  top: 418px;
-  left: 393px;
-  /* top: 40vw;
-  left: 40vw; */
 }
 
 .player3 {
   border: 2px solid rgb(37, 37, 105);
-  transform: rotate(180deg);
-  position: absolute;
-  top: 797px;
-  /* top: 45vw; */
 }
 
 .player4 {
   border: 2px solid rgb(243, 196, 43);
-  transform: rotate(270deg);
-  position: absolute;
-  top: 418px;
-  left: -364px;
-  /* top: 40vw;
-  left: -40vw; */
 }
