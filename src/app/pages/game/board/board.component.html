@@ -1,4 +1,4 @@
-<div [ngClass]="player" class="offset-5">
+<div [ngClass]="player.name" class="offset-5">
   <div class="boardRow" *ngFor="let row of board.tiles; index as i">
     <div class="boardCol" *ngFor="let block of row; index as j">
       <img
@@ -9,5 +9,3 @@
     </div>
   </div>
 </div>
-<p>{{ player }}: {{ score }}</p>
-<p *ngIf="gameOver">Game Over</p>

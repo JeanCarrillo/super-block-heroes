@@ -13,6 +13,7 @@ import { MenuComponent } from './pages/main/menu/menu.component';
 import { GameComponent } from './pages/game/game.component';
 import { BoardComponent } from './pages/game/board/board.component';
 import { MonsterComponent } from './pages/game/monster/monster.component';
+import { ScoreComponent } from './pages/game/score/score.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,11 @@ import { MonsterComponent } from './pages/game/monster/monster.component';
     MenuComponent,
     GameComponent,
     BoardComponent,
-    MonsterComponent
+    MonsterComponent,
+    ScoreComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
