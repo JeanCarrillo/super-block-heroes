@@ -162,9 +162,22 @@ export class Player {
   }
 
   // Score calculation
-  // TO DO: something smarter ;-)
+  // TODO: something more complex ;-)
   private handleScore(nbOfRows: number): void {
-    this.score += nbOfRows * 10;
+    switch(nbOfRows) {
+      case 1:
+        this.score += 10;
+        break;
+      case 2:
+        this.score += 24;
+        break;
+      case 3:
+        this.score += 39;
+        break;
+      case 4:
+        this.score += 56;
+        break;
+    }
   }
 
   private handleGameOver(): void {
