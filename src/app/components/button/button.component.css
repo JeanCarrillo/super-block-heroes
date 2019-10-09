@@ -1,0 +1,19 @@
+.cuteButton {
+    background-image: url(../../../assets/img/button.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 150px;
+    width: 200px;
+    transition: 1s;
+    margin-left: 30px;
+}
+.cuteButton:hover {
+    filter: saturate(2);
+    transform: scale(1.1);
+    transition-property: transform;
+    transition-duration: 1s;
+}
+a {
+
+}

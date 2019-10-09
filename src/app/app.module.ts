@@ -14,6 +14,7 @@ import { GameComponent } from './pages/game/game.component';
 import { BoardComponent } from './pages/game/board/board.component';
 import { MonsterComponent } from './pages/game/monster/monster.component';
 import { ScoreComponent } from './pages/game/score/score.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ScoreComponent } from './pages/game/score/score.component';
     GameComponent,
     BoardComponent,
     MonsterComponent,
-    ScoreComponent
+    ScoreComponent,
+    ButtonComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
