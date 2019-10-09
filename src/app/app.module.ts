@@ -15,6 +15,11 @@ import { BoardComponent } from './pages/game/board/board.component';
 import { MonsterComponent } from './pages/game/monster/monster.component';
 import { ScoreComponent } from './pages/game/score/score.component';
 import { PlayerContainerComponent } from './pages/game/player-container/player-container.component';
+import { StoreComponent } from './pages/store/store.component';
+import { SocialComponent } from './pages/social/social.component';
+import { MyaccountComponent } from './myaccount/myaccount.component';
+import { RankingComponent } from './pages/ranking/ranking.component';
+import { CollectionComponent } from './collection/collection.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,12 @@ import { PlayerContainerComponent } from './pages/game/player-container/player-c
     BoardComponent,
     MonsterComponent,
     ScoreComponent,
-    PlayerContainerComponent
+    PlayerContainerComponent,
+    StoreComponent,
+    SocialComponent,
+    MyaccountComponent,
+    RankingComponent,
+    CollectionComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
