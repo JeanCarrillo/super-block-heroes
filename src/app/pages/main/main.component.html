@@ -1,31 +1,48 @@
-<div>
-    <img class="logo" src="assets/img/logo.png">
-    <div>
-        <img class="gameboy" src="assets/img/gameboy.png">
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="col-4">
+            <img class="logo" src="assets/img/logo.png">
+        </div>
+        <div class="col-4">
+            <img class="gameboy" src="assets/img/gameboy.png">
+        </div>
+    </div>
+    <div class="row justify-content-end">
+        <div class="col-4">
+            <img class="gameboyleft" src="assets/img/gameboyleft.png">
+        </div>
+        <div class="col-4">
+            <button class="play">Play</button>
+        </div>
+        <div class="col-4">
+            <img class="gameboyright" src="assets/img/gameboyright.png">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <img class="lootbox" src="assets/img/lootbox.jpg">
+        </div>
+        <div class="col">
+            <img class="gameboyback" src="assets/img/gameboyback.png">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="bt">Store</button>
+        </div>
+        <div class="col">
+            <button class="bt">Social</button>
+        </div>
+        <div class="col">
+            <button class="bt">My Account</button>
+        </div>
+        <div class="col">
+            <button class="bt">Ranking</button>
+        </div>
+        <div class="col">
+            <button class="bt">Collection</button>
+        </div>
     </div>
 </div>
-
-<button class="playbutton"><a [routerLink]="['/game']">Play</a></button>
-
-<div class="square">
-    <img class="lootbox" src="assets/img/lootbox.jpg">
-</div>
-
-<div class="rectangle1">
-    <button class="store">Store</button>
-</div>
-<div class="rectangle2">
-    <button class="social">Social</button>
-</div>
-<div class="rectangle3">
-    <button class="myaccount">My Account</button>
-</div>
-<div class="rectangle4">
-    <button class="ranking">Ranking</button>
-</div>
-<div class="rectangle5">
-    <button class="collection">Collection</button>
-</div>
-
 
 <app-menu></app-menu>
