@@ -42,10 +42,10 @@ import { CollectionComponent } from './collection/collection.component';
     SocialComponent,
     MyaccountComponent,
     RankingComponent,
-    CollectionComponent
+    CollectionComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
