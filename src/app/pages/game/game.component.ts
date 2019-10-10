@@ -11,7 +11,7 @@ export class GameComponent implements OnInit, OnDestroy {
   players: Player[];
   interval: any;
   monster: Monster;
-  backgroundX: string;
+  backgrounds: number[];
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -25,7 +25,9 @@ export class GameComponent implements OnInit, OnDestroy {
       this.players[0].rotateCurrentPiece(1);
     }
     if (event.key === 'ArrowUp') {
-      this.players[0].dropCurrentBlocks();
+      if (!this.players[0].isFastForwarding) {
+        this.players[0].dropCurrentBlocks();
+      }
     }
   }
 
@@ -36,6 +38,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.players.push(new Player(name));
     }
     this.monster = new Monster('giphy');
+    this.backgrounds = new Array(4).fill(1);
   }
 
   ngOnInit() {
@@ -49,10 +52,6 @@ export class GameComponent implements OnInit, OnDestroy {
       }
     }
     this.monster.move();
-  }
-
-  getBackgroundX(index: number) {
-    return this.monster.x / ((index + 1) / 2) + '%';
   }
 
   ngOnDestroy() {

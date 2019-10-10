@@ -1,38 +1,8 @@
 <div class="container-fluid px-0 vertical-center">
-  <!-- <app-background
-    *ngFor="let background of backgrounds"
-    [monster]="monster"
-    [index]="i"
-    [type]="1"
-  > -->
-  <div
-    class="game-background"
-    [ngStyle]="{
-      'background-image': 'url(../../../assets/img/backgrounds/1/1.png)',
-      'background-position-x': getBackgroundX(0)
-    }"
-  >
-    <div
-      class="game-background"
-      [ngStyle]="{
-        'background-image': 'url(../../../assets/img/backgrounds/1/2.png)',
-        'background-position-x': getBackgroundX(1)
-      }"
-    >
-      <div
-        class="game-background"
-        [ngStyle]="{
-          'background-image': 'url(../../../assets/img/backgrounds/1/3.png)',
-          'background-position-x': getBackgroundX(2)
-        }"
-      >
-        <div
-          class="game-background"
-          [ngStyle]="{
-            'background-image': 'url(../../../assets/img/backgrounds/1/4.png)',
-            'background-position-x': getBackgroundX(3)
-          }"
-        >
+  <app-background [monsterX]="monster.x" [index]="0" [type]="1">
+    <app-background [monsterX]="monster.x" [index]="1" [type]="1">
+      <app-background [monsterX]="monster.x" [index]="2" [type]="1">
+        <app-background [monsterX]="monster.x" [index]="3" [type]="1">
           <div class="row pr-5 pl-5">
             <app-player-container
               *ngFor="let player of players"
@@ -41,9 +11,8 @@
             ></app-player-container>
             <app-monster [monster]="monster" class="col-12"></app-monster>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- </app-background> -->
+        </app-background>
+      </app-background>
+    </app-background>
+  </app-background>
 </div>

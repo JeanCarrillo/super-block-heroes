@@ -1,8 +1,9 @@
 <div
   class="game-background"
   [ngStyle]="{
-    'background-image':
-      'url(../../../assets/img/backgrounds/{ type }/{ index + 1 }.png)',
-    'background-position-x': getBackgroundPos(index)
+    'background-image': getBackgroundImg(),
+    'background-position-x': getBackgroundPos()
   }"
-></div>
+>
+  <ng-content></ng-content>
+</div>

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Monster } from '../monster';
 
 @Component({
   selector: 'app-background',
@@ -7,16 +6,19 @@ import { Monster } from '../monster';
   styleUrls: ['./background.component.css']
 })
 export class BackgroundComponent implements OnInit {
-  @Input() monster: Monster;
+  @Input() monsterX: number;
   @Input() index: number;
   @Input() type: number;
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.type);
+  ngOnInit() {}
+
+  getBackgroundPos() {
+    return this.monsterX / ((this.index + 1) / 2) + '%';
   }
 
-  getBackgroundPos(index: number) {
-    return this.monster.x / ((index + 1) / 2) + '%';
+  getBackgroundImg() {
+    return `url(../../../assets/img/backgrounds/${this.type}/${this.index +
+      1}.png)`;
   }
 }
