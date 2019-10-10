@@ -4,6 +4,7 @@ import { Block } from '../../models/block';
 import { Piece } from '../../models/piece';
 
 export class Player {
+  isFastForwarding = false;
   gameOver = false;
   name: string;
   score: number;
@@ -13,8 +14,12 @@ export class Player {
   currentBlocks: Block[];
   currentPiece: Piece;
   fallingSpeed: number;
+  loopTime: number;
+  loopDelay: number;
 
   constructor(name: string) {
+    this.loopTime = Date.now();
+    this.loopDelay = 300;
     this.name = name;
     this.score = 0;
     this.board = new Board(this.rowNumbers, this.colNumbers);
@@ -22,20 +27,24 @@ export class Player {
   }
 
   public loop(): void {
-    let didCollide = false;
-    for (let i = 0; i < this.currentBlocks.length; i++) {
-      const block = this.currentBlocks[i];
-      if (this.isColliding(block.x, block.y, 1)) {
-        didCollide = true;
-        break;
+    const now = Date.now();
+    if (now - this.loopTime > this.loopDelay && !this.gameOver) {
+      this.loopTime = Date.now();
+      let didCollide = false;
+      for (let i = 0; i < this.currentBlocks.length; i++) {
+        const block = this.currentBlocks[i];
+        if (this.isColliding(block.x, block.y, 1)) {
+          didCollide = true;
+          break;
+        }
       }
+      if (didCollide) {
+        this.handleCollision();
+      } else {
+        this.letCurrentBlocksFall();
+      }
+      this.createPiece();
     }
-    if (didCollide) {
-      this.handleCollision();
-    } else {
-      this.letCurrentBlocksFall();
-    }
-    this.createPiece();
   }
 
   // If there is no currentBlocks, creates a new piece
@@ -114,8 +123,9 @@ export class Player {
     for (let i = 0; i < this.currentBlocks.length; i++) {
       const block = this.currentBlocks[i];
       // If there is already a block where current block is, then it is likely we are on top of the board
+      // additional check : block index is < 3 (just in case false positive bottom/middle of the board)
       // => game over
-      if (this.board.tiles[block.y][block.x] !== 0) {
+      if (this.board.tiles[block.y][block.x] !== 0 && block.y < 3) {
         gameOver = true;
       }
       // Current block is now part of the board matrix
@@ -124,8 +134,9 @@ export class Player {
     this.currentBlocks = [];
     if (gameOver) {
       this.handleGameOver();
+    } else {
+      this.checkCompletedLines();
     }
-    this.checkCompletedLines();
   }
 
   // Checks board.tiles matrix for full lines
@@ -147,6 +158,7 @@ export class Player {
     }
     if (rowsToDelete.length > 0) {
       this.deleteRows(rowsToDelete);
+      this.handleScore(rowsToDelete.length);
     }
   }
 
@@ -158,7 +170,6 @@ export class Player {
       this.board.tiles.splice(rowsToDelete[i], 1);
       this.board.tiles.splice(0, 0, emptyRow);
     }
-    this.handleScore(rowsToDelete.length);
   }
 
   // Score calculation
@@ -181,6 +192,7 @@ export class Player {
   }
 
   private handleGameOver(): void {
+    this.currentBlocks = [];
     this.gameOver = true;
   }
 
@@ -232,20 +244,24 @@ export class Player {
   // => current blocks fall until collision (fast forward)
   // TO DO: DEBUG
   public dropCurrentBlocks(): void {
-    let didCollide = false;
-    while (!didCollide) {
-      for (let i = 0; i < this.currentBlocks.length; i++) {
-        const block = this.currentBlocks[i];
-        if (this.isColliding(block.x, block.y, 1)) {
-          didCollide = true;
-          break;
+    if (!this.isFastForwarding) {
+      this.isFastForwarding = true;
+      let didCollide = false;
+      while (!didCollide) {
+        for (let i = 0; i < this.currentBlocks.length; i++) {
+          const block = this.currentBlocks[i];
+          if (this.isColliding(block.x, block.y, 1)) {
+            didCollide = true;
+            break;
+          }
+        }
+        if (!didCollide) {
+          this.letCurrentBlocksFall();
         }
       }
-      if (didCollide) {
-        this.handleCollision();
-      } else {
-        this.letCurrentBlocksFall();
-      }
+      this.handleCollision();
+      setTimeout(() => (this.isFastForwarding = false), 300);
+      // this.isFastForwarding = false;
     }
   }
 }
