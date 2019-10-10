@@ -15,13 +15,13 @@
           [x]="monster.x"
           [index]="3"
         >
-          <div class="row pr-5 pl-5">
+          <div class="row">
             <app-player-container
               *ngFor="let player of players"
               [player]="player"
               class="col-3"
             ></app-player-container>
-            <app-monster [monster]="monster" class="col-12"></app-monster>
+            <app-monster [monster]="monster"></app-monster>
           </div>
         </app-background>
       </app-background>

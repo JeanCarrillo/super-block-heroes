@@ -10,3 +10,15 @@
   width: 75%;
   height: auto;
 }
+
+app-background {
+  display: flex;
+  flex-grow: 1;
+  min-height: 100%;
+}
+
+app-monster { 
+  display: flex;
+  flex-grow: 1;
+  min-width: 100%;
+}

@@ -1,5 +1,6 @@
 export class Monster {
-  life: number;
+  startingLife: number;
+  currentLife: number;
   x: number;
   name: string;
   movingDirection: number;
@@ -8,7 +9,8 @@ export class Monster {
 
   constructor(name: string) {
     this.background = '1';
-    this.life = 100;
+    this.startingLife = 100;
+    this.currentLife = this.startingLife;
     this.x = 0;
     this.name = name;
     this.movingDirection = 1; // 1 = right, -1 = left
@@ -32,7 +34,7 @@ export class Monster {
     }
   }
 
-  public takeDamage() {
-    this.life -= 10;
+  public takeDamage(hitpoints: number) {
+    this.currentLife -= hitpoints;
   }
 }

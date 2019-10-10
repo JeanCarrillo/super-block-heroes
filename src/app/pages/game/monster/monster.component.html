@@ -1,8 +1,12 @@
-<div class="boardMonster" [ngClass]="monster">
+<div
+  class="row boardMonster"
+  [ngClass]="monster"
+  [ngStyle]="{ 'background-image': getBackgroundImg() }"
+>
   <img
     src="assets/img/monsters/{{ monster.name }}.gif"
     alt="monster"
     class="monster"
-    [ngStyle]="{ left: getPosition(), 'background-image': getBackgroundImg() }"
+    [ngStyle]="{ left: getPosition(), transform: getDirection() }"
   />
 </div>

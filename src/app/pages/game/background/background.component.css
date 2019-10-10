@@ -1,6 +1,6 @@
 .game-background {
   background-repeat: repeat-x;
-  transition: 1s;
+  transition: 2s;
   min-height: 100%;
   min-width: 100%;
   display: flex;

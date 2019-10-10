@@ -4,6 +4,7 @@ import { Block } from '../../models/block';
 import { Piece } from '../../models/piece';
 
 export class Player {
+  isFastForwarding = false;
   gameOver = false;
   name: string;
   score: number;
@@ -13,7 +14,6 @@ export class Player {
   currentBlocks: Block[];
   currentPiece: Piece;
   fallingSpeed: number;
-  isFastForwarding = false;
 
   constructor(name: string) {
     this.name = name;
@@ -234,23 +234,19 @@ export class Player {
   // TO DO: DEBUG
   public dropCurrentBlocks(): void {
     let didCollide = false;
-    this.isFastForwarding = true;
     while (!didCollide) {
-      let isColliding = false;
       for (let i = 0; i < this.currentBlocks.length; i++) {
         const block = this.currentBlocks[i];
         if (this.isColliding(block.x, block.y, 1)) {
-          isColliding = true;
+          didCollide = true;
           break;
         }
       }
-      if (isColliding) {
+      if (didCollide) {
         this.handleCollision();
-        didCollide = true;
       } else {
         this.letCurrentBlocksFall();
       }
     }
-    this.isFastForwarding = false;
   }
 }

@@ -12,6 +12,8 @@ export class GameComponent implements OnInit, OnDestroy {
   interval: any;
   monster: Monster;
   backgrounds: number[];
+  victory = false;
+  defeat = false;
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -51,7 +53,12 @@ export class GameComponent implements OnInit, OnDestroy {
         player.loop();
       }
     }
-    this.monster.move();
+    if (this.monster.currentLife > 0) {
+      this.monster.move();
+    } else {
+      this.victory = true;
+      clearInterval(this.interval);
+    }
   }
 
   ngOnDestroy() {

@@ -20,4 +20,8 @@ export class MonsterComponent implements OnInit {
   getBackgroundImg() {
     return `url(/assets/img/backgrounds/${this.monster.background}/background.png)`;
   }
+
+  getDirection() {
+    return `scaleX(${this.monster.movingDirection === 1 ? '1' : '-1'})`;
+  }
 }

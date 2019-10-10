@@ -6,15 +6,15 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./background.component.css']
 })
 export class BackgroundComponent implements OnInit {
-  @Input() x: number;
-  @Input() index: number;
   @Input() background: string;
+  @Input() index: number;
+  @Input() x: number;
   constructor() {}
 
   ngOnInit() {}
 
   getBackgroundPos() {
-    return this.x / ((this.index + 1) / 2) + '%';
+    return this.x / ((5 - this.index + 1) / 2) + '%';
   }
 
   getBackgroundImg() {
