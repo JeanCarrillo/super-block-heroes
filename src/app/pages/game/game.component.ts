@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { Player } from './player';
+import { Monster } from './monster';
 
 @Component({
   selector: 'app-game',
@@ -9,6 +10,8 @@ import { Player } from './player';
 export class GameComponent implements OnInit, OnDestroy {
   players: Player[];
   interval: any;
+  monster: Monster;
+  backgroundX: string;
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -32,6 +35,7 @@ export class GameComponent implements OnInit, OnDestroy {
     for (const name of playerNames) {
       this.players.push(new Player(name));
     }
+    this.monster = new Monster('giphy');
   }
 
   ngOnInit() {
@@ -44,6 +48,11 @@ export class GameComponent implements OnInit, OnDestroy {
         player.loop();
       }
     }
+    this.monster.move();
+  }
+
+  getBackgroundX(index: number) {
+    return this.monster.x / ((index + 1) / 2) + '%';
   }
 
   ngOnDestroy() {

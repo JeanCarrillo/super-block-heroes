@@ -20,6 +20,7 @@ import { SocialComponent } from './pages/social/social.component';
 import { MyaccountComponent } from './myaccount/myaccount.component';
 import { RankingComponent } from './pages/ranking/ranking.component';
 import { CollectionComponent } from './collection/collection.component';
+import { BackgroundComponent } from './pages/game/background/background.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CollectionComponent } from './collection/collection.component';
     SocialComponent,
     MyaccountComponent,
     RankingComponent,
-    CollectionComponent
+    CollectionComponent,
+    BackgroundComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

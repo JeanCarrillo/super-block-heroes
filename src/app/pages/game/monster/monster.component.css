@@ -5,14 +5,14 @@
   background: url('/assets/img/backgroundMonster.png');
   background-repeat: repeat-x;
   background-size: contain;
+  position: relative;
 }
 
 .monster {
   vertical-align: middle;
   border-style: none;
   height: auto;
-  width: 5.3%;  
+  width: 5.3%;
   bottom: 2%;
   position: absolute;
-  transform: translateX(0%);
 }

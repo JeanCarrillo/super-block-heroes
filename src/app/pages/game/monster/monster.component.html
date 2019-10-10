@@ -1,3 +1,8 @@
 <div class="boardMonster" [ngClass]="monster">
-    <img src="assets/img/giphy.gif" alt="monster" class="monster">
+  <img
+    src="assets/img/{{ monster.name }}.gif"
+    alt="monster"
+    class="monster"
+    [ngStyle]="{ left: getPosition() }"
+  />
 </div>

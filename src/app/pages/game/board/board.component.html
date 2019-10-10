@@ -1,10 +1,10 @@
-<div class="player1 d-block mx-auto">
+<div class="d-block mx-auto">
   <div class="boardRow" *ngFor="let row of board.tiles; index as i">
     <div class="boardCol" *ngFor="let block of row; index as j">
       <img
         *ngIf="getBlock(i, j)"
         class="block"
-        src="../../assets/blocks/{{ getBlock(i, j) }}.png"
+        src="../../assets/img/blocks/{{ getBlock(i, j) }}.png"
       />
     </div>
   </div>
