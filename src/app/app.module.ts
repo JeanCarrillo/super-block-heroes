@@ -14,6 +14,7 @@ import { GameComponent } from './pages/game/game.component';
 import { BoardComponent } from './pages/game/board/board.component';
 import { MonsterComponent } from './pages/game/monster/monster.component';
 import { ScoreComponent } from './pages/game/score/score.component';
+import { ButtonComponent } from './components/button/button.component';
 import { PlayerContainerComponent } from './pages/game/player-container/player-container.component';
 import { StoreComponent } from './pages/store/store.component';
 import { SocialComponent } from './pages/social/social.component';
@@ -36,6 +37,7 @@ import { BackgroundComponent } from './pages/game/background/background.componen
     BoardComponent,
     MonsterComponent,
     ScoreComponent,
+    ButtonComponent,
     PlayerContainerComponent,
     StoreComponent,
     SocialComponent,
@@ -48,4 +50,4 @@ import { BackgroundComponent } from './pages/game/background/background.componen
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
