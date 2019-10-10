@@ -10,7 +10,7 @@ export class Monster {
     this.x = 0;
     this.name = name;
     this.movingDirection = 1; // right
-    this.movingSpeed = 1;
+    this.movingSpeed = 1.5;
   }
 
   public move() {
