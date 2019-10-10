@@ -19,12 +19,15 @@ app-background {
 
 app-monster { 
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
   min-width: 100%;
 }
 
 app-player-container {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .playerMonster {
   width: 100%;
