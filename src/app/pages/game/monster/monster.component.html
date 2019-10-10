@@ -1,8 +1,8 @@
 <div class="boardMonster" [ngClass]="monster">
   <img
-    src="assets/img/{{ monster.name }}.gif"
+    src="assets/img/monsters/{{ monster.name }}.gif"
     alt="monster"
     class="monster"
-    [ngStyle]="{ left: getPosition() }"
+    [ngStyle]="{ left: getPosition(), 'background-image': getBackgroundImg() }"
   />
 </div>

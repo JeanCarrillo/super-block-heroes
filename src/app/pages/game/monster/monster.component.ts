@@ -16,4 +16,8 @@ export class MonsterComponent implements OnInit {
   getPosition() {
     return `${this.monster.x}%`;
   }
+
+  getBackgroundImg() {
+    return `url(/assets/img/backgrounds/${this.monster.background}/background.png)`;
+  }
 }

@@ -4,12 +4,14 @@ export class Monster {
   name: string;
   movingDirection: number;
   movingSpeed: number;
+  background: string;
 
   constructor(name: string) {
+    this.background = '1';
     this.life = 100;
     this.x = 0;
     this.name = name;
-    this.movingDirection = 1; // right
+    this.movingDirection = 1; // 1 = right, -1 = left
     this.movingSpeed = 1.5;
   }
 

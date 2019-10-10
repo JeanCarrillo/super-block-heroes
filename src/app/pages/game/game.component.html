@@ -1,8 +1,20 @@
 <div class="container-fluid m-0 px-0 vertical-center">
-  <app-background [monsterX]="monster.x" [index]="0" [type]="1">
-    <app-background [monsterX]="monster.x" [index]="1" [type]="1">
-      <app-background [monsterX]="monster.x" [index]="2" [type]="1">
-        <app-background [monsterX]="monster.x" [index]="3" [type]="1">
+  <app-background [background]="monster.background" [x]="monster.x" [index]="0">
+    <app-background
+      [background]="monster.background"
+      [x]="monster.x"
+      [index]="1"
+    >
+      <app-background
+        [background]="monster.background"
+        [x]="monster.x"
+        [index]="2"
+      >
+        <app-background
+          [background]="monster.background"
+          [x]="monster.x"
+          [index]="3"
+        >
           <div class="row pr-5 pl-5">
             <app-player-container
               *ngFor="let player of players"
