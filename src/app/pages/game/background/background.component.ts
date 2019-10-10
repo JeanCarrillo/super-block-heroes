@@ -18,7 +18,7 @@ export class BackgroundComponent implements OnInit {
   }
 
   getBackgroundImg() {
-    return `url(../../../assets/img/backgrounds/${this.background}/${this
-      .index + 1}.png)`;
+    return `url(assets/img/backgrounds/${this.background}/${this.index +
+      1}.png)`;
   }
 }

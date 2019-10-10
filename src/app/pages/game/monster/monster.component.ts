@@ -18,7 +18,7 @@ export class MonsterComponent implements OnInit {
   }
 
   getBackgroundImg() {
-    return `url(/assets/img/backgrounds/${this.monster.background}/background.png)`;
+    return `url(assets/img/backgrounds/${this.monster.background}/background.png)`;
   }
 
   getDirection() {
