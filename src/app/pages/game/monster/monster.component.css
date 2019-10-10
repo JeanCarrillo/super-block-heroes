@@ -1,11 +1,18 @@
 .boardMonster {
-  position: absolute;
   border: 2px solid black;
-  width: 253px;
-  height: 253px;
-  /* width: 20vw;
-  height: 20vw; */
-  background: dimgray;
-  top: 544px;
-  /* top: 30vw; */
+  width: 100%;
+  height: 100px;
+  background: url('/assets/img/backgroundMonster.png');
+  background-repeat: repeat-x;
+  background-size: contain;
+}
+
+.monster {
+  vertical-align: middle;
+  border-style: none;
+  height: auto;
+  width: 5.3%;  
+  bottom: 2%;
+  position: absolute;
+  transform: translateX(0%);
 }

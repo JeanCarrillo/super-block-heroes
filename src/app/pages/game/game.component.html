@@ -1,14 +1,10 @@
-<div class="gameContainer">
-  <app-board
-    *ngFor="let player of players"
-    [board]="player.board"
-    [player]="player"
-  ></app-board>
-  <app-monster monster="monster1"></app-monster>
-  <app-score
-    *ngFor="let player of players"
-    [name]="player.name"
-    [score]="player.score"
-    [gameOver]="player.gameOver"
-  ></app-score>
+<div class="container-fluid pr-5 pl-5">
+  <div class="gameContainer row mt-5">
+    <app-player-container
+      *ngFor="let player of players"
+      [player]="player"
+      class="col-3"
+    ></app-player-container>
+    <app-monster monster="monster1" class="col-12"></app-monster>
+  </div>
 </div>

@@ -164,7 +164,7 @@ export class Player {
   // Score calculation
   // TODO: something more complex ;-)
   private handleScore(nbOfRows: number): void {
-    switch(nbOfRows) {
+    switch (nbOfRows) {
       case 1:
         this.score += 10;
         break;
