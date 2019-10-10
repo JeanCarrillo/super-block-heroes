@@ -14,6 +14,7 @@ import { GameComponent } from './pages/game/game.component';
 import { BoardComponent } from './pages/game/board/board.component';
 import { MonsterComponent } from './pages/game/monster/monster.component';
 import { ScoreComponent } from './pages/game/score/score.component';
+import { ButtonComponent } from './components/button/button.component';
 import { PlayerContainerComponent } from './pages/game/player-container/player-container.component';
 import { StoreComponent } from './pages/store/store.component';
 import { SocialComponent } from './pages/social/social.component';
@@ -35,6 +36,7 @@ import { CollectionComponent } from './collection/collection.component';
     BoardComponent,
     MonsterComponent,
     ScoreComponent,
+    ButtonComponent,
     PlayerContainerComponent,
     StoreComponent,
     SocialComponent,
