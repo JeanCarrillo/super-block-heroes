@@ -11,7 +11,7 @@ export class Monster {
     this.background = '1';
     this.startingLife = 100;
     this.currentLife = this.startingLife;
-    this.x = 0;
+    this.x = -10;
     this.name = name;
     this.movingDirection = 1; // 1 = right, -1 = left
     this.movingSpeed = 1.5;
