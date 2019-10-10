@@ -5,13 +5,15 @@
   background-repeat: repeat-x;
   background-size: contain;
   position: relative;
+  display: flex;
+  flex-grow: 1;
 }
 
 .monster {
   vertical-align: middle;
   border-style: none;
-  height: auto;
-  width: 5vw;
+  height: 80%;
+  width: auto;
   bottom: 2%;
   position: absolute;
 }

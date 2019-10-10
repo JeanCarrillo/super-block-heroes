@@ -1,3 +1,4 @@
 .board {
     width: 80%;
+    align-items: flex-end;
 }
