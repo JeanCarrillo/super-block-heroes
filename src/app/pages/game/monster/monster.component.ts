@@ -24,4 +24,8 @@ export class MonsterComponent implements OnInit {
   getDirection() {
     return `scaleX(${this.monster.movingDirection === 1 ? '1' : '-1'})`;
   }
+
+  getLifePercentage() {
+    return `${(this.monster.currentLife * 100) / this.monster.startingLife}%`;
+  }
 }

@@ -54,9 +54,12 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   private gameLoop(): void {
+    let totalScore = 0;
     for (const player of this.players) {
       player.loop();
+      totalScore += player.score;
     }
+    this.monster.currentLife = this.monster.startingLife - totalScore;
     if (this.monster.currentLife > 0) {
       this.monster.move();
     } else {

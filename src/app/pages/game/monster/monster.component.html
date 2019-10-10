@@ -1,5 +1,5 @@
 <div
-  class="row boardMonster"
+  class="row boardMonster m-0"
   [ngClass]="monster"
   [ngStyle]="{ 'background-image': getBackgroundImg() }"
 >
@@ -11,6 +11,14 @@
   />
 </div>
 <div class="progress">
-    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+  <div
+    class="progress-bar bg-danger"
+    role="progressbar"
+    [ngStyle]="{ width: getLifePercentage() }"
+    aria-valuenow="{ monster.currentLife }"
+    aria-valuemin="0"
+    aria-valuemax="{ monster.startingLife }"
+  >
+    {{ getLifePercentage() }}
+  </div>
 </div>
-
