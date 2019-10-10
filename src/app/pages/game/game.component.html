@@ -1,8 +1,10 @@
-<p>Super tetris de dingo</p>
-<div class="game container-fluid">
-    <app-board player="player1"></app-board>
-    <app-monster monster="monster1"></app-monster>
-    <app-board player="player2"></app-board>
-    <app-board player="player3"></app-board>
-    <app-board player="player4"></app-board>
+<div class="container-fluid pr-5 pl-5">
+  <div class="gameContainer row mt-5">
+    <app-player-container
+      *ngFor="let player of players"
+      [player]="player"
+      class="col-3"
+    ></app-player-container>
+    <app-monster monster="monster1" class="col-12"></app-monster>
+  </div>
 </div>

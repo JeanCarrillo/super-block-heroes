@@ -13,6 +13,14 @@ import { MenuComponent } from './pages/main/menu/menu.component';
 import { GameComponent } from './pages/game/game.component';
 import { BoardComponent } from './pages/game/board/board.component';
 import { MonsterComponent } from './pages/game/monster/monster.component';
+import { ScoreComponent } from './pages/game/score/score.component';
+import { ButtonComponent } from './components/button/button.component';
+import { PlayerContainerComponent } from './pages/game/player-container/player-container.component';
+import { StoreComponent } from './pages/store/store.component';
+import { SocialComponent } from './pages/social/social.component';
+import { MyaccountComponent } from './myaccount/myaccount.component';
+import { RankingComponent } from './pages/ranking/ranking.component';
+import { CollectionComponent } from './collection/collection.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +34,18 @@ import { MonsterComponent } from './pages/game/monster/monster.component';
     MenuComponent,
     GameComponent,
     BoardComponent,
-    MonsterComponent
+    MonsterComponent,
+    ScoreComponent,
+    ButtonComponent,
+    PlayerContainerComponent,
+    StoreComponent,
+    SocialComponent,
+    MyaccountComponent,
+    RankingComponent,
+    CollectionComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

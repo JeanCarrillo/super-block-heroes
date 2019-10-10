@@ -1,6 +1,5 @@
 export class Block {
   color: number;
-  // isMoving: boolean;
   x: number;
   y: number;
 
@@ -8,6 +7,5 @@ export class Block {
     this.color = color;
     this.x = x;
     this.y = y;
-    // this.isMoving = isMoving;
   }
 }

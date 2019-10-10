@@ -19,12 +19,11 @@ export class Board {
     }
   }
 
-  // UNUSED CODE ATM
-  generateNewRow() {
-    const row = [];
-    for (let i = 0; i < this.width; i += 1) {
-      row[i].push(0);
-    }
-    return row;
-  }
+  // generateNewRow() {
+  //   const row = [];
+  //   for (let i = 0; i < this.width; i += 1) {
+  //     row[i].push(0);
+  //   }
+  //   return row;
+  // }
 }

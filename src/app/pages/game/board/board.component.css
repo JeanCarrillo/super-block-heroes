@@ -1,45 +1,41 @@
 .boardRow {
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .boardCol {
   display: flex;
   flex-direction: column;
-  width: 25px;
-  height: 25px;
-  /* border: 1px dotted lightgray; */
+  width: 10%;
+  height: 1.688vw;
 }
 
 .block {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .player1 {
   border: 2px solid rgb(124, 2, 2);
-  position: absolute;
+  border-radius: 2%;
+  width: 75%;
 }
 
 .player2 {
   border: 2px solid rgb(43, 105, 43);
-  transform: rotate(90deg);
-  position: absolute;
-  top: 418px;
-  left: 393px;
+  border-radius: 2%;
+  width: 75%;
 }
 
 .player3 {
   border: 2px solid rgb(37, 37, 105);
-  transform: rotate(180deg);
-  position: absolute;
-  top: 797px;
+  border-radius: 2%;
+  width: 75%;
 }
 
 .player4 {
   border: 2px solid rgb(243, 196, 43);
-  transform: rotate(-90deg);
-  position: absolute;
-  top: 418px;
-  left: -364px;
+  border-radius: 2%;
+  width: 75%;
 }
