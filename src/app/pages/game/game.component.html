@@ -1,10 +1,30 @@
-<div class="container-fluid pr-5 pl-5">
-  <div class="gameContainer row mt-5">
-    <app-player-container
-      *ngFor="let player of players"
-      [player]="player"
-      class="col-3"
-    ></app-player-container>
-    <app-monster monster="monster1" class="col-12"></app-monster>
-  </div>
+<div class="container-fluid m-0 p-0">
+  <app-background [background]="monster.background" [x]="monster.x" [index]="0">
+    <app-background
+      [background]="monster.background"
+      [x]="monster.x"
+      [index]="1"
+    >
+      <app-background
+        [background]="monster.background"
+        [x]="monster.x"
+        [index]="2"
+      >
+        <app-background
+          [background]="monster.background"
+          [x]="monster.x"
+          [index]="3"
+        >
+          <div class="row playerMonster">
+            <app-player-container
+              *ngFor="let player of players"
+              [player]="player"
+              class="col-3"
+            ></app-player-container>
+            <app-monster [monster]="monster"></app-monster>
+          </div>
+        </app-background>
+      </app-background>
+    </app-background>
+  </app-background>
 </div>
