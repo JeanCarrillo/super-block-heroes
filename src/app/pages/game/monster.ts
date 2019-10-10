@@ -10,12 +10,12 @@ export class Monster {
     this.x = 0;
     this.name = name;
     this.movingDirection = 1; // right
-    this.movingSpeed = 1;
+    this.movingSpeed = 1.5;
   }
 
   public move() {
     // right
-    if (this.movingDirection === 1 && this.x < 96) {
+    if (this.movingDirection === 1 && this.x < 100) {
       this.x += this.movingSpeed;
     }
     if (this.x >= 100) {
