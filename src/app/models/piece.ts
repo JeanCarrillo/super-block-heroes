@@ -15,7 +15,7 @@ export class Piece {
     this.x = x;
     this.y = y;
     this.rotationIndex = 0;
-    this.color = rdmCeil(4);
+    this.color = rdmCeil(7);
     // random piece index, T = 1, Z = 2 etc.
     this.pieceIndex = rdmFloor(pieces.length);
     this.createShape();
