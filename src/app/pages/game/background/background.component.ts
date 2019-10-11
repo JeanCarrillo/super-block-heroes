@@ -14,7 +14,11 @@ export class BackgroundComponent implements OnInit {
   ngOnInit() {}
 
   getBackgroundPos() {
-    return this.x / ((5 - this.index + 1) / 2) + '%';
+    const indexMax = 4;
+    const vmin = 0.1;
+    return this.x * ((this.index * (1 - vmin)) / indexMax + vmin) + '%';
+
+    // return this.x / ((5 - this.index + 1) / 2) + '%';
   }
 
   getBackgroundImg() {
