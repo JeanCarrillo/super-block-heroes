@@ -18,7 +18,7 @@ export class MonsterComponent implements OnInit {
   }
 
   getBackgroundImg() {
-    return `url(/assets/img/backgrounds/${this.monster.background}/background.png)`;
+    return `url(assets/img/backgrounds/${this.monster.background}/background.png)`;
   }
 
   getDirection() {
@@ -26,6 +26,7 @@ export class MonsterComponent implements OnInit {
   }
 
   getLifePercentage() {
-    return `${(this.monster.currentLife * 100) / this.monster.startingLife}%`;
+    const percentage = (this.monster.currentLife * 100) / this.monster.startingLife;
+    return `${percentage < 0 ? 0 : percentage}%`;
   }
 }
