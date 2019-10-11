@@ -14,7 +14,7 @@ export class MonsterComponent implements OnInit {
   ngOnInit() {}
 
   getPosition() {
-    return `${this.monster.x}%`;
+    return `${this.monster.x - 5}%`;
   }
 
   getBackgroundImg() {
@@ -26,7 +26,8 @@ export class MonsterComponent implements OnInit {
   }
 
   getLifePercentage() {
-    const percentage = (this.monster.currentLife * 100) / this.monster.startingLife;
+    const percentage =
+      (this.monster.currentLife * 100) / this.monster.startingLife;
     return `${percentage < 0 ? 0 : percentage}%`;
   }
 }
