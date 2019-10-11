@@ -1,7 +1,7 @@
 .cuteButton {
   position: absolute;
-  background-image: url(/assets/img/menuButton.png);
   background-size: contain;
+  background-image: url(/assets/img/menuButton.png);
   background-repeat: no-repeat;
   background-position: center;
   width: 100px;
