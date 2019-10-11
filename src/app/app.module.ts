@@ -16,11 +16,11 @@ import { MonsterComponent } from './pages/game/monster/monster.component';
 import { ScoreComponent } from './pages/game/score/score.component';
 import { ButtonComponent } from './components/button/button.component';
 import { PlayerContainerComponent } from './pages/game/player-container/player-container.component';
-import { StoreComponent } from './pages/store/store.component';
-import { SocialComponent } from './pages/social/social.component';
-import { MyaccountComponent } from './myaccount/myaccount.component';
-import { RankingComponent } from './pages/ranking/ranking.component';
-import { CollectionComponent } from './collection/collection.component';
+import { StoreComponent } from './pages/main/store/store.component';
+import { SocialComponent } from './pages/main/social/social.component';
+import { MyaccountComponent } from './pages/main/myaccount/myaccount.component';
+import { RankingComponent } from './pages/main/ranking/ranking.component';
+import { CollectionComponent } from './pages/main/collection/collection.component';
 import { BackgroundComponent } from './pages/game/background/background.component';
 
 @NgModule({
@@ -50,4 +50,4 @@ import { BackgroundComponent } from './pages/game/background/background.componen
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
