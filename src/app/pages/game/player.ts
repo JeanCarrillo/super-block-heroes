@@ -16,8 +16,12 @@ export class Player {
   fallingSpeed: number;
   loopTime: number;
   loopDelay: number;
+  playerNum: number;
+  handlePlayerAction: any;
 
-  constructor(name: string) {
+  constructor(name: string, playerNum: number, handlePlayerAction: any) {
+    this.handlePlayerAction = handlePlayerAction;
+    this.playerNum = playerNum;
     this.loopTime = Date.now();
     this.loopDelay = 300;
     this.name = name;
@@ -77,8 +81,7 @@ export class Player {
         const color = this.currentPiece.shape[i][j];
         if (
           color !== 0 &&
-          this.board.tiles[this.currentPiece.y + j][this.currentPiece.x + i] !==
-            0
+          this.board.tiles[this.currentPiece.y + j][this.currentPiece.x + i] !== 0
         ) {
           rotationCollide = true;
         }
@@ -175,20 +178,23 @@ export class Player {
   // Score calculation
   // TODO: something more complex ;-)
   private handleScore(nbOfRows: number): void {
+    let score;
     switch (nbOfRows) {
       case 1:
-        this.score += 10;
+        score = 10;
         break;
       case 2:
-        this.score += 24;
+        score = 24;
         break;
       case 3:
-        this.score += 39;
+        score = 39;
         break;
       case 4:
-        this.score += 56;
+        score = 56;
         break;
     }
+    this.score += score;
+    this.handlePlayerAction(this.playerNum, score);
   }
 
   private handleGameOver(): void {

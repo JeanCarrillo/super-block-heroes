@@ -8,8 +8,10 @@ export class Monster {
   background: string;
   moveTime: number;
   moveDelay: number;
+  handleMonsterAction: any;
 
-  constructor(name: string) {
+  constructor(name: string, handleMonsterAction: any) {
+    this.handleMonsterAction = handleMonsterAction;
     this.background = '1';
     this.startingLife = 100;
     this.currentLife = this.startingLife;
