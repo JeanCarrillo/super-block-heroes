@@ -1,48 +1,35 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
-import { Player } from './player';
+
+import { Game } from './game';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit, OnDestroy {
-  players: Player[];
   interval: any;
+  backgrounds: number[];
+  game: Game;
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    if (event.key === 'ArrowRight') {
-      this.players[0].moveCurrentBlocks(1);
-    }
-    if (event.key === 'ArrowLeft') {
-      this.players[0].moveCurrentBlocks(-1);
-    }
-    if (event.key === ' ') {
-      this.players[0].rotateCurrentPiece(1);
-    }
-    if (event.key === 'ArrowUp') {
-      this.players[0].dropCurrentBlocks();
-    }
+    this.game.handleKeys(event.key);
   }
 
   constructor() {
-    const playerNames = ['player1', 'player2', 'player3', 'player4'];
-    this.players = [];
-    for (const name of playerNames) {
-      this.players.push(new Player(name));
-    }
+    this.game = new Game();
+    this.backgrounds = new Array(4).fill(1);
   }
 
   ngOnInit() {
-    this.interval = setInterval(() => this.gameLoop(), 200);
+    this.interval = setInterval(() => this.gameLoop(), 20);
   }
 
   private gameLoop(): void {
-    for (const player of this.players) {
-      if (!player.gameOver) {
-        player.loop();
-      }
+    this.game.loop();
+    if (this.game.victory) {
+      clearInterval(this.interval);
     }
   }
 

@@ -1,8 +1,47 @@
-.gameContainer {
-  width: 100%;
+.gameOver {
+  position: absolute;
+  top: 44vh;
+  left: 40vw;
+}
+
+h5 {
+  text-align: center;
+  font-weight: normal;
+  font-size: 4em;
+  font-family: 'Righteous', cursive;
+}
+
+@media screen and (max-width: 50em) {
+  h5 {
+    font-size: 20vw;
+  }
 }
 
 .logo {
   width: 75%;
   height: auto;
+}
+
+app-background {
+  display: flex;
+  flex-grow: 1;
+  min-height: 100%;
+}
+
+app-monster {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 100%;
+}
+
+app-player-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.playerMonster {
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
 }

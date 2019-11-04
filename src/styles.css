@@ -1,7 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 @import url(https://unpkg.com/bootstrap@4.1.1/dist/css/bootstrap.min.css);
-
-html,
+@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
+html {
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-grow: 1;
+}
 body {
-  background-color:  #389beb;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+app-root {
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+}
+
+app-game {
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+}
+
+app-main {
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+  background-image: url(assets/img/backgrounds/4/background.png);
 }
