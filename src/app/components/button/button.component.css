@@ -1,12 +1,11 @@
 .cuteButton {
-  position: absolute;
-  background-size: contain;
-  background-image: url(/assets/img/menuButton.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100px;
-  height: 50px;
-  transition: 1s;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100px;
+    height: 50px;
+    transition: 1s;
 }
 .cuteButton:hover {
   filter: saturate(2);
