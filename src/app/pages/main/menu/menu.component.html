@@ -1,17 +1,14 @@
-<div class="row">
-  <div class="col">
-    <button class="bt" routerLink="/store">Store</button>
-  </div>
-  <div class="col">
-    <button class="bt" routerLink="/social">Social</button>
-  </div>
-  <div class="col">
-    <button class="bt" routerLink="/myaccount">My Account</button>
-  </div>
-  <div class="col">
-    <button class="bt" routerLink="/ranking">Ranking</button>
-  </div>
-  <div class="col">
-    <button class="bt" routerLink="/collection">Collection</button>
+<div class="container-fluid fixed-bottom">
+  <div class="row buttonfooter">
+    <div class="col" *ngFor="let button of buttons; index as i">
+      <div
+        class="cuteButton"
+        [class.selectedButton]="i === selectedButton"
+        routerLink="{{ button.link }}"
+        (click)="setSelectedButton(i)"
+      >
+        <a>{{ button.text }}</a>
+      </div>
+    </div>
   </div>
 </div>
