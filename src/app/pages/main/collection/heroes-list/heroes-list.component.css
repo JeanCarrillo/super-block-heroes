@@ -1,0 +1,9 @@
+.card-img {
+  width: 8vw;
+  height: auto;
+}
+
+.selectedHero {
+  border: 3px solid yellow;
+  border-radius: 20px;
+}

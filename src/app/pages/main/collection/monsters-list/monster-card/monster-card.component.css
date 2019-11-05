@@ -1,0 +1,6 @@
+.monster {
+  /* margin-top: 300px; */
+  transform: scale(3);
+  width: 40px;
+  height: 32px;
+}

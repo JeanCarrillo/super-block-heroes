@@ -1,39 +1,11 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            <img class="Kirby" src="assets/img/kirby.png" />
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-        <div class="col-sm">
-            One of three columns
-        </div>
-    </div>
-</div>
+<ul class="nav nav-tabs">
+    <li class="nav-item" (click)="setSelectedCategory('heroes')">
+        <span class="nav-link" [class.active]="selectedCategory === 'heroes'">Heroes</span>
+    </li>
+    <li class="nav-item" (click)="setSelectedCategory('monsters')">
+        <span class="nav-link" [class.active]="selectedCategory === 'monsters'">Monsters</span>
+    </li>
+</ul>
+
+<app-heroes-list *ngIf="selectedCategory === 'heroes'"></app-heroes-list>
+<app-monsters-list *ngIf="selectedCategory === 'monsters'"></app-monsters-list>

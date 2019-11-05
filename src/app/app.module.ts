@@ -25,6 +25,9 @@ import { CollectionComponent } from './pages/main/collection/collection.componen
 import { BackgroundComponent } from './pages/game/background/background.component';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { HeroesListComponent } from './pages/main/collection/heroes-list/heroes-list.component';
+import { MonstersListComponent } from './pages/main/collection/monsters-list/monsters-list.component';
+import { MonsterCardComponent } from './pages/main/collection/monsters-list/monster-card/monster-card.component';
 const serverURL = `http://localhost`;
 const serverPort = 5000;
 const socketConfig: SocketIoConfig = { url: `${serverURL}:${serverPort}`, options: {} };
@@ -51,6 +54,9 @@ const socketConfig: SocketIoConfig = { url: `${serverURL}:${serverPort}`, option
     RankingComponent,
     CollectionComponent,
     BackgroundComponent,
+    HeroesListComponent,
+    MonstersListComponent,
+    MonsterCardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SocketIoModule.forRoot(socketConfig)],
   providers: [],
