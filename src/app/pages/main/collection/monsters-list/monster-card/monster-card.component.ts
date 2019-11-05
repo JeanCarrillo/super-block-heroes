@@ -8,7 +8,7 @@ import { monsters } from '../monstersData';
 })
 export class MonsterCardComponent implements OnInit, OnDestroy {
   @Input() monsterIndex: number;
-  monsters = monsters;
+  monster: any;
   x: number;
   y: number;
   interval: number;
@@ -16,19 +16,21 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    this.x = this.monsters[this.monsterIndex].sprites.moving.xMin;
-    this.y = this.monsters[this.monsterIndex].sprites.moving.y;
+    this.monster = monsters[this.monsterIndex];
+    this.x = this.monster.sprites.moving.xMin;
+    this.y = this.monster.sprites.moving.y;
     this.interval = window.setInterval(() => {
-      if (this.x < this.monsters[this.monsterIndex].sprites.moving.xMax) {
+      if (this.x < this.monster.sprites.moving.xMax) {
         this.x += 1;
       } else {
-        this.x = this.monsters[this.monsterIndex].sprites.moving.xMin;
+        this.x = this.monster.sprites.moving.xMin;
       }
     }, 200);
   }
 
   getBackground(): string {
-    return `url(assets/img/monsters/enemies.png) ${-this.x * 40}px ${-this.y * 40}px`;
+    return `url(assets/img/monsters/enemies.png) ${-this.x * this.monster.sprites.width}px ${-this
+      .y * this.monster.sprites.height}px`;
   }
 
   ngOnDestroy(): void {

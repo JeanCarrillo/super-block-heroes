@@ -13,4 +13,8 @@ export class MonstersListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  setSelectedMonster(index: number) {
+    this.selectedMonster = index;
+  }
 }
