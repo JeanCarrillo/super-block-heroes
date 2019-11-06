@@ -12,6 +12,9 @@ export class Monster {
   handleMonsterAction: any;
   animationTime: number;
   animationDelay: number;
+  spriteX: number;
+  spriteY: number;
+  sprites: any;
 
   constructor(monster: any, handleMonsterAction: any) {
     // this.time_min
@@ -28,6 +31,9 @@ export class Monster {
     this.movingSpeed = monster.speed; // one monster move = this.movingSpeed percent
     this.animationTime = Date.now();
     this.animationDelay = 200;
+    this.sprites = monster.sprites;
+    this.spriteX = monster.sprites.moving.xMin;
+    this.spriteY = monster.sprites.moving.y;
   }
 
   public move() {
@@ -50,16 +56,17 @@ export class Monster {
       }
     }
     if (now - this.animationTime > this.animationDelay) {
+      this.animationTime = Date.now();
       this.animate();
     }
   }
 
   private animate() {
-    // if (this.spriteX < this.sprites.moving.xMax) {
-    //   this.spriteX += 1;
-    // } else {
-    //   this.spriteX = this.sprites.moving.xMin;
-    // }
+    if (this.spriteX < this.sprites.moving.xMax) {
+      this.spriteX += 1;
+    } else {
+      this.spriteX = this.sprites.moving.xMin;
+    }
   }
 
   public takeDamage(hitpoints: number) {

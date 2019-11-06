@@ -31,7 +31,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private gameLoop(): void {
     this.game.loop();
-    if (this.game.victory) {
+    if (this.game.victory && this.game.defeat) {
       clearInterval(this.interval);
     }
   }

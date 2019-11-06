@@ -54,8 +54,16 @@ export class Game {
   };
 
   loop(): void {
+    let defeat = true;
     for (const player of this.players) {
       player.loop();
+      if (!player.gameOver) {
+        defeat = false;
+      }
+    }
+    console.log(this.defeat);
+    if (defeat) {
+      this.defeat = true;
     }
     if (this.monster.currentLife > 0) {
       this.monster.move();
