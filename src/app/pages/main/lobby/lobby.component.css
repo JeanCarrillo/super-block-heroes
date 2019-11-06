@@ -2,27 +2,21 @@
   max-width: 150%;
   max-height: 90%;
 }
-
 .gameboy {
   max-width: 50%;
   margin-top: 20%;
 }
-
 .plus {
   max-width: 30%;
   margin-top: 35%;
   margin-left: 93%;
 }
-
-.play {
-  margin-left: 17%;
-  margin-bottom: 20%;
-}
-
 .lootbox {
   max-width: 100%;
   -webkit-animation: lootbox 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 2 both;
   animation: lootbox 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 2 both;
+  width: 150px;
+  height: auto;
 }
 @-webkit-keyframes lootbox {
   0%,
@@ -89,4 +83,37 @@
     -webkit-transform: rotate(8deg);
     transform: rotate(8deg);
   }
+}
+.play {
+  background-image: url(/assets/img/menuButton.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 200px;
+  height: 100px;
+  transition: 1s;
+  margin-left: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+.play:hover {
+  filter: saturate(2);
+  transform: scale(1.1);
+  transition-property: transform;
+  transition-duration: 1s;
+}
+.p {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 25px;
+}
+.a {
+  color: rgb(63, 63, 63);
+  text-decoration: none;
 }

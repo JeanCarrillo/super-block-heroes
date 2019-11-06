@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-9">
+      <div class="row">
+        <div
+          class="col text-center"
+          *ngFor="let monster of monsters; index as i"
+          [class.selectedMonster]="i === selectedMonster"
+          (click)="setSelectedMonster(i)"
+        >
+          <app-monster-card [monster]="monster"></app-monster-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 text-center">{{ monsters[selectedMonster].name }}</div>
+  </div>
+</div>

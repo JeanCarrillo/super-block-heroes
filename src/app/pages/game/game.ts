@@ -9,13 +9,13 @@ export class Game {
   monster: Monster;
   players: Player[];
 
-  constructor() {
+  constructor(monster: any) {
     const playerNames = ['player1', 'player2', 'player3', 'player4'];
     this.players = [];
     for (let i = 0; i < playerNames.length; i += 1) {
       this.players.push(new Player(playerNames[i], i, this.handlePlayerAction));
     }
-    this.monster = new Monster('giphy', this.handleMonsterAction);
+    this.monster = new Monster(monster, this.handleMonsterAction);
   }
 
   handleKeys(key): void {
@@ -54,8 +54,16 @@ export class Game {
   };
 
   loop(): void {
+    let defeat = true;
     for (const player of this.players) {
       player.loop();
+      if (!player.gameOver) {
+        defeat = false;
+      }
+    }
+    console.log(this.defeat);
+    if (defeat) {
+      this.defeat = true;
     }
     if (this.monster.currentLife > 0) {
       this.monster.move();
