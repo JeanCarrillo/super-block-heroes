@@ -1,5 +1,5 @@
-<div class="cuteButton">
-  <p>
-    <a [routerLink]="['/accueil']">Connect</a>
-  </p>
+<div class="cuteButton" [ngStyle]='{"background-image": whichButton()}'>
+    <p class="buttonContainer">
+        <a class="buttonLink" [routerLink]="['/accueil']">Log In</a>
+    </p>
 </div>

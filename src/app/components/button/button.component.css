@@ -1,7 +1,5 @@
 .cuteButton {
-  position: absolute;
   background-size: contain;
-  background-image: url(/assets/img/menuButton.png);
   background-repeat: no-repeat;
   background-position: center;
   width: 100px;
@@ -14,16 +12,16 @@
   transition-property: transform;
   transition-duration: 1s;
 }
-p {
+.buttonContainer {
   margin: 0;
   padding: 0;
   width: 100%;
   font-size: 1em;
   font-weight: bold;
   text-align: center;
-  margin-top: 12px;
+  padding-top: 10px;
 }
-a {
+.buttonLink {
   color: rgb(63, 63, 63);
   text-decoration: none;
 }
