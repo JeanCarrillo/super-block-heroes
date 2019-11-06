@@ -1,8 +1,8 @@
 export class Monster {
+  id: number;
   startingLife: number;
   currentLife: number;
   x: number;
-  monster: any;
   movingDirection: number;
   movingSpeed: number;
   background: string;
@@ -19,6 +19,7 @@ export class Monster {
   constructor(monster: any, handleMonsterAction: any) {
     // this.time_min
     // this.time_max
+    this.id = monster.id;
     this.handleMonsterAction = handleMonsterAction;
     this.name = monster.name;
     this.background = monster.background.toString();

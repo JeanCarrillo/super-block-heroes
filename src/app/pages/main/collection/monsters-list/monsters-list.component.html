@@ -4,7 +4,7 @@
       <div class="row">
         <div
           class="col text-center"
-          *ngFor="let monster of monsters; index as i"
+          *ngFor="let monster of dbService.monsters; index as i"
           [class.selectedMonster]="i === selectedMonster"
           (click)="setSelectedMonster(i)"
         >
@@ -12,6 +12,10 @@
         </div>
       </div>
     </div>
-    <div class="col-3 text-center">{{ monsters[selectedMonster].name }}</div>
+    <div class="col-3 text-center">
+      <p *ngIf="dbService.monsters[selectedMonster]">
+        {{ dbService.monsters[selectedMonster].name }}
+      </p>
+    </div>
   </div>
 </div>

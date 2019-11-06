@@ -6,12 +6,12 @@ import { KEYS } from '../../constants/keyboard';
 export class Game {
   victory = false;
   defeat = false;
+  startTime = Date.now();
   monster: Monster;
-  players: Player[];
+  players: Player[] = [];
 
   constructor(monster: any) {
     const playerNames = ['player1', 'player2', 'player3', 'player4'];
-    this.players = [];
     for (let i = 0; i < playerNames.length; i += 1) {
       this.players.push(new Player(playerNames[i], i, this.handlePlayerAction));
     }
@@ -61,7 +61,6 @@ export class Game {
         defeat = false;
       }
     }
-    console.log(this.defeat);
     if (defeat) {
       this.defeat = true;
     }

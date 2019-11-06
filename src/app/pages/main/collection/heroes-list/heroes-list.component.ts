@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DbService } from '../../../../db.service';
 
 @Component({
@@ -6,19 +6,11 @@ import { DbService } from '../../../../db.service';
   templateUrl: './heroes-list.component.html',
   styleUrls: ['./heroes-list.component.css'],
 })
-export class HeroesListComponent implements OnInit {
+export class HeroesListComponent {
   heroes: any[] = [];
   selectedHero = 0;
 
-  constructor(private dbService: DbService) { }
-
-  ngOnInit(): void {
-    this.getHeroes();
-  }
-
-  getHeroes(): void {
-    this.dbService.getHeroes().subscribe(heroes => (this.heroes = heroes));
-  }
+  constructor(private dbService: DbService) {}
 
   setSelectedHero(index: number): void {
     this.selectedHero = index;

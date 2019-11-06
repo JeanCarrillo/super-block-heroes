@@ -20,10 +20,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
   constructor(private dbService: DbService) {}
 
-  async ngOnInit() {
-    let monsters;
-    await this.dbService.getMonsters().subscribe(res => (monsters = res));
-    const rdmMonster = monsters[Math.floor(Math.random() * monsters.length)];
+  ngOnInit() {
+    const rdmMonster = this.dbService.monsters[
+      Math.floor(Math.random() * this.dbService.monsters.length)
+    ];
     this.game = new Game(rdmMonster);
     this.backgrounds = new Array(4).fill(1);
     this.interval = setInterval(() => this.gameLoop(), 20);
@@ -31,8 +31,9 @@ export class GameComponent implements OnInit, OnDestroy {
 
   private gameLoop(): void {
     this.game.loop();
-    if (this.game.victory && this.game.defeat) {
+    if (this.game.victory || this.game.defeat) {
       clearInterval(this.interval);
+      this.dbService.postGame(this.game);
     }
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { monsters } from './data/monsters';
-import { heroes } from './data/heroes';
+
 import { user } from './data/user';
 
 @Injectable({
@@ -9,26 +9,36 @@ import { user } from './data/user';
 })
 export class DbService {
   user: any;
-  monsters: any[];
-  heroes: any[];
+  monsters: any = null;
+  heroes: any = null;
+  // monstersUpdated: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
-    this.monsters = monsters;
-    for (const monster of this.monsters) {
-      monster.sprites = JSON.parse(monster.sprites);
-    }
-    this.heroes = heroes;
+  private API_SERVER = 'http://localhost:3000';
+
+  constructor(private http: HttpClient) {
     this.user = user;
   }
 
-  getHeroes(): Observable<any[]> {
-    return of(this.heroes);
+  async getHeroes() {
+    await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => (this.heroes = heroes));
   }
 
-  getMonsters(): Observable<any[]> {
-    return of(this.monsters);
+  async getMonsters() {
+    await this.http.get(this.API_SERVER + '/monsters').subscribe(monsters => {
+      this.monsters = monsters;
+      for (const monster of this.monsters) {
+        monster.sprites = JSON.parse(monster.sprites);
+      }
+      // this.monstersUpdated.emit();
+    });
+    // return this.monsters;
   }
-  getUser(): Observable<any> {
-    return of(this.user);
+
+  getUser(nickname): Observable<any> {
+    return of(this.http.get(this.API_SERVER + '/users/nickname/' + nickname));
+  }
+
+  postGame(game): void {
+    console.log(game);
   }
 }

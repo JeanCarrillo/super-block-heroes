@@ -4,8 +4,8 @@
       <img class="logo" src="assets/img/logo.png" />
     </div>
     <div class="col-4">
-      <div class="gameboy">{{ user.nickname }}</div>
-      <img src="{{ heroes[user.selected_hero].img }}" class="gameboy" />
+      <div class="gameboy">{{ dbService.user.nickname }}</div>
+      <img src="{{ dbService.heroes[dbService.user.selected_hero].img }}" class="gameboy" />
     </div>
   </div>
   <div class="row">
@@ -13,18 +13,39 @@
       <img class="lootbox" src="assets/img/lootbox.jpg" />
     </div>
     <div class="col-3">
-      <img class="plus" data-toggle="modal" data-target="#exampleModalCenter" src="assets/img/plus.png" />
+      <img
+        class="plus"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
+        src="assets/img/plus.png"
+      />
     </div>
     <div class="col-3">
-      <img class="plus" data-toggle="modal" data-target="#exampleModalCenter" src="assets/img/plus.png" />
+      <img
+        class="plus"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
+        src="assets/img/plus.png"
+      />
     </div>
     <div class="col-3">
-      <img class="plus" data-toggle="modal" data-target="#exampleModalCenter" src="assets/img/plus.png" />
+      <img
+        class="plus"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
+        src="assets/img/plus.png"
+      />
     </div>
   </div>
   <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
+  <div
+    class="modal fade"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
