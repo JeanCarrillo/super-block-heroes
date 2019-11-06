@@ -10,7 +10,7 @@ export class HeroesListComponent implements OnInit {
   heroes: any[] = [];
   selectedHero = 0;
 
-  constructor(private dbService: DbService) {}
+  constructor(private dbService: DbService) { }
 
   ngOnInit(): void {
     this.getHeroes();

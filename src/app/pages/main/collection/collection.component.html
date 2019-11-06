@@ -1,10 +1,10 @@
 <ul class="nav nav-tabs">
-  <li class="nav-item" (click)="setSelectedCategory('heroes')">
-    <span class="nav-link" [class.active]="selectedCategory === 'heroes'">Heroes</span>
-  </li>
-  <li class="nav-item" (click)="setSelectedCategory('monsters')">
-    <span class="nav-link" [class.active]="selectedCategory === 'monsters'">Monsters</span>
-  </li>
+    <li class="nav-item" (click)="setSelectedCategory('heroes')">
+        <span class="nav-link" [class.active]="selectedCategory === 'heroes'">Heroes</span>
+    </li>
+    <li class="nav-item" (click)="setSelectedCategory('monsters')">
+        <span class="nav-link" [class.active]="selectedCategory === 'monsters'">Monsters</span>
+    </li>
 </ul>
 
 <app-heroes-list *ngIf="selectedCategory === 'heroes'"></app-heroes-list>

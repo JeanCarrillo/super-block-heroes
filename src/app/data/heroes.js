@@ -1,22 +1,30 @@
 export const heroes = [
   {
-    name: 'Yoshi',
-    img: 'assets/img/heroes/yoshi.png',
+    name: 'Luigi',
+    img: 'assets/img/heroes/Luigi.png',
   },
   {
-    name: 'Mario',
-    img: 'assets/img/heroes/mario.png',
+    name: 'PacMan',
+    img: 'assets/img/heroes/PacMan.png',
   },
   {
-    name: 'Samus',
-    img: 'assets/img/heroes/samus.png',
+    name: 'Peach',
+    img: 'assets/img/heroes/Peach.png',
   },
   {
-    name: 'Kirby',
-    img: 'assets/img/heroes/kirby.png',
+    name: 'Pikachu',
+    img: 'assets/img/heroes/Pikachu.png',
   },
   {
-    name: 'Link',
-    img: 'assets/img/heroes/link.png',
+    name: 'Plant',
+    img: 'assets/img/heroes/Plant.png',
+  },
+  {
+    name: 'Sonic',
+    img: 'assets/img/heroes/Sonic.png',
+  },
+  {
+    name: 'Squirtle',
+    img: 'assets/img/heroes/Squirtle.png',
   },
 ];

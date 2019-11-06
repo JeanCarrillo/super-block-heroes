@@ -28,7 +28,6 @@ export class DbService {
   getMonsters(): Observable<any[]> {
     return of(this.monsters);
   }
-
   getUser(): Observable<any> {
     return of(this.user);
   }
