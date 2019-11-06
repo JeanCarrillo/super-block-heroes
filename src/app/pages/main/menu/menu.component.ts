@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {}
 
-  setSelectedButton(index: number): void {
+  setSelectedButton = (index: number): void => {
     this.selectedButton = index;
-  }
+  };
 }

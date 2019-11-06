@@ -11,7 +11,7 @@ import { CollectionComponent } from './pages/main/collection/collection.componen
 import { LobbyComponent } from './pages/main/lobby/lobby.component';
 
 const routes: Routes = [
-  // { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent },
   {
     path: 'accueil',
     component: MainComponent,

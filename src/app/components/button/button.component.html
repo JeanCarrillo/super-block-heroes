@@ -1,5 +1,11 @@
-<div class="cuteButton" [ngStyle]='{"background-image": whichButton()}'>
-    <p class="buttonContainer">
-        <a class="buttonLink" [routerLink]="['/accueil']">Log In</a>
-    </p>
+<div
+  class="cuteButton"
+  [class.buttonSelected]="selected"
+  [style.backgroundImage]="whichButton()"
+  [routerLink]="url"
+  (click)="callback()"
+>
+  <p class="buttonContainer">
+    <a class="buttonLink">{{ text }}</a>
+  </p>
 </div>
