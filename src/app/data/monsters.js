@@ -17,7 +17,7 @@ export const monsters = [
     },
   },
   {
-    name: 'Truc',
+    name: 'Super Koopa',
     sprites: {
       width: 40,
       height: 40,
@@ -34,7 +34,7 @@ export const monsters = [
     },
   },
   {
-    name: 'Machin',
+    name: 'Galoomba',
     sprites: {
       width: 40,
       height: 40,
@@ -51,7 +51,7 @@ export const monsters = [
     },
   },
   {
-    name: 'Ghost',
+    name: 'Boo',
     sprites: {
       width: 25,
       height: 40,

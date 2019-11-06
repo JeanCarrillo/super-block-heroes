@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { monsters } from '../monstersData';
 
 @Component({
   selector: 'app-monster-card',
@@ -7,8 +6,7 @@ import { monsters } from '../monstersData';
   styleUrls: ['./monster-card.component.css'],
 })
 export class MonsterCardComponent implements OnInit, OnDestroy {
-  @Input() monsterIndex: number;
-  monster: any;
+  @Input() monster: any;
   x: number;
   y: number;
   interval: number;
@@ -16,7 +14,6 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    this.monster = monsters[this.monsterIndex];
     this.x = this.monster.sprites.moving.xMin;
     this.y = this.monster.sprites.moving.y;
     this.interval = window.setInterval(() => {

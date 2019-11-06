@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { monsters } from './monstersData';
+import { DbService } from '../../../../db.service';
 
 @Component({
   selector: 'app-monsters-list',
@@ -7,14 +7,20 @@ import { monsters } from './monstersData';
   styleUrls: ['./monsters-list.component.css'],
 })
 export class MonstersListComponent implements OnInit {
-  monsters = monsters;
+  monsters: any[] = [];
   selectedMonster = 0;
 
-  constructor() {}
+  constructor(private dbService: DbService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.getMonsters();
+  }
 
-  setSelectedMonster(index: number) {
+  getMonsters(): void {
+    this.dbService.getMonsters().subscribe(monsters => (this.monsters = monsters));
+  }
+
+  setSelectedMonster(index: number): void {
     this.selectedMonster = index;
   }
 }
