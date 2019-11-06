@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { DbService } from '../../db.service';
 
 import { Game } from './game';
 
@@ -17,12 +18,14 @@ export class GameComponent implements OnInit, OnDestroy {
     this.game.handleKeys(event.key);
   }
 
-  constructor() {
-    this.game = new Game();
-    this.backgrounds = new Array(4).fill(1);
-  }
+  constructor(private dbService: DbService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    let monsters;
+    await this.dbService.getMonsters().subscribe(res => (monsters = res));
+    const rdmMonster = monsters[Math.floor(Math.random() * monsters.length)];
+    this.game = new Game(rdmMonster);
+    this.backgrounds = new Array(4).fill(1);
     this.interval = setInterval(() => this.gameLoop(), 20);
   }
 
