@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { user } from '../../../data/user';
 
 @Component({
   selector: 'app-lobby',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lobby.component.css']
 })
 export class LobbyComponent implements OnInit {
+  user = {}
 
   constructor() { }
 
   ngOnInit() {
+    this.user = user
   }
 
 }
