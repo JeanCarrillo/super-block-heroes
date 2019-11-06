@@ -1,6 +1,11 @@
 .loginPage{
-    width: 100%;
-    background-image: url('../../../assets/img/backgroundLogin.jpg');
-    background-repeat: no-repeat;
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: lightblue;
+    align-items: center;
+    width: 600px;
+    height: 400px;
+    padding: 15px;
+    margin: 30px;
 }
