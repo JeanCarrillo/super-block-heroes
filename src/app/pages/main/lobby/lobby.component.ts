@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { user } from '../../../data/user';
+import { DbService } from '../../../db.service';
 
 @Component({
   selector: 'app-lobby',
@@ -8,11 +8,16 @@ import { user } from '../../../data/user';
 })
 export class LobbyComponent implements OnInit {
   user = {}
+  heroes: any[];
 
-  constructor() { }
+  constructor(private dbService: DbService) { }
 
-  ngOnInit() {
-    this.user = user
+  ngOnInit(): void {
+    this.getData();
   }
 
+  getData(): void {
+    this.dbService.getHeroes().subscribe(heroes => (this.heroes = heroes));
+    this.dbService.getUser().subscribe(user => (this.user = user));
+  }
 }

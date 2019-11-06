@@ -2,25 +2,32 @@ export class Monster {
   startingLife: number;
   currentLife: number;
   x: number;
-  name: string;
+  monster: any;
   movingDirection: number;
   movingSpeed: number;
   background: string;
   moveTime: number;
   moveDelay: number;
+  name: string;
   handleMonsterAction: any;
+  animationTime: number;
+  animationDelay: number;
 
-  constructor(name: string, handleMonsterAction: any) {
+  constructor(monster: any, handleMonsterAction: any) {
+    // this.time_min
+    // this.time_max
     this.handleMonsterAction = handleMonsterAction;
-    this.background = '1';
-    this.startingLife = 100;
+    this.name = monster.name;
+    this.background = monster.background.toString();
+    this.startingLife = monster.hp;
     this.currentLife = this.startingLife;
     this.x = -10;
-    this.name = name;
     this.movingDirection = 1; // 1 = right, -1 = left
     this.moveTime = Date.now();
     this.moveDelay = 80; // monster moves every this.moveDelay ms
-    this.movingSpeed = 0.5; // one monster move = this.movingSpeed percent
+    this.movingSpeed = monster.speed; // one monster move = this.movingSpeed percent
+    this.animationTime = Date.now();
+    this.animationDelay = 200;
   }
 
   public move() {
@@ -41,6 +48,9 @@ export class Monster {
       if (this.x <= 0) {
         this.movingDirection = 1;
       }
+    }
+    if (now - this.animationTime > this.animationDelay) {
+      this.animate();
     }
   }
 

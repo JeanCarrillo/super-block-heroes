@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DbService } from '../../../../db.service';
 
 @Component({
   selector: 'app-heroes-list',
@@ -6,41 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./heroes-list.component.css'],
 })
 export class HeroesListComponent implements OnInit {
-  heroes = [
-    {
-      name: 'Luigi',
-      img: 'assets/img/heroes/Luigi.png',
-    },
-    {
-      name: 'PacMan',
-      img: 'assets/img/heroes/PacMan.png',
-    },
-    {
-      name: 'Peach',
-      img: 'assets/img/heroes/Peach.png',
-    },
-    {
-      name: 'Pikachu',
-      img: 'assets/img/heroes/Pikachu.png',
-    },
-    {
-      name: 'Plant',
-      img: 'assets/img/heroes/Plant.png',
-    },
-    {
-      name: 'Sonic',
-      img: 'assets/img/heroes/Sonic.png',
-    },
-    {
-      name: 'Squirtle',
-      img: 'assets/img/heroes/Squirtle.png',
-    },
-  ];
+  heroes: any[] = [];
   selectedHero = 0;
 
-  constructor() { }
+  constructor(private dbService: DbService) { }
 
-  ngOnInit() { }
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+
+  getHeroes(): void {
+    this.dbService.getHeroes().subscribe(heroes => (this.heroes = heroes));
+  }
 
   setSelectedHero(index: number): void {
     this.selectedHero = index;

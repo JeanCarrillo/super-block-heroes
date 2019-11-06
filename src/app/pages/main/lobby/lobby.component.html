@@ -5,7 +5,7 @@
     </div>
     <div class="col-4">
       <div class="gameboy">{{ user.nickname }}</div>
-      <div class="gameboy">{{ user.selected_hero }}</div>
+      <img src="{{ heroes[user.selected_hero].img }}" class="gameboy" />
     </div>
   </div>
   <div class="row">
