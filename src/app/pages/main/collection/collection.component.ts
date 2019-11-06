@@ -11,7 +11,7 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {}
 
-  setSelectedCategory(str: string) {
+  setSelectedCategory(str: string): void {
     this.selectedCategory = str;
   }
 }

@@ -8,10 +8,10 @@
           [class.selectedMonster]="i === selectedMonster"
           (click)="setSelectedMonster(i)"
         >
-          <app-monster-card [monsterIndex]="i"></app-monster-card>
+          <app-monster-card [monster]="monster"></app-monster-card>
         </div>
       </div>
-      <div class="col-3 text-center">{{ monsters[selectedMonster].name }}</div>
     </div>
+    <div class="col-3 text-center">{{ monsters[selectedMonster].name }}</div>
   </div>
 </div>

@@ -44,6 +44,14 @@ export class Monster {
     }
   }
 
+  private animate() {
+    // if (this.spriteX < this.sprites.moving.xMax) {
+    //   this.spriteX += 1;
+    // } else {
+    //   this.spriteX = this.sprites.moving.xMin;
+    // }
+  }
+
   public takeDamage(hitpoints: number) {
     this.currentLife -= hitpoints;
   }
