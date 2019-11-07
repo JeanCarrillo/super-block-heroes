@@ -9,6 +9,7 @@ import { logging } from 'protractor';
 })
 export class ButtonComponent implements OnInit {
   @Input() buttonType: string;
+  @Input() size = 1;
   @Input() url: string;
   @Input() selected: boolean;
   @Input() text: string;
@@ -18,10 +19,14 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit() {}
 
+  private textSize(): number {
+    return this.selected ? this.size * 1.3 : this.size;
+  }
+
   /*
    * this method choose a button depends on its type
    */
-  private whichButton() {
+  private whichButton(): string {
     switch (this.buttonType) {
       case 'play': {
         return 'url(../../../assets/img/buttons/playButton.png)';

@@ -4,7 +4,11 @@
       <app-logo></app-logo>
     </div>
     <div class="col-4">
-      <div class="gameboy">{{ dbService.user.nickname }}</div>
+      <!-- <app-user-card></app-user-card> -->
+      <div class="gameboy">
+        <h2>{{ dbService.user.nickname }}</h2>
+        <p>Gold: {{ dbService.user.gold }}</p>
+      </div>
       <img src="{{ dbService.user.hero.img }}" class="gameboy" />
     </div>
   </div>
@@ -74,9 +78,10 @@
   </div>
   <div class="row justify-content-end">
     <div class="col-4">
-      <div class="play" routerLink="/game">
+      <app-button text="Play" url="/game" size="2"></app-button>
+      <!-- <div class="play" routerLink="/game">
         <a>Play</a>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

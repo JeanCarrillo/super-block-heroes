@@ -6,10 +6,12 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
   styleUrls: ['./monster-card.component.css'],
 })
 export class MonsterCardComponent implements OnInit, OnDestroy {
+  @Input() selected: boolean;
   @Input() monster: any;
   x: number;
   y: number;
   interval: number;
+  status = 'moving';
 
   constructor() {}
 
@@ -17,10 +19,13 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
     this.x = this.monster.sprites.moving.xMin;
     this.y = this.monster.sprites.moving.y;
     this.interval = window.setInterval(() => {
-      if (this.x < this.monster.sprites.moving.xMax) {
+      if (this.x < this.monster.sprites[this.status].xMax) {
         this.x += 1;
       } else {
-        this.x = this.monster.sprites.moving.xMin;
+        if (this.status === 'attacking') {
+          this.status = 'moving';
+        }
+        this.x = this.monster.sprites[this.status].xMin;
       }
     }, 200);
   }
@@ -28,6 +33,15 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
   getBackground(): string {
     return `url(assets/img/monsters/enemies.png) ${-this.x * this.monster.sprites.width}px ${-this
       .y * this.monster.sprites.height}px`;
+  }
+
+  getScale() {
+    return `scale(${this.selected ? '4' : '3'})`;
+  }
+
+  changeStatus() {
+    this.status = 'attacking';
+    this.x = this.monster.sprites[this.status].xMin;
   }
 
   ngOnDestroy(): void {

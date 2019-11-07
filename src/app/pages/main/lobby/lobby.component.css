@@ -80,36 +80,3 @@
     transform: rotate(8deg);
   }
 }
-.play {
-  background-image: url(/assets/img/buttons/menuButton.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 200px;
-  height: 100px;
-  transition: 1s;
-  margin-left: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-}
-.play:hover {
-  filter: saturate(2);
-  transform: scale(1.1);
-  transition-property: transform;
-  transition-duration: 1s;
-}
-.p {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  font-size: 2em;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 25px;
-}
-.a {
-  color: rgb(63, 63, 63);
-  text-decoration: none;
-}

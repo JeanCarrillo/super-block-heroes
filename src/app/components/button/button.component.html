@@ -1,7 +1,7 @@
 <div
   class="cuteButton"
-  [class.buttonSelected]="selected"
   [style.backgroundImage]="whichButton()"
+  [style.fontSize.em]="textSize()"
   [routerLink]="url"
   (click)="callback()"
 >

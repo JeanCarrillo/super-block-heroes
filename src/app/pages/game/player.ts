@@ -23,7 +23,7 @@ export class Player {
     this.handlePlayerAction = handlePlayerAction;
     this.playerNum = playerNum;
     this.loopTime = Date.now();
-    this.loopDelay = 50;
+    this.loopDelay = 300;
     this.name = user.nickname;
     this.score = 0;
     this.board = new Board(this.rowNumbers, this.colNumbers);
