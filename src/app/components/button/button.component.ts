@@ -11,8 +11,8 @@ export class ButtonComponent implements OnInit {
   @Input() buttonType: string;
   @Input() url: string;
   @Input() selected: boolean;
-  @Input() callback: any;
   @Input() text: string;
+  @Input() callback: any = () => {};
 
   constructor() {}
 

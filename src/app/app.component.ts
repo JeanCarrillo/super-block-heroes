@@ -11,5 +11,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.dbService.getMonsters();
     this.dbService.getHeroes();
+    // this.dbService.postUser({
+    //   email: 'player5@email.com',
+    //   nickname: 'player5',
+    //   password: 'password',
+    //   hero: 3,
+    // });
   }
 }

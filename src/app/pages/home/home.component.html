@@ -1,11 +1,16 @@
-<div class="container loginPage">
+<div class="container-fluid loginPage">
   <!--
     TODO: a real login form
     <p>Sign In</p>
     <p>Forgot password ?</p>
 -->
-
-  <p>Sign Up</p>
-
-  <app-button buttonType="login" url="['/accueil']" text="Log In"></app-button>
+  <app-logo></app-logo>
+  <input
+    type="text"
+    [(ngModel)]="nickname"
+    class="input"
+    placeholder="Nickname"
+    (keyup.enter)="submit()"
+  />
+  <app-button buttonType="login" text="Log In" (click)="submit()"></app-button>
 </div>

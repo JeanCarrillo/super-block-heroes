@@ -29,3 +29,7 @@ app-main {
   min-width: 100%;
   background-image: url(assets/img/backgrounds/4/background.png);
 }
+
+app-home {
+  background-image: url(assets/img/backgrounds/4/background.png);
+}

@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 
 import { HomeComponent } from './pages/home/home.component';
@@ -29,6 +30,7 @@ import { MonsterCardComponent } from './pages/main/collection/monsters-list/mons
 
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { LogoComponent } from './components/logo/logo.component';
 
 const serverURL = `http://localhost`;
 const serverPort = 5000;
@@ -59,11 +61,13 @@ const socketConfig: SocketIoConfig = { url: `${serverURL}:${serverPort}`, option
     HeroesListComponent,
     MonstersListComponent,
     MonsterCardComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     SocketIoModule.forRoot(socketConfig),
   ],
   providers: [],

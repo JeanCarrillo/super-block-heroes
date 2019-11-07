@@ -1,14 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { DbService } from '../../db.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
-  constructor() { }
+export class HomeComponent {
+  nickname: string;
 
-  ngOnInit() {
-  }
+  constructor(private dbService: DbService, private router: Router) {}
 
+  submit = async () => {
+    await this.dbService.postUser(this.nickname).subscribe(async res => {
+      await this.dbService.setUser(res);
+      this.router.navigate(['/accueil']);
+    });
+  };
 }

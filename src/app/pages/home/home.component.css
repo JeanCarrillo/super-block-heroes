@@ -1,11 +1,14 @@
-.loginPage{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    background-color: lightblue;
-    align-items: center;
-    width: 600px;
-    height: 400px;
-    padding: 15px;
-    margin: 30px;
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
+  /* padding: 15px; */
+  /* margin: 30px; */
+}
+
+.input {
+  text-align: center;
 }
