@@ -16,14 +16,15 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    this.x = this.monster.sprites.moving.xMin;
-    this.y = this.monster.sprites.moving.y;
+    this.x = this.monster.sprites[this.status].xMin;
+    this.y = this.monster.sprites[this.status].y;
     this.interval = window.setInterval(() => {
       if (this.x < this.monster.sprites[this.status].xMax) {
         this.x += 1;
       } else {
         if (this.status === 'attacking') {
           this.status = 'moving';
+          this.y = this.monster.sprites[this.status].y;
         }
         this.x = this.monster.sprites[this.status].xMin;
       }
@@ -42,6 +43,7 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
   changeStatus() {
     this.status = 'attacking';
     this.x = this.monster.sprites[this.status].xMin;
+    this.y = this.monster.sprites[this.status].y;
   }
 
   ngOnDestroy(): void {

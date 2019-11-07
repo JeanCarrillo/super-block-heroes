@@ -13,7 +13,6 @@ export class Player {
   colNumbers = 20;
   currentBlocks: Block[];
   currentPiece: Piece;
-  fallingSpeed: number;
   loopTime: number;
   loopDelay: number;
   playerNum: number;
@@ -31,12 +30,14 @@ export class Player {
   }
 
   public loop(): void {
+    if (this.isFastForwarding) {
+      return;
+    }
     const now = Date.now();
     if (now - this.loopTime > this.loopDelay && !this.gameOver) {
       this.loopTime = Date.now();
       let didCollide = false;
-      for (let i = 0; i < this.currentBlocks.length; i++) {
-        const block = this.currentBlocks[i];
+      for (const block of this.currentBlocks) {
         if (this.isColliding(block.x, block.y, 1)) {
           didCollide = true;
           break;
@@ -109,8 +110,8 @@ export class Player {
 
   // Y + 1 to all currentBlocks and currentPiece (fall by 1)
   private letCurrentBlocksFall(): void {
-    for (let i = 0; i < this.currentBlocks.length; i++) {
-      this.currentBlocks[i].y += 1;
+    for (const block of this.currentBlocks) {
+      block.y += 1;
     }
     if (this.currentPiece) {
       this.currentPiece.y += 1;
@@ -123,8 +124,7 @@ export class Player {
   // => reset current blocks
   private handleCollision(): void {
     let gameOver = false;
-    for (let i = 0; i < this.currentBlocks.length; i++) {
-      const block = this.currentBlocks[i];
+    for (const block of this.currentBlocks) {
       // If there is already a block where current block is, then it is likely we are on top of the board
       // additional check : block index is < 3 (just in case false positive bottom/middle of the board)
       // => game over
@@ -249,13 +249,14 @@ export class Player {
   // When key is pressed
   // => current blocks fall until collision (fast forward)
   // TO DO: DEBUG
+  // Sometimes it starts to create blocks on the board :-/
   public dropCurrentBlocks(): void {
     if (!this.isFastForwarding) {
       this.isFastForwarding = true;
       let didCollide = false;
       while (!didCollide) {
-        for (let i = 0; i < this.currentBlocks.length; i++) {
-          const block = this.currentBlocks[i];
+        for (const block of this.currentBlocks) {
+          // const block = this.currentBlocks[i];
           if (this.isColliding(block.x, block.y, 1)) {
             didCollide = true;
             break;
@@ -266,6 +267,7 @@ export class Player {
         }
       }
       this.handleCollision();
+      this.createPiece();
       setTimeout(() => (this.isFastForwarding = false), 300);
       // this.isFastForwarding = false;
     }
