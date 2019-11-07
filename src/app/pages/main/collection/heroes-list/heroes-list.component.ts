@@ -7,12 +7,13 @@ import { DbService } from '../../../../db.service';
   styleUrls: ['./heroes-list.component.css'],
 })
 export class HeroesListComponent {
-  heroes: any[] = [];
-  selectedHero = 0;
+  selectedHero: any = this.dbService.user.hero;
 
   constructor(private dbService: DbService) {}
 
-  setSelectedHero(index: number): void {
-    this.selectedHero = index;
+  setSelectedHero(hero: any): void {
+    this.dbService.updateUser(this.dbService.user.id, {
+      hero,
+    });
   }
 }

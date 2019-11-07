@@ -26,6 +26,12 @@ export class DbService {
     });
   }
 
+  updateUser(id: number, data: any) {
+    this.http.put(this.API_SERVER + '/users/' + id, data).subscribe(user => {
+      this.user = user;
+    });
+  }
+
   setUser(user: any) {
     this.user = user;
   }
@@ -41,11 +47,11 @@ export class DbService {
     // return this.monsters;
   }
 
-  getUser(nickname): Observable<any> {
+  getUser(nickname: string): Observable<any> {
     return of(this.http.get(this.API_SERVER + '/users/nickname/' + nickname));
   }
 
-  postGame(game): void {
+  postGame(game: any): void {
     console.log(game);
   }
 }
