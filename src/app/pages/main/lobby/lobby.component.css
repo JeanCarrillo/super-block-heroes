@@ -81,7 +81,7 @@
   }
 }
 .play {
-  background-image: url(/assets/img/menuButton.png);
+  background-image: url(/assets/img/buttons/menuButton.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

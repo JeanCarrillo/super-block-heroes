@@ -1,6 +1,7 @@
 .card-img {
   width: 8vw;
   height: auto;
+  cursor: pointer;
 }
 
 .selectedHero {

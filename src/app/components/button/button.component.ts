@@ -24,13 +24,13 @@ export class ButtonComponent implements OnInit {
   private whichButton() {
     switch (this.buttonType) {
       case 'play': {
-        return 'url(../../../assets/img/playButton.png)';
+        return 'url(../../../assets/img/buttons/playButton.png)';
       }
       case 'login': {
-        return 'url(../../../assets/img/loginButton.png)';
+        return 'url(../../../assets/img/buttons/loginButton.png)';
       }
       default: {
-        return 'url(../../../assets/img/menuButton.png)';
+        return 'url(../../../assets/img/buttons/menuButton.png)';
       }
     }
   }
