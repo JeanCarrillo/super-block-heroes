@@ -12,6 +12,7 @@ export class HeroesListComponent {
   constructor(private dbService: DbService) {}
 
   setSelectedHero(hero: any): void {
+    this.selectedHero = hero;
     this.dbService.updateUser(this.dbService.user.id, {
       hero,
     });

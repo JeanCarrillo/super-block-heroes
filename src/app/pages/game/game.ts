@@ -10,10 +10,9 @@ export class Game {
   monster: Monster;
   players: Player[] = [];
 
-  constructor(monster: any) {
-    const playerNames = ['player1', 'player2', 'player3', 'player4'];
-    for (let i = 0; i < playerNames.length; i += 1) {
-      this.players.push(new Player(playerNames[i], i, this.handlePlayerAction));
+  constructor(monster: any, users: any) {
+    for (let i = 0; i < users.length; i += 1) {
+      this.players.push(new Player(users[i], i, this.handlePlayerAction));
     }
     this.monster = new Monster(monster, this.handleMonsterAction);
   }

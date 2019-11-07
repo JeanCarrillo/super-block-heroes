@@ -52,6 +52,22 @@ export class DbService {
   }
 
   postGame(game: any): void {
-    console.log(game);
+    const gameDuration = Date.now() - game.startTime;
+    const victory = game.victory ? true : false;
+    const monsterId = game.monster.id;
+    const data = {
+      gameDuration,
+      victory,
+      monsterId,
+      // TO DO
+    };
+    const goldGained = victory
+      ? Math.floor((game.monster.startingLife / 10) * (gameDuration / 1000))
+      : 10;
+    console.log(goldGained);
+    // this.http.post(this.API_SERVER + '/games', data);
+    this.updateUser(this.user.id, {
+      gold: this.user.gold + goldGained,
+    });
   }
 }

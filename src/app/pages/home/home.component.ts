@@ -15,7 +15,7 @@ export class HomeComponent {
   submit = async () => {
     await this.dbService.postUser(this.nickname).subscribe(async res => {
       await this.dbService.setUser(res);
-      this.router.navigate(['/accueil']);
+      this.router.navigate(['/home']);
     });
   };
 }

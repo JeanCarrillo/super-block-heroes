@@ -19,12 +19,12 @@ export class Player {
   playerNum: number;
   handlePlayerAction: any;
 
-  constructor(name: string, playerNum: number, handlePlayerAction: any) {
+  constructor(user: any, playerNum: number, handlePlayerAction: any) {
     this.handlePlayerAction = handlePlayerAction;
     this.playerNum = playerNum;
     this.loopTime = Date.now();
-    this.loopDelay = 300;
-    this.name = name;
+    this.loopDelay = 50;
+    this.name = user.nickname;
     this.score = 0;
     this.board = new Board(this.rowNumbers, this.colNumbers);
     this.currentBlocks = [];

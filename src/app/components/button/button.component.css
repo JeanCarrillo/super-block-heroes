@@ -2,9 +2,9 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 100px;
-  height: 50px;
+  padding: 20px;
   transition: 1s;
+  cursor: pointer;
 }
 .cuteButton:hover {
   filter: saturate(2);
@@ -22,15 +22,11 @@
   font-size: 1em;
   font-weight: bold;
   text-align: center;
-  padding-top: 10px;
 }
 .buttonLink {
   color: rgb(63, 63, 63);
   text-decoration: none;
 }
 .buttonSelected {
-  /*
-  TO DO : something not ugly like that ;-)
-  */
-  text-decoration: yellow underline;
+  font-size: 1.3em;
 }

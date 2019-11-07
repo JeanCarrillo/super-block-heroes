@@ -15,6 +15,11 @@
 
             <div *ngIf="game.victory" class="alert alert-success gameOver">
               <h5 class="alert-heading">Victory !</h5>
+              <app-button text="Back to menu" url="/home" buttonType="login"></app-button>
+            </div>
+            <div *ngIf="game.defeat" class="alert alert-success gameOver">
+              <h5 class="alert-heading">Defeat !</h5>
+              <app-button text="Back to menu" url="/home" buttonType="login"></app-button>
             </div>
           </app-background>
         </app-background>

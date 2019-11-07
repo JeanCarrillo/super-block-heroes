@@ -24,7 +24,12 @@ export class GameComponent implements OnInit, OnDestroy {
     const rdmMonster = this.dbService.monsters[
       Math.floor(Math.random() * this.dbService.monsters.length)
     ];
-    this.game = new Game(rdmMonster);
+    this.game = new Game(rdmMonster, [
+      this.dbService.user,
+      { nickname: 'Grogory' },
+      { nickname: 'Mayelle' },
+      { nickname: 'Bière' },
+    ]);
     this.backgrounds = new Array(4).fill(1);
     this.interval = setInterval(() => this.gameLoop(), 20);
   }

@@ -13,7 +13,7 @@ import { LobbyComponent } from './pages/main/lobby/lobby.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: 'accueil',
+    path: 'home',
     component: MainComponent,
     children: [
       {
@@ -39,7 +39,7 @@ const routes: Routes = [
     ],
   },
   { path: 'game', component: GameComponent },
-  { path: '**', redirectTo: 'accueil' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

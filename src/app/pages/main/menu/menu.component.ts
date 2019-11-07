@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
     },
     {
       text: 'Lobby',
-      link: 'accueil',
+      link: 'home',
     },
     {
       text: 'Ranking',
