@@ -7,7 +7,11 @@ import { DbService } from '../../db.service';
   styleUrls: ['./user-card.component.css'],
 })
 export class UserCardComponent implements OnInit {
-  constructor(private dbService: DbService) {}
+  user: {};
 
-  ngOnInit() {}
+  constructor(private DbService: DbService) {}
+
+  ngOnInit() {
+    this.user = this.DbService.user;
+  }
 }

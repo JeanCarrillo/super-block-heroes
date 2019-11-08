@@ -1,8 +1,7 @@
-<div class="container">
-  <h3>{{ dbService.user.nickname }}</h3>
-  <img
-    class="card-img-bottom"
-    src="{{ dbService.user.hero.img }}"
-    alt="{{ dbService.user.hero.name }}"
-  />
+<div class="user-card">
+  <div class="text">
+    <h5>{{ user.nickname }}</h5>
+    <h4>💰{{ user.gold }}</h4>
+  </div>
+  <img src="{{ user.hero.img }}" alt="" />
 </div>
