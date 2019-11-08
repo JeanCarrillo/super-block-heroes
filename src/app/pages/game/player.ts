@@ -36,6 +36,9 @@ export class Player {
     const now = Date.now();
     if (now - this.loopTime > this.loopDelay && !this.gameOver) {
       this.loopTime = Date.now();
+      if (!this.currentPiece) {
+        this.createPiece();
+      }
       let didCollide = false;
       for (const block of this.currentBlocks) {
         if (this.isColliding(block.x, block.y, 1)) {
@@ -48,7 +51,6 @@ export class Player {
       } else {
         this.letCurrentBlocksFall();
       }
-      this.createPiece();
     }
   }
 
@@ -57,10 +59,8 @@ export class Player {
   // => then recreates it with individual blocks (added to currentBlocks)
   // Piece and currentBlocks are two different entities sharing the same coordinates and updated at the same times
   private createPiece(): void {
-    if (this.currentBlocks.length > 0) {
-      return;
-    }
     this.currentPiece = new Piece(5, 0);
+    this.currentBlocks = [];
     for (let i = 0; i < this.currentPiece.shape.length; i++) {
       for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
         const color = this.currentPiece.shape[i][j];
@@ -74,6 +74,9 @@ export class Player {
   // direction: number of indexes to rotate
   // => direction 1 : rotate right, direction -1 : rotate left
   public rotateCurrentPiece(direction: number): void {
+    if (!this.currentPiece) {
+      return;
+    }
     this.currentPiece.rotate(direction);
     // Check collisions after rotating piece
     let rotationCollide = false;
@@ -110,12 +113,13 @@ export class Player {
 
   // Y + 1 to all currentBlocks and currentPiece (fall by 1)
   private letCurrentBlocksFall(): void {
+    if (!this.currentPiece) {
+      return;
+    }
     for (const block of this.currentBlocks) {
       block.y += 1;
     }
-    if (this.currentPiece) {
-      this.currentPiece.y += 1;
-    }
+    this.currentPiece.y += 1;
   }
 
   // When current blocks collide with matrix or existing blocks
@@ -125,6 +129,7 @@ export class Player {
   private handleCollision(): void {
     let gameOver = false;
     for (const block of this.currentBlocks) {
+      console.log('handleCollision');
       // If there is already a block where current block is, then it is likely we are on top of the board
       // additional check : block index is < 3 (just in case false positive bottom/middle of the board)
       // => game over
@@ -135,6 +140,7 @@ export class Player {
       this.board.tiles[block.y][block.x] = block.color;
     }
     this.currentBlocks = [];
+    this.currentPiece = null;
     if (gameOver) {
       this.handleGameOver();
     } else {
@@ -199,6 +205,7 @@ export class Player {
 
   private handleGameOver(): void {
     this.currentBlocks = [];
+    this.currentPiece = null;
     this.gameOver = true;
   }
 
@@ -221,6 +228,7 @@ export class Player {
     for (const block of this.currentBlocks) {
       if (!this.canMove(block.x, block.y, x)) {
         canMove = false;
+        break;
       }
     }
     if (canMove) {
@@ -255,8 +263,10 @@ export class Player {
       this.isFastForwarding = true;
       let didCollide = false;
       while (!didCollide) {
+        if (this.currentBlocks.length === 0) {
+          break;
+        }
         for (const block of this.currentBlocks) {
-          // const block = this.currentBlocks[i];
           if (this.isColliding(block.x, block.y, 1)) {
             didCollide = true;
             break;
@@ -267,9 +277,9 @@ export class Player {
         }
       }
       this.handleCollision();
-      this.createPiece();
-      setTimeout(() => (this.isFastForwarding = false), 300);
-      // this.isFastForwarding = false;
+      this.isFastForwarding = false;
     }
   }
+
+  private instantDrop() {}
 }

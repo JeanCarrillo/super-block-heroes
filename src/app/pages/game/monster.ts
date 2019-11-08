@@ -72,7 +72,7 @@ export class Monster {
       this.animationTime = Date.now();
       this.animate();
     }
-    if (now - this.attackAnimationTime > this.attackAnimationDelay) {
+    if (now - this.attackAnimationTime > this.attackAnimationDelay && this.status !== 'moving') {
       this.changeStatus('moving');
     }
     if (now - this.attackTime > this.attackDelay) {
@@ -84,6 +84,8 @@ export class Monster {
   }
 
   private attack() {
+    // TO DO: something depending on monster
+    // need to update database
     this.handleMonsterAction();
   }
 
