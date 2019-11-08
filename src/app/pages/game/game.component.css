@@ -1,13 +1,13 @@
 .gameOver {
   position: absolute;
   top: 44vh;
-  left: 40vw;
+  left: 45%;
 }
 
 h5 {
   text-align: center;
   font-weight: normal;
-  font-size: 4em;
+  font-size: 3em;
   font-family: 'Righteous', cursive;
 }
 
