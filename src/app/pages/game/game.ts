@@ -10,6 +10,7 @@ export class Game {
   monster: Monster;
   players: Player[] = [];
   playersPositions: any[] = [];
+  playerFacingMonster = -1;
 
   constructor(monster: any, users: any) {
     for (let i = 0; i < users.length; i += 1) {
@@ -49,6 +50,7 @@ export class Game {
     }
   }
 
+  // Player callback
   // If a player scores, check monster position and handle damage if monster is within player range
   handlePlayerAction = (playerIndex: number, score: number): void => {
     if (
@@ -59,6 +61,7 @@ export class Game {
     }
   };
 
+  // Monster callback
   handleMonsterAction = (): void => {
     for (let i = 0; i < this.players.length; i++) {
       if (
@@ -70,7 +73,8 @@ export class Game {
     }
   };
 
-  whichPlayerHasMonster() {
+  // Returns index of player facing monster
+  whichPlayerHasMonster(): number {
     for (let i = 0; i < this.players.length; i++) {
       if (
         this.monster.x > this.playersPositions[i].min &&
@@ -79,6 +83,7 @@ export class Game {
         return i;
       }
     }
+    return -1;
   }
 
   loop(): void {
@@ -97,5 +102,6 @@ export class Game {
     } else {
       this.victory = true;
     }
+    this.playerFacingMonster = this.whichPlayerHasMonster();
   }
 }

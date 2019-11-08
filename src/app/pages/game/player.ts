@@ -129,7 +129,6 @@ export class Player {
   private handleCollision(): void {
     let gameOver = false;
     for (const block of this.currentBlocks) {
-      console.log('handleCollision');
       // If there is already a block where current block is, then it is likely we are on top of the board
       // additional check : block index is < 3 (just in case false positive bottom/middle of the board)
       // => game over

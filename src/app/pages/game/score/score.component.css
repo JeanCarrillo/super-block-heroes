@@ -14,18 +14,20 @@
 }
 
 .playerScore {
-  justify-content: space-around;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
 
 h5 {
   text-align: center;
   font-weight: normal;
-  font-size: 3em;
+  font-size: 2.5vw;
   font-family: 'Righteous', cursive;
 }
-
+/* 
 @media screen and (max-width: 50em) {
   h5 {
     font-size: 20vw;
    }
-}
+} */

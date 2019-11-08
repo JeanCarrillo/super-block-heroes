@@ -11,12 +11,6 @@ h5 {
   font-family: 'Righteous', cursive;
 }
 
-@media screen and (max-width: 50em) {
-  h5 {
-    font-size: 20vw;
-  }
-}
-
 .logo {
   width: 75%;
   height: auto;

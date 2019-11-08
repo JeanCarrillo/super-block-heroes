@@ -4,13 +4,12 @@ import { Player } from '../player';
 @Component({
   selector: 'app-player-container',
   templateUrl: './player-container.component.html',
-  styleUrls: ['./player-container.component.css']
+  styleUrls: ['./player-container.component.css'],
 })
 export class PlayerContainerComponent implements OnInit {
   @Input() player: Player;
+  @Input() facingMonster: boolean;
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.player);
-  }
+  ngOnInit() {}
 }

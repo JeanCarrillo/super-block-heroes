@@ -6,8 +6,9 @@
           <app-background [background]="game.monster.background" [x]="game.monster.x" [index]="4">
             <div class="row playerMonster m-0">
               <app-player-container
-                *ngFor="let player of game.players"
+                *ngFor="let player of game.players; index as i"
                 [player]="player"
+                [facingMonster]="game.playerFacingMonster === i"
                 class="col"
               ></app-player-container>
               <app-monster [monster]="game.monster"></app-monster>

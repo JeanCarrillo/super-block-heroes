@@ -5,11 +5,12 @@ import { Block } from '../../../models/block';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+  styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
   @Input() board: Board;
   @Input() currentBlocks: Block[];
+  @Input() facingMonster: boolean;
 
   constructor() {}
 
@@ -26,5 +27,9 @@ export class BoardComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  private getBackgroundColor(): string {
+    return this.facingMonster ? 'rgba(252, 99, 71, 0.2)' : 'rgba(255, 255, 255, 0.2)';
   }
 }
