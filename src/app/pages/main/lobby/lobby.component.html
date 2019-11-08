@@ -4,8 +4,9 @@
       <app-logo></app-logo>
     </div>
     <div class="col-4">
-      <div class="gameboy">{{ dbService.user.nickname }}</div>
-      <img src="{{ dbService.user.hero.img }}" class="gameboy" />
+      <div class="gameboy">
+        <app-user-card></app-user-card>
+      </div>
     </div>
   </div>
   <div class="row">

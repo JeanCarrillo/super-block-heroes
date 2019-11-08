@@ -31,6 +31,7 @@ import { MonsterCardComponent } from './pages/main/collection/monsters-list/mons
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { LogoComponent } from './components/logo/logo.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 const serverURL = `http://localhost`;
 const serverPort = 5000;
@@ -62,6 +63,7 @@ const socketConfig: SocketIoConfig = { url: `${serverURL}:${serverPort}`, option
     MonstersListComponent,
     MonsterCardComponent,
     LogoComponent,
+    UserCardComponent,
   ],
   imports: [
     BrowserModule,
