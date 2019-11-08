@@ -1,3 +1,7 @@
+.d-block {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 .boardRow {
   display: flex;
   flex-direction: row;
