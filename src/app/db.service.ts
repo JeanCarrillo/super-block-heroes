@@ -28,7 +28,9 @@ export class DbService {
 
   updateUser(id: number, data: any) {
     this.http.put(this.API_SERVER + '/users/' + id, data).subscribe(user => {
-      this.user = user;
+      if (user) {
+        this.setUser(user);
+      }
     });
   }
 
