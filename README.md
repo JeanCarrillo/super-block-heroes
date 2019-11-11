@@ -6,7 +6,7 @@ Stack: Angular 8 + NestJS ([super-block-heroes-server](https://github.com/JeanCa
 
 ## Contributors
 
-Léo - [LeopoldAssogbaA](https://github.com/LeopoldAssogbaA)
-Virgile - [VirgileLyon](https://github.com/VirgileLyon)
-Catherine - [c4th-code](https://github.com/c4th-code)
-Jean - [JeanCarrillo](https://github.com/JeanCarrillo)
+- Léo - [LeopoldAssogbaA](https://github.com/LeopoldAssogbaA)
+- Virgile - [VirgileLyon](https://github.com/VirgileLyon)
+- Catherine - [c4th-code](https://github.com/c4th-code)
+- Jean - [JeanCarrillo](https://github.com/JeanCarrillo)
