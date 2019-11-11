@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-9">
+      <div class="row">
+        <div
+          class="col text-center"
+          *ngFor="let monster of dbService.monsters; index as i"
+          (click)="setSelectedMonster(i)"
+        >
+          <app-monster-card
+            [monster]="monster"
+            [selected]="i === selectedMonster"
+          ></app-monster-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 text-center">
+      <h2 *ngIf="dbService.monsters[selectedMonster]">
+        {{ dbService.monsters[selectedMonster].name }}
+      </h2>
+    </div>
+  </div>
+</div>

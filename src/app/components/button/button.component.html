@@ -1,5 +1,11 @@
-<div class="cuteButton">
-  <p>
-    <a [routerLink]="['/accueil']">Connect</a>
+<div
+  class="cuteButton"
+  [style.backgroundImage]="whichButton()"
+  [style.fontSize.em]="textSize()"
+  [routerLink]="url"
+  (click)="callback()"
+>
+  <p class="buttonContainer">
+    <a class="buttonLink">{{ text }}</a>
   </p>
 </div>

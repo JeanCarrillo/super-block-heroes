@@ -1,0 +1,15 @@
+<div class="container-fluid fixed-bottom">
+  <div class="row">
+    <div
+      class="col height flex-grow-1 justify-content-center align-items-center"
+      *ngFor="let button of buttons; index as i"
+    >
+      <app-button
+        [url]="button.link"
+        [selected]="i === selectedButton"
+        [text]="button.text"
+        [callback]="setSelectedButton.bind(this, i)"
+      ></app-button>
+    </div>
+  </div>
+</div>

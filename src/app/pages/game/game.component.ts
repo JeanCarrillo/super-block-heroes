@@ -1,70 +1,44 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
-import { Player } from './player';
-import { Monster } from './monster';
-import { KEYS } from '../../constants/keyboard';
+import { DbService } from '../../shared/services/db.service';
+
+import { Game } from '../../shared/models/game';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit, OnDestroy {
-  players: Player[];
   interval: any;
-  monster: Monster;
   backgrounds: number[];
-  victory = false;
-  defeat = false;
+  game: Game;
 
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.players.length; i++) {
-      if (!this.players[i].gameOver) {
-        if (event.key === KEYS[i].MOVE_RIGHT) {
-          this.players[i].moveCurrentBlocks(1);
-        }
-        if (event.key === KEYS[i].MOVE_LEFT) {
-          this.players[i].moveCurrentBlocks(-1);
-        }
-        if (event.key === KEYS[i].ROTATE_RIGHT) {
-          this.players[i].rotateCurrentPiece(1);
-        }
-        if (event.key === KEYS[i].INSTANT_DROP) {
-          if (!this.players[i].isFastForwarding) {
-            this.players[i].dropCurrentBlocks();
-          }
-        }
-      }
-    }
+    this.game.handleKeys(event.key);
   }
 
-  constructor() {
-    const playerNames = ['player1', 'player2', 'player3', 'player4'];
-    this.players = [];
-    for (const name of playerNames) {
-      this.players.push(new Player(name));
-    }
-    this.monster = new Monster('giphy');
-    this.backgrounds = new Array(4).fill(1);
-  }
+  constructor(private dbService: DbService) {}
 
   ngOnInit() {
+    const rdmMonster = this.dbService.monsters[
+      Math.floor(Math.random() * this.dbService.monsters.length)
+    ];
+    this.game = new Game(rdmMonster, [
+      this.dbService.user,
+      { nickname: 'Grogory' },
+      { nickname: 'Mayelle' },
+      { nickname: 'Bière' },
+    ]);
+    this.backgrounds = new Array(4).fill(1);
     this.interval = setInterval(() => this.gameLoop(), 20);
   }
 
   private gameLoop(): void {
-    let totalScore = 0;
-    for (const player of this.players) {
-      player.loop();
-      totalScore += player.score;
-    }
-    this.monster.currentLife = this.monster.startingLife - totalScore;
-    if (this.monster.currentLife > 0) {
-      this.monster.move();
-    } else {
-      this.victory = true;
+    this.game.loop();
+    if (this.game.victory || this.game.defeat) {
       clearInterval(this.interval);
+      this.dbService.postGame(this.game);
     }
   }
 

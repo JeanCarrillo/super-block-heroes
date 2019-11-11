@@ -1,0 +1,32 @@
+<div
+  class="row boardMonster m-0"
+  [ngClass]="monster"
+  [ngStyle]="{ 'background-image': getBackgroundImg() }"
+>
+  <div
+    [ngStyle]="{ background: getMonsterImg() }"
+    [style.transform]="getDirection()"
+    [style.left]="getPosition()"
+    [style.height.px]="monster.sprites.height"
+    [style.width.px]="monster.sprites.width"
+    class="monster"
+  ></div>
+  <!-- <img
+    src="assets/img/monsters/{{ monster.name }}.gif"
+    alt="monster"
+    class="monster"
+    [ngStyle]="{ left: getPosition(), transform: getDirection() }"
+  /> -->
+</div>
+<div class="progress">
+  <div
+    class="progress-bar bg-danger"
+    role="progressbar"
+    [ngStyle]="{ width: getLifePercentage() }"
+    aria-valuenow="{ monster.currentLife }"
+    aria-valuemin="0"
+    aria-valuemax="{ monster.startingLife }"
+  >
+    {{ getLifePercentage() }}
+  </div>
+</div>
