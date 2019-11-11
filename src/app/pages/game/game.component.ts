@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
-import { DbService } from '../../db.service';
+import { DbService } from '../../shared/services/db.service';
 
-import { Game } from './game';
+import { Game } from '../../shared/models/game';
 
 @Component({
   selector: 'app-game',

@@ -1,0 +1,16 @@
+<div class="container-fluid loginPage">
+  <!--
+    TODO: a real login form
+    <p>Sign In</p>
+    <p>Forgot password ?</p>
+-->
+  <app-logo></app-logo>
+  <input
+    type="text"
+    [(ngModel)]="nickname"
+    class="input"
+    placeholder="Nickname"
+    (keyup.enter)="submit()"
+  />
+  <app-button buttonType="login" text="Log In" (click)="submit()" size="1.4"></app-button>
+</div>

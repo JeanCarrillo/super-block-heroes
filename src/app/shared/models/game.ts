@@ -1,7 +1,7 @@
 import { Player } from './player';
 import { Monster } from './monster';
 
-import { KEYS } from '../../constants/keyboard';
+import { KEYS } from '../constants/keyboard';
 
 export class Game {
   victory = false;
@@ -25,7 +25,10 @@ export class Game {
     for (let i = 0; i < this.players.length; i++) {
       const playerMinPercentage = i * playersPercentage; // 0-25-50-75
       const playerMaxPercentage = (i + 1) * playersPercentage; // 25-50-75-100
-      this.playersPositions.push({ min: playerMinPercentage, max: playerMaxPercentage });
+      this.playersPositions.push({
+        min: playerMinPercentage,
+        max: playerMaxPercentage,
+      });
     }
   }
 

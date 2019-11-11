@@ -1,7 +1,7 @@
 // tslint:disable: prefer-for-of
-import { Board } from '../../models/board';
-import { Block } from '../../models/block';
-import { Piece } from '../../models/piece';
+import { Board } from "./board";
+import { Block } from "./block";
+import { Piece } from "./piece";
 
 export class Player {
   isFastForwarding = false;
@@ -85,7 +85,8 @@ export class Player {
         const color = this.currentPiece.shape[i][j];
         if (
           color !== 0 &&
-          this.board.tiles[this.currentPiece.y + j][this.currentPiece.x + i] !== 0
+          this.board.tiles[this.currentPiece.y + j][this.currentPiece.x + i] !==
+            0
         ) {
           rotationCollide = true;
         }

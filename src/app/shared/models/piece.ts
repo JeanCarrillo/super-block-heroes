@@ -39,21 +39,11 @@ export class Piece {
 
   public createShape() {
     const shape = [];
-    for (
-      let i = 0;
-      i < pieces[this.pieceIndex].shapes[this.rotationIndex].length;
-      i++
-    ) {
+    for (let i = 0; i < pieces[this.pieceIndex].shapes[this.rotationIndex].length; i++) {
       shape.push([]);
-      for (
-        let j = 0;
-        j < pieces[this.pieceIndex].shapes[this.rotationIndex][i].length;
-        j++
-      ) {
+      for (let j = 0; j < pieces[this.pieceIndex].shapes[this.rotationIndex][i].length; j++) {
         shape[i].push(
-          pieces[this.pieceIndex].shapes[this.rotationIndex][i][j] === 0
-            ? 0
-            : this.color
+          pieces[this.pieceIndex].shapes[this.rotationIndex][i][j] === 0 ? 0 : this.color
         );
       }
     }

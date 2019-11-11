@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Monster } from '../monster';
+import { Monster } from '../../../shared/models/monster';
 
 @Component({
   selector: 'app-monster',
