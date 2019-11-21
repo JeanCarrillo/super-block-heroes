@@ -4,11 +4,9 @@
   [ngStyle]="{ 'background-image': getBackgroundImg() }"
 >
   <div
-    [ngStyle]="{ background: getMonsterImg() }"
+    [ngStyle]="{ 'background-image': getMonsterImg() }"
     [style.transform]="getDirection()"
     [style.left]="getPosition()"
-    [style.height.px]="monster.sprites.height"
-    [style.width.px]="monster.sprites.width"
     class="monster"
   ></div>
   <!-- <img

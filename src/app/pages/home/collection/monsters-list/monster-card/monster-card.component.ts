@@ -8,42 +8,41 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 export class MonsterCardComponent implements OnInit, OnDestroy {
   @Input() selected: boolean;
   @Input() monster: any;
-  x: number;
-  y: number;
+  sprite: number;
   interval: number;
-  status = 'moving';
+  status = 'Idle';
 
   constructor() {}
 
   ngOnInit(): void {
-    this.x = this.monster.sprites[this.status].xMin;
-    this.y = this.monster.sprites[this.status].y;
+    console.log(this.monster);
+    this.sprite = 0;
     this.interval = window.setInterval(() => {
-      if (this.x < this.monster.sprites[this.status].xMax) {
-        this.x += 1;
+      if (this.sprite < this.monster.sprites[this.status]) {
+        this.sprite += 1;
       } else {
-        if (this.status === 'attacking') {
-          this.status = 'moving';
-          this.y = this.monster.sprites[this.status].y;
+        if (this.status === 'Attack') {
+          this.status = 'Idle';
         }
-        this.x = this.monster.sprites[this.status].xMin;
+        this.sprite = 0;
       }
-    }, 200);
+    }, 50);
   }
 
-  getBackground(): string {
-    return `url(assets/img/monsters/enemies.png) ${-this.x * this.monster.sprites.width}px ${-this
-      .y * this.monster.sprites.height}px`;
+  getBackgroundImg(): string {
+    // tslint:disable-next-line: max-line-length
+    return `url(assets/img/monsters/${this.monster.name.replace(' ', '_')}/${
+      this.status
+    }/skeleton-${this.status}_${this.sprite}.png)`;
   }
 
   getScale() {
-    return `scale(${this.selected ? '4' : '3'})`;
+    return `scale(${this.selected ? '2' : '1'})`;
   }
 
   changeStatus() {
-    this.status = 'attacking';
-    this.x = this.monster.sprites[this.status].xMin;
-    this.y = this.monster.sprites[this.status].y;
+    this.status = 'Attack';
+    this.sprite = 0;
   }
 
   ngOnDestroy(): void {

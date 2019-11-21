@@ -11,10 +11,12 @@
 }
 
 .monster {
+  background-size: contain;
+  background-repeat: no-repeat;
   vertical-align: middle;
   border-style: none;
-  height: 80%;
-  width: auto;
+  width: 8vw;
+  height: 8vw;
   bottom: 2%;
   position: absolute;
   z-index: 10;

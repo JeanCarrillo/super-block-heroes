@@ -1,7 +1,5 @@
 <div
-  [ngStyle]="{ background: getBackground(i) }"
-  [style.height.px]="monster.sprites.height"
-  [style.width.px]="monster.sprites.width"
+  [ngStyle]="{ 'background-image': getBackgroundImg() }"
   [class.selected]="selected"
   class="monster"
   (click)="changeStatus()"

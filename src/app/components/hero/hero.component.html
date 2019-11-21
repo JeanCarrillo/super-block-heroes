@@ -1,0 +1,11 @@
+<!-- <img
+  src="{{ hero.img }}"
+  class="card-img img-responsive"
+  [class.selectedHero]="selected"
+/> -->
+<div
+  [ngStyle]="{ 'background-image': getBackgroundImg() }"
+  [class.selected]="selected"
+  class="hero"
+  (click)="changeStatus()"
+></div>

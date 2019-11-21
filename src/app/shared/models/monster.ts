@@ -12,8 +12,7 @@ export class Monster {
   handleMonsterAction: any;
   animationTime: number;
   animationDelay: number;
-  spriteX: number;
-  spriteY: number;
+  sprite: number;
   sprites: any;
   attackTime: number;
   attackDelay: number;
@@ -39,9 +38,9 @@ export class Monster {
     this.movingSpeed = monster.speed; // one monster move = this.movingSpeed percent
     // Animation init
     this.animationTime = Date.now();
-    this.animationDelay = 200;
+    this.animationDelay = 40;
     this.sprites = monster.sprites;
-    this.changeStatus('moving');
+    this.changeStatus('Walk');
     // Attack init
     this.attackTime = Date.now();
     this.attackDelay = 10000;
@@ -51,7 +50,7 @@ export class Monster {
 
   public move() {
     const now = Date.now();
-    if (now - this.moveTime > this.moveDelay && this.status === 'moving') {
+    if (now - this.moveTime > this.moveDelay && this.status === 'Walk') {
       this.moveTime = Date.now();
       // right
       if (this.movingDirection === 1 && this.x < 100) {
@@ -72,13 +71,13 @@ export class Monster {
       this.animationTime = Date.now();
       this.animate();
     }
-    if (now - this.attackAnimationTime > this.attackAnimationDelay && this.status !== 'moving') {
-      this.changeStatus('moving');
+    if (now - this.attackAnimationTime > this.attackAnimationDelay && this.status !== 'Walk') {
+      this.changeStatus('Walk');
     }
     if (now - this.attackTime > this.attackDelay) {
       this.attackTime = Date.now();
       this.attackAnimationTime = Date.now();
-      this.changeStatus('attacking');
+      this.changeStatus('Attack');
       this.attack();
     }
   }
@@ -90,20 +89,19 @@ export class Monster {
   }
 
   private animate() {
-    if (this.spriteX < this.sprites[this.status].xMax) {
-      this.spriteX += 1;
+    if (this.sprite < this.sprites[this.status]) {
+      this.sprite += 1;
     } else {
       // if (this.status === 'attacking') {
       //   this.changeStatus('moving');
       // }
-      this.spriteX = this.sprites[this.status].xMin;
+      this.sprite = 0;
     }
   }
 
   private changeStatus(status: string) {
     this.status = status;
-    this.spriteX = this.sprites[this.status].xMin;
-    this.spriteY = this.sprites[this.status].y;
+    this.sprite = 0;
   }
 
   public takeDamage(hitpoints: number) {

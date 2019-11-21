@@ -4,11 +4,6 @@
   cursor: pointer;
 }
 
-.selectedHero {
-  border: 3px solid yellow;
-  border-radius: 20px;
-}
-
 .borders {
   /* border-right: 1px solid white;
   border-left: 1px solid white; */

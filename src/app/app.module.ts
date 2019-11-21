@@ -27,6 +27,7 @@ import { BackgroundComponent } from './components/background/background.componen
 import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-list.component';
 import { MonstersListComponent } from './pages/home/collection/monsters-list/monsters-list.component';
 import { MonsterCardComponent } from './pages/home/collection/monsters-list/monster-card/monster-card.component';
+import { HeroComponent } from './components/hero/hero.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -67,6 +68,7 @@ const socketConfig: SocketIoConfig = {
     MonsterCardComponent,
     LogoComponent,
     UserCardComponent,
+    HeroComponent,
   ],
   imports: [
     BrowserModule,

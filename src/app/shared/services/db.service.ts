@@ -9,6 +9,7 @@ export class DbService {
   user: any = null;
   monsters: any = null;
   heroes: any = null;
+  images: any = {};
   // monstersUpdated: EventEmitter<any> = new EventEmitter();
 
   private API_SERVER = 'http://localhost:3000';
@@ -16,7 +17,23 @@ export class DbService {
   constructor(private http: HttpClient) {}
 
   async getHeroes() {
-    await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => (this.heroes = heroes));
+    await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => {
+      this.heroes = heroes;
+      for (const hero of this.heroes) {
+        hero.sprites = JSON.parse(hero.sprites);
+        // Preload sprites
+        this.images[hero.name] = {
+          Idle: [],
+        };
+        for (let i = 0; i < hero.sprites.Idle; i++) {
+          const img = new Image();
+          img.src = `/assets/img/heroes/${hero.name}/Idle/Idle_0${i < 10 ? '0' + i : i}.png`;
+          this.images[hero.name].Idle.push(img);
+        }
+      }
+      console.log(this.heroes);
+      console.log(this.images);
+    });
   }
 
   postUser(user: any): Observable<any> {

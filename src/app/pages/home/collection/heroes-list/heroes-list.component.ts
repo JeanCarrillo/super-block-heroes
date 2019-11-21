@@ -1,10 +1,10 @@
-import { Component } from "@angular/core";
-import { DbService } from "../../../../shared/services/db.service";
+import { Component } from '@angular/core';
+import { DbService } from '../../../../shared/services/db.service';
 
 @Component({
-  selector: "app-heroes-list",
-  templateUrl: "./heroes-list.component.html",
-  styleUrls: ["./heroes-list.component.css"]
+  selector: 'app-heroes-list',
+  templateUrl: './heroes-list.component.html',
+  styleUrls: ['./heroes-list.component.css'],
 })
 export class HeroesListComponent {
   selectedHero: any = this.dbService.user.hero;
@@ -14,7 +14,7 @@ export class HeroesListComponent {
   setSelectedHero(hero: any): void {
     this.selectedHero = hero;
     this.dbService.updateUser(this.dbService.user.id, {
-      hero
+      hero,
     });
   }
 }

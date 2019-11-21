@@ -18,8 +18,10 @@ export class MonsterComponent implements OnInit {
   }
 
   getMonsterImg(): string {
-    return `url(assets/img/monsters/enemies.png) ${-this.monster.spriteX *
-      this.monster.sprites.width}px ${-this.monster.spriteY * this.monster.sprites.height}px`;
+    // tslint:disable-next-line: max-line-length
+    return `url(assets/img/monsters/${this.monster.name.replace(' ', '_')}/${
+      this.monster.status
+    }/skeleton-${this.monster.status}_${this.monster.sprite}.png)`;
   }
 
   getBackgroundImg() {
@@ -27,7 +29,7 @@ export class MonsterComponent implements OnInit {
   }
 
   getDirection() {
-    return `scale(${this.monster.movingDirection === 1 ? '-3' : '3'}, 3)`;
+    return `scale(${this.monster.movingDirection === 1 ? '-1' : '1'}, 1)`;
   }
 
   getLifePercentage() {

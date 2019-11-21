@@ -1,0 +1,13 @@
+.hero {
+  height: 10vw;
+  width: 10vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.selected {
+  height: calc(10vw + 1px);
+  width: calc(10vw + 1px);
+  border: 2px solid yellow;
+  border-radius: 20px;
+}

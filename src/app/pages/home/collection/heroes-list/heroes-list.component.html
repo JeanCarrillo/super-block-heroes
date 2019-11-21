@@ -10,11 +10,7 @@
           *ngFor="let hero of dbService.heroes"
           (click)="setSelectedHero(hero)"
         >
-          <img
-            src="{{ hero.img }}"
-            class="card-img img-responsive"
-            [class.selectedHero]="hero.id === selectedHero.id"
-          />
+          <app-hero [inputHero]="hero" [selected]="hero.id === selectedHero.id"></app-hero>
         </div>
       </div>
     </div>
