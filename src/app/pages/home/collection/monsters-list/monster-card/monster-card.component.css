@@ -1,4 +1,5 @@
 .sprite-container {
+  cursor: pointer;
   width: 15vw;
 }
 .sprite {

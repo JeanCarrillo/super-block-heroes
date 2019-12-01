@@ -4,6 +4,7 @@
 }
 
 .plus {
+  cursor: pointer;
   max-width: 30%;
   margin-top: 35%;
   margin-left: 93%;
