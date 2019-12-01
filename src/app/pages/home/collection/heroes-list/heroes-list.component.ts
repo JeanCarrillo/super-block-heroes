@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DbService } from '../../../../shared/services/db.service';
+import { Hero } from 'src/app/shared/models/hero';
 
 @Component({
   selector: 'app-heroes-list',
@@ -7,13 +8,13 @@ import { DbService } from '../../../../shared/services/db.service';
   styleUrls: ['./heroes-list.component.css'],
 })
 export class HeroesListComponent {
-  selectedHero: any = this.dbService.user.hero;
+  selectedHero: Hero = this.dbService.user.hero;
 
   constructor(private dbService: DbService) {}
 
-  setSelectedHero(hero: any): void {
+  setSelectedHero(hero: Hero): void {
     this.selectedHero = hero;
-    this.dbService.updateUser(this.dbService.user.id, {
+    this.dbService.updateUser({
       hero,
     });
   }

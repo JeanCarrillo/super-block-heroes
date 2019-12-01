@@ -3,9 +3,7 @@
   class="card-img img-responsive"
   [class.selectedHero]="selected"
 /> -->
-<div
-  [ngStyle]="{ 'background-image': getBackgroundImg() }"
-  [class.selected]="selected"
-  class="hero"
-  (click)="changeStatus()"
-></div>
+<!-- [ngStyle]="{ 'background-image': getBackgroundImg() }" -->
+<div [class.selected]="selected" class="hero" (click)="changeStatus()">
+  <img img-cache img-cache-src="{{ getImg() }}" />
+</div>

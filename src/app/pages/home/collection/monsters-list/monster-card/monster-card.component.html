@@ -1,6 +1,10 @@
-<div
-  [ngStyle]="{ 'background-image': getBackgroundImg() }"
-  [class.selected]="selected"
-  class="monster"
-  (click)="changeStatus()"
-></div>
+<div class="sprite-container" [class.selected]="selected" (click)="changeStatus()">
+  <div
+    class="sprite"
+    img-cache
+    img-cache-bg-url="{{ img }}"
+    [style.backgroundPosition]="getBackgroundPosition()"
+    [style.paddingBottom]="paddingBottom"
+    [style.marginTop]="marginTop"
+  ></div>
+</div>

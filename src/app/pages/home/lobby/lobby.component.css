@@ -1,12 +1,14 @@
-.gameboy {
+.user-card {
   max-width: 50%;
   margin-top: 20%;
 }
+
 .plus {
   max-width: 30%;
   margin-top: 35%;
   margin-left: 93%;
 }
+
 .lootbox {
   max-width: 100%;
   -webkit-animation: lootbox 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) 2 both;
@@ -14,6 +16,7 @@
   width: 150px;
   height: auto;
 }
+
 @-webkit-keyframes lootbox {
   0%,
   100% {

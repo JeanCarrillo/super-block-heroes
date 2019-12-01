@@ -15,23 +15,33 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   constructor(private dbService: DbService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.createHero();
+  }
+
+  createHero(): void {
     this.hero = new Hero(this.inputHero);
+    this.loop();
+  }
+
+  loop(): void {
     this.interval = window.setInterval(() => {
+      if (this.inputHero.name !== this.hero.name) {
+        clearInterval(this.interval);
+        this.createHero();
+      }
       this.hero.move();
     }, 20);
   }
 
-  getBackgroundImg(): string {
-    console.log(this.dbService.images[this.hero.name][this.hero.status][this.hero.sprite]);
-    return `url(${this.dbService.images[this.hero.name][this.hero.status][this.hero.sprite]})`;
-    // return `url(assets/img/heroes/${this.hero.name}/${this.hero.status}/${this.hero.status}_0${
-    //   this.hero.sprite < 10 ? '0' + this.hero.sprite : this.hero.sprite
-    // }.png)`;
+  getImg(): string {
+    return `/assets/img/heroes/${this.hero.name}/${this.hero.status}/${this.hero.status}_0${
+      this.hero.sprite < 10 ? '0' + this.hero.sprite : this.hero.sprite
+    }.png`;
   }
 
   // TO DO
-  changeStatus() {
+  changeStatus(): void {
     this.hero.changeStatus('Idle');
   }
 

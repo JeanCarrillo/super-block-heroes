@@ -3,5 +3,5 @@
     <h5>{{ dbService.user.nickname }}</h5>
     <h4>💰{{ dbService.user.gold }}</h4>
   </div>
-  <img src="{{ dbService.user.hero.img }}" alt="" />
+  <app-hero [inputHero]="dbService.user.hero"></app-hero>
 </div>

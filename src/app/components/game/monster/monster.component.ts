@@ -8,20 +8,26 @@ import { Monster } from '../../../shared/models/monster';
 })
 export class MonsterComponent implements OnInit {
   @Input() monster: Monster;
+  monsterImg: string;
+  paddingBottom: string;
+  marginTop: string;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const { name, sprites } = this.monster;
+    this.monsterImg = `url(/assets/img/monsters/${name.replace(' ', '')}.png)`;
+    this.paddingBottom = sprites.paddingBottom + '%';
+    this.marginTop = 100 - sprites.paddingBottom + '%';
+  }
 
   getPosition() {
     return `${this.monster.x - 5}%`;
   }
 
-  getMonsterImg(): string {
-    // tslint:disable-next-line: max-line-length
-    return `url(assets/img/monsters/${this.monster.name.replace(' ', '_')}/${
-      this.monster.status
-    }/skeleton-${this.monster.status}_${this.monster.sprite}.png)`;
+  getMonsterBackgroundPosition(): string {
+    const { sprite, sprites } = this.monster;
+    return `0 ${sprite === 0 ? 0 : (100 / sprites.total) * sprite}%`;
   }
 
   getBackgroundImg() {
@@ -33,7 +39,7 @@ export class MonsterComponent implements OnInit {
   }
 
   getLifePercentage() {
-    const percentage = (this.monster.currentLife * 100) / this.monster.startingLife;
+    const percentage = Math.ceil((this.monster.currentLife * 100) / this.monster.startingLife);
     return `${percentage < 0 ? 0 : percentage}%`;
   }
 }

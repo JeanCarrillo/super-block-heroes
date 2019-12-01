@@ -89,22 +89,23 @@ export class Monster {
   }
 
   private animate() {
-    if (this.sprite < this.sprites[this.status]) {
+    if (this.sprite < this.sprites[this.status].end) {
       this.sprite += 1;
     } else {
       // if (this.status === 'attacking') {
       //   this.changeStatus('moving');
       // }
-      this.sprite = 0;
+      this.sprite = this.sprites[this.status].start;
     }
   }
 
   private changeStatus(status: string) {
     this.status = status;
-    this.sprite = 0;
+    this.sprite = this.sprites[this.status].start;
   }
 
   public takeDamage(hitpoints: number) {
     this.currentLife -= hitpoints;
+    this.changeStatus('GetHit');
   }
 }

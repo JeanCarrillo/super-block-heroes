@@ -7,9 +7,9 @@ import { Observable, of } from 'rxjs';
 })
 export class DbService {
   user: any = null;
-  monsters: any = null;
-  heroes: any = null;
-  images: any = {};
+  monsters: any = [];
+  heroes: any = [];
+  // images: any = {};
   // monstersUpdated: EventEmitter<any> = new EventEmitter();
 
   private API_SERVER = 'http://localhost:3000';
@@ -21,18 +21,18 @@ export class DbService {
       this.heroes = heroes;
       for (const hero of this.heroes) {
         hero.sprites = JSON.parse(hero.sprites);
-        // Preload sprites
-        this.images[hero.name] = {
-          Idle: [],
-        };
-        for (let i = 0; i < hero.sprites.Idle; i++) {
-          const img = new Image();
-          img.src = `/assets/img/heroes/${hero.name}/Idle/Idle_0${i < 10 ? '0' + i : i}.png`;
-          this.images[hero.name].Idle.push(img);
-        }
+        // Preload sprites ?
+        // this.images[hero.name] = {
+        //   Idle: [],
+        // };
+        // for (let i = 0; i < hero.sprites.Idle; i++) {
+        //   const img = new Image();
+        //   img.src = `/assets/img/heroes/${hero.name}/Idle/Idle_0${i < 10 ? '0' + i : i}.png`;
+        //   // this.images[hero.name].Idle.push(img);
+        // }
       }
       console.log(this.heroes);
-      console.log(this.images);
+      // console.log(this.images);
     });
   }
 
@@ -43,8 +43,8 @@ export class DbService {
     });
   }
 
-  updateUser(id: number, data: any) {
-    this.http.put(this.API_SERVER + '/users/' + id, data).subscribe(user => {
+  updateUser(data: any) {
+    this.http.put(this.API_SERVER + '/users/' + this.user.id, data).subscribe(user => {
       if (user) {
         this.setUser(user);
       }
@@ -53,6 +53,7 @@ export class DbService {
 
   setUser(user: any) {
     this.user = user;
+    this.user.hero.sprites = JSON.parse(this.user.hero.sprites);
   }
 
   async getMonsters() {
@@ -60,7 +61,11 @@ export class DbService {
       this.monsters = monsters;
       for (const monster of this.monsters) {
         monster.sprites = JSON.parse(monster.sprites);
+        // TO DO : cache image ?
+        // const img = new Image();
+        // img.src = `/assets/img/monsters/${monster.name.replace(' ', '')}.png`;
       }
+      console.log(this.monsters);
       // this.monstersUpdated.emit();
     });
     // return this.monsters;
@@ -85,7 +90,7 @@ export class DbService {
       : 10;
     console.log(goldGained);
     // this.http.post(this.API_SERVER + '/games', data);
-    this.updateUser(this.user.id, {
+    this.updateUser({
       gold: this.user.gold + goldGained,
     });
   }
