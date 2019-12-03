@@ -30,6 +30,13 @@ export class MonsterComponent implements OnInit {
     return `0 ${sprite === 0 ? 0 : (100 / sprites.total) * sprite}%`;
   }
 
+  getBackgroundFilter(): string {
+    if (this.monster.frozenStatus) {
+      return 'grayscale(100%) invert(86%) sepia(4%) saturate(2310%) hue-rotate(187deg) brightness(108%) contrast(104%)';
+    }
+    return 'none';
+  }
+
   getBackgroundImg() {
     return `url(assets/img/backgrounds/${this.monster.background}/background.png)`;
   }

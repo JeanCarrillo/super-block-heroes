@@ -2,6 +2,7 @@
   <div class="sprite-container" [style.left]="getPosition()">
     <div
       class="sprite"
+      [ngStyle]="{ filter: getBackgroundFilter() }"
       [style.backgroundImage]="monsterImg"
       [style.backgroundPosition]="getMonsterBackgroundPosition()"
       [style.paddingBottom]="paddingBottom"

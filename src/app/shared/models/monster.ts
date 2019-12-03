@@ -21,6 +21,7 @@ export class Monster {
   status: string;
   frozenDelay: number;
   frozenTime: number;
+  frozenStatus: boolean;
 
   constructor(monster: any, handleMonsterAction: any) {
     this.handleMonsterAction = handleMonsterAction;
@@ -50,14 +51,19 @@ export class Monster {
     this.attackAnimationTime = Date.now();
     this.attackAnimationDelay = 2000;
     // Frozen init
-    this.frozenTime = Date.now();
+    this.frozenTime = null;
     this.frozenDelay = 2000;
+    this.frozenStatus = false;
   }
 
   public move() {
     const now = Date.now();
-    if (this.status === 'Frozen') {
+    if (this.frozenStatus) {
+      // Resets attack timer
       this.attackTime = Date.now();
+      if (now - this.frozenTime > this.frozenDelay) {
+        this.frozenStatus = false;
+      }
       return;
     }
     if (now - this.moveTime > this.moveDelay && this.status === 'Walk') {
@@ -129,7 +135,8 @@ export class Monster {
   public handleCapacity(capacity: string) {
     switch (capacity) {
       case 'Frost Blast': {
-        this.changeStatus('Frozen');
+        this.frozenTime = Date.now();
+        this.frozenStatus = true;
         break;
       }
       default:
