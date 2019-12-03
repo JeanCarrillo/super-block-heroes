@@ -14,7 +14,9 @@ export class Game {
 
   constructor(monster: any, users: any) {
     for (let i = 0; i < users.length; i += 1) {
-      this.players.push(new Player(users[i], i, this.handlePlayerAction));
+      this.players.push(
+        new Player(users[i], i, this.handlePlayerAction, this.handlePlayerCapacity)
+      );
     }
     this.monster = new Monster(monster, this.handleMonsterAction);
 
@@ -49,6 +51,9 @@ export class Game {
             this.players[i].dropCurrentBlocks();
           }
         }
+        if (key === KEYS[i].CAPACITY) {
+          this.players[i].useCapacity();
+        }
       }
     }
   }
@@ -60,7 +65,19 @@ export class Game {
       this.monster.x > this.playersPositions[playerIndex].min &&
       this.monster.x < this.playersPositions[playerIndex].max
     ) {
-      this.monster.takeDamage(score);
+      this.monster.handleDamage(score);
+    }
+  };
+
+  handlePlayerCapacity = (playerIndex: number, capacity: string): void => {
+    switch (capacity) {
+      case 'Frost Blast': {
+        console.log('capacity : ' + playerIndex + ' ' + capacity);
+        this.monster.handleCapacity(capacity);
+        break;
+      }
+      default:
+        break;
     }
   };
 

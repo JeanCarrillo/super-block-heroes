@@ -3,6 +3,7 @@
     class="sprite"
     img-cache
     img-cache-bg-url="{{ img }}"
+    [ngStyle]="{ filter: 'hue-rotate(0deg)' }"
     [style.backgroundPosition]="getBackgroundPosition()"
     [style.paddingBottom]="paddingBottom"
     [style.marginTop]="marginTop"

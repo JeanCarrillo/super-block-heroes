@@ -34,8 +34,9 @@ export class Monster {
     this.movingDirection = 1; // 1 = right, -1 = left
     // Moving init
     this.moveTime = Date.now();
-    this.moveDelay = 80; // monster moves every this.moveDelay ms
-    this.movingSpeed = monster.speed; // one monster move = this.movingSpeed percent
+    this.moveDelay = 15; // monster moves every this.moveDelay ms
+    // this.movingSpeed = monster.speed; // one monster move = this.movingSpeed percent
+    this.movingSpeed = 0.1; // one monster move = this.movingSpeed percent
     // Animation init
     this.animationTime = Date.now();
     this.animationDelay = 40;
@@ -50,6 +51,10 @@ export class Monster {
 
   public move() {
     const now = Date.now();
+    if (this.status === 'Frozen') {
+      this.attackTime = Date.now();
+      return;
+    }
     if (now - this.moveTime > this.moveDelay && this.status === 'Walk') {
       this.moveTime = Date.now();
       // right
@@ -71,7 +76,7 @@ export class Monster {
       this.animationTime = Date.now();
       this.animate();
     }
-    if (now - this.attackAnimationTime > this.attackAnimationDelay && this.status !== 'Walk') {
+    if (now - this.attackAnimationTime > this.attackAnimationDelay && this.status === 'Attack') {
       this.changeStatus('Walk');
     }
     if (now - this.attackTime > this.attackDelay) {
@@ -92,9 +97,12 @@ export class Monster {
     if (this.sprite < this.sprites[this.status].end) {
       this.sprite += 1;
     } else {
-      // if (this.status === 'attacking') {
-      //   this.changeStatus('moving');
-      // }
+      if (this.status === 'Death') {
+        return;
+      }
+      if (this.status === 'GetHit') {
+        this.changeStatus('Walk');
+      }
       this.sprite = this.sprites[this.status].start;
     }
   }
@@ -104,8 +112,23 @@ export class Monster {
     this.sprite = this.sprites[this.status].start;
   }
 
-  public takeDamage(hitpoints: number) {
+  public handleDamage(hitpoints: number) {
     this.currentLife -= hitpoints;
-    this.changeStatus('GetHit');
+    if (this.currentLife > 0) {
+      this.changeStatus('GetHit');
+    } else {
+      this.changeStatus('Death');
+    }
+  }
+
+  public handleCapacity(capacity: string) {
+    switch (capacity) {
+      case 'Frost Blast': {
+        this.changeStatus('Frozen');
+        break;
+      }
+      default:
+        break;
+    }
   }
 }

@@ -17,9 +17,13 @@ export class Player {
   loopDelay: number;
   playerNum: number;
   handlePlayerAction: any;
+  handlePlayerCapacity: any;
+  capacity: string;
 
-  constructor(user: any, playerNum: number, handlePlayerAction: any) {
+  constructor(user: any, playerNum: number, handlePlayerAction: any, handlePlayerCapacity: any) {
     this.handlePlayerAction = handlePlayerAction;
+    this.handlePlayerCapacity = handlePlayerCapacity;
+    this.capacity = 'Frost Blast';
     this.playerNum = playerNum;
     this.loopTime = Date.now();
     this.loopDelay = 300;
@@ -220,6 +224,10 @@ export class Player {
     return false;
   }
 
+  public useCapacity(): void {
+    this.handlePlayerCapacity(this.playerNum, this.capacity);
+  }
+
   // Linked to Keyboard events : actions
   // Moves current blocks left/right, X axis only, no Y axis checks
   public moveCurrentBlocks(x: number): void {
@@ -279,6 +287,4 @@ export class Player {
       this.isFastForwarding = false;
     }
   }
-
-  private instantDrop() {}
 }
