@@ -30,7 +30,6 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    // this.img = `url(/assets/img/monsters/${this.monster.name.replace(' ', '')}.png)`;
     this.img = `url(/assets/img/monsters/${this.monster.name.replace(' ', '')}.png)`;
     this.paddingBottom = this.monster.sprites.paddingBottom + '%';
     this.marginTop = 100 - this.monster.sprites.paddingBottom + '%';
@@ -52,7 +51,7 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
   }
 
   changeStatus(): void {
-    const status = ['Attack', 'Death', 'GetHit', 'Walk'];
+    const status = ['Attack', 'Death', 'GetHit'];
     const rdmStatus = rdmFloor(status.length);
     this.status = status[rdmStatus];
     this.sprite = this.monster.sprites[this.status].start;

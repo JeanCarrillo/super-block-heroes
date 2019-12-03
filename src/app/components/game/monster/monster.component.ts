@@ -30,9 +30,16 @@ export class MonsterComponent implements OnInit {
     return `0 ${sprite === 0 ? 0 : (100 / sprites.total) * sprite}%`;
   }
 
-  getBackgroundFilter(): string {
+  getContainerFilterFrozen(): string {
     if (this.monster.isFrozen) {
-      return 'grayscale(100%) invert(86%) sepia(4%) saturate(2310%) hue-rotate(187deg) brightness(108%) contrast(104%)';
+      return 'invert(73%) sepia(28%) saturate(869%) hue-rotate(185deg) brightness(101%) contrast(102%)';
+    }
+    return 'none';
+  }
+
+  getFilterFrozen(): string {
+    if (this.monster.isFrozen) {
+      return 'invert(0%) sepia(94%) saturate(0%) hue-rotate(245deg) brightness(95%) contrast(105%)';
     }
     return 'none';
   }
