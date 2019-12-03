@@ -15,9 +15,21 @@
       </div>
     </div>
     <div class="col-3 text-center">
-      <h2 *ngIf="dbService.monsters[selectedMonster]">
-        {{ dbService.monsters[selectedMonster].name }}
-      </h2>
+      <div class="row" class="monsterName">
+        <div class="col">
+          <h2 *ngIf="dbService.monsters[selectedMonster]">
+            {{ dbService.monsters[selectedMonster].name }}
+          </h2>
+        </div>
+      </div>
+      <div class="row" class="monsterCapacities">
+        <div class="col">
+          <h4 *ngIf="dbService.monsters[selectedMonster]">
+            HP : {{ dbService.monsters[selectedMonster].hp }}
+            Speed : {{ dbService.monsters[selectedMonster].speed }}
+          </h4>
+        </div>
+      </div>
     </div>
   </div>
 </div>

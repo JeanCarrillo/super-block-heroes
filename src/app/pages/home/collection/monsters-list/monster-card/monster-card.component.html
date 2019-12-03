@@ -1,9 +1,8 @@
 <div class="sprite-container" [class.selected]="selected" (click)="changeStatus()">
   <div
     class="sprite"
-    img-cache
-    img-cache-bg-url="{{ img }}"
     [ngStyle]="{ filter: 'hue-rotate(0deg)' }"
+    [style.backgroundImage]="img"
     [style.backgroundPosition]="getBackgroundPosition()"
     [style.paddingBottom]="paddingBottom"
     [style.marginTop]="marginTop"

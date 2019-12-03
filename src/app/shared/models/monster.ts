@@ -19,6 +19,8 @@ export class Monster {
   attackAnimationTime: number;
   attackAnimationDelay: number;
   status: string;
+  frozenDelay: number;
+  frozenTime: number;
 
   constructor(monster: any, handleMonsterAction: any) {
     this.handleMonsterAction = handleMonsterAction;
@@ -47,6 +49,9 @@ export class Monster {
     this.attackDelay = 10000;
     this.attackAnimationTime = Date.now();
     this.attackAnimationDelay = 2000;
+    // Frozen init
+    this.frozenTime = Date.now();
+    this.frozenDelay = 2000;
   }
 
   public move() {

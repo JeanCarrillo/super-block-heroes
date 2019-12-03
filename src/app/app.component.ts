@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ImgCacheService } from 'ng-imgcache';
 import { DbService } from './shared/services/db.service';
 import { Router } from '@angular/router';
 
@@ -12,14 +11,8 @@ export class AppComponent implements OnInit {
   constructor(
     private dbService: DbService,
     private router: Router,
-    private imgCache: ImgCacheService
   ) {}
   ngOnInit() {
-    this.imgCache.init({
-      debug: true,
-      usePersistentCache: true,
-      chromeQuota: 50 * 1024 * 1024,
-    });
     this.router.navigate(['/']);
     this.dbService.getMonsters();
     this.dbService.getHeroes();
