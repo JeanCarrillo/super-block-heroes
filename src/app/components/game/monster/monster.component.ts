@@ -31,7 +31,7 @@ export class MonsterComponent implements OnInit {
   }
 
   getBackgroundFilter(): string {
-    if (this.monster.frozenStatus) {
+    if (this.monster.isFrozen) {
       return 'grayscale(100%) invert(86%) sepia(4%) saturate(2310%) hue-rotate(187deg) brightness(108%) contrast(104%)';
     }
     return 'none';

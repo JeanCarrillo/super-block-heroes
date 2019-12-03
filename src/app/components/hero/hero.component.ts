@@ -1,6 +1,16 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Hero } from '../../shared/models/hero';
-import { DbService } from 'src/app/shared/services/db.service';
+import { rdmFloor } from 'src/app/shared/helpers/functions';
+
+const sprites = {
+  Idle: { start: 0, end: 17 }, // 18
+  Walk: { start: 18, end: 41 }, // 24
+  Attack: { start: 42, end: 53 }, // 12
+  Throw: { start: 54, end: 65 }, // 12
+  GetHit: { start: 66, end: 77 }, // 12
+  Death: { start: 78, end: 92 }, // 15
+  total: 92,
+};
 
 @Component({
   selector: 'app-hero',
@@ -11,38 +21,40 @@ export class HeroComponent implements OnInit, OnDestroy {
   @Input() inputHero: Hero;
   @Input() selected: boolean;
   hero: Hero;
+  sprite: number;
   interval: number;
+  status = 'Idle';
+  img: string;
 
-  constructor(private dbService: DbService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.createHero();
-  }
-
-  createHero(): void {
-    this.hero = new Hero(this.inputHero);
-    this.loop();
-  }
-
-  loop(): void {
+    this.img = `url(/assets/img/heroes/${this.inputHero.name.replace(' ', '')}.png)`;
+    if (this.inputHero.name === 'Satyr') {
+      this.img = `url(/assets/img/heroes/Paladin.png)`;
+    }
+    this.sprite = sprites[this.status].start;
     this.interval = window.setInterval(() => {
-      if (this.inputHero.name !== this.hero.name) {
-        clearInterval(this.interval);
-        this.createHero();
+      if (this.sprite < sprites[this.status].end) {
+        this.sprite += 1;
+      } else {
+        if (this.status !== 'Idle') {
+          this.status = 'Idle';
+        }
+        this.sprite = sprites[this.status].start;
       }
-      this.hero.move();
-    }, 20);
+    }, 50);
   }
 
-  getImg(): string {
-    return `/assets/img/heroes/${this.hero.name}/${this.hero.status}/${this.hero.status}_0${
-      this.hero.sprite < 10 ? '0' + this.hero.sprite : this.hero.sprite
-    }.png`;
+  getBackgroundPosition(): string {
+    return `0 ${this.sprite === 0 ? 0 : (100 / sprites.total) * this.sprite}%`;
   }
 
-  // TO DO
   changeStatus(): void {
-    this.hero.changeStatus('Idle');
+    const status = ['Attack', 'Death', 'GetHit', 'Walk'];
+    const rdmStatus = rdmFloor(status.length);
+    this.status = status[rdmStatus];
+    this.sprite = sprites[this.status].start;
   }
 
   ngOnDestroy(): void {

@@ -1,19 +1,17 @@
-.hero {
+.sprite-container {
   cursor: pointer;
-  height: 10vw;
   width: 10vw;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
-
+.sprite {
+  width: 100%;
+  height: 0;
+  display: block;
+  background-size: 100%;
+  padding-bottom: 100%;
+}
 .selected {
   height: calc(10vw + 1px);
   width: calc(10vw + 1px);
   border: 2px solid yellow;
   border-radius: 20px;
-}
-
-img {
-  width: 100%;
-  height: auto;
 }

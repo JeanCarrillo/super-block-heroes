@@ -61,9 +61,16 @@ export class Game {
   // Player callback
   // If a player scores, check monster position and handle damage if monster is within player range
   handlePlayerAction = (playerIndex: number, score: number): void => {
+    let goldGained = score;
+    if (this.players[playerIndex].currentBonus.goldRush.active) {
+      goldGained *= 2;
+      // TO DO : RETHINK HOW GOLD IS GAINED
+    }
     if (
-      this.monster.x > this.playersPositions[playerIndex].min &&
-      this.monster.x < this.playersPositions[playerIndex].max
+      (this.monster.x > this.playersPositions[playerIndex].min &&
+        this.monster.x < this.playersPositions[playerIndex].max) ||
+      // Special case if player has shuriken fury buff: attack from anywhere
+      this.players[playerIndex].currentBonus.shurikenFury.active
     ) {
       this.monster.handleDamage(score);
     }
@@ -72,8 +79,48 @@ export class Game {
   handlePlayerCapacity = (playerIndex: number, capacity: string): void => {
     switch (capacity) {
       case 'Frost Blast': {
-        console.log('capacity : ' + playerIndex + ' ' + capacity);
         this.monster.handleCapacity(capacity);
+        break;
+      }
+      case 'Taunt': {
+        // isHeadingTo = middle of player board
+        const isHeadingTo =
+          this.playersPositions[playerIndex].min +
+          (this.playersPositions[playerIndex].max - this.playersPositions[playerIndex].min) / 2;
+        this.monster.handleCapacity(capacity, { isHeadingTo });
+        break;
+      }
+      case 'Gold Rush': {
+        for (const player of this.players) {
+          player.currentBonus.goldRush.active = true;
+          player.currentBonus.goldRush.startTime = Date.now();
+        }
+        break;
+      }
+      case 'Holy Blocks': {
+        this.players[this.playerFacingMonster].changeBlock();
+        break;
+      }
+      case "King's Blocks": {
+        this.players[this.playerFacingMonster].capacityTime =
+          Date.now() + this.players[this.playerFacingMonster].capacityCooldown;
+        break;
+      }
+      case "Monk's Blessing": {
+        let mostInDangerPlayer = -1;
+        let lowerBlock = 99999;
+        for (let i = 0; i < this.players.length; i++) {
+          for (let j = 0; j < this.players[i].board.tiles.length; j++) {
+            // tslint:disable-next-line: prefer-for-of
+            for (let k = 0; k < this.players[i].board.tiles[j].length; k++) {
+              if (this.players[i].board.tiles[j][k] !== 0 && j < lowerBlock) {
+                lowerBlock = j;
+                mostInDangerPlayer = i;
+              }
+            }
+          }
+        }
+        this.players[mostInDangerPlayer].deleteRows([19, 18]);
         break;
       }
       default:

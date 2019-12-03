@@ -33,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { LogoComponent } from './components/logo/logo.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { CapacityIconComponent } from './components/capacity-icon/capacity-icon.component';
 
 const serverURL = `http://localhost`;
 const serverPort = 5000;
@@ -69,6 +70,7 @@ const socketConfig: SocketIoConfig = {
     LogoComponent,
     UserCardComponent,
     HeroComponent,
+    CapacityIconComponent,
   ],
   imports: [
     BrowserModule,

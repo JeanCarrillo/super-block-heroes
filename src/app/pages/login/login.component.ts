@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   // monster: Monster;
   nickname: string;
+  capacityName = "King's Grace";
+  timer = 1000;
+  cooldown = 5000;
 
   constructor(private dbService: DbService, private router: Router) {}
 

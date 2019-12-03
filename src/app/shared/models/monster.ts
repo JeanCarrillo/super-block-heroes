@@ -21,7 +21,9 @@ export class Monster {
   status: string;
   frozenDelay: number;
   frozenTime: number;
-  frozenStatus: boolean;
+  isFrozen: boolean;
+  isTaunt: boolean;
+  isHeadingTo: number;
 
   constructor(monster: any, handleMonsterAction: any) {
     this.handleMonsterAction = handleMonsterAction;
@@ -53,16 +55,17 @@ export class Monster {
     // Frozen init
     this.frozenTime = null;
     this.frozenDelay = 2000;
-    this.frozenStatus = false;
+    this.isFrozen = false;
+    this.isTaunt = false;
   }
 
   public move() {
     const now = Date.now();
-    if (this.frozenStatus) {
-      // Resets attack timer
+    // Handle freeze capacity timer
+    if (this.isFrozen) {
       this.attackTime = Date.now();
       if (now - this.frozenTime > this.frozenDelay) {
-        this.frozenStatus = false;
+        this.isFrozen = false;
       }
       return;
     }
@@ -72,14 +75,14 @@ export class Monster {
       if (this.movingDirection === 1 && this.x < 100) {
         this.x += this.movingSpeed;
       }
-      if (this.x >= 100) {
+      if (this.x >= 100 || (this.isTaunt && this.x >= this.isHeadingTo)) {
         this.movingDirection = -1;
       }
       // left
       if (this.movingDirection === -1 && this.x > 0) {
         this.x -= this.movingSpeed;
       }
-      if (this.x <= 0) {
+      if (this.x <= 0 || (this.isTaunt && this.x <= this.isHeadingTo)) {
         this.movingDirection = 1;
       }
     }
@@ -91,10 +94,17 @@ export class Monster {
       this.changeStatus('Walk');
     }
     if (now - this.attackTime > this.attackDelay) {
-      this.attackTime = Date.now();
-      this.attackAnimationTime = Date.now();
-      this.changeStatus('Attack');
-      this.attack();
+      // Taunt check
+      if (this.isTaunt && this.x >= this.isHeadingTo - 1 && this.x <= this.isHeadingTo + 1) {
+        console.log('taunt stop');
+        this.isTaunt = false;
+      }
+      if (!this.isTaunt) {
+        this.attackTime = Date.now();
+        this.attackAnimationTime = Date.now();
+        this.changeStatus('Attack');
+        this.attack();
+      }
     }
   }
 
@@ -132,11 +142,16 @@ export class Monster {
     }
   }
 
-  public handleCapacity(capacity: string) {
+  public handleCapacity(capacity: string, options?: any) {
     switch (capacity) {
       case 'Frost Blast': {
         this.frozenTime = Date.now();
-        this.frozenStatus = true;
+        this.isFrozen = true;
+        break;
+      }
+      case 'Taunt': {
+        this.isTaunt = true;
+        this.isHeadingTo = options.isHeadingTo;
         break;
       }
       default:

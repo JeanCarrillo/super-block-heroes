@@ -10,7 +10,6 @@ import { Game } from '../../shared/models/game';
 })
 export class GameComponent implements OnInit, OnDestroy {
   interval: any;
-  backgrounds: number[];
   game: Game;
 
   @HostListener('window:keydown', ['$event'])
@@ -26,11 +25,34 @@ export class GameComponent implements OnInit, OnDestroy {
     ];
     this.game = new Game(rdmMonster, [
       this.dbService.user,
-      { nickname: 'Grogory' },
-      { nickname: 'Mayelle' },
-      { nickname: 'Bière' },
+      {
+        nickname: 'Grogory',
+        hero: {
+          name: 'Mage',
+          capacity: {
+            name: 'Frost Blast',
+          },
+        },
+      },
+      {
+        nickname: 'Mayelle',
+        hero: {
+          name: 'Monk',
+          capacity: {
+            name: "Monk's Blessing",
+          },
+        },
+      },
+      {
+        nickname: 'Bière',
+        hero: {
+          name: 'King',
+          capacity: {
+            name: "King's Grace",
+          },
+        },
+      },
     ]);
-    this.backgrounds = new Array(4).fill(1);
     this.interval = setInterval(() => this.gameLoop(), 20);
   }
 

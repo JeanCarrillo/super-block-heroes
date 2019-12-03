@@ -6,24 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-menu.component.css'],
 })
 export class NavMenuComponent implements OnInit {
-  selectedButton = 2;
+  selectedButton = 0;
   buttons = [
-    {
-      text: 'Store',
-      link: 'store',
-    },
-    {
-      text: 'Social',
-      link: 'social',
-    },
+    // {
+    //   text: 'Store',
+    //   link: 'store',
+    // },
+    // {
+    //   text: 'Social',
+    //   link: 'social',
+    // },
     {
       text: 'Lobby',
       link: 'home',
     },
-    {
-      text: 'Ranking',
-      link: 'ranking',
-    },
+    // {
+    //   text: 'Ranking',
+    //   link: 'ranking',
+    // },
     {
       text: 'Collection',
       link: 'collection',
