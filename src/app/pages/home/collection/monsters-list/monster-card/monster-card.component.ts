@@ -31,7 +31,7 @@ export class MonsterCardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.img = `url(/assets/img/monsters/${this.monster.name.replace(' ', '')}.png)`;
-    this.img = `/assets/img/monsters/${this.monster.name.replace(' ', '')}.png`;
+    this.img = `url(/assets/img/monsters/${this.monster.name.replace(' ', '')}.png)`;
     this.paddingBottom = this.monster.sprites.paddingBottom + '%';
     this.marginTop = 100 - this.monster.sprites.paddingBottom + '%';
     this.sprite = this.monster.sprites[this.status].start;
