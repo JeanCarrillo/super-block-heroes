@@ -2,7 +2,7 @@
 import { Board } from './board';
 import { Block } from './block';
 import { Piece } from './piece';
-import { stringify } from 'querystring';
+import { Hero } from './hero';
 
 export class Player {
   isFastForwarding = false;
@@ -23,6 +23,7 @@ export class Player {
   capacity: string;
   capacityCooldown: number;
   capacityTime: number;
+  // Used to display capacity cooldown icon
   capacityCooldownPercentage: number;
   currentBonus: any = {
     shurikenFury: {
@@ -37,9 +38,10 @@ export class Player {
     },
   };
   nextPiece: string = null;
+  hero: Hero;
+  facingMonster = false;
 
   constructor(user: any, playerNum: number, handlePlayerAction: any, handlePlayerCapacity: any) {
-    console.log({ user });
     this.handlePlayerAction = handlePlayerAction;
     this.handlePlayerCapacity = handlePlayerCapacity;
     this.capacity = user.hero.capacity ? user.hero.capacity.name : 'Holy Blocks';
@@ -51,10 +53,13 @@ export class Player {
     this.name = user.nickname;
     this.score = 0;
     this.board = new Board(this.rowNumbers, this.colNumbers);
+    this.hero = new Hero(user.hero);
     this.currentBlocks = [];
   }
 
   public loop(): void {
+    this.hero.facingMonster = this.facingMonster;
+    this.hero.move();
     if (this.isFastForwarding) {
       return;
     }
@@ -240,6 +245,7 @@ export class Player {
   }
 
   private handleGameOver(): void {
+    this.hero.changeStatus('Death');
     this.currentBlocks = [];
     this.currentPiece = null;
     this.gameOver = true;

@@ -1,3 +1,5 @@
+import { heroSprites } from '../constants/sprites';
+
 export class Hero {
   name: string;
   sprite: number;
@@ -5,15 +7,14 @@ export class Hero {
   animationTime: number;
   animationDelay: number;
   sprites: any;
+  facingMonster: boolean;
 
-  constructor(hero: Hero) {
+  constructor(hero: any) {
     this.name = hero.name;
-    this.sprite = 0;
     // Animation init
+    this.changeStatus('Idle');
     this.animationTime = Date.now();
     this.animationDelay = 20;
-    this.sprites = hero.sprites;
-    this.changeStatus('Idle');
   }
 
   public move() {
@@ -25,18 +26,30 @@ export class Hero {
   }
 
   private animate() {
-    if (this.sprite < this.sprites[this.status]) {
+    if (this.facingMonster && this.status === 'Walk') {
+      this.changeStatus('Idle');
+    }
+    if (!this.facingMonster && this.status === 'Idle') {
+      this.changeStatus('Walk');
+    }
+
+    if (this.sprite < heroSprites[this.status].end) {
       this.sprite += 1;
     } else {
-      // if (this.status === 'attacking') {
-      //   this.changeStatus('moving');
-      // }
-      this.sprite = 0;
+      if (this.status === 'Death') {
+        return;
+      }
+
+      if (this.status === 'GetHit' || this.status === 'Attack' || this.status === 'Throw') {
+        this.changeStatus('Idle');
+      }
+
+      this.sprite = heroSprites[this.status].start;
     }
   }
 
   public changeStatus(status: string) {
     this.status = status;
-    this.sprite = 0;
+    this.sprite = heroSprites[this.status].start;
   }
 }

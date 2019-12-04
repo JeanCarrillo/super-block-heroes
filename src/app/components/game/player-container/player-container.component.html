@@ -3,9 +3,10 @@
   [capacityName]="player.capacity"
   [progress]="player.capacityCooldownPercentage"
 ></app-capacity-icon>
+<app-hero [hero]="player.hero"></app-hero>
 <app-board
   [board]="player.board"
-  [facingMonster]="facingMonster"
+  [facingMonster]="player.facingMonster"
   [currentBlocks]="player.currentBlocks"
   class="d-flex board"
 ></app-board>

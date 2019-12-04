@@ -96,13 +96,9 @@ export class Monster {
     if (now - this.attackTime > this.attackDelay) {
       // Taunt check
       if (this.isTaunt && this.x >= this.isHeadingTo - 1 && this.x <= this.isHeadingTo + 1) {
-        console.log('taunt stop');
         this.isTaunt = false;
       }
       if (!this.isTaunt) {
-        this.attackTime = Date.now();
-        this.attackAnimationTime = Date.now();
-        this.changeStatus('Attack');
         this.attack();
       }
     }
@@ -111,7 +107,13 @@ export class Monster {
   private attack() {
     // TO DO: something depending on monster
     // need to update database
-    this.handleMonsterAction();
+    const isPlayerAlive = this.handleMonsterAction();
+    if (isPlayerAlive) {
+      this.attackTime = Date.now();
+      this.attackAnimationTime = Date.now();
+      this.changeStatus('Attack');
+      this.handleMonsterAction(true);
+    }
   }
 
   private animate() {

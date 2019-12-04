@@ -10,7 +10,10 @@
           *ngFor="let hero of dbService.heroes"
           (click)="setSelectedHero(hero)"
         >
-          <app-hero [inputHero]="hero" [selected]="hero.id === selectedHero.id"></app-hero>
+          <app-hero-card
+            [inputHero]="hero"
+            [selected]="hero.id === selectedHero.id"
+          ></app-hero-card>
         </div>
       </div>
     </div>

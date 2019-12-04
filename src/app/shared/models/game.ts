@@ -72,11 +72,13 @@ export class Game {
       // Special case if player has shuriken fury buff: attack from anywhere
       this.players[playerIndex].currentBonus.shurikenFury.active
     ) {
+      this.players[playerIndex].hero.changeStatus('Attack');
       this.monster.handleDamage(score);
     }
   };
 
   handlePlayerCapacity = (playerIndex: number, capacity: string): void => {
+    this.players[playerIndex].hero.changeStatus('Throw');
     switch (capacity) {
       case 'Frost Blast': {
         this.monster.handleCapacity(capacity);
@@ -129,14 +131,24 @@ export class Game {
   };
 
   // Monster callback
-  handleMonsterAction = (): void => {
-    for (let i = 0; i < this.players.length; i++) {
-      if (
-        this.monster.x > this.playersPositions[i].min &&
-        this.monster.x < this.playersPositions[i].max
-      ) {
-        this.players[i].loopDelay -= 50;
+  handleMonsterAction = (act?: boolean) => {
+    // Monster action
+    if (act) {
+      for (let i = 0; i < this.players.length; i++) {
+        if (
+          this.monster.x > this.playersPositions[i].min &&
+          this.monster.x < this.playersPositions[i].max
+        ) {
+          this.players[i].hero.changeStatus('GetHit');
+          this.players[i].loopDelay -= 50;
+        }
       }
+    } else {
+      // Monster is getting info about player facing him: if dead returns false;
+      if (this.players[this.playerFacingMonster].gameOver) {
+        return false;
+      }
+      return true;
     }
   };
 
@@ -148,6 +160,7 @@ export class Game {
         this.monster.x < this.playersPositions[i].max
       ) {
         return i;
+      } else {
       }
     }
     return -1;
@@ -155,20 +168,29 @@ export class Game {
 
   loop(): void {
     let defeat = true;
-    for (const player of this.players) {
-      player.loop();
-      if (!player.gameOver) {
+
+    this.playerFacingMonster = this.whichPlayerHasMonster();
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.playerFacingMonster === i) {
+        this.players[i].facingMonster = true;
+      } else {
+        this.players[i].facingMonster = false;
+      }
+      this.players[i].loop();
+      if (!this.players[i].gameOver) {
         defeat = false;
       }
     }
+
     if (defeat) {
       this.defeat = true;
     }
+
     if (this.monster.currentLife > 0) {
       this.monster.move();
     } else {
       this.victory = true;
     }
-    this.playerFacingMonster = this.whichPlayerHasMonster();
   }
 }

@@ -26,14 +26,15 @@ import { CollectionComponent } from './pages/home/collection/collection.componen
 import { BackgroundComponent } from './components/background/background.component';
 import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-list.component';
 import { MonstersListComponent } from './pages/home/collection/monsters-list/monsters-list.component';
-import { MonsterCardComponent } from './pages/home/collection/monsters-list/monster-card/monster-card.component';
-import { HeroComponent } from './components/hero/hero.component';
+import { MonsterCardComponent } from './components/monster-card/monster-card.component';
+import { HeroComponent } from './components/game/hero/hero.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { LogoComponent } from './components/logo/logo.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { CapacityIconComponent } from './components/capacity-icon/capacity-icon.component';
+import { HeroCardComponent } from './components/hero-card/hero-card.component';
 
 const serverURL = `http://localhost`;
 const serverPort = 5000;
@@ -71,6 +72,7 @@ const socketConfig: SocketIoConfig = {
     UserCardComponent,
     HeroComponent,
     CapacityIconComponent,
+    HeroCardComponent,
   ],
   imports: [
     BrowserModule,

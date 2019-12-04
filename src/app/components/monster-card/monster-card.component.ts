@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { rdmFloor } from '../../../../../shared/helpers/functions';
+import { rdmFloor } from '../../shared/helpers/functions';
 
 // tslint:disable: max-line-length
 // Database monster sprites format
