@@ -11,7 +11,7 @@ import { heroSprites } from '../../shared/constants/sprites';
 export class HeroCardComponent implements OnInit, OnDestroy {
   @Input() inputHero: Hero;
   @Input() selected: boolean;
-  hero: Hero;
+  name: string;
   sprite: number;
   interval: number;
   status = 'Idle';
@@ -20,12 +20,26 @@ export class HeroCardComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    this.img = `url(/assets/img/heroes/${this.inputHero.name.replace(' ', '')}.png)`;
-    if (this.inputHero.name === 'Satyr') {
+    this.init();
+    this.loop();
+  }
+
+  init(): void {
+    this.name = this.inputHero.name;
+    this.img = `url(/assets/img/heroes/${this.name.replace(' ', '')}.png)`;
+    if (this.name === 'Satyr') {
       this.img = `url(/assets/img/heroes/Paladin.png)`;
     }
     this.sprite = heroSprites[this.status].start;
+  }
+
+  loop(): void {
     this.interval = window.setInterval(() => {
+      if (this.inputHero.name !== this.name) {
+        clearInterval(this.interval);
+        this.init();
+        this.loop();
+      }
       if (this.sprite < heroSprites[this.status].end) {
         this.sprite += 1;
       } else {
