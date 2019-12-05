@@ -27,30 +27,15 @@ export class GameComponent implements OnInit, OnDestroy {
       this.dbService.user,
       {
         nickname: 'Grogory',
-        hero: {
-          name: 'Mage',
-          capacity: {
-            name: 'Frost Blast',
-          },
-        },
+        hero: this.dbService.heroes[3],
       },
       {
         nickname: 'Mayelle',
-        hero: {
-          name: 'Monk',
-          capacity: {
-            name: "Monk's Blessing",
-          },
-        },
+        hero: this.dbService.heroes[4],
       },
       {
         nickname: 'Bière',
-        hero: {
-          name: 'King',
-          capacity: {
-            name: "King's Grace",
-          },
-        },
+        hero: this.dbService.heroes[6],
       },
     ]);
     this.interval = setInterval(() => this.gameLoop(), 20);

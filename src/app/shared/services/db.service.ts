@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-import * as jwt_decode from 'jwt-decode';
+// import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DbService {
-  token: string;
+  token: string = this.getToken();
   user: any = null;
   monsters: any = [];
   heroes: any = [];
@@ -45,19 +45,15 @@ export class DbService {
       this.monsters = monsters;
       for (const monster of this.monsters) {
         monster.sprites = JSON.parse(monster.sprites);
-        // TO DO : cache image ?
-        // const img = new Image();
-        // img.src = `/assets/img/monsters/${monster.name.replace(' ', '')}.png`;
       }
       console.log(this.monsters);
-      // this.monstersUpdated.emit();
     });
-    // return this.monsters;
   }
 
   getUser(nickname: string): Observable<any> {
     return of(this.http.get(this.API_SERVER + '/users/nickname/' + nickname));
   }
+
   register(user: any) {
     this.user = user;
     this.http
@@ -83,7 +79,8 @@ export class DbService {
         if (!res.access_token) {
           return;
         }
-        this.token = res.access_token;
+        localStorage.setItem('token', res.access_token);
+        // this.token = res.access_token;
         // console.log({ res });
         // const decoded = jwt_decode(res.access_token);
         // console.log({ decoded });
@@ -100,7 +97,7 @@ export class DbService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${this.getToken()}`,
       }),
     };
     console.log({ httpOptions });
@@ -109,6 +106,10 @@ export class DbService {
         this.setUser(user);
       }
     });
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token');
   }
 
   setUser(user: any) {
