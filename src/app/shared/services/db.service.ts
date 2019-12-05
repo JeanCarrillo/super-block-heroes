@@ -78,13 +78,15 @@ export class DbService {
       .post(this.API_SERVER + '/auth/login', {
         password: this.user.password,
         email: this.user.email,
+        nickname: this.user.nickname,
       })
       .subscribe(async (res: any) => {
         if (!res.access_token) {
+          console.log({ res });
           return;
         }
         this.token = res.access_token;
-        // console.log({ res });
+        console.log({ res });
         // const decoded = jwt_decode(res.access_token);
         // console.log({ decoded });
         this.http.get(this.API_SERVER + '/users/nickname/' + this.user.nickname).subscribe(res => {
