@@ -19,6 +19,21 @@
     </div>
     <div class="col-3 text-center">
       <h2>{{ selectedHero.name }}</h2>
+      <p>Capacity:</p>
+      <div class="text-center">
+        <p>{{ selectedHero.capacity.name }}</p>
+        <app-capacity-icon
+          [capacityName]="selectedHero.capacity.name"
+          [progress]="100"
+        ></app-capacity-icon>
+      </div>
+      <p>{{ selectedHero.capacity.description }}</p>
+      <p>Cooldown</p>
+      <p>{{ selectedHero.capacity.cooldown }}</p>
+      <div *ngIf="selectedHero.capacity.duration !== 0">
+        <p>Duration</p>
+        <p>{{ selectedHero.capacity.duration }}</p>
+      </div>
     </div>
   </div>
 </div>
