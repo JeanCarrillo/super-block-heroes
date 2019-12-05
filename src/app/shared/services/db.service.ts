@@ -1,69 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-const activeFakeData = true;
-const fakeUser = {
-  nickname: 'test',
-  password: 'nimp',
-  email: 'bla@bla.com',
-  hero: 3,
-};
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DbService {
-  user: any = activeFakeData ? fakeUser : null;
+  token: string;
+  user: any = null;
   monsters: any = [];
   heroes: any = [];
-  // images: any = {};
-  // monstersUpdated: EventEmitter<any> = new EventEmitter();
+  capacities: any = [];
 
   private API_SERVER = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   async getHeroes() {
     await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => {
       this.heroes = heroes;
       for (const hero of this.heroes) {
         hero.sprites = JSON.parse(hero.sprites);
-        // Preload sprites ?
-        // this.images[hero.name] = {
-        //   Idle: [],
-        // };
-        // for (let i = 0; i < hero.sprites.Idle; i++) {
-        //   const img = new Image();
-        //   img.src = `/assets/img/heroes/${hero.name}/Idle/Idle_0${i < 10 ? '0' + i : i}.png`;
-        //   // this.images[hero.name].Idle.push(img);
-        // }
       }
-      console.log(this.heroes);
-      // console.log(this.images);
+      console.log('heroes :', this.heroes);
     });
   }
 
-  postUser(user: any): Observable<any> {
-    return this.http.post(this.API_SERVER + '/users', {
-      nickname: user.nickname,
-      password: user.password,
-      email: user.email,
-      hero: 1,
+  async getCapacities() {
+    await this.http.get(this.API_SERVER + '/capacities').subscribe(capacities => {
+      console.log({ capacities });
+      this.capacities = capacities;
     });
-  }
-
-  updateUser(data: any) {
-    this.http.put(this.API_SERVER + '/users/' + this.user.id, data).subscribe(user => {
-      if (user) {
-        this.setUser(user);
-      }
-    });
-  }
-
-  setUser(user: any) {
-    this.user = user;
-    this.user.hero.sprites = JSON.parse(this.user.hero.sprites);
   }
 
   async getMonsters() {
@@ -83,6 +53,63 @@ export class DbService {
 
   getUser(nickname: string): Observable<any> {
     return of(this.http.get(this.API_SERVER + '/users/nickname/' + nickname));
+  }
+  register(user: any) {
+    this.user = user;
+    this.http
+      .post(this.API_SERVER + '/auth/register', {
+        nickname: this.user.nickname,
+        password: this.user.password,
+        email: this.user.email,
+        hero: 1,
+      })
+      .subscribe(async res => {
+        console.log({ res });
+      });
+  }
+
+  login(user: any) {
+    console.log(this.user);
+    this.http
+      .post(this.API_SERVER + '/auth/login', {
+        password: this.user.password,
+        email: this.user.email,
+      })
+      .subscribe(async (res: any) => {
+        if (!res.access_token) {
+          return;
+        }
+        this.token = res.access_token;
+        // console.log({ res });
+        // const decoded = jwt_decode(res.access_token);
+        // console.log({ decoded });
+        this.http.get(this.API_SERVER + '/users/nickname/' + this.user.nickname).subscribe(res => {
+          console.log({ res });
+          this.setUser(res);
+          this.router.navigate(['/home']);
+        });
+        // await this.setUser(res);
+      });
+  }
+
+  updateUser(data: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.token}`,
+      }),
+    };
+    console.log({ httpOptions });
+    this.http.put(this.API_SERVER + '/users/' + this.user.id, data, httpOptions).subscribe(user => {
+      if (user) {
+        this.setUser(user);
+      }
+    });
+  }
+
+  setUser(user: any) {
+    this.user = user;
+    this.user.hero.sprites = JSON.parse(this.user.hero.sprites);
   }
 
   postGame(game: any): void {

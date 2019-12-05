@@ -8,14 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private dbService: DbService,
-    private router: Router,
-  ) {}
+  constructor(private dbService: DbService, private router: Router) {}
   ngOnInit() {
     this.router.navigate(['/login']);
     this.dbService.getMonsters();
     this.dbService.getHeroes();
+    this.dbService.getCapacities();
     // this.dbService.postUser({
     //   email: 'player5@email.com',
     //   nickname: 'player5',
