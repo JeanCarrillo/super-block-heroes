@@ -17,23 +17,36 @@
         </div>
       </div>
     </div>
-    <div class="col-3 text-center">
-      <h2>{{ selectedHero.name }}</h2>
-      <p>Capacity:</p>
-      <div class="text-center">
-        <p>{{ selectedHero.capacity.name }}</p>
-        <app-capacity-icon
-          [capacityName]="selectedHero.capacity.name"
-          [progress]="100"
-        ></app-capacity-icon>
+
+    <div class="col-3 card heroListCard text-center">
+      <div class="card-title heroListName">
+        <h2 class="heroName">{{ selectedHero.name }}</h2>
       </div>
-      <p>{{ selectedHero.capacity.description }}</p>
-      <p>Cooldown</p>
-      <p>{{ selectedHero.capacity.cooldown }}</p>
-      <div *ngIf="selectedHero.capacity.duration !== 0">
-        <p>Duration</p>
-        <p>{{ selectedHero.capacity.duration }}</p>
+      <div class="card-body heroListBody">
+        <div class="row no-gutter">
+          <div class="col-8">
+            <div class="text-center heroListCapacity align-items-center">
+              <p class="heroCapacity">Capacity : {{ selectedHero.capacity.name }}</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <app-capacity-icon
+              [capacityName]="selectedHero.capacity.name"
+              [progress]="100"
+            ></app-capacity-icon>
+          </div>
+        </div>
+        <div class="row no-gutter heroListDescription">
+          <p class="heroDescription">{{ selectedHero.capacity.description }}</p>
+        </div>
+      </div>
+      <div class="card-footer heroListFooter text-muted">
+        <p class="capacityProperty">Cooldown : {{ selectedHero.capacity.cooldown }}</p>
+      </div>
+      <div class="card-footer heroListFooter text-muted" *ngIf="selectedHero.capacity.duration !== 0">
+        <p class="capacityProperty">Duration : {{ selectedHero.capacity.duration }}</p>
       </div>
     </div>
+
   </div>
 </div>
