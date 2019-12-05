@@ -1,1 +1,28 @@
-<p>sign-in works!</p>
+<div class="container-fluid loginPage">
+    <!-- <app-monster-card [monster]="monster"></app-monster-card> -->
+    <app-logo></app-logo>
+    <input
+      type="text"
+      [(ngModel)]="user.nickname"
+      class="input"
+      placeholder="Nickname"
+      (keyup.enter)="submit()"
+    />
+    <input
+    type="text"
+    [(ngModel)]="user.email"
+    class="input"
+    placeholder="user@email.com"
+    (keyup.enter)="submit()"
+  />
+  <input
+  type="password"
+  [(ngModel)]="user.password"
+  class="input"
+  placeholder="Password"
+  (keyup.enter)="submit()"
+  showPassword
+  />
+    <app-button buttonType="login" text="Log In" (click)="signin()" size="1.4"></app-button>
+  </div>
+  

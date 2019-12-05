@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './pages/authentification/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { GameComponent } from './pages/game/game.component';
 import { StoreComponent } from './pages/home/store/store.component';
@@ -9,10 +8,13 @@ import { SocialComponent } from './pages/home/social/social.component';
 import { RankingComponent } from './pages/home/ranking/ranking.component';
 import { CollectionComponent } from './pages/home/collection/collection.component';
 import { LobbyComponent } from './pages/home/lobby/lobby.component';
+import { WelcomeComponent } from './pages/authentification/welcome/welcome.component';
+import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'welcome', component: WelcomeComponent },
+  { path: 'sign-up', component:  SignUpComponent},
   { path: 'sign-in', component: SignInComponent },
   {
     path: 'home',

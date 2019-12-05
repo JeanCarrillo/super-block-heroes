@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
     private router: Router,
   ) {}
   ngOnInit() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/welcome']);
     this.dbService.getMonsters();
     this.dbService.getHeroes();
     // this.dbService.postUser({

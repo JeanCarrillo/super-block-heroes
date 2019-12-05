@@ -8,7 +8,6 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AppComponent } from './app.component';
 
 // authentification
-import { LoginComponent } from './pages/authentification/login.component';
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
 import { ForgotPwComponent } from './pages/authentification/forgot-pw/forgot-pw.component';
@@ -47,6 +46,8 @@ import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WelcomeComponent } from './pages/authentification/welcome/welcome.component';
+import { ShowPasswordDirective } from './pages/authentification/show-password.directive';
 
 const serverURL = `http://localhost`;
 const serverPort = 5000;
@@ -58,7 +59,6 @@ const socketConfig: SocketIoConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     SignInComponent,
     SignUpComponent,
     ForgotPwComponent,
@@ -85,6 +85,9 @@ const socketConfig: SocketIoConfig = {
     HeroComponent,
     CapacityIconComponent,
     HeroCardComponent,
+    WelcomeComponent,
+    SignInComponent,
+    ShowPasswordDirective,
   ],
   imports: [
     BrowserModule,
