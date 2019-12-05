@@ -43,9 +43,10 @@ import { CollectionComponent } from './pages/home/collection/collection.componen
 import { MonstersListComponent } from './pages/home/collection/monsters-list/monsters-list.component';
 import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-list.component';
 
-// fontawesome
+//fontawsome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// bootstrap
+//bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const serverURL = `http://localhost`;
 const serverPort = 5000;
@@ -91,6 +92,7 @@ const socketConfig: SocketIoConfig = {
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    NgbModule,
     SocketIoModule.forRoot(socketConfig),
   ],
   providers: [],

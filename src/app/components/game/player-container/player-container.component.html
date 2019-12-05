@@ -1,12 +1,8 @@
 <app-score [name]="player.name" [score]="player.score" [gameOver]="player.gameOver"></app-score>
-<app-capacity-icon
-  [capacityName]="player.capacity"
-  [progress]="player.capacityCooldownPercentage"
-></app-capacity-icon>
-<app-hero [hero]="player.hero"></app-hero>
-<app-board
-  [board]="player.board"
-  [facingMonster]="player.facingMonster"
-  [currentBlocks]="player.currentBlocks"
-  class="d-flex board"
-></app-board>
+<div class="capacityalign">
+  <app-hero [hero]="player.hero"></app-hero>
+  <app-capacity-icon [capacityName]="player.capacity" [progress]="player.capacityCooldownPercentage">
+  </app-capacity-icon>
+</div>
+<app-board [board]="player.board" [facingMonster]="player.facingMonster" [currentBlocks]="player.currentBlocks"
+  class="d-flex board"></app-board>
