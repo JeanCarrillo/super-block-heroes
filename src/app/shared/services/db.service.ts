@@ -74,9 +74,11 @@ export class DbService {
       .post(this.API_SERVER + '/auth/login', {
         password: this.user.password,
         email: this.user.email,
+        nickname: this.user.nickname,
       })
       .subscribe(async (res: any) => {
         if (!res.access_token) {
+          console.log({ res });
           return;
         }
         localStorage.setItem('token', res.access_token);
