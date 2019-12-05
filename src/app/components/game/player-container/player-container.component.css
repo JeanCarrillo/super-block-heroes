@@ -2,8 +2,14 @@
     width: auto;
 }
 
-/* .capacity-align{
+/* .capacityalign{
 position: absolute;
-top: 17em;
-right: 11em;
+width: 4vw;
+height: 4vw;
 } */
+
+.capacityalign{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

@@ -4,9 +4,6 @@
   background-size: contain;
   border: 1px solid white;
   /* border-radius: 50%; */
-  position: absolute;
-  top: 17em;
-  right: 11em;
 }
 
 .overlay {
