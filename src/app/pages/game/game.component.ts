@@ -18,7 +18,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.game.handleKeys(event.key);
   }
 
-  constructor(private dbService: DbService) {}
+  constructor(private dbService: DbService) { }
 
   ngOnInit() {
     const rdmMonster = this.dbService.monsters[
