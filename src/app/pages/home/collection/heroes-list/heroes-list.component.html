@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-2 text-center">
+      <app-user-card></app-user-card>
+    </div>
+    <div class="col-7 borders">
+      <div class="row">
+        <div
+          class="col text-center"
+          *ngFor="let hero of dbService.heroes"
+          (click)="setSelectedHero(hero)"
+        >
+          <app-hero-card
+            [inputHero]="hero"
+            [selected]="hero.id === selectedHero.id"
+          ></app-hero-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 text-center">
+      <h2>{{ selectedHero.name }}</h2>
+    </div>
+  </div>
+</div>

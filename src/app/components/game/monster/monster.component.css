@@ -1,0 +1,25 @@
+.boardMonster {
+  border: 2px solid black;
+  width: 100%;
+  height: 13vh;
+  background-repeat: repeat-x;
+  background-size: contain;
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+.sprite-container {
+  position: absolute;
+  bottom: 2%;
+  z-index: 10;
+  width: 15vw;
+}
+.sprite {
+  width: 100%;
+  height: 0;
+  display: block;
+  background-size: 100%;
+  /* transform: scale(1); */
+  /* transform-origin: 50% 75%; */
+}

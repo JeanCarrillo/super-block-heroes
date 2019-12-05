@@ -1,9 +1,0 @@
-.monster {
-  /* margin-top: 300px; */
-  transform: scale(2);
-  /* transition: 200ms; */
-}
-
-.selected {
-  transform: scale(3);
-}

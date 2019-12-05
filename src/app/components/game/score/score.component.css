@@ -1,0 +1,33 @@
+.alert {
+  padding: 3px;
+}
+
+.badge {
+  padding: 0.5rem 1rem;
+  border: 2px solid black;
+  box-shadow: 2px 2px 5px 1px black;
+}
+
+.gameOver {
+  position: absolute;
+  top: 35vh;
+}
+
+.playerScore {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+h5 {
+  text-align: center;
+  font-weight: normal;
+  font-size: 1.5vw;
+  font-family: 'Righteous', cursive;
+}
+/* 
+@media screen and (max-width: 50em) {
+  h5 {
+    font-size: 20vw;
+   }
+} */

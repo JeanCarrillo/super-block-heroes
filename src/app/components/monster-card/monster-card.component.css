@@ -1,0 +1,22 @@
+.sprite-container {
+  cursor: pointer;
+  width: 15vw;
+}
+.sprite {
+  width: 100%;
+  height: 0;
+  display: block;
+  background-size: 100%;
+  /* transform: scale(1); */
+  /* transform-origin: 50% 75%; */
+}
+
+.monster {
+  width: 15vw;
+  height: 15vw;
+}
+
+.selected {
+  border: 1px solid yellow;
+  border-radius: 20px;
+}

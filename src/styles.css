@@ -25,12 +25,12 @@ app-game {
   display: flex;
 }
 
-app-main {
+app-home {
   min-height: 100%;
   min-width: 100%;
   background-image: url(assets/img/backgrounds/4/background.png);
 }
 
-app-home {
+app-login {
   background-image: url(assets/img/backgrounds/4/background.png);
 }

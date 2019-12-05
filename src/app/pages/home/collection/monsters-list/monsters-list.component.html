@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-9">
+      <div class="row">
+        <div
+          class="col text-center"
+          *ngFor="let monster of dbService.monsters; index as i"
+          (click)="setSelectedMonster(i)"
+        >
+          <app-monster-card
+            [monster]="monster"
+            [selected]="i === selectedMonster"
+          ></app-monster-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 text-center">
+      <div class="row" class="monsterName">
+        <div class="col">
+          <h2 *ngIf="dbService.monsters[selectedMonster]">
+            {{ dbService.monsters[selectedMonster].name }}
+          </h2>
+        </div>
+      </div>
+      <div class="row" class="monsterCapacities">
+        <div class="col">
+          <h4 *ngIf="dbService.monsters[selectedMonster]">
+            HP : {{ dbService.monsters[selectedMonster].hp }}
+            Speed : {{ dbService.monsters[selectedMonster].speed }}
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

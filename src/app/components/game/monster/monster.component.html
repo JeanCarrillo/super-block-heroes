@@ -1,0 +1,29 @@
+<div class="row boardMonster m-0" [style.backgroundImage]="getBackgroundImg()">
+  <div
+    class="sprite-container"
+    [style.left]="getPosition()"
+    [ngStyle]="{ filter: getContainerFilterFrozen() }"
+  >
+    <div
+      class="sprite"
+      [ngStyle]="{ filter: getFilterFrozen() }"
+      [style.backgroundImage]="monsterImg"
+      [style.backgroundPosition]="getMonsterBackgroundPosition()"
+      [style.paddingBottom]="paddingBottom"
+      [style.marginTop]="marginTop"
+      [style.transform]="getDirection()"
+    ></div>
+  </div>
+</div>
+<div class="progress">
+  <div
+    class="progress-bar bg-danger"
+    role="progressbar"
+    [style.width]="getLifePercentage()"
+    aria-valuenow="{ monster.currentLife }"
+    aria-valuemin="0"
+    aria-valuemax="{ monster.startingLife }"
+  >
+    {{ getLifePercentage() }}
+  </div>
+</div>

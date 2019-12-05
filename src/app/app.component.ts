@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbService } from './db.service';
+import { DbService } from './shared/services/db.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,9 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private dbService: DbService, private router: Router) {}
+  constructor(
+    private dbService: DbService,
+    private router: Router,
+  ) {}
   ngOnInit() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
     this.dbService.getMonsters();
     this.dbService.getHeroes();
     // this.dbService.postUser({
