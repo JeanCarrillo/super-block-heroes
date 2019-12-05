@@ -2,11 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
+const activeFakeData = true;
+const fakeUser = {
+  nickname: 'test',
+  password: 'nimp',
+  email: 'bla@bla.com',
+  hero: 3,
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class DbService {
-  user: any = null;
+  user: any = activeFakeData ? fakeUser : null;
   monsters: any = [];
   heroes: any = [];
   // images: any = {};
@@ -38,8 +46,10 @@ export class DbService {
 
   postUser(user: any): Observable<any> {
     return this.http.post(this.API_SERVER + '/users', {
-      nickname: user,
-      hero: 3,
+      nickname: user.nickname,
+      password: user.password,
+      email: user.email,
+      hero: 1,
     });
   }
 

@@ -13,8 +13,13 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 })
 export class LoginComponent implements OnInit {
   // monster: Monster;
-  nickname: string;
-  email: string;
+  user = {
+    nickname: '',
+    email: '',
+    password: '',
+  };
+  // nickname: string;
+  // email: string;
   capacityName = "King's Grace";
   timer = 1000;
   cooldown = 5000;
@@ -26,7 +31,8 @@ export class LoginComponent implements OnInit {
   }
 
   submit = async () => {
-    await this.dbService.postUser(this.nickname).subscribe(async res => {
+    console.log(this.user);
+    await this.dbService.postUser(this.user).subscribe(async res => {
       await this.dbService.setUser(res);
       this.router.navigate(['/home']);
     });
