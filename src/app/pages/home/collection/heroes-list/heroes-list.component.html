@@ -9,6 +9,7 @@
           class="col text-center"
           *ngFor="let hero of dbService.heroes"
           (click)="setSelectedHero(hero)"
+          [ngStyle]="{ filter: getFilter(hero.id) }"
         >
           <app-hero-card
             [inputHero]="hero"
@@ -43,10 +44,22 @@
       <div class="card-footer heroListFooter text-muted">
         <p class="capacityProperty">Cooldown : {{ selectedHero.capacity.cooldown }}</p>
       </div>
-      <div class="card-footer heroListFooter text-muted" *ngIf="selectedHero.capacity.duration !== 0">
+      <div
+        class="card-footer heroListFooter text-muted"
+        *ngIf="selectedHero.capacity.duration !== 0"
+      >
         <p class="capacityProperty">Duration : {{ selectedHero.capacity.duration }}</p>
       </div>
+      <div *ngIf="!isOwned(selectedHero.id)">
+        {{ selectedHero.price }} gold
+        <button
+          type="button"
+          [disabled]="!canBuy(selectedHero.price)"
+          (click)="buyHero(selectedHero)"
+        >
+          Buy
+        </button>
+      </div>
     </div>
-
   </div>
 </div>

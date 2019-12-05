@@ -1,6 +1,8 @@
 import { heroSprites } from '../constants/sprites';
 
 export class Hero {
+  id: number;
+  price: number;
   name: string;
   sprite: number;
   status: string;

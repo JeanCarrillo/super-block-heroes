@@ -17,8 +17,6 @@ export class SignUpComponent implements OnInit {
     email: '',
     password: '',
   };
-  timer = 1000;
-  cooldown = 5000;
   faUser = faUser;
   constructor(private dbService: DbService, private router: Router) {}
 

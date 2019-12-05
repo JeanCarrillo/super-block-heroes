@@ -78,7 +78,6 @@ export class DbService {
       })
       .subscribe(async (res: any) => {
         if (!res.access_token) {
-          console.log({ res });
           return;
         }
         localStorage.setItem('token', res.access_token);
@@ -102,7 +101,6 @@ export class DbService {
         Authorization: `Bearer ${this.getToken()}`,
       }),
     };
-    console.log({ httpOptions });
     this.http.put(this.API_SERVER + '/users/' + this.user.id, data, httpOptions).subscribe(user => {
       if (user) {
         this.setUser(user);
@@ -126,8 +124,10 @@ export class DbService {
     }
     user.hero.capacity = capacity;
     // END TEMP
+    user.hero.sprites = JSON.parse(user.hero.sprites);
+    user.inventory = JSON.parse(user.inventory);
     this.user = user;
-    this.user.hero.sprites = JSON.parse(this.user.hero.sprites);
+    console.log({ user });
   }
 
   postGame(game: any): void {
