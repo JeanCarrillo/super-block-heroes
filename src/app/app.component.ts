@@ -8,14 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private dbService: DbService,
-    private router: Router,
-  ) {}
-  ngOnInit() {
-    this.router.navigate(['/welcome']);
-    this.dbService.getMonsters();
-    this.dbService.getHeroes();
+  constructor(private dbService: DbService, private router: Router) {}
+  async ngOnInit() {
+    this.router.navigate(['/login']);
+    await this.dbService.getHeroes();
+    await this.dbService.getMonsters();
+    await this.dbService.getCapacities();
     // this.dbService.postUser({
     //   email: 'player5@email.com',
     //   nickname: 'player5',
