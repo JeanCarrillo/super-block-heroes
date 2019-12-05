@@ -33,6 +33,10 @@ export class DbService {
     await this.http.get(this.API_SERVER + '/capacities').subscribe(capacities => {
       console.log({ capacities });
       this.capacities = capacities;
+      for (let i = 0; i < this.heroes.length; i++) {
+        this.heroes[i].capacity = this.capacities[i];
+      }
+      console.log(this.heroes);
     });
   }
 
@@ -69,7 +73,7 @@ export class DbService {
   }
 
   login(user: any) {
-    console.log(this.user);
+    this.user = user;
     this.http
       .post(this.API_SERVER + '/auth/login', {
         password: this.user.password,
@@ -108,6 +112,17 @@ export class DbService {
   }
 
   setUser(user: any) {
+    // TEMP UNTIL BACKEND MANY TO MANY RESOLVED
+    const heroId = user.hero.id;
+    let capacity;
+    for (const cap of this.capacities) {
+      if (cap.id === heroId) {
+        capacity = cap;
+        break;
+      }
+    }
+    user.hero.capacity = capacity;
+    // END TEMP
     this.user = user;
     this.user.hero.sprites = JSON.parse(this.user.hero.sprites);
   }
