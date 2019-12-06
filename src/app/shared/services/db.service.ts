@@ -54,18 +54,24 @@ export class DbService {
     return of(this.http.get(this.API_SERVER + '/users/nickname/' + nickname));
   }
 
-  register(user: any) {
+  async register(user: any) {
     this.user = user;
-    this.http
+    await this.http
       .post(this.API_SERVER + '/auth/register', {
         nickname: this.user.nickname,
         password: this.user.password,
         email: this.user.email,
         hero: 1,
       })
-      .subscribe(async res => {
-        console.log({ res });
-      });
+      .subscribe(
+        async (res: any) => {
+          if (res.email && res.nickname) {
+            this.login(this.user);
+            return;
+          }
+        },
+        err => window.alert('Account already exists')
+      );
   }
 
   login(user: any) {

@@ -15,23 +15,22 @@ export class SignInComponent implements OnInit {
     email: '',
     password: '',
   };
-  timer = 1000;
-  cooldown = 5000;
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
 
   constructor(private dbService: DbService, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
+  forgotPW = () => {
+    window.alert('This feature will be enable soon!');
+  };
 
   signin = async () => {
     await this.dbService.login(this.user);
   };
 
-  
-
   showPassword = () => {
     window.alert('show password');
-  }
+  };
 }

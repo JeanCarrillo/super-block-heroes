@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   constructor(private dbService: DbService, private router: Router) {}
   async ngOnInit() {
-    this.router.navigate(['/welcome']);
+    this.router.navigate(['/sign-in']);
     await this.dbService.getHeroes();
     await this.dbService.getMonsters();
     await this.dbService.getCapacities();
