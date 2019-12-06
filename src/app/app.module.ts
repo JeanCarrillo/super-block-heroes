@@ -49,7 +49,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WelcomeComponent } from './pages/authentification/welcome/welcome.component';
 import { ShowPasswordDirective } from './pages/authentification/show-password.directive';
 
-const serverURL = `http://localhost`;
+const serverURL = `http://192.168.146.102`;
 const serverPort = 5000;
 const socketConfig: SocketIoConfig = {
   url: `${serverURL}:${serverPort}`,

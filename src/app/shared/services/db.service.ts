@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-// import * as jwt_decode from 'jwt-decode';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class DbService {
   heroes: any = [];
   capacities: any = [];
 
-  private API_SERVER = 'http://localhost:3000';
+  private API_SERVER = 'http://192.168.146.102:3000';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -82,9 +82,9 @@ export class DbService {
         }
         localStorage.setItem('token', res.access_token);
         // this.token = res.access_token;
-        // console.log({ res });
-        // const decoded = jwt_decode(res.access_token);
-        // console.log({ decoded });
+        console.log({ res });
+        const decoded = jwt_decode(res.access_token);
+        console.log({ decoded });
         this.http.get(this.API_SERVER + '/users/nickname/' + this.user.nickname).subscribe(res => {
           console.log({ res });
           this.setUser(res);
