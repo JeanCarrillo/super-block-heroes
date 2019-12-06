@@ -1,11 +1,11 @@
-import { Directive, ElementRef} from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[showPassword]'
+  selector: '[showPassword]',
 })
 export class ShowPasswordDirective {
   private _shown = false;
- 
+
   constructor(private el: ElementRef) {
     this.setup();
   }
@@ -25,7 +25,8 @@ export class ShowPasswordDirective {
     const parent = this.el.nativeElement.parentNode;
     const span = document.createElement('span');
     span.innerHTML = `Show password`;
-    span.addEventListener('click', (event) => {
+    span.style.cursor = 'pointer';
+    span.addEventListener('click', event => {
       this.toggle(span);
     });
     parent.appendChild(span);

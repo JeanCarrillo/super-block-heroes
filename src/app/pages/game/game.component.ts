@@ -27,7 +27,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.dbService.user,
       {
         nickname: 'Grogory',
-        hero: this.dbService.heroes[3],
+        hero: this.dbService.heroes[5],
       },
       {
         nickname: 'Mayelle',
