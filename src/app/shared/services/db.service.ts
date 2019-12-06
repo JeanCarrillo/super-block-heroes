@@ -15,7 +15,7 @@ export class DbService {
   heroes: any = [];
   capacities: any = [];
 
-  private API_SERVER = 'http://192.168.146.102:3000';
+  private API_SERVER = 'http://localhost:3000';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -85,7 +85,7 @@ export class DbService {
         console.log({ res });
         const decoded = jwt_decode(res.access_token);
         console.log({ decoded });
-        this.http.get(this.API_SERVER + '/users/nickname/' + this.user.nickname).subscribe(res => {
+        this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).subscribe(res => {
           console.log({ res });
           this.setUser(res);
           this.router.navigate(['/home']);
