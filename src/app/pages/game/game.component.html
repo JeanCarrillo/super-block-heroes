@@ -8,7 +8,6 @@
               <app-player-container
                 *ngFor="let player of game.players; index as i"
                 [player]="player"
-                [facingMonster]="game.playerFacingMonster === i"
                 class="col"
               ></app-player-container>
               <app-monster [monster]="game.monster"></app-monster>

@@ -1,28 +1,25 @@
-<div
-  class="row boardMonster m-0"
-  [ngClass]="monster"
-  [ngStyle]="{ 'background-image': getBackgroundImg() }"
->
+<div class="row boardMonster m-0" [style.backgroundImage]="getBackgroundImg()">
   <div
-    [ngStyle]="{ background: getMonsterImg() }"
-    [style.transform]="getDirection()"
+    class="sprite-container"
     [style.left]="getPosition()"
-    [style.height.px]="monster.sprites.height"
-    [style.width.px]="monster.sprites.width"
-    class="monster"
-  ></div>
-  <!-- <img
-    src="assets/img/monsters/{{ monster.name }}.gif"
-    alt="monster"
-    class="monster"
-    [ngStyle]="{ left: getPosition(), transform: getDirection() }"
-  /> -->
+    [ngStyle]="{ filter: getContainerFilterFrozen() }"
+  >
+    <div
+      class="sprite"
+      [ngStyle]="{ filter: getFilterFrozen() }"
+      [style.backgroundImage]="monsterImg"
+      [style.backgroundPosition]="getMonsterBackgroundPosition()"
+      [style.paddingBottom]="paddingBottom"
+      [style.marginTop]="marginTop"
+      [style.transform]="getDirection()"
+    ></div>
+  </div>
 </div>
 <div class="progress">
   <div
     class="progress-bar bg-danger"
     role="progressbar"
-    [ngStyle]="{ width: getLifePercentage() }"
+    [style.width]="getLifePercentage()"
     aria-valuenow="{ monster.currentLife }"
     aria-valuemin="0"
     aria-valuemax="{ monster.startingLife }"

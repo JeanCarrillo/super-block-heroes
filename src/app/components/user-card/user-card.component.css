@@ -1,7 +1,17 @@
-.user-card {
+.userCard {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    background-color: transparent;
+    border: 1px, solid, #495057;
+    border-radius: 20px%;
+}
+.card-title {
+    text-align: center;
+    background-color: #495057;
+    color: white;
+    border-radius: 10px;
 }
 
 img {

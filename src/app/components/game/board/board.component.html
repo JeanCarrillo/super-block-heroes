@@ -1,6 +1,10 @@
-<div class="d-block mx-auto" [style.backgroundColor]="getBackgroundColor()">
+<div class="d-block mx-auto" [style.backgroundColor]="getBoardBackgroundColor()">
   <div class="boardRow" *ngFor="let row of board.tiles; index as i">
-    <div class="boardCol" *ngFor="let block of row; index as j">
+    <div
+      class="boardCol"
+      *ngFor="let block of row; index as j"
+      [style.backgroundColor]="getColBackground(j)"
+    >
       <img *ngIf="getBlock(i, j)" class="block" src="assets/img/blocks/{{ getBlock(i, j) }}.png" />
     </div>
   </div>

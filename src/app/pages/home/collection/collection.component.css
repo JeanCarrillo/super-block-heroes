@@ -1,4 +1,16 @@
-.menucenter{
-    margin: 0 auto;
-    font-size: 5vw;
+.nav-tabs {
+  padding-top: 4vh;
+}
+
+.menucenter {
+  cursor: pointer;
+  margin: 0 auto;
+  font-size: 5vw;
+}
+
+.nav-link {
+  background-color: transparent;
+}
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.3);
 }

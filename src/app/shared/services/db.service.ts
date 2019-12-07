@@ -1,41 +1,43 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DbService {
+  token: string = this.getToken();
   user: any = null;
-  monsters: any = null;
-  heroes: any = null;
-  // monstersUpdated: EventEmitter<any> = new EventEmitter();
+  monsters: any = [];
+  heroes: any = [];
+  capacities: any = [];
 
   private API_SERVER = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   async getHeroes() {
-    await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => (this.heroes = heroes));
-  }
-
-  postUser(user: any): Observable<any> {
-    return this.http.post(this.API_SERVER + '/users', {
-      nickname: user,
-      hero: 3,
-    });
-  }
-
-  updateUser(id: number, data: any) {
-    this.http.put(this.API_SERVER + '/users/' + id, data).subscribe(user => {
-      if (user) {
-        this.setUser(user);
+    await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => {
+      this.heroes = heroes;
+      for (const hero of this.heroes) {
+        hero.sprites = JSON.parse(hero.sprites);
       }
+      console.log('heroes :', this.heroes);
     });
   }
 
-  setUser(user: any) {
-    this.user = user;
+  async getCapacities() {
+    await this.http.get(this.API_SERVER + '/capacities').subscribe(capacities => {
+      console.log({ capacities });
+      this.capacities = capacities;
+      for (let i = 0; i < this.heroes.length; i++) {
+        this.heroes[i].capacity = this.capacities[i];
+      }
+      console.log(this.heroes);
+    });
   }
 
   async getMonsters() {
@@ -44,13 +46,94 @@ export class DbService {
       for (const monster of this.monsters) {
         monster.sprites = JSON.parse(monster.sprites);
       }
-      // this.monstersUpdated.emit();
+      console.log(this.monsters);
     });
-    // return this.monsters;
   }
 
   getUser(nickname: string): Observable<any> {
     return of(this.http.get(this.API_SERVER + '/users/nickname/' + nickname));
+  }
+
+  async register(user: any) {
+    this.user = user;
+    await this.http
+      .post(this.API_SERVER + '/auth/register', {
+        nickname: this.user.nickname,
+        password: this.user.password,
+        email: this.user.email,
+        hero: 1,
+      })
+      .subscribe(
+        async (res: any) => {
+          if (res.email && res.nickname) {
+            this.login(this.user);
+            return;
+          }
+        },
+        err => window.alert('Account already exists')
+      );
+  }
+
+  login(user: any) {
+    this.user = user;
+    this.http
+      .post(this.API_SERVER + '/auth/login', {
+        password: this.user.password,
+        email: this.user.email,
+        nickname: this.user.nickname,
+      })
+      .subscribe(async (res: any) => {
+        if (!res.access_token) {
+          return;
+        }
+        localStorage.setItem('token', res.access_token);
+        // this.token = res.access_token;
+        console.log({ res });
+        const decoded = jwt_decode(res.access_token);
+        console.log({ decoded });
+        this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).subscribe(res => {
+          console.log({ res });
+          this.setUser(res);
+          this.router.navigate(['/home']);
+        });
+        // await this.setUser(res);
+      });
+  }
+
+  updateUser(data: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      }),
+    };
+    this.http.put(this.API_SERVER + '/users/' + this.user.id, data, httpOptions).subscribe(user => {
+      if (user) {
+        this.setUser(user);
+      }
+    });
+  }
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  setUser(user: any) {
+    // TEMP UNTIL BACKEND MANY TO MANY RESOLVED
+    const heroId = user.hero.id;
+    let capacity;
+    for (const cap of this.capacities) {
+      if (cap.id === heroId) {
+        capacity = cap;
+        break;
+      }
+    }
+    user.hero.capacity = capacity;
+    // END TEMP
+    user.hero.sprites = JSON.parse(user.hero.sprites);
+    user.inventory = JSON.parse(user.inventory);
+    this.user = user;
+    console.log({ user });
   }
 
   postGame(game: any): void {
@@ -68,7 +151,7 @@ export class DbService {
       : 10;
     console.log(goldGained);
     // this.http.post(this.API_SERVER + '/games', data);
-    this.updateUser(this.user.id, {
+    this.updateUser({
       gold: this.user.gold + goldGained,
     });
   }

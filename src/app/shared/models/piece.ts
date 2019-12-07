@@ -11,15 +11,22 @@ export class Piece {
   pieceIndex: number;
   color: any;
 
-  constructor(x: number, y: number) {
+  constructor(x: number, y: number, type?: string) {
     this.x = x;
     this.y = y;
     this.rotationIndex = 0;
     this.color = rdmCeil(7);
     // random piece index, T = 1, Z = 2 etc.
-    this.pieceIndex = rdmFloor(pieces.length);
+    if (type) {
+      for (let i = 0; i < pieces.length; i++) {
+        if (pieces[i].type === type) {
+          this.pieceIndex = i;
+        }
+      }
+    } else {
+      this.pieceIndex = rdmFloor(pieces.length);
+    }
     this.createShape();
-    // type (string), (example: "J")
   }
 
   public rotate(num: number) {

@@ -14,7 +14,9 @@ export class Game {
 
   constructor(monster: any, users: any) {
     for (let i = 0; i < users.length; i += 1) {
-      this.players.push(new Player(users[i], i, this.handlePlayerAction));
+      this.players.push(
+        new Player(users[i], i, this.handlePlayerAction, this.handlePlayerCapacity)
+      );
     }
     this.monster = new Monster(monster, this.handleMonsterAction);
 
@@ -49,6 +51,9 @@ export class Game {
             this.players[i].dropCurrentBlocks();
           }
         }
+        if (key === KEYS[i].CAPACITY) {
+          this.players[i].useCapacity();
+        }
       }
     }
   }
@@ -56,23 +61,94 @@ export class Game {
   // Player callback
   // If a player scores, check monster position and handle damage if monster is within player range
   handlePlayerAction = (playerIndex: number, score: number): void => {
+    let goldGained = score;
+    if (this.players[playerIndex].currentBonus.goldRush.active) {
+      goldGained *= 2;
+      // TO DO : RETHINK HOW GOLD IS GAINED
+    }
     if (
-      this.monster.x > this.playersPositions[playerIndex].min &&
-      this.monster.x < this.playersPositions[playerIndex].max
+      (this.monster.x > this.playersPositions[playerIndex].min &&
+        this.monster.x < this.playersPositions[playerIndex].max) ||
+      // Special case if player has shuriken fury buff: attack from anywhere
+      this.players[playerIndex].currentBonus.shurikenFury.active
     ) {
-      this.monster.takeDamage(score);
+      this.players[playerIndex].hero.changeStatus('Attack');
+      this.monster.handleDamage(score);
+    }
+  };
+
+  handlePlayerCapacity = (playerIndex: number, capacity: string): void => {
+    this.players[playerIndex].hero.changeStatus('Throw');
+    switch (capacity) {
+      case 'Frost Blast': {
+        this.monster.handleCapacity(capacity);
+        break;
+      }
+      case 'Taunt': {
+        // isHeadingTo = middle of player board
+        const isHeadingTo =
+          this.playersPositions[playerIndex].min +
+          (this.playersPositions[playerIndex].max - this.playersPositions[playerIndex].min) / 2;
+        this.monster.handleCapacity(capacity, { isHeadingTo });
+        break;
+      }
+      case 'Gold Rush': {
+        for (const player of this.players) {
+          player.currentBonus.goldRush.active = true;
+          player.currentBonus.goldRush.startTime = Date.now();
+        }
+        break;
+      }
+      case 'Holy Blocks': {
+        this.players[this.playerFacingMonster].changeBlock();
+        break;
+      }
+      case "King's Blocks": {
+        this.players[this.playerFacingMonster].capacityTime =
+          Date.now() + this.players[this.playerFacingMonster].capacityCooldown;
+        break;
+      }
+      case "Monk's Blessing": {
+        let mostInDangerPlayer = -1;
+        let lowerBlock = 99999;
+        for (let i = 0; i < this.players.length; i++) {
+          for (let j = 0; j < this.players[i].board.tiles.length; j++) {
+            // tslint:disable-next-line: prefer-for-of
+            for (let k = 0; k < this.players[i].board.tiles[j].length; k++) {
+              if (this.players[i].board.tiles[j][k] !== 0 && j < lowerBlock) {
+                lowerBlock = j;
+                mostInDangerPlayer = i;
+              }
+            }
+          }
+        }
+        this.players[mostInDangerPlayer].deleteRows([19, 18]);
+        break;
+      }
+      default:
+        break;
     }
   };
 
   // Monster callback
-  handleMonsterAction = (): void => {
-    for (let i = 0; i < this.players.length; i++) {
-      if (
-        this.monster.x > this.playersPositions[i].min &&
-        this.monster.x < this.playersPositions[i].max
-      ) {
-        this.players[i].loopDelay -= 50;
+  handleMonsterAction = (act?: boolean) => {
+    // Monster action
+    if (act) {
+      for (let i = 0; i < this.players.length; i++) {
+        if (
+          this.monster.x > this.playersPositions[i].min &&
+          this.monster.x < this.playersPositions[i].max
+        ) {
+          this.players[i].hero.changeStatus('GetHit');
+          this.players[i].loopDelay -= 50;
+        }
       }
+    } else {
+      // Monster is getting info about player facing him: if dead returns false;
+      if (this.players[this.playerFacingMonster].gameOver) {
+        return false;
+      }
+      return true;
     }
   };
 
@@ -84,6 +160,7 @@ export class Game {
         this.monster.x < this.playersPositions[i].max
       ) {
         return i;
+      } else {
       }
     }
     return -1;
@@ -91,20 +168,29 @@ export class Game {
 
   loop(): void {
     let defeat = true;
-    for (const player of this.players) {
-      player.loop();
-      if (!player.gameOver) {
+
+    this.playerFacingMonster = this.whichPlayerHasMonster();
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.playerFacingMonster === i) {
+        this.players[i].facingMonster = true;
+      } else {
+        this.players[i].facingMonster = false;
+      }
+      this.players[i].loop();
+      if (!this.players[i].gameOver) {
         defeat = false;
       }
     }
+
     if (defeat) {
       this.defeat = true;
     }
+
     if (this.monster.currentLife > 0) {
       this.monster.move();
     } else {
       this.victory = true;
     }
-    this.playerFacingMonster = this.whichPlayerHasMonster();
   }
 }

@@ -12,14 +12,18 @@ export class Monster {
   handleMonsterAction: any;
   animationTime: number;
   animationDelay: number;
-  spriteX: number;
-  spriteY: number;
+  sprite: number;
   sprites: any;
   attackTime: number;
   attackDelay: number;
   attackAnimationTime: number;
   attackAnimationDelay: number;
   status: string;
+  frozenDelay: number;
+  frozenTime: number;
+  isFrozen: boolean;
+  isTaunt: boolean;
+  isHeadingTo: number;
 
   constructor(monster: any, handleMonsterAction: any) {
     this.handleMonsterAction = handleMonsterAction;
@@ -35,36 +39,50 @@ export class Monster {
     this.movingDirection = 1; // 1 = right, -1 = left
     // Moving init
     this.moveTime = Date.now();
-    this.moveDelay = 80; // monster moves every this.moveDelay ms
-    this.movingSpeed = monster.speed; // one monster move = this.movingSpeed percent
+    this.moveDelay = 15; // monster moves every this.moveDelay ms
+    // this.movingSpeed = monster.speed; // one monster move = this.movingSpeed percent
+    this.movingSpeed = 0.1; // one monster move = this.movingSpeed percent
     // Animation init
     this.animationTime = Date.now();
-    this.animationDelay = 200;
+    this.animationDelay = 40;
     this.sprites = monster.sprites;
-    this.changeStatus('moving');
+    this.changeStatus('Walk');
     // Attack init
     this.attackTime = Date.now();
     this.attackDelay = 10000;
     this.attackAnimationTime = Date.now();
     this.attackAnimationDelay = 2000;
+    // Frozen init
+    this.frozenTime = null;
+    this.frozenDelay = 2000;
+    this.isFrozen = false;
+    this.isTaunt = false;
   }
 
   public move() {
     const now = Date.now();
-    if (now - this.moveTime > this.moveDelay && this.status === 'moving') {
+    // Handle freeze capacity timer
+    if (this.isFrozen) {
+      this.attackTime = Date.now();
+      if (now - this.frozenTime > this.frozenDelay) {
+        this.isFrozen = false;
+      }
+      return;
+    }
+    if (now - this.moveTime > this.moveDelay && this.status === 'Walk') {
       this.moveTime = Date.now();
       // right
       if (this.movingDirection === 1 && this.x < 100) {
         this.x += this.movingSpeed;
       }
-      if (this.x >= 100) {
+      if (this.x >= 100 || (this.isTaunt && this.x >= this.isHeadingTo)) {
         this.movingDirection = -1;
       }
       // left
       if (this.movingDirection === -1 && this.x > 0) {
         this.x -= this.movingSpeed;
       }
-      if (this.x <= 0) {
+      if (this.x <= 0 || (this.isTaunt && this.x <= this.isHeadingTo)) {
         this.movingDirection = 1;
       }
     }
@@ -72,41 +90,74 @@ export class Monster {
       this.animationTime = Date.now();
       this.animate();
     }
-    if (now - this.attackAnimationTime > this.attackAnimationDelay && this.status !== 'moving') {
-      this.changeStatus('moving');
+    if (now - this.attackAnimationTime > this.attackAnimationDelay && this.status === 'Attack') {
+      this.changeStatus('Walk');
     }
     if (now - this.attackTime > this.attackDelay) {
-      this.attackTime = Date.now();
-      this.attackAnimationTime = Date.now();
-      this.changeStatus('attacking');
-      this.attack();
+      // Taunt check
+      if (this.isTaunt && this.x >= this.isHeadingTo - 1 && this.x <= this.isHeadingTo + 1) {
+        this.isTaunt = false;
+      }
+      if (!this.isTaunt) {
+        this.attack();
+      }
     }
   }
 
   private attack() {
     // TO DO: something depending on monster
     // need to update database
-    this.handleMonsterAction();
+    const isPlayerAlive = this.handleMonsterAction();
+    if (isPlayerAlive) {
+      this.attackTime = Date.now();
+      this.attackAnimationTime = Date.now();
+      this.changeStatus('Attack');
+      this.handleMonsterAction(true);
+    }
   }
 
   private animate() {
-    if (this.spriteX < this.sprites[this.status].xMax) {
-      this.spriteX += 1;
+    if (this.sprite < this.sprites[this.status].end) {
+      this.sprite += 1;
     } else {
-      // if (this.status === 'attacking') {
-      //   this.changeStatus('moving');
-      // }
-      this.spriteX = this.sprites[this.status].xMin;
+      if (this.status === 'Death') {
+        return;
+      }
+      if (this.status === 'GetHit') {
+        this.changeStatus('Walk');
+      }
+      this.sprite = this.sprites[this.status].start;
     }
   }
 
   private changeStatus(status: string) {
     this.status = status;
-    this.spriteX = this.sprites[this.status].xMin;
-    this.spriteY = this.sprites[this.status].y;
+    this.sprite = this.sprites[this.status].start;
   }
 
-  public takeDamage(hitpoints: number) {
+  public handleDamage(hitpoints: number) {
     this.currentLife -= hitpoints;
+    if (this.currentLife > 0) {
+      this.changeStatus('GetHit');
+    } else {
+      this.changeStatus('Death');
+    }
+  }
+
+  public handleCapacity(capacity: string, options?: any) {
+    switch (capacity) {
+      case 'Frost Blast': {
+        this.frozenTime = Date.now();
+        this.isFrozen = true;
+        break;
+      }
+      case 'Taunt': {
+        this.isTaunt = true;
+        this.isHeadingTo = options.isHeadingTo;
+        break;
+      }
+      default:
+        break;
+    }
   }
 }

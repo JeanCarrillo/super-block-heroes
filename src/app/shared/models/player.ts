@@ -1,39 +1,76 @@
 // tslint:disable: prefer-for-of
-import { Board } from "./board";
-import { Block } from "./block";
-import { Piece } from "./piece";
+import { Board } from './board';
+import { Block } from './block';
+import { Piece } from './piece';
+import { Hero } from './hero';
 
 export class Player {
   isFastForwarding = false;
   gameOver = false;
-  name: string;
-  score: number;
-  board: Board;
   rowNumbers = 10;
   colNumbers = 20;
+  name: string;
+  score: number;
+  status: string;
+  board: Board;
   currentBlocks: Block[];
   currentPiece: Piece;
   loopTime: number;
   loopDelay: number;
   playerNum: number;
   handlePlayerAction: any;
+  handlePlayerCapacity: any;
+  capacity: string;
+  capacityCooldown: number;
+  capacityTime: number;
+  // Used to display capacity cooldown icon
+  capacityCooldownPercentage: number;
+  currentBonus: any = {
+    shurikenFury: {
+      active: false,
+      startTime: Date.now(),
+      duration: 10000,
+    },
+    goldRush: {
+      active: false,
+      startTime: Date.now(),
+      duration: 10000,
+    },
+  };
+  nextPiece: string = null;
+  hero: Hero;
+  facingMonster = false;
 
-  constructor(user: any, playerNum: number, handlePlayerAction: any) {
+  constructor(user: any, playerNum: number, handlePlayerAction: any, handlePlayerCapacity: any) {
     this.handlePlayerAction = handlePlayerAction;
+    this.handlePlayerCapacity = handlePlayerCapacity;
+    this.capacity = user.hero.capacity.name;
+    this.capacityCooldown = user.hero.capacity.cooldown;
+    this.capacityTime = Date.now();
     this.playerNum = playerNum;
     this.loopTime = Date.now();
     this.loopDelay = 300;
     this.name = user.nickname;
     this.score = 0;
     this.board = new Board(this.rowNumbers, this.colNumbers);
+    this.hero = new Hero(user.hero);
     this.currentBlocks = [];
   }
 
   public loop(): void {
+    this.hero.facingMonster = this.facingMonster;
+    this.hero.move();
     if (this.isFastForwarding) {
       return;
     }
     const now = Date.now();
+    this.capacityCooldownPercentage = ((now - this.capacityTime) * 100) / this.capacityCooldown;
+    const bonuses = Object.keys(this.currentBonus);
+    for (const bonus of bonuses) {
+      if (now - this.currentBonus[bonus].startTime > this.currentBonus[bonus].duration) {
+        this.currentBonus[bonus].active = false;
+      }
+    }
     if (now - this.loopTime > this.loopDelay && !this.gameOver) {
       this.loopTime = Date.now();
       if (!this.currentPiece) {
@@ -59,7 +96,12 @@ export class Player {
   // => then recreates it with individual blocks (added to currentBlocks)
   // Piece and currentBlocks are two different entities sharing the same coordinates and updated at the same times
   private createPiece(): void {
-    this.currentPiece = new Piece(5, 0);
+    if (this.nextPiece) {
+      this.currentPiece = new Piece(5, 0, this.nextPiece);
+      this.nextPiece = null;
+    } else {
+      this.currentPiece = new Piece(5, 0);
+    }
     this.currentBlocks = [];
     for (let i = 0; i < this.currentPiece.shape.length; i++) {
       for (let j = 0; j < this.currentPiece.shape[i].length; j++) {
@@ -85,8 +127,7 @@ export class Player {
         const color = this.currentPiece.shape[i][j];
         if (
           color !== 0 &&
-          this.board.tiles[this.currentPiece.y + j][this.currentPiece.x + i] !==
-            0
+          this.board.tiles[this.currentPiece.y + j][this.currentPiece.x + i] !== 0
         ) {
           rotationCollide = true;
         }
@@ -173,7 +214,7 @@ export class Player {
 
   // delete all lines in the rowsToDelete array from the board.tiles matrix
   // => replace them by empty lines (filled by 0) at the 0 index of the matrix (top)
-  private deleteRows(rowsToDelete: number[]): void {
+  public deleteRows(rowsToDelete: number[]): void {
     const emptyRow = new Array(this.rowNumbers).fill(0);
     for (let i = 0; i < rowsToDelete.length; i++) {
       this.board.tiles.splice(rowsToDelete[i], 1);
@@ -204,6 +245,7 @@ export class Player {
   }
 
   private handleGameOver(): void {
+    this.hero.changeStatus('Death');
     this.currentBlocks = [];
     this.currentPiece = null;
     this.gameOver = true;
@@ -219,6 +261,26 @@ export class Player {
       return true;
     }
     return false;
+  }
+
+  public useCapacity(): void {
+    const now = Date.now();
+    if (now - this.capacityTime > this.capacityCooldown) {
+      this.capacityTime = Date.now();
+      if (this.capacity === 'Shuriken Fury') {
+        this.currentBonus.shurikenFury.active = true;
+        this.currentBonus.shurikenFury.startTime = Date.now();
+      } else {
+        this.handlePlayerCapacity(this.playerNum, this.capacity);
+      }
+    }
+  }
+
+  // Used for Holy Block capacity, changes to I piece
+  public changeBlock(): void {
+    this.currentBlocks = [];
+    this.currentPiece = null;
+    this.nextPiece = 'I';
   }
 
   // Linked to Keyboard events : actions
@@ -280,6 +342,4 @@ export class Player {
       this.isFastForwarding = false;
     }
   }
-
-  private instantDrop() {}
 }

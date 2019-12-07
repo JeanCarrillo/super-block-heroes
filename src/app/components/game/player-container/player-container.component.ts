@@ -8,7 +8,6 @@ import { Player } from '../../../shared/models/player';
 })
 export class PlayerContainerComponent implements OnInit {
   @Input() player: Player;
-  @Input() facingMonster: boolean;
   constructor() {}
 
   ngOnInit() {}

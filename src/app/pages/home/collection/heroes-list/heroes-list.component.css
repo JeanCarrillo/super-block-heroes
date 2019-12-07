@@ -1,15 +1,35 @@
-.card-img {
-  width: 8vw;
-  height: auto;
+.heroListCard {
+  padding: 0;
+  border: 0px;
+  background: transparent;
+}
+.heroListName {
+  margin: 0 0 1.5rem 0;
+}
+.heroName {
+  margin: 0;
+}
+.heroListBody {
+  flex: 0;
+  padding: 0;
+}
+.heroCapacity {
+  margin: 0;
+}
+.heroListDescription {
+  margin: 2rem 0 0 0;
+}
+.heroCapacity {
+  margin: 0;
+}
+.heroListFooter {
+  padding: 0;
+  border: 0px;
+  background-color: transparent;
+}
+.capacityProperty {
+  margin-bottom: 0;
+}
+.buy-button {
   cursor: pointer;
-}
-
-.selectedHero {
-  border: 3px solid yellow;
-  border-radius: 20px;
-}
-
-.borders {
-  /* border-right: 1px solid white;
-  border-left: 1px solid white; */
 }
