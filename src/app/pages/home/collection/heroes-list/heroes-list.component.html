@@ -54,6 +54,7 @@
         {{ selectedHero.price }} gold
         <button
           type="button"
+          class="buy-button"
           [disabled]="!canBuy(selectedHero.price)"
           (click)="buyHero(selectedHero)"
         >

@@ -8,13 +8,13 @@
     placeholder="Nickname"
     (keyup.enter)="signin()"
   />
-  <input
+  <!-- <input
     type="text"
     [(ngModel)]="user.email"
     class="input"
     placeholder="user@email.com"
     (keyup.enter)="signin()"
-  />
+  /> -->
   <input
     type="password"
     [(ngModel)]="user.password"
@@ -28,8 +28,8 @@
     <span>If you want to play to super Block heroes please sign up here: </span>
     <app-button text="Sign Up" url="/sign-up" buttonType="login"></app-button>
   </div>
-  <div>
+  <!-- <div>
     <span>Forgot your pasword? : </span>
     <app-button text="Here" (click)="forgotPW()"></app-button>
-  </div>
+  </div> -->
 </div>

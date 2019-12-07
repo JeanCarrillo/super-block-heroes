@@ -30,3 +30,6 @@
 .capacityProperty {
   margin-bottom: 0;
 }
+.buy-button {
+  cursor: pointer;
+}
