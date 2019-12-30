@@ -1,35 +1,56 @@
 .heroListCard {
-  padding: 0;
-  border: 0px;
-  background: transparent;
+    padding: 0;
+    border: 0px;
+    background: transparent;
 }
+
 .heroListName {
-  margin: 0 0 1.5rem 0;
+    margin: 0 0 1.5rem 0;
 }
+
 .heroName {
-  margin: 0;
+    margin: 0;
 }
+
 .heroListBody {
-  flex: 0;
-  padding: 0;
+    flex: 0;
+    padding: 0;
 }
+
 .heroCapacity {
-  margin: 0;
+    margin: 0;
 }
+
 .heroListDescription {
-  margin: 2rem 0 0 0;
+    margin: 2rem 0 0.5rem 0;
 }
+
 .heroCapacity {
-  margin: 0;
+    margin: 0;
 }
+
 .heroListFooter {
-  padding: 0;
-  border: 0px;
-  background-color: transparent;
+    padding: 0;
+    border: 0px;
+    background-color: transparent;
 }
+
 .capacityProperty {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
+
 .buy-button {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+.heroesPrice {
+    margin-top: 2rem;
+}
+
+.heroListCard {
+    padding: 0.5rem;
+    background-color: transparent;
+    border: 1px, solid, #495057;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }

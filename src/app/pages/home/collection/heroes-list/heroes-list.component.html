@@ -42,15 +42,18 @@
         </div>
       </div>
       <div class="card-footer heroListFooter text-muted">
-        <p class="capacityProperty">Cooldown : {{ selectedHero.capacity.cooldown }}</p>
+        <p class="capacityProperty">Cooldown : {{ selectedHero.capacity.cooldown }} s</p>
       </div>
       <div
         class="card-footer heroListFooter text-muted"
         *ngIf="selectedHero.capacity.duration !== 0"
       >
-        <p class="capacityProperty">Duration : {{ selectedHero.capacity.duration }}</p>
+        <p class="capacityProperty">Duration : {{ selectedHero.capacity.duration }} s</p>
       </div>
-      <div *ngIf="!isOwned(selectedHero.id)">
+      <div
+        class="heroesPrice"
+        *ngIf="!isOwned(selectedHero.id)"
+      >
         {{ selectedHero.price }} gold
         <button
           type="button"
