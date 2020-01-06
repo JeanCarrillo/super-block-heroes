@@ -1,1 +1,32 @@
-<p>ranking works!</p>
+<div class="container-fluid">
+    <div class="row justify-content-between">
+      <div class="col-4">
+        <app-logo></app-logo>
+      </div>
+      <div class="col-4">
+        <div class="user-card">
+          <app-user-card></app-user-card>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Player</th>
+                    <th scope="col">Club</th>
+                    <th scope="col">Highscore</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users; index as i">
+                    <th scope="row">1</th>
+                    <td>{{ user.nickname }}</td>
+                    <td>{{ club.name }}</td>
+                    <td>{{ user.highscore }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
