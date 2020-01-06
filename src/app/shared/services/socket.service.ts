@@ -6,13 +6,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SocketService {
+  room = {
+    players: [],
+    messages: [],
+    game: {},
+    started: false,
+  };
+
   constructor(private socket: Socket) {}
 
-  sendMessage(message: any) {
-    this.socket.emit('message', message);
+  sendEvent(event: string, data?: any) {
+    this.socket.emit(event, data);
   }
 
   getMessage(): Observable<any> {
     return this.socket.fromEvent('message');
+  }
+
+  getRoom(): void {
+    this.socket.fromEvent('room').subscribe((room: any) => {
+      console.log({ room });
+      this.room = room;
+    });
   }
 }

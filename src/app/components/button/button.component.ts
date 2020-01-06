@@ -1,13 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { type } from 'os';
-import { logging } from 'protractor';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css'],
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
   @Input() buttonType: string;
   @Input() size = 1;
   @Input() url: string;
@@ -16,8 +14,6 @@ export class ButtonComponent implements OnInit {
   @Input() callback: any = () => {};
 
   constructor() {}
-
-  ngOnInit() {}
 
   private textSize(): number {
     return this.selected ? this.size * 1.3 : this.size;

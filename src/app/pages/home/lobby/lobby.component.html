@@ -5,7 +5,11 @@
     </div>
     <div class="col-4">
       <div class="user-card">
-        <app-user-card></app-user-card>
+        <app-user-card
+          [nickname]="authService.user.nickname"
+          [gold]="authService.user.gold"
+          [hero]="authService.user.hero"
+        ></app-user-card>
       </div>
     </div>
   </div>

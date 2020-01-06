@@ -1,7 +1,11 @@
 <div class="container-fluid">
   <div class="row mt-5">
     <div class="col-2 text-center">
-      <app-user-card></app-user-card>
+      <app-user-card
+        [nickname]="authService.user.nickname"
+        [gold]="authService.user.gold"
+        [hero]="authService.user.hero"
+      ></app-user-card>
     </div>
     <div class="col-7 borders">
       <div class="row">
@@ -50,10 +54,7 @@
       >
         <p class="capacityProperty">Duration : {{ selectedHero.capacity.duration }} s</p>
       </div>
-      <div
-        class="heroesPrice"
-        *ngIf="!isOwned(selectedHero.id)"
-      >
+      <div class="heroesPrice" *ngIf="!isOwned(selectedHero.id)">
         {{ selectedHero.price }} gold
         <button
           type="button"

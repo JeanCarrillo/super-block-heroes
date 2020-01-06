@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
-import { SocketService } from '../../../shared/services/socket.service';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 // import { Monster } from 'src/app/shared/models/monster';
 import { ShowPasswordDirective } from '../show-password.directive';
@@ -9,7 +8,7 @@ import { ShowPasswordDirective } from '../show-password.directive';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'],
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
   user = {
     nickname: '',
     email: '',
@@ -18,12 +17,7 @@ export class SignInComponent implements OnInit {
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
 
-  constructor(private authService: AuthService, private socketService: SocketService) {}
-
-  ngOnInit() {
-    this.socketService.sendMessage('hello');
-    this.socketService.getMessage().subscribe(response => console.log({ response }));
-  }
+  constructor(private authService: AuthService) {}
 
   forgotPW = () => {
     window.alert('This feature will be enable soon!');
