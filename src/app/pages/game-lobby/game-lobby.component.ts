@@ -8,10 +8,17 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./game-lobby.component.css'],
 })
 export class GameLobbyComponent implements OnInit {
+  chatInput = '';
+
   constructor(private authService: AuthService, private socketService: SocketService) {}
 
   ngOnInit() {
     this.socketService.sendEvent('join', this.authService.user);
     this.socketService.getRoom();
+  }
+
+  submitChat() {
+    this.socketService.sendEvent('chat', this.chatInput);
+    this.chatInput = '';
   }
 }

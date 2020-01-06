@@ -4,3 +4,14 @@
   [gold]="player.gold"
   [hero]="player.hero"
 ></app-user-card>
+<div>
+  <p *ngFor="let message of socketService.room.messages">
+    {{ message.author }} : {{ message.text }}
+  </p>
+  <input
+    type="text"
+    [(ngModel)]="chatInput"
+    placeholder="Type in to chat"
+    (keyup.enter)="submitChat()"
+  />
+</div>
