@@ -37,6 +37,7 @@ import { PlayerContainerComponent } from './components/game/player-container/pla
 
 // page components
 import { GameComponent } from './pages/game/game.component';
+import { GameLobbyComponent } from './pages/game-lobby/game-lobby.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LobbyComponent } from './pages/home/lobby/lobby.component';
 import { MyaccountComponent } from './pages/home/myaccount/myaccount.component';
@@ -89,6 +90,7 @@ const socketConfig: SocketIoConfig = {
     WelcomeComponent,
     SignInComponent,
     ShowPasswordDirective,
+    GameLobbyComponent,
   ],
   imports: [
     BrowserModule,

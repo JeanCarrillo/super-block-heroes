@@ -11,11 +11,13 @@ import { LobbyComponent } from './pages/home/lobby/lobby.component';
 import { WelcomeComponent } from './pages/authentification/welcome/welcome.component';
 import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
+import { GameLobbyComponent } from './pages/game-lobby/game-lobby.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'sign-up', component:  SignUpComponent},
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-in', component: SignInComponent },
+  { path: 'game-lobby', component: GameLobbyComponent },
   {
     path: 'home',
     component: HomeComponent,
