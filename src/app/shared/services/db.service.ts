@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import server from '../constants/server';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ export class DbService {
   heroes: any = [];
   capacities: any = [];
 
-  private API_SERVER = 'http://localhost:3000';
+  private API_SERVER = `http://${server.ip}:${server.port}`;
 
   constructor(private http: HttpClient) {}
 
