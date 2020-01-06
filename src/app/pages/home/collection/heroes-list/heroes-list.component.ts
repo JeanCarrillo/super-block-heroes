@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DbService } from '../../../../shared/services/db.service';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { DbService } from 'src/app/shared/services/db.service';
 import { Hero } from 'src/app/shared/models/hero';
 
 @Component({
@@ -8,10 +9,10 @@ import { Hero } from 'src/app/shared/models/hero';
   styleUrls: ['./heroes-list.component.css'],
 })
 export class HeroesListComponent {
-  selectedHero: Hero = this.dbService.user.hero;
+  selectedHero: Hero = this.authService.user.hero;
   availableHeroes: Hero[];
 
-  constructor(private dbService: DbService) {}
+  constructor(private dbService: DbService, private authService: AuthService) {}
 
   getFilter(heroId: number): string {
     return this.isOwned(heroId) ? '' : 'grayscale(1)';
@@ -26,21 +27,21 @@ export class HeroesListComponent {
   }
 
   setUserHero(hero: Hero): void {
-    this.dbService.updateUser({
+    this.authService.updateUser({
       hero,
     });
   }
 
   canBuy(price: number): boolean {
-    return this.dbService.user.gold > price;
+    return this.authService.user.gold > price;
   }
 
   buyHero(hero: Hero): void {
-    const user = this.dbService.user;
+    const user = this.authService.user;
     user.gold = user.gold - hero.price;
     user.inventory.heroes.push(hero.id);
     console.log({ user });
-    this.dbService.updateUser({
+    this.authService.updateUser({
       gold: user.gold,
       inventory: JSON.stringify(user.inventory),
     });
@@ -48,7 +49,7 @@ export class HeroesListComponent {
 
   isOwned(heroId: number): boolean {
     let owned;
-    for (const i of this.dbService.user.inventory.heroes) {
+    for (const i of this.authService.user.inventory.heroes) {
       if (i === heroId) {
         owned = true;
       }

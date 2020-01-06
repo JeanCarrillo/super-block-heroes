@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbService } from '../../../shared/services/db.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-lobby',
@@ -7,9 +7,9 @@ import { DbService } from '../../../shared/services/db.service';
   styleUrls: ['./lobby.component.css'],
 })
 export class LobbyComponent implements OnInit {
-  constructor(private dbService: DbService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    console.log(this.dbService.user);
+    console.log(this.authService.user);
   }
 }

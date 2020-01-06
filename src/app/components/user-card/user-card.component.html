@@ -1,7 +1,7 @@
 <div class="card userCard">
-    <div class="card-body">
-      <h5 class="card-title">{{ dbService.user.nickname }}</h5>
-      <h4 class="card-text">💰{{ dbService.user.gold }}</h4>
-    </div>
-    <app-hero-card [inputHero]="dbService.user.hero"></app-hero-card>
+  <div class="card-body">
+    <h5 class="card-title">{{ authService.user.nickname }}</h5>
+    <h4 class="card-text">💰{{ authService.user.gold }}</h4>
   </div>
+  <app-hero-card [inputHero]="authService.user.hero"></app-hero-card>
+</div>

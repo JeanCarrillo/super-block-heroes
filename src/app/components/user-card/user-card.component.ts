@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbService } from '../../shared/services/db.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-user-card',
@@ -7,7 +7,7 @@ import { DbService } from '../../shared/services/db.service';
   styleUrls: ['./user-card.component.css'],
 })
 export class UserCardComponent implements OnInit {
-  constructor(private dbService: DbService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 }

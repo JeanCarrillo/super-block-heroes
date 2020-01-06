@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DbService } from '../../../shared/services/db.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 // import { Monster } from 'src/app/shared/models/monster';
@@ -18,7 +18,7 @@ export class SignInComponent implements OnInit {
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
 
-  constructor(private dbService: DbService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -27,7 +27,7 @@ export class SignInComponent implements OnInit {
   };
 
   signin = async () => {
-    await this.dbService.login(this.user);
+    await this.authService.login(this.user);
   };
 
   showPassword = () => {
