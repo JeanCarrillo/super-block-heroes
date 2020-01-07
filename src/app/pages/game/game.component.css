@@ -39,3 +39,16 @@ app-player-container {
   display: flex;
   flex-grow: 1;
 }
+
+.otherPlayers {
+  display: flex;
+}
+
+.playerName {
+  margin: 1rem;
+  width: 50%;
+}
+
+.inviteBtn {
+  width: 50%;
+}
