@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AppComponent } from './app.component';
 
+// server ip/port
+import server from './shared/constants/server';
+
 // authentification
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
@@ -34,6 +37,7 @@ import { PlayerContainerComponent } from './components/game/player-container/pla
 
 // page components
 import { GameComponent } from './pages/game/game.component';
+import { GameLobbyComponent } from './pages/game-lobby/game-lobby.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LobbyComponent } from './pages/home/lobby/lobby.component';
 import { MyaccountComponent } from './pages/home/myaccount/myaccount.component';
@@ -49,10 +53,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WelcomeComponent } from './pages/authentification/welcome/welcome.component';
 import { ShowPasswordDirective } from './pages/authentification/show-password.directive';
 
-const serverURL = `http://192.168.146.102`;
-const serverPort = 5000;
 const socketConfig: SocketIoConfig = {
-  url: `${serverURL}:${serverPort}`,
+  url: `${server.ip}:${server.port}`,
   options: {},
 };
 
@@ -88,6 +90,7 @@ const socketConfig: SocketIoConfig = {
     WelcomeComponent,
     SignInComponent,
     ShowPasswordDirective,
+    GameLobbyComponent,
   ],
   imports: [
     BrowserModule,

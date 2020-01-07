@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="col-3 text-center">
+    <div class="col-3 text-center monsterListCard">
       <div class="row" class="monsterName">
         <div class="col">
           <h2 *ngIf="dbService.monsters[selectedMonster]">
@@ -22,12 +22,14 @@
           </h2>
         </div>
       </div>
-      <div class="row" class="monsterCapacities">
-        <div class="col">
-          <h4 *ngIf="dbService.monsters[selectedMonster]">
+      <div class="row">
+        <div class="col monsterCapacities">
+          <p *ngIf="dbService.monsters[selectedMonster]">
             HP : {{ dbService.monsters[selectedMonster].hp }}
+          </p>
+          <p *ngIf="dbService.monsters[selectedMonster]">
             Speed : {{ dbService.monsters[selectedMonster].speed }}
-          </h4>
+          </p>
         </div>
       </div>
     </div>
