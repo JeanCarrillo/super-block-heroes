@@ -18,12 +18,4 @@ export class Board {
       }
     }
   }
-
-  // generateNewRow() {
-  //   const row = [];
-  //   for (let i = 0; i < this.width; i += 1) {
-  //     row[i].push(0);
-  //   }
-  //   return row;
-  // }
 }

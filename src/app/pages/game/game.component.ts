@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { DbService } from '../../shared/services/db.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SocketService } from 'src/app/shared/services/socket.service';
 
 import { Game } from '../../shared/models/game';
 
@@ -18,28 +19,43 @@ export class GameComponent implements OnInit, OnDestroy {
     this.game.handleKeys(event.key);
   }
 
-  constructor(private dbService: DbService, private authService: AuthService) {}
+  constructor(
+    private dbService: DbService,
+    private authService: AuthService,
+    private socketService: SocketService
+  ) {}
 
   ngOnInit() {
+    // TODO
     const rdmMonster = this.dbService.monsters[
       Math.floor(Math.random() * this.dbService.monsters.length)
     ];
-    this.game = new Game(rdmMonster, [
-      this.authService.user,
-      {
-        nickname: 'Grogory',
-        hero: this.dbService.heroes[5],
-      },
-      {
-        nickname: 'Mayelle',
-        hero: this.dbService.heroes[4],
-      },
-      {
-        nickname: 'Bière',
-        hero: this.dbService.heroes[6],
-      },
-    ]);
+    this.game = new Game(
+      rdmMonster,
+      this.socketService.room.players,
+      this.socketService.myPlayerIndex
+    );
+    this.socketService.getGameEvent().subscribe(event => {
+      this.handleGameEvent(event);
+    });
+    this.game.gameStream$.subscribe((event: any) => {
+      this.socketService.sendEvent('gameEvent', event);
+    });
     this.interval = setInterval(() => this.gameLoop(), 20);
+  }
+
+  handleGameEvent(event: any) {
+    console.log({ event });
+    switch (event.eventType) {
+      case 'board': {
+        console.log(this.game);
+        this.game.players[event.playerIndex].board.tiles = event.data;
+        break;
+      }
+      case 'gameOver': {
+        this.game.players[event.playerIndex].gameOver = true;
+      }
+    }
   }
 
   private gameLoop(): void {

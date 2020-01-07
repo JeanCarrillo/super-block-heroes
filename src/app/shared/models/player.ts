@@ -20,6 +20,7 @@ export class Player {
   playerNum: number;
   handlePlayerAction: any;
   handlePlayerCapacity: any;
+  addToGameStream: any;
   capacity: string;
   capacityCooldown: number;
   capacityTime: number;
@@ -40,10 +41,21 @@ export class Player {
   nextPiece: string = null;
   hero: Hero;
   facingMonster = false;
+  myPlayerIndex: number;
+  test = true;
 
-  constructor(user: any, playerNum: number, handlePlayerAction: any, handlePlayerCapacity: any) {
+  constructor(
+    user: any,
+    playerNum: number,
+    myPlayerIndex: number,
+    handlePlayerAction: any,
+    handlePlayerCapacity: any,
+    addToGameStream: any
+  ) {
     this.handlePlayerAction = handlePlayerAction;
     this.handlePlayerCapacity = handlePlayerCapacity;
+    this.addToGameStream = addToGameStream;
+    this.myPlayerIndex = myPlayerIndex;
     this.capacity = user.hero.capacity.name;
     this.capacityCooldown = user.hero.capacity.cooldown;
     this.capacityTime = Date.now();
@@ -58,6 +70,7 @@ export class Player {
   }
 
   public loop(): void {
+    const isMyPlayer = this.myPlayerIndex === this.playerNum;
     this.hero.facingMonster = this.facingMonster;
     this.hero.move();
     if (this.isFastForwarding) {
@@ -71,7 +84,7 @@ export class Player {
         this.currentBonus[bonus].active = false;
       }
     }
-    if (now - this.loopTime > this.loopDelay && !this.gameOver) {
+    if (isMyPlayer && now - this.loopTime > this.loopDelay && !this.gameOver) {
       this.loopTime = Date.now();
       if (!this.currentPiece) {
         this.createPiece();
@@ -182,6 +195,7 @@ export class Player {
     }
     this.currentBlocks = [];
     this.currentPiece = null;
+    // TODO: SEND EVENT
     if (gameOver) {
       this.handleGameOver();
     } else {
@@ -210,6 +224,7 @@ export class Player {
       this.deleteRows(rowsToDelete);
       this.handleScore(rowsToDelete.length);
     }
+    this.sendEvent('board', this.board.tiles);
   }
 
   // delete all lines in the rowsToDelete array from the board.tiles matrix
@@ -249,6 +264,7 @@ export class Player {
     this.currentBlocks = [];
     this.currentPiece = null;
     this.gameOver = true;
+    this.sendEvent('gameOver', null);
   }
 
   // Returns true if something is colliding
@@ -341,5 +357,13 @@ export class Player {
       this.handleCollision();
       this.isFastForwarding = false;
     }
+  }
+
+  private sendEvent(eventType: string, data?: any) {
+    this.addToGameStream({
+      playerIndex: this.myPlayerIndex,
+      eventType,
+      data,
+    });
   }
 }

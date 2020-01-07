@@ -21,4 +21,8 @@ export class GameLobbyComponent implements OnInit {
     this.socketService.sendEvent('chat', this.chatInput);
     this.chatInput = '';
   }
+
+  launchGame() {
+    this.socketService.sendEvent('start');
+  }
 }

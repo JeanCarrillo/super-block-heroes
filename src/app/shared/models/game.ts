@@ -2,6 +2,7 @@ import { Player } from './player';
 import { Monster } from './monster';
 
 import { KEYS } from '../constants/keyboard';
+import { Observable } from 'rxjs';
 
 export class Game {
   victory = false;
@@ -11,11 +12,25 @@ export class Game {
   players: Player[] = [];
   playersPositions: any[] = [];
   playerFacingMonster = -1;
+  myPlayerIndex: number;
+  keyboardEvents: Set<any> = new Set<any>();
+  private observer: any;
+  gameStream$: Observable<any[]> = Observable.create(observer => {
+    this.observer = observer;
+  });
 
-  constructor(monster: any, users: any) {
+  constructor(monster: any, users: any, myPlayerIndex: number) {
+    this.myPlayerIndex = myPlayerIndex;
     for (let i = 0; i < users.length; i += 1) {
       this.players.push(
-        new Player(users[i], i, this.handlePlayerAction, this.handlePlayerCapacity)
+        new Player(
+          users[i],
+          i,
+          myPlayerIndex,
+          this.handlePlayerAction,
+          this.handlePlayerCapacity,
+          this.addToGameStream
+        )
       );
     }
     this.monster = new Monster(monster, this.handleMonsterAction);
@@ -34,28 +49,33 @@ export class Game {
     }
   }
 
+  addToGameStream = value => {
+    this.observer.next(value);
+  };
+
   handleKeys(key): void {
-    for (let i = 0; i < this.players.length; i++) {
-      if (!this.players[i].gameOver && !this.victory) {
-        if (key === KEYS[i].MOVE_RIGHT) {
-          this.players[i].moveCurrentBlocks(1);
-        }
-        if (key === KEYS[i].MOVE_LEFT) {
-          this.players[i].moveCurrentBlocks(-1);
-        }
-        if (key === KEYS[i].ROTATE_RIGHT) {
-          this.players[i].rotateCurrentPiece(1);
-        }
-        if (key === KEYS[i].INSTANT_DROP) {
-          if (!this.players[i].isFastForwarding) {
-            this.players[i].dropCurrentBlocks();
-          }
-        }
-        if (key === KEYS[i].CAPACITY) {
-          this.players[i].useCapacity();
+    // for (let i = 0; i < this.players.length; i++) {
+    if (!this.players[this.myPlayerIndex].gameOver && !this.victory) {
+      if (key === KEYS[0].MOVE_RIGHT) {
+        this.players[this.myPlayerIndex].moveCurrentBlocks(1);
+      }
+      if (key === KEYS[0].MOVE_LEFT) {
+        this.players[this.myPlayerIndex].moveCurrentBlocks(-1);
+      }
+      if (key === KEYS[0].ROTATE_RIGHT) {
+        this.players[this.myPlayerIndex].rotateCurrentPiece(1);
+      }
+      if (key === KEYS[0].INSTANT_DROP) {
+        if (!this.players[this.myPlayerIndex].isFastForwarding) {
+          this.players[this.myPlayerIndex].dropCurrentBlocks();
         }
       }
+      if (key === KEYS[0].CAPACITY) {
+        // TODO: SEND EVENT
+        this.players[this.myPlayerIndex].useCapacity();
+      }
     }
+    // }
   }
 
   // Player callback

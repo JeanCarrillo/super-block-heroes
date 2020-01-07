@@ -15,4 +15,4 @@
     (keyup.enter)="submitChat()"
   />
 </div>
-<app-button text="Play" url="/game" size="2"></app-button>
+<app-button text="Start" size="2" [callback]="launchGame.bind(this)"></app-button>
