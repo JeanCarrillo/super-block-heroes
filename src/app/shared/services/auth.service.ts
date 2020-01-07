@@ -119,7 +119,9 @@ export class AuthService {
       : 10;
     console.log({ goldGained });
     // this.http.post(this.API_SERVER + '/games', data);
+    // this.user.highscore => 0
     this.updateUser({
+      highscore: this.user.highscore < goldGained ? this.user.highscore : goldGained,
       gold: this.user.gold + goldGained,
     });
   }
