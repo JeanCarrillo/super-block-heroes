@@ -43,6 +43,7 @@ export class Player {
   facingMonster = false;
   myPlayerIndex: number;
   test = true;
+  isMyPlayer: boolean;
 
   constructor(
     user: any,
@@ -52,6 +53,7 @@ export class Player {
     handlePlayerCapacity: any,
     addToGameStream: any
   ) {
+    this.isMyPlayer = myPlayerIndex === playerNum;
     this.handlePlayerAction = handlePlayerAction;
     this.handlePlayerCapacity = handlePlayerCapacity;
     this.addToGameStream = addToGameStream;
@@ -70,7 +72,6 @@ export class Player {
   }
 
   public loop(): void {
-    const isMyPlayer = this.myPlayerIndex === this.playerNum;
     this.hero.facingMonster = this.facingMonster;
     this.hero.move();
     if (this.isFastForwarding) {
@@ -84,7 +85,7 @@ export class Player {
         this.currentBonus[bonus].active = false;
       }
     }
-    if (isMyPlayer && now - this.loopTime > this.loopDelay && !this.gameOver) {
+    if (this.isMyPlayer && now - this.loopTime > this.loopDelay && !this.gameOver) {
       this.loopTime = Date.now();
       if (!this.currentPiece) {
         this.createPiece();
@@ -165,6 +166,7 @@ export class Player {
         }
       }
     }
+    this.sendEvent('currentBlocks', this.currentBlocks);
   }
 
   // Y + 1 to all currentBlocks and currentPiece (fall by 1)

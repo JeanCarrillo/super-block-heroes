@@ -49,11 +49,12 @@ export class Game {
     }
   }
 
-  addToGameStream = value => {
-    this.observer.next(value);
+  addToGameStream = event => {
+    this.observer.next(event);
   };
 
   handleKeys(key): void {
+    // TODO: keep local multiplayer keys?
     // for (let i = 0; i < this.players.length; i++) {
     if (!this.players[this.myPlayerIndex].gameOver && !this.victory) {
       if (key === KEYS[0].MOVE_RIGHT) {
@@ -71,8 +72,11 @@ export class Game {
         }
       }
       if (key === KEYS[0].CAPACITY) {
-        // TODO: SEND EVENT
-        this.players[this.myPlayerIndex].useCapacity();
+        this.addToGameStream({
+          playerIndex: this.myPlayerIndex,
+          eventType: 'useCapacity',
+        });
+        // this.players[this.myPlayerIndex].useCapacity();
       }
     }
     // }
@@ -84,7 +88,7 @@ export class Game {
     let goldGained = score;
     if (this.players[playerIndex].currentBonus.goldRush.active) {
       goldGained *= 2;
-      // TO DO : RETHINK HOW GOLD IS GAINED
+      // TODO: RETHINK HOW GOLD IS GAINED
     }
     if (
       (this.monster.x > this.playersPositions[playerIndex].min &&

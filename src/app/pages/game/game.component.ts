@@ -60,6 +60,10 @@ export class GameComponent implements OnInit, OnDestroy {
         this.game.players[event.playerIndex].currentBlocks = event.data;
         break;
       }
+      case 'useCapacity': {
+        this.game.players[event.playerIndex].useCapacity();
+        break;
+      }
     }
   }
 
