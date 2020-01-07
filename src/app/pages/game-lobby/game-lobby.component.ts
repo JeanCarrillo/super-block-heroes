@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from 'src/app/shared/services/socket.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { DbService } from 'src/app/shared/services/db.service';
 
 @Component({
   selector: 'app-game-lobby',
@@ -10,19 +11,26 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class GameLobbyComponent implements OnInit {
   chatInput = '';
 
-  constructor(private authService: AuthService, private socketService: SocketService) {}
+  constructor(
+    private authService: AuthService,
+    private socketService: SocketService,
+    private dbService: DbService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.socketService.sendEvent('join', this.authService.user);
     this.socketService.getRoom();
   }
 
-  submitChat() {
+  submitChat(): void {
     this.socketService.sendEvent('chat', this.chatInput);
     this.chatInput = '';
   }
 
-  launchGame() {
-    this.socketService.sendEvent('start');
+  launchGame(): void {
+    const rdmMonster = this.dbService.monsters[
+      Math.floor(Math.random() * this.dbService.monsters.length)
+    ];
+    this.socketService.sendEvent('start', rdmMonster);
   }
 }

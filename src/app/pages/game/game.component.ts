@@ -26,12 +26,8 @@ export class GameComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // TODO
-    const rdmMonster = this.dbService.monsters[
-      Math.floor(Math.random() * this.dbService.monsters.length)
-    ];
     this.game = new Game(
-      rdmMonster,
+      this.socketService.room.monster,
       this.socketService.room.players,
       this.socketService.myPlayerIndex
     );

@@ -12,7 +12,7 @@ export class SocketService {
   room = {
     players: [],
     messages: [],
-    game: {},
+    monster: {},
     started: false,
   };
 
