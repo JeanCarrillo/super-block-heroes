@@ -38,6 +38,8 @@ export class GameComponent implements OnInit, OnDestroy {
       this.socketService.sendEvent('gameEvent', event);
     });
     this.interval = setInterval(() => this.gameLoop(), 20);
+
+    console.log(this.game.players);
   }
 
   handleGameEvent(event: any) {
@@ -58,6 +60,14 @@ export class GameComponent implements OnInit, OnDestroy {
       }
       case 'useCapacity': {
         this.game.players[event.playerIndex].useCapacity();
+        break;
+      }
+      case 'score': {
+        this.game.players[event.playerIndex].score = event.data;
+        break;
+      }
+      case 'monsterLife': {
+        this.game.monster.currentLife = event.data;
         break;
       }
     }

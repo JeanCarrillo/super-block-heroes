@@ -24,8 +24,14 @@ export class Monster {
   isFrozen: boolean;
   isTaunt: boolean;
   isHeadingTo: number;
+  addToGameStream: any;
+  myPlayerIndex: number;
 
-  constructor(monster: any, handleMonsterAction: any) {
+  constructor(monster: any,
+    handleMonsterAction: any,
+    addToGameStream: any,
+    myPlayerIndex: number
+    ) {
     this.handleMonsterAction = handleMonsterAction;
     // Initial values
     // monster.time_min ?
@@ -57,6 +63,9 @@ export class Monster {
     this.frozenDelay = 2000;
     this.isFrozen = false;
     this.isTaunt = false;
+    this.addToGameStream = addToGameStream;
+
+    this.myPlayerIndex = myPlayerIndex;
   }
 
   public move() {
@@ -137,6 +146,7 @@ export class Monster {
 
   public handleDamage(hitpoints: number) {
     this.currentLife -= hitpoints;
+    this.sendEvent('monsterLife', this.currentLife);
     if (this.currentLife > 0) {
       this.changeStatus('GetHit');
     } else {
@@ -160,4 +170,13 @@ export class Monster {
         break;
     }
   }
+
+  private sendEvent(eventType: string, data?: any) {
+    this.addToGameStream({
+      playerIndex: this.myPlayerIndex,
+      eventType,
+      data,
+    });
+  }
+
 }
