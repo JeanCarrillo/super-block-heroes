@@ -124,6 +124,7 @@ export class Player {
         }
       }
     }
+    this.sendEvent('currentBlocks', this.currentBlocks);
   }
 
   // direction: number of indexes to rotate
@@ -175,6 +176,7 @@ export class Player {
       block.y += 1;
     }
     this.currentPiece.y += 1;
+    this.sendEvent('currentBlocks', this.currentBlocks);
   }
 
   // When current blocks collide with matrix or existing blocks
@@ -313,6 +315,7 @@ export class Player {
       for (const block of this.currentBlocks) {
         block.x += x;
       }
+      this.sendEvent('currentBlocks', this.currentBlocks);
       if (this.currentPiece) {
         this.currentPiece.x += x;
       }

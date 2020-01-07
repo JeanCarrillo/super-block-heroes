@@ -54,6 +54,11 @@ export class GameComponent implements OnInit, OnDestroy {
       }
       case 'gameOver': {
         this.game.players[event.playerIndex].gameOver = true;
+        break;
+      }
+      case 'currentBlocks': {
+        this.game.players[event.playerIndex].currentBlocks = event.data;
+        break;
       }
     }
   }
