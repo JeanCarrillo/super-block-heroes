@@ -44,8 +44,8 @@ export class Player {
   constructor(user: any, playerNum: number, handlePlayerAction: any, handlePlayerCapacity: any) {
     this.handlePlayerAction = handlePlayerAction;
     this.handlePlayerCapacity = handlePlayerCapacity;
-    this.capacity = user.hero.capacity ? user.hero.capacity.name : 'Holy Blocks';
-    this.capacityCooldown = 5000;
+    this.capacity = user.hero.capacity.name;
+    this.capacityCooldown = user.hero.capacity.cooldown;
     this.capacityTime = Date.now();
     this.playerNum = playerNum;
     this.loopTime = Date.now();

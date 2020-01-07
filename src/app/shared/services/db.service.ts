@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import server from '../constants/server';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DbService {
-  user: any = null;
   monsters: any = [];
   heroes: any = [];
-  // images: any = {};
-  // monstersUpdated: EventEmitter<any> = new EventEmitter();
+  capacities: any = [];
 
-  private API_SERVER = 'http://localhost:3000';
+  private API_SERVER = `http://${server.ip}:${server.port}`;
 
   constructor(private http: HttpClient) {}
 
@@ -21,39 +19,20 @@ export class DbService {
       this.heroes = heroes;
       for (const hero of this.heroes) {
         hero.sprites = JSON.parse(hero.sprites);
-        // Preload sprites ?
-        // this.images[hero.name] = {
-        //   Idle: [],
-        // };
-        // for (let i = 0; i < hero.sprites.Idle; i++) {
-        //   const img = new Image();
-        //   img.src = `/assets/img/heroes/${hero.name}/Idle/Idle_0${i < 10 ? '0' + i : i}.png`;
-        //   // this.images[hero.name].Idle.push(img);
-        // }
+      }
+      console.log('heroes :', this.heroes);
+    });
+  }
+
+  async getCapacities() {
+    await this.http.get(this.API_SERVER + '/capacities').subscribe(capacities => {
+      console.log({ capacities });
+      this.capacities = capacities;
+      for (let i = 0; i < this.heroes.length; i++) {
+        this.heroes[i].capacity = this.capacities[i];
       }
       console.log(this.heroes);
-      // console.log(this.images);
     });
-  }
-
-  postUser(user: any): Observable<any> {
-    return this.http.post(this.API_SERVER + '/users', {
-      nickname: user,
-      hero: 3,
-    });
-  }
-
-  updateUser(data: any) {
-    this.http.put(this.API_SERVER + '/users/' + this.user.id, data).subscribe(user => {
-      if (user) {
-        this.setUser(user);
-      }
-    });
-  }
-
-  setUser(user: any) {
-    this.user = user;
-    this.user.hero.sprites = JSON.parse(this.user.hero.sprites);
   }
 
   async getMonsters() {
@@ -61,37 +40,8 @@ export class DbService {
       this.monsters = monsters;
       for (const monster of this.monsters) {
         monster.sprites = JSON.parse(monster.sprites);
-        // TO DO : cache image ?
-        // const img = new Image();
-        // img.src = `/assets/img/monsters/${monster.name.replace(' ', '')}.png`;
       }
       console.log(this.monsters);
-      // this.monstersUpdated.emit();
-    });
-    // return this.monsters;
-  }
-
-  getUser(nickname: string): Observable<any> {
-    return of(this.http.get(this.API_SERVER + '/users/nickname/' + nickname));
-  }
-
-  postGame(game: any): void {
-    const gameDuration = Date.now() - game.startTime;
-    const victory = game.victory ? true : false;
-    const monsterId = game.monster.id;
-    const data = {
-      gameDuration,
-      victory,
-      monsterId,
-      // TO DO
-    };
-    const goldGained = victory
-      ? Math.floor((game.monster.startingLife / 10) * (gameDuration / 1000))
-      : 10;
-    console.log(goldGained);
-    // this.http.post(this.API_SERVER + '/games', data);
-    this.updateUser({
-      gold: this.user.gold + goldGained,
     });
   }
 }

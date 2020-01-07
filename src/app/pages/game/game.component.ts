@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { DbService } from '../../shared/services/db.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { Game } from '../../shared/models/game';
 
@@ -17,40 +18,29 @@ export class GameComponent implements OnInit, OnDestroy {
     this.game.handleKeys(event.key);
   }
 
+<<<<<<< HEAD
   constructor(private dbService: DbService) { }
+=======
+  constructor(private dbService: DbService, private authService: AuthService) {}
+>>>>>>> 0aeab9e4a726afcf594ca39e1eb29b666e419e33
 
   ngOnInit() {
     const rdmMonster = this.dbService.monsters[
       Math.floor(Math.random() * this.dbService.monsters.length)
     ];
     this.game = new Game(rdmMonster, [
-      this.dbService.user,
+      this.authService.user,
       {
         nickname: 'Grogory',
-        hero: {
-          name: 'Mage',
-          capacity: {
-            name: 'Frost Blast',
-          },
-        },
+        hero: this.dbService.heroes[5],
       },
       {
         nickname: 'Mayelle',
-        hero: {
-          name: 'Monk',
-          capacity: {
-            name: "Monk's Blessing",
-          },
-        },
+        hero: this.dbService.heroes[4],
       },
       {
         nickname: 'Bière',
-        hero: {
-          name: 'King',
-          capacity: {
-            name: "King's Grace",
-          },
-        },
+        hero: this.dbService.heroes[6],
       },
     ]);
     this.interval = setInterval(() => this.gameLoop(), 20);
@@ -60,7 +50,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.game.loop();
     if (this.game.victory || this.game.defeat) {
       clearInterval(this.interval);
-      this.dbService.postGame(this.game);
+      this.authService.postGame(this.game);
     }
   }
 

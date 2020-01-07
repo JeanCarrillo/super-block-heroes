@@ -7,8 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AppComponent } from './app.component';
 
+// server ip/port
+import server from './shared/constants/server';
+
 // authentification
-import { LoginComponent } from './pages/authentification/login.component';
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
 import { ForgotPwComponent } from './pages/authentification/forgot-pw/forgot-pw.component';
@@ -35,6 +37,7 @@ import { PlayerContainerComponent } from './components/game/player-container/pla
 
 // page components
 import { GameComponent } from './pages/game/game.component';
+import { GameLobbyComponent } from './pages/game-lobby/game-lobby.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LobbyComponent } from './pages/home/lobby/lobby.component';
 import { MyaccountComponent } from './pages/home/myaccount/myaccount.component';
@@ -43,21 +46,21 @@ import { CollectionComponent } from './pages/home/collection/collection.componen
 import { MonstersListComponent } from './pages/home/collection/monsters-list/monsters-list.component';
 import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-list.component';
 
-// fontawesome
+//fontawsome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// bootstrap
+//bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WelcomeComponent } from './pages/authentification/welcome/welcome.component';
+import { ShowPasswordDirective } from './pages/authentification/show-password.directive';
 
-const serverURL = `http://localhost`;
-const serverPort = 5000;
 const socketConfig: SocketIoConfig = {
-  url: `${serverURL}:${serverPort}`,
+  url: `${server.ip}:${server.port}`,
   options: {},
 };
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     SignInComponent,
     SignUpComponent,
     ForgotPwComponent,
@@ -84,6 +87,10 @@ const socketConfig: SocketIoConfig = {
     HeroComponent,
     CapacityIconComponent,
     HeroCardComponent,
+    WelcomeComponent,
+    SignInComponent,
+    ShowPasswordDirective,
+    GameLobbyComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +98,7 @@ const socketConfig: SocketIoConfig = {
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
+    NgbModule,
     SocketIoModule.forRoot(socketConfig),
   ],
   providers: [],

@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { DbService } from '../../shared/services/db.service';
+import { Component, Input } from '@angular/core';
+import { Hero } from 'src/app/shared/models/hero';
 
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.css'],
 })
-export class UserCardComponent implements OnInit {
-  constructor(private dbService: DbService) {}
-
-  ngOnInit() {}
+export class UserCardComponent {
+  @Input() nickname: string;
+  @Input() gold: number;
+  @Input() hero: Hero;
 }

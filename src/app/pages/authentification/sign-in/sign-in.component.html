@@ -1,1 +1,35 @@
-<p>sign-in works!</p>
+<div class="container-fluid loginPage">
+  <!-- <app-monster-card [monster]="monster"></app-monster-card> -->
+  <app-logo></app-logo>
+  <input
+    type="text"
+    [(ngModel)]="user.nickname"
+    class="input"
+    placeholder="Nickname"
+    (keyup.enter)="signin()"
+  />
+  <!-- <input
+    type="text"
+    [(ngModel)]="user.email"
+    class="input"
+    placeholder="user@email.com"
+    (keyup.enter)="signin()"
+  /> -->
+  <input
+    type="password"
+    [(ngModel)]="user.password"
+    class="input"
+    placeholder="Password"
+    (keyup.enter)="signin()"
+    showPassword
+  />
+  <app-button buttonType="login" text="Log In" (click)="signin()" size="1.4"></app-button>
+  <div>
+    <span>If you want to play to super Block heroes please sign up here: </span>
+    <app-button text="Sign Up" url="/sign-up" buttonType="login"></app-button>
+  </div>
+  <!-- <div>
+    <span>Forgot your pasword? : </span>
+    <app-button text="Here" (click)="forgotPW()"></app-button>
+  </div> -->
+</div>

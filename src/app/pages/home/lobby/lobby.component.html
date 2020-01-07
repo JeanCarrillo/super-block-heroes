@@ -5,7 +5,11 @@
     </div>
     <div class="col-4">
       <div class="user-card">
-        <app-user-card></app-user-card>
+        <app-user-card
+          [nickname]="authService.user.nickname"
+          [gold]="authService.user.gold"
+          [hero]="authService.user.hero"
+        ></app-user-card>
       </div>
     </div>
   </div>
@@ -75,7 +79,7 @@
   </div>
   <div class="row justify-content-end">
     <div class="col-4">
-      <app-button text="Play" url="/game" size="2"></app-button>
+      <app-button text="Play" url="/game-lobby" size="2"></app-button>
     </div>
   </div>
 </div>

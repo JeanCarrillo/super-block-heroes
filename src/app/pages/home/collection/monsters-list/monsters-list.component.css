@@ -1,4 +1,13 @@
+.monsterListCard {
+    padding: 0.5rem;
+    background-color: transparent;
+    border: 1px, solid, #495057;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
 .monsterCapacities {
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -1,7 +1,11 @@
 <div class="container-fluid">
   <div class="row mt-5">
     <div class="col-2 text-center">
-      <app-user-card></app-user-card>
+      <app-user-card
+        [nickname]="authService.user.nickname"
+        [gold]="authService.user.gold"
+        [hero]="authService.user.hero"
+      ></app-user-card>
     </div>
     <div class="col-7 borders">
       <div class="row">
@@ -9,6 +13,7 @@
           class="col text-center"
           *ngFor="let hero of dbService.heroes"
           (click)="setSelectedHero(hero)"
+          [ngStyle]="{ filter: getFilter(hero.id) }"
         >
           <app-hero-card
             [inputHero]="hero"
@@ -17,8 +22,49 @@
         </div>
       </div>
     </div>
-    <div class="col-3 text-center">
-      <h2>{{ selectedHero.name }}</h2>
+
+    <div class="col-3 card heroListCard text-center">
+      <div class="card-title heroListName">
+        <h2 class="heroName">{{ selectedHero.name }}</h2>
+      </div>
+      <div class="card-body heroListBody">
+        <div class="row no-gutter">
+          <div class="col-8">
+            <div class="text-center heroListCapacity align-items-center">
+              <p class="heroCapacity">Capacity : {{ selectedHero.capacity.name }}</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <app-capacity-icon
+              [capacityName]="selectedHero.capacity.name"
+              [progress]="100"
+            ></app-capacity-icon>
+          </div>
+        </div>
+        <div class="row no-gutter heroListDescription">
+          <p class="heroDescription">{{ selectedHero.capacity.description }}</p>
+        </div>
+      </div>
+      <div class="card-footer heroListFooter text-muted">
+        <p class="capacityProperty">Cooldown : {{ selectedHero.capacity.cooldown }} s</p>
+      </div>
+      <div
+        class="card-footer heroListFooter text-muted"
+        *ngIf="selectedHero.capacity.duration !== 0"
+      >
+        <p class="capacityProperty">Duration : {{ selectedHero.capacity.duration }} s</p>
+      </div>
+      <div class="heroesPrice" *ngIf="!isOwned(selectedHero.id)">
+        {{ selectedHero.price }} gold
+        <button
+          type="button"
+          class="buy-button"
+          [disabled]="!canBuy(selectedHero.price)"
+          (click)="buyHero(selectedHero)"
+        >
+          Buy
+        </button>
+      </div>
     </div>
   </div>
 </div>
