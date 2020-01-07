@@ -260,6 +260,7 @@ export class Player {
         break;
     }
     this.score += score;
+    this.sendEvent('score', this.score);
     this.handlePlayerAction(this.playerNum, score);
   }
 
