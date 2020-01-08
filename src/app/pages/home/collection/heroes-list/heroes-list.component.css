@@ -1,6 +1,8 @@
 .heroListCard {
     padding: 0;
-    border: 0px;
+    border: 1px, solid, #495057;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
     background: transparent;
 }
 
@@ -22,7 +24,7 @@
 }
 
 .heroListDescription {
-    margin: 2rem 0 0.5rem 0;
+    margin: 2rem 0 .5rem 0;
 }
 
 .heroCapacity {
@@ -31,7 +33,7 @@
 
 .heroListFooter {
     padding: 0;
-    border: 0px;
+    border: 0;
     background-color: transparent;
 }
 
@@ -45,12 +47,4 @@
 
 .heroesPrice {
     margin-top: 2rem;
-}
-
-.heroListCard {
-    padding: 0.5rem;
-    background-color: transparent;
-    border: 1px, solid, #495057;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }

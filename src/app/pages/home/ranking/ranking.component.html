@@ -1,32 +1,36 @@
 <div class="container-fluid">
-    <div class="row justify-content-between">
-      <div class="col-4">
-        <app-logo></app-logo>
-      </div>
-      <div class="col-4">
-        <div class="user-card">
-          <app-user-card></app-user-card>
-        </div>
-      </div>
-    </div>
     <div class="row">
+      <div class="col-8">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col"></th>
                     <th scope="col">Player</th>
-                    <th scope="col">Club</th>
+                    <th scope="col">Hero</th>
                     <th scope="col">Highscore</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of users; index as i">
-                    <th scope="row">1</th>
+                <tr *ngFor="let user of dbService.highscores; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
                     <td>{{ user.nickname }}</td>
-                    <td>{{ club.name }}</td>
+                    <td>
+                      <app-hero-card
+                        [inputHero]="user.hero"
+                        [width]= "5"
+                      ></app-hero-card>
+                    </td>
                     <td>{{ user.highscore }}</td>
                 </tr>
             </tbody>
         </table>
+      </div>
+      <div class="col-4 flex-fill">
+        <app-user-card
+          [nickname]="authService.user.nickname"
+          [gold]="authService.user.gold"
+          [hero]="authService.user.hero"
+        ></app-user-card>
+      </div>
     </div>
 </div>
