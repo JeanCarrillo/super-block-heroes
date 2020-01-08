@@ -1,18 +1,20 @@
-<app-user-card
-  *ngFor="let player of socketService.room.players"
-  [nickname]="player.nickname"
-  [gold]="player.gold"
-  [hero]="player.hero"
-></app-user-card>
-<div>
-  <p *ngFor="let message of socketService.room.messages">
-    {{ message.author }} : {{ message.text }}
-  </p>
-  <input
-    type="text"
-    [(ngModel)]="chatInput"
-    placeholder="Type in to chat"
-    (keyup.enter)="submitChat()"
-  />
+<app-user-card class="usercardlobby" *ngFor="let player of socketService.room.players" [nickname]="player.nickname"
+  [gold]="player.gold" [hero]="player.hero"></app-user-card>
+<div class="messagesgeneral">
+  <div class="messages">
+    <p *ngFor="let message of socketService.room.messages"
+      [style.text-align]="message.author===authService.user.nickname?'end':'start'">
+      <span>{{ message.author }}</span> : {{ message.text }}
+    </p>
+  </div>
 </div>
-<app-button text="Play" url="/game" size="2"></app-button>
+<div>
+  <input class="tchat" type="text" [(ngModel)]="chatInput" placeholder="Type in to chat" (keyup.enter)="submitChat()" />
+</div>
+<div class="buttonlobby">
+    <h1>
+        {{(time > 0) ? time : "Go !"}}
+      </h1>
+  <app-button text="Play" size="2" (click)="counter()"></app-button>
+  <app-button text="Back" url="/home" size="2"></app-button>
+</div>

@@ -12,12 +12,14 @@ import { WelcomeComponent } from './pages/authentification/welcome/welcome.compo
 import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
 import { GameLobbyComponent } from './pages/game-lobby/game-lobby.component';
+import { decompteComponent } from './pages/decompte/decompte.component';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'game-lobby', component: GameLobbyComponent },
+  { path: 'decompte', component: decompteComponent },
   {
     path: 'home',
     component: HomeComponent,
@@ -52,4 +54,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

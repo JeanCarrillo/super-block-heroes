@@ -45,6 +45,7 @@ import { StoreComponent } from './pages/home/store/store.component';
 import { CollectionComponent } from './pages/home/collection/collection.component';
 import { MonstersListComponent } from './pages/home/collection/monsters-list/monsters-list.component';
 import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-list.component';
+import { decompteComponent } from './pages/decompte/decompte.component';
 
 //fontawsome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -91,6 +92,7 @@ const socketConfig: SocketIoConfig = {
     SignInComponent,
     ShowPasswordDirective,
     GameLobbyComponent,
+    decompteComponent,
   ],
   imports: [
     BrowserModule,
