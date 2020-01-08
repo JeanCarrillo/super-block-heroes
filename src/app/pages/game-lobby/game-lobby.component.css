@@ -1,0 +1,27 @@
+.buttonlobby {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tchat {
+  border-radius: 10%;
+  margin-left: 30%;
+  margin-top: 20px;
+}
+
+.usercardlobby {
+  display: inline-block;
+}
+
+.messagesgeneral {
+  border-width: 5px;
+  border-style: inset;
+  border-color: black;
+  margin-top: 30px;
+}
+
+span {
+  color: rgb(116, 116, 116);
+  font-style: italic;
+  font-size: small;
+}

@@ -27,11 +27,7 @@ export class Monster {
   addToGameStream: any;
   myPlayerIndex: number;
 
-  constructor(monster: any,
-    handleMonsterAction: any,
-    addToGameStream: any,
-    myPlayerIndex: number
-    ) {
+  constructor(monster: any, handleMonsterAction: any, addToGameStream: any, myPlayerIndex: number) {
     this.handleMonsterAction = handleMonsterAction;
     // Initial values
     // monster.time_min ?
@@ -64,7 +60,6 @@ export class Monster {
     this.isFrozen = false;
     this.isTaunt = false;
     this.addToGameStream = addToGameStream;
-
     this.myPlayerIndex = myPlayerIndex;
   }
 
@@ -171,12 +166,11 @@ export class Monster {
     }
   }
 
-  private sendEvent(eventType: string, data?: any) {
+  private sendEvent(eventType: string, data: any) {
     this.addToGameStream({
       playerIndex: this.myPlayerIndex,
       eventType,
       data,
     });
   }
-
 }
