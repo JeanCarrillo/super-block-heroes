@@ -6,17 +6,18 @@ export class Hero {
   name: string;
   sprite: number;
   status: string;
-  animationTime: number;
-  animationDelay: number;
+  animationTime: number = Date.now();
+  animationDelay = 20;
   sprites: any;
   facingMonster: boolean;
+  gameOverAlreadySet = false;
+  setGameOver: any;
 
-  constructor(hero: any) {
+  constructor(hero: any, setGameOver: any = () => {}) {
+    this.setGameOver = setGameOver;
     this.name = hero.name;
     // Animation init
     this.changeStatus('Idle');
-    this.animationTime = Date.now();
-    this.animationDelay = 20;
   }
 
   public move() {
@@ -39,6 +40,10 @@ export class Hero {
       this.sprite += 1;
     } else {
       if (this.status === 'Death') {
+        if (!this.gameOverAlreadySet) {
+          this.gameOverAlreadySet = true;
+          this.setGameOver();
+        }
         return;
       }
 

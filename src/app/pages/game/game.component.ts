@@ -46,7 +46,6 @@ export class GameComponent implements OnInit, OnDestroy {
     console.log({ event });
     switch (event.eventType) {
       case 'board': {
-        console.log(this.game);
         this.game.players[event.playerIndex].board.tiles = event.data;
         break;
       }
@@ -63,7 +62,7 @@ export class GameComponent implements OnInit, OnDestroy {
         break;
       }
       case 'score': {
-        this.game.players[event.playerIndex].score = event.data;
+        this.game.handlePlayerAction(event.playerIndex, event.data);
         break;
       }
       case 'monsterLife': {

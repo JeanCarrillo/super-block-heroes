@@ -67,7 +67,7 @@ export class Player {
     this.name = user.nickname;
     this.score = 0;
     this.board = new Board(this.rowNumbers, this.colNumbers);
-    this.hero = new Hero(user.hero);
+    this.hero = new Hero(user.hero, this.setGameOver);
     this.currentBlocks = [];
   }
 
@@ -199,7 +199,6 @@ export class Player {
     }
     this.currentBlocks = [];
     this.currentPiece = null;
-    // TODO: SEND EVENT
     if (gameOver) {
       this.handleGameOver();
     } else {
@@ -259,18 +258,23 @@ export class Player {
         score = 56;
         break;
     }
-    this.score += score;
-    this.sendEvent('score', this.score);
+    this.sendEvent('score', score);
     this.handlePlayerAction(this.playerNum, score);
   }
 
   private handleGameOver(): void {
+    if (this.hero.status === 'Death') {
+      return;
+    }
     this.hero.changeStatus('Death');
     this.currentBlocks = [];
     this.currentPiece = null;
+  }
+
+  public setGameOver = (): void => {
     this.gameOver = true;
     this.sendEvent('gameOver', null);
-  }
+  };
 
   // Returns true if something is colliding
   // Y axis only

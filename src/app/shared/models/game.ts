@@ -33,7 +33,12 @@ export class Game {
         )
       );
     }
-    this.monster = new Monster(monster, this.handleMonsterAction, this.addToGameStream, myPlayerIndex);
+    this.monster = new Monster(
+      monster,
+      this.handleMonsterAction,
+      this.addToGameStream,
+      myPlayerIndex
+    );
 
     // Calculate players positions
     // Example: player 1 owns 0% to 25% of the board, player 2 25-50% etc.
@@ -85,11 +90,10 @@ export class Game {
   // Player callback
   // If a player scores, check monster position and handle damage if monster is within player range
   handlePlayerAction = (playerIndex: number, score: number): void => {
-    let goldGained = score;
     if (this.players[playerIndex].currentBonus.goldRush.active) {
-      goldGained *= 2;
-      // TODO: RETHINK HOW GOLD IS GAINED
+      score *= 2;
     }
+    this.players[playerIndex].score += score;
     if (
       (this.monster.x > this.playersPositions[playerIndex].min &&
         this.monster.x < this.playersPositions[playerIndex].max) ||
