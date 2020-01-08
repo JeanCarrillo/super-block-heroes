@@ -33,7 +33,7 @@ export class Game {
         )
       );
     }
-    this.monster = new Monster(monster, this.handleMonsterAction);
+    this.monster = new Monster(monster, this.handleMonsterAction, this.addToGameStream, myPlayerIndex);
 
     // Calculate players positions
     // Example: player 1 owns 0% to 25% of the board, player 2 25-50% etc.
