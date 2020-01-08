@@ -20,10 +20,10 @@ export class NavMenuComponent implements OnInit {
       text: 'Lobby',
       link: 'home',
     },
-    // {
-    //   text: 'Ranking',
-    //   link: 'ranking',
-    // },
+    {
+      text: 'Ranking',
+      link: 'ranking',
+    },
     {
       text: 'Collection',
       link: 'collection',

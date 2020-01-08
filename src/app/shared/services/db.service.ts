@@ -9,10 +9,11 @@ export class DbService {
   monsters: any = [];
   heroes: any = [];
   capacities: any = [];
+  highscores: any = [];
 
   private API_SERVER = `http://${server.ip}:${server.port}`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   async getHeroes() {
     await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => {
@@ -44,4 +45,12 @@ export class DbService {
       console.log(this.monsters);
     });
   }
+
+  async getHighscores() {
+    await this.http.get(this.API_SERVER + '/users/highscores').subscribe(highscores => {
+      this.highscores = highscores;
+    });
+    console.log(this.highscores);
+  }
+
 }

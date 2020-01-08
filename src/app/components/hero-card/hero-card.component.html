@@ -1,4 +1,7 @@
-<div class="sprite-container" [class.selected]="selected" (click)="changeStatus()">
+<div class="sprite-container"
+  [class.selected]="selected"
+  [style.width]="getWidth()"
+  (click)="changeStatus()">
   <div
     class="sprite"
     [style.backgroundImage]="img"

@@ -11,6 +11,7 @@ import { heroSprites } from '../../shared/constants/sprites';
 export class HeroCardComponent implements OnInit, OnDestroy {
   @Input() inputHero: Hero;
   @Input() selected: boolean;
+  @Input() width: number;
   name: string;
   sprite: number;
   interval: number;
@@ -53,6 +54,10 @@ export class HeroCardComponent implements OnInit, OnDestroy {
 
   getBackgroundPosition(): string {
     return `0 ${this.sprite === 0 ? 0 : (100 / heroSprites.total) * this.sprite}%`;
+  }
+
+  getWidth(): string {
+    return this.width+"vw";
   }
 
   changeStatus(): void {
