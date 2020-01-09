@@ -25,7 +25,7 @@ export class GameComponent implements OnInit, OnDestroy {
     private socketService: SocketService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.game = new Game(
       this.socketService.room.monster,
       this.socketService.room.players,
@@ -42,7 +42,7 @@ export class GameComponent implements OnInit, OnDestroy {
     console.log(this.game.players);
   }
 
-  handleGameEvent(event: any) {
+  handleGameEvent(event: any): void {
     console.log({ event });
     switch (event.eventType) {
       case 'board': {
@@ -50,7 +50,7 @@ export class GameComponent implements OnInit, OnDestroy {
         break;
       }
       case 'gameOver': {
-        this.game.players[event.playerIndex].gameOver = true;
+        this.game.players[event.playerIndex].handleGameOver();
         break;
       }
       case 'currentBlocks': {
@@ -80,16 +80,18 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     clearInterval(this.interval);
   }
 
-  sendInvitation = (i) => {
-    this.authService.getUser(this.game.players[i].name)
-      .subscribe((player: any) => {
-        if (player.id) {
-          this.authService.inviteUser(player.id, this.game.players[this.socketService.myPlayerIndex].name);
-        }
-      });
-  }
+  sendInvitation = (i: number): void => {
+    this.authService.getUser(this.game.players[i].name).subscribe((player: any) => {
+      if (player.id) {
+        this.authService.inviteUser(
+          player.id,
+          this.game.players[this.socketService.myPlayerIndex].name
+        );
+      }
+    });
+  };
 }

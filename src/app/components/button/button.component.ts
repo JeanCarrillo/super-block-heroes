@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button.component.css'],
 })
 export class ButtonComponent {
+  @Input() disabled: boolean;
   @Input() buttonType: string;
   @Input() size = 1;
   @Input() url: string;
@@ -14,6 +15,12 @@ export class ButtonComponent {
   @Input() callback: any = () => {};
 
   constructor() {}
+
+  private useCallback(): void {
+    if (!this.disabled) {
+      this.callback();
+    }
+  }
 
   private textSize(): number {
     return this.selected ? this.size * 1.3 : this.size;

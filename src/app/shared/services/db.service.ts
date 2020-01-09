@@ -17,8 +17,8 @@ export class DbService {
 
   async getHeroes() {
     await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => {
+      console.log({ heroes });
       this.heroes = heroes;
-      console.log('heroes :', this.heroes);
     });
   }
 
@@ -29,7 +29,6 @@ export class DbService {
       for (let i = 0; i < this.heroes.length; i++) {
         this.heroes[i].capacity = this.capacities[i];
       }
-      console.log(this.heroes);
     });
   }
 
@@ -39,14 +38,14 @@ export class DbService {
       for (const monster of this.monsters) {
         monster.sprites = JSON.parse(monster.sprites);
       }
-      console.log(this.monsters);
+      console.log('monsters :', this.monsters);
     });
   }
 
   async getHighscores() {
     await this.http.get(this.API_SERVER + '/users/highscores').subscribe(highscores => {
+      console.log({ highscores });
       this.highscores = highscores;
     });
-    console.log(this.highscores);
   }
 }

@@ -54,11 +54,11 @@ export class Game {
     }
   }
 
-  addToGameStream = event => {
+  addToGameStream = (event: any): void => {
     this.observer.next(event);
   };
 
-  handleKeys(key): void {
+  handleKeys(key: string): void {
     // TODO: keep local multiplayer keys?
     // for (let i = 0; i < this.players.length; i++) {
     if (!this.players[this.myPlayerIndex].gameOver && !this.victory) {
@@ -168,7 +168,8 @@ export class Game {
           this.monster.x < this.playersPositions[i].max
         ) {
           this.players[i].hero.changeStatus('GetHit');
-          this.players[i].loopDelay -= 50;
+          // TODO: change value and effect ?
+          this.players[i].loopDelay -= 30;
         }
       }
     } else {

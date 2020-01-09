@@ -20,7 +20,7 @@ export class Hero {
     this.changeStatus('Idle');
   }
 
-  public move() {
+  public move(): void {
     const now = Date.now();
     if (now - this.animationTime > this.animationDelay) {
       this.animationTime = Date.now();
@@ -28,7 +28,7 @@ export class Hero {
     }
   }
 
-  private animate() {
+  private animate(): void {
     if (this.facingMonster && this.status === 'Walk') {
       this.changeStatus('Idle');
     }
@@ -55,7 +55,7 @@ export class Hero {
     }
   }
 
-  public changeStatus(status: string) {
+  public changeStatus(status: string): void {
     this.status = status;
     this.sprite = heroSprites[this.status].start;
   }

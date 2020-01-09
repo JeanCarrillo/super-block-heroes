@@ -12,15 +12,6 @@ export class MonstersListComponent {
 
   constructor(private dbService: DbService) {}
 
-  // async getMonsters() {
-  //   // this.dbService.getMonsters().subscribe(monsters => {
-  //   //   this.monsters = monsters;
-  //   //   console.log(monsters);
-  //   // });
-  //   this.monsters = await this.dbService.getMonsters();
-  //   console.log(this.monsters);
-  // }
-
   setSelectedMonster(index: number): void {
     this.selectedMonster = index;
   }

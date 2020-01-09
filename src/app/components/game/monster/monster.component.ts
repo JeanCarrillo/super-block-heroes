@@ -14,14 +14,14 @@ export class MonsterComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const { name, sprites } = this.monster;
     this.monsterImg = `url(/assets/img/monsters/${name.replace(' ', '')}.png)`;
     this.paddingBottom = sprites.paddingBottom + '%';
     this.marginTop = 100 - sprites.paddingBottom + '%';
   }
 
-  getPosition() {
+  getPosition(): string {
     return `${this.monster.x - 5}%`;
   }
 
@@ -44,15 +44,15 @@ export class MonsterComponent implements OnInit {
     return 'none';
   }
 
-  getBackgroundImg() {
+  getBackgroundImg(): string {
     return `url(assets/img/backgrounds/${this.monster.background}/background.png)`;
   }
 
-  getDirection() {
+  getDirection(): string {
     return `scale(${this.monster.movingDirection === 1 ? '-1' : '1'}, 1)`;
   }
 
-  getLifePercentage() {
+  getLifePercentage(): string {
     const percentage = Math.ceil((this.monster.currentLife * 100) / this.monster.startingLife);
     return `${percentage < 0 ? 0 : percentage}%`;
   }

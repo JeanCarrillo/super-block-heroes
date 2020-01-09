@@ -249,20 +249,20 @@ export class Player {
         score = 10;
         break;
       case 2:
-        score = 24;
+        score = 30;
         break;
       case 3:
-        score = 39;
+        score = 60;
         break;
       case 4:
-        score = 56;
+        score = 100;
         break;
     }
     this.sendEvent('score', score);
     this.handlePlayerAction(this.playerNum, score);
   }
 
-  private handleGameOver(): void {
+  public handleGameOver(): void {
     if (this.hero.status === 'Death') {
       return;
     }

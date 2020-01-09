@@ -9,7 +9,7 @@ import { SocketService } from 'src/app/shared/services/socket.service';
 export class HomeComponent implements OnInit {
   constructor(private socketService: SocketService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.socketService.sendEvent('mainMenu');
   }
 }

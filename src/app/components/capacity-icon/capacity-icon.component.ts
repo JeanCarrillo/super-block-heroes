@@ -11,17 +11,17 @@ export class CapacityIconComponent implements OnInit, OnChanges {
   img: string;
   constructor() {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.img = this.formatImg(this.capacityName);
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes): void {
     if (changes.capacityName) {
       this.img = this.formatImg(changes.capacityName.currentValue);
     }
   }
 
-  formatImg(str: string) {
+  formatImg(str: string): string {
     const name = str.replace(' ', '').replace("'", '');
     return `url(/assets/img/capacities/${name}.png)`;
   }

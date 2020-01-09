@@ -20,11 +20,5 @@ export class AppComponent implements OnInit {
     await this.dbService.getMonsters();
     await this.dbService.getCapacities();
     this.socketService.getRoom();
-    // this.dbService.postUser({
-    //   email: 'player5@email.com',
-    //   nickname: 'player5',
-    //   password: 'password',
-    //   hero: 3,
-    // });
   }
 }

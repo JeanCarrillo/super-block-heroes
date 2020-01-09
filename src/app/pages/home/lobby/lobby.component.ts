@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -6,10 +6,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.css'],
 })
-export class LobbyComponent implements OnInit {
+export class LobbyComponent {
   constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    console.log(this.authService.user);
-  }
 }

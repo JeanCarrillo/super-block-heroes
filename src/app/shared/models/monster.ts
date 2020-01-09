@@ -63,7 +63,7 @@ export class Monster {
     this.myPlayerIndex = myPlayerIndex;
   }
 
-  public move() {
+  public move(): void {
     const now = Date.now();
     // Handle freeze capacity timer
     if (this.isFrozen) {
@@ -108,9 +108,9 @@ export class Monster {
     }
   }
 
-  private attack() {
-    // TO DO: something depending on monster
-    // need to update database
+  private attack(): void {
+    // TODO: something depending on monster
+    // need to update database and create capacities
     const isPlayerAlive = this.handleMonsterAction();
     if (isPlayerAlive) {
       this.attackTime = Date.now();
@@ -120,7 +120,7 @@ export class Monster {
     }
   }
 
-  private animate() {
+  private animate(): void {
     if (this.sprite < this.sprites[this.status].end) {
       this.sprite += 1;
     } else {
@@ -134,12 +134,12 @@ export class Monster {
     }
   }
 
-  private changeStatus(status: string) {
+  private changeStatus(status: string): void {
     this.status = status;
     this.sprite = this.sprites[this.status].start;
   }
 
-  public handleDamage(hitpoints: number) {
+  public handleDamage(hitpoints: number): void {
     this.currentLife -= hitpoints;
     this.sendEvent('monsterLife', this.currentLife);
     if (this.currentLife > 0) {
@@ -149,7 +149,7 @@ export class Monster {
     }
   }
 
-  public handleCapacity(capacity: string, options?: any) {
+  public handleCapacity(capacity: string, options?: any): void {
     switch (capacity) {
       case 'Frost Blast': {
         this.frozenTime = Date.now();
@@ -166,7 +166,7 @@ export class Monster {
     }
   }
 
-  private sendEvent(eventType: string, data: any) {
+  private sendEvent(eventType: string, data: any): void {
     this.addToGameStream({
       playerIndex: this.myPlayerIndex,
       eventType,

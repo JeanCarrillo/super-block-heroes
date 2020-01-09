@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { DbService } from './db.service';
 import server from '../constants/server';
 
@@ -19,7 +18,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private dbService: DbService) {}
 
   getUser(nickname: string) {
-   return this.http.get(this.API_SERVER + '/users/nickname/'+ nickname);
+    return this.http.get(this.API_SERVER + '/users/nickname/' + nickname);
   }
 
   inviteUser(userId: number, userSendingInvitNickname: string) {
@@ -30,7 +29,7 @@ export class AuthService {
         Authorization: `Bearer ${this.getToken()}`,
       }),
     };
-    console.log("data: ", data);
+    console.log('data: ', data);
     console.log('id ', userId);
     console.log(this.API_SERVER + '/users/invite/' + userId);
     this.http.put(this.API_SERVER + '/users/invite/' + userId, data, httpOptions);
