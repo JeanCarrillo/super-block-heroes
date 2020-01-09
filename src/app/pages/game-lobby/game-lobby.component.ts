@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class GameLobbyComponent implements OnInit {
   chatInput = '';
-  time = 5;
   constructor(
     public router: Router,
     private authService: AuthService,
@@ -22,17 +21,6 @@ export class GameLobbyComponent implements OnInit {
   ngOnInit(): void {
     this.socketService.sendEvent('join', this.authService.user);
     this.socketService.getRoom();
-  }
-
-  counter(): void {
-    setTimeout(() => {
-      if (this.time > 0) {
-        this.time--;
-        this.counter();
-      } else {
-        this.router.navigateByUrl('/game');
-      }
-    }, 1000);
   }
 
   submitChat(): void {

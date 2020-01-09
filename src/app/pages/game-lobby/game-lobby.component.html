@@ -26,7 +26,7 @@
 </div>
 <div class="buttonlobby">
   <h1>
-    {{ time > 0 ? time : 'Go !' }}
+    {{ socketService.time > 0 ? socketService.time : 'Go !' }}
   </h1>
   <app-button text="Play" size="2" (click)="launchGame()"></app-button>
   <app-button text="Back" url="/home" size="2"></app-button>

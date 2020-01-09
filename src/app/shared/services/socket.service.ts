@@ -16,6 +16,8 @@ export class SocketService {
     started: false,
   };
 
+  time = 5;
+
   constructor(private socket: Socket, private authService: AuthService, private router: Router) {}
 
   sendEvent(event: string, data?: any) {
@@ -37,9 +39,20 @@ export class SocketService {
       }
       this.room = room;
       if (this.room.started && this.router.url !== '/game') {
-        this.router.navigate(['/game']);
+        this.startGame();
       }
     });
+  }
+
+  startGame(): void {
+    setTimeout(() => {
+      if (this.time > 0) {
+        this.time--;
+        this.startGame();
+      } else {
+        this.router.navigateByUrl('/game');
+      }
+    }, 1000);
   }
 
   getGameEvent(): Observable<any> {
