@@ -18,8 +18,22 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router, private dbService: DbService) {}
 
-  getUser(nickname: string): Observable<any> {
-    return of(this.http.get(this.API_SERVER + '/users/nickname/' + nickname));
+  getUser(nickname: string) {
+   return this.http.get(this.API_SERVER + '/users/nickname/'+ nickname);
+  }
+
+  inviteUser(userId: number, userSendingInvitNickname: string) {
+    const data = { nickname: userSendingInvitNickname };
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      }),
+    };
+    console.log("data: ", data);
+    console.log('id ', userId);
+    console.log(this.API_SERVER + '/users/invite/' + userId);
+    this.http.put(this.API_SERVER + '/users/invite/' + userId, data, httpOptions);
   }
 
   async register(user: any) {
@@ -98,7 +112,6 @@ export class AuthService {
     }
     user.hero.capacity = capacity;
     // END TEMP
-    user.hero.sprites = JSON.parse(user.hero.sprites);
     user.inventory = JSON.parse(user.inventory);
     this.user = user;
     console.log({ user });

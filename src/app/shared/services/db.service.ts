@@ -17,9 +17,6 @@ export class DbService {
   async getHeroes() {
     await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => {
       this.heroes = heroes;
-      for (const hero of this.heroes) {
-        hero.sprites = JSON.parse(hero.sprites);
-      }
       console.log('heroes :', this.heroes);
     });
   }

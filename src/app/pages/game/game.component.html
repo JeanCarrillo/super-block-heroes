@@ -15,6 +15,12 @@
 
             <div *ngIf="game.victory" class="alert alert-success gameOver">
               <h5 class="alert-heading">Victory !</h5>
+              <div *ngFor="let player of game.players; index as i">
+                <div *ngIf="i !== game.myPlayerIndex" class="otherPlayers">
+                  <span class="playerName">Player : {{ player.name }}</span>  
+                  <app-button text="Invite" class="inviteBtn"></app-button>
+                </div> 
+              </div>
               <app-button text="Back to menu" url="/home" buttonType="login"></app-button>
             </div>
             <div *ngIf="game.defeat" class="alert alert-success gameOver">
@@ -22,7 +28,7 @@
               <div *ngFor="let player of game.players; index as i">
                 <div *ngIf="i !== game.myPlayerIndex" class="otherPlayers">
                   <span class="playerName">Player : {{ player.name }}</span>  
-                  <app-button text="Invite" class="inviteBtn"></app-button>
+                  <app-button text="Invite" [callback]="sendInvitation.bind(this, i)" class="inviteBtn"></app-button>
                 </div> 
               </div>
               <app-button text="Back to menu" url="/home" buttonType="login"></app-button>
