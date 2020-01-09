@@ -107,19 +107,18 @@ export class AuthService {
   postGame(game: any): void {
     const gameDuration = Date.now() - game.startTime;
     const victory = game.victory ? true : false;
-    const monsterId = game.monster.id;
-    const data = {
-      gameDuration,
-      victory,
-      monsterId,
-      // TO DO
-    };
+    // TODO: SEND GAME DATA
+    // const monsterId = game.monster.id;
+    // const data = {
+    //   gameDuration,
+    //   victory,
+    //   monsterId,
+    // };
+    // this.http.post(this.API_SERVER + '/games', data);
     const goldGained = victory
       ? Math.floor((game.monster.startingLife / 10) * (gameDuration / 1000))
       : 10;
     console.log({ goldGained });
-    // this.http.post(this.API_SERVER + '/games', data);
-    // this.user.highscore => 0
     this.updateUser({
       highscore: this.user.highscore < goldGained ? goldGained : this.user.highscore,
       gold: this.user.gold + goldGained,

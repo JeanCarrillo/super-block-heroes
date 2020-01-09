@@ -10,9 +10,9 @@ import { ShowPasswordDirective } from '../show-password.directive';
 })
 export class SignInComponent {
   user = {
-    nickname: '',
-    email: '',
-    password: '',
+    nickname: 'test',
+    email: 'test',
+    password: 'test',
   };
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;

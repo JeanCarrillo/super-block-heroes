@@ -19,8 +19,13 @@ export class GameLobbyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.socketService.room = {
+      players: [],
+      messages: [],
+      monster: {},
+      started: false,
+    };
     this.socketService.sendEvent('join', this.authService.user);
-    this.socketService.getRoom();
   }
 
   submitChat(): void {

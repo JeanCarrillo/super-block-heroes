@@ -13,14 +13,11 @@ export class DbService {
 
   private API_SERVER = `http://${server.ip}:${server.port}`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   async getHeroes() {
     await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => {
       this.heroes = heroes;
-      for (const hero of this.heroes) {
-        hero.sprites = JSON.parse(hero.sprites);
-      }
       console.log('heroes :', this.heroes);
     });
   }
@@ -52,5 +49,4 @@ export class DbService {
     });
     console.log(this.highscores);
   }
-
 }

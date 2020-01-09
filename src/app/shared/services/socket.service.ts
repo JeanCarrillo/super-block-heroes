@@ -17,6 +17,7 @@ export class SocketService {
   };
 
   time = 5;
+  interval: number;
 
   constructor(private socket: Socket, private authService: AuthService, private router: Router) {}
 
@@ -45,11 +46,12 @@ export class SocketService {
   }
 
   startGame(): void {
-    setTimeout(() => {
+    this.interval = window.setInterval(() => {
       if (this.time > 0) {
         this.time--;
-        this.startGame();
       } else {
+        clearInterval(this.interval);
+        this.time = 5;
         this.router.navigateByUrl('/game');
       }
     }, 1000);
