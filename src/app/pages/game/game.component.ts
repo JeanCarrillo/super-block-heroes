@@ -83,4 +83,13 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     clearInterval(this.interval);
   }
+
+  sendInvitation = (i) => {
+    this.authService.getUser(this.game.players[i].name)
+      .subscribe((player: any) => {
+        if (player.id) {
+          this.authService.inviteUser(player.id, this.game.players[this.socketService.myPlayerIndex].name);
+        }
+      });
+  }
 }
