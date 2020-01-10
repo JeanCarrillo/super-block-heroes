@@ -1,3 +1,108 @@
-.userCard {
+.container {
+    padding-top: 2rem;
+}
+
+.ranking {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.shimmer {
+    text-align: center;
+    font-weight: 500;
+    line-height: 2;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 0 0 1em 0;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.1);
+    background: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    background: -moz-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    background: gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+    -webkit-background-size: 125px 100%;
+    -moz-background-size: 125px 100%;
+    background-size: 125px 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-animation-name: shimmer;
+    -moz-animation-name: shimmer;
+    animation-name: shimmer;
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: #222;
+}
+
+@-moz-keyframes shimmer {
+    0% {
+        background-position: top left;
+    }
+
+    100% {
+        background-position: top right;
+    }
+}
+
+@-webkit-keyframes shimmer {
+    0% {
+        background-position: top left;
+    }
+
+    100% {
+        background-position: top right;
+    }
+}
+
+@-o-keyframes shimmer {
+    0% {
+        background-position: top left;
+    }
+
+    100% {
+        background-position: top right;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: top left;
+    }
+
+    100% {
+        background-position: top right;
+    }
+}
+
+.highscore-table {
+    width: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.highscore-table tbody {
+    display:block;
+    width: 100%;
+    overflow: scroll;
+    height: 400px;
+}
+
+.highscore-table thead tr {
+    display: block;
+}
+
+.highscore-table th,
+.highscore-table td {
+    padding: 5px;
+    width: 200px;
+}
+.aside {
     max-width: 50%;
+    margin: auto;
 }
