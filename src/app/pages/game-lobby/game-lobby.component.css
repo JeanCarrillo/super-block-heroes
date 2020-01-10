@@ -5,23 +5,36 @@
 
 .tchat {
   border-radius: 10%;
-  margin-left: 30%;
-  margin-top: 20px;
+  margin-left: 41%;
+  margin-top: 1.25rem;
 }
 
 .usercardlobby {
   display: inline-block;
+  margin-left: 9.375rem;
 }
 
 .messagesgeneral {
-  border-width: 5px;
+  border-width: 0.3125rem;
   border-style: inset;
   border-color: black;
-  margin-top: 30px;
+  margin-top: 1.875rem;
+  margin-left: 18.75rem;
+  width: 43.75rem;
+  height: 15rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  overflow: auto;
+  position: relative;
+}
+
+.messages{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 span {
-  color: rgb(116, 116, 116);
+  color: rgb(207, 0, 0);
   font-style: italic;
   font-size: small;
 }
