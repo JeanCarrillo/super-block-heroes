@@ -1,0 +1,6 @@
+<div>
+    <div *ngFor="let invitation of authservice.user.invitations; index as i">
+      <div>{{ invitation }}</div>
+      <app-button text="Accept" [callback]="accept.bind(this, invitation)"></app-button>
+    </div>
+  </div>

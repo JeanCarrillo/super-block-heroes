@@ -52,6 +52,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WelcomeComponent } from './pages/authentification/welcome/welcome.component';
 import { ShowPasswordDirective } from './pages/authentification/show-password.directive';
+import { InvitationsComponent } from './pages/home/social/invitations/invitations.component';
+import { FriendsComponent } from './pages/home/social/friends/friends.component';
 
 const socketConfig: SocketIoConfig = {
   url: `${server.ip}:${server.port}`,
@@ -91,6 +93,8 @@ const socketConfig: SocketIoConfig = {
     SignInComponent,
     ShowPasswordDirective,
     GameLobbyComponent,
+    InvitationsComponent,
+    FriendsComponent,
   ],
   imports: [
     BrowserModule,

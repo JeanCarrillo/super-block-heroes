@@ -1,13 +1,12 @@
-<div>
-  <h1>Invitations</h1>
-  <div *ngFor="let invitation of authservice.user.invitations; index as i">
-    <div>{{ invitation }}</div>
-    <app-button text="Accept" [callback]="accept.bind(this, invitation)"></app-button>
-  </div>
-</div>
-<div>
-  <h1>Friends</h1>
-  <div *ngFor="let friend of authservice.user.friends; index as i">
-    <div>{{ friend }}</div>
-  </div>
-</div>
+<ul class="nav nav-tabs">
+  <li class="nav-item" class="menucenter" (click)="setSelectedCategory('friends')">
+      <span class="nav-link" [class.active]="selectedCategory === 'friends'">Friends</span>
+  </li>
+  <li class="nav-item" class="menucenter" (click)="setSelectedCategory('invitations')">
+      <span class="nav-link" [class.active]="selectedCategory === 'invitations'">Invitations</span>
+  </li>
+</ul>
+
+
+<app-friends *ngIf="selectedCategory === 'friends'"></app-friends>
+<app-invitations *ngIf="selectedCategory === 'invitations'"></app-invitations>

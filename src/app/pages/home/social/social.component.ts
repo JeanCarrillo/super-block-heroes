@@ -7,6 +7,7 @@ import { AuthService } from '../../../shared/services/auth.service';
   styleUrls: ['./social.component.css'],
 })
 export class SocialComponent implements OnInit {
+  selectedCategory = 'friends';
   constructor(private authservice: AuthService) {}
 
   accept(nickname) {
@@ -14,5 +15,9 @@ export class SocialComponent implements OnInit {
   }
   ngOnInit() {
     this.authservice.getMyUser();
+  }
+
+  setSelectedCategory(str: string): void {
+    this.selectedCategory = str;
   }
 }
