@@ -19,6 +19,7 @@ export class DbService {
     await this.http.get(this.API_SERVER + '/heroes').subscribe(heroes => {
       console.log({ heroes });
       this.heroes = heroes;
+      this.getCapacities();
     });
   }
 

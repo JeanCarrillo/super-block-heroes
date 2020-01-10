@@ -259,7 +259,6 @@ export class Player {
         break;
     }
     this.sendEvent('score', score);
-    this.handlePlayerAction(this.playerNum, score);
   }
 
   public handleGameOver(): void {

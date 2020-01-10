@@ -4,8 +4,10 @@
 }
 
 .tchat {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
   border-radius: 10%;
-  margin-left: 41%;
   margin-top: 1.25rem;
   text-align: center;
 }

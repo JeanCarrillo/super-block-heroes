@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/sign-in']);
     await this.dbService.getHeroes();
     await this.dbService.getMonsters();
-    await this.dbService.getCapacities();
     this.socketService.getRoom();
   }
 }
