@@ -32,6 +32,15 @@ export class AuthService {
     );
   }
 
+  addFriend(nickname: string, userSendingInvitNickname: string) {
+    const data = { nickname: userSendingInvitNickname };
+    console.log("data: ", data);
+    console.log('id ', nickname);
+    console.log(this.API_SERVER + '/users/addFriend/' + nickname);
+    this.http.put(this.API_SERVER + '/users/addFriend/' + nickname, data)
+    .subscribe(res=>console.log('res',res),(err)=>console.log('err',err));
+  }
+
   async register(user: any) {
     this.user = user;
     await this.http
