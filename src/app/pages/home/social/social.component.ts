@@ -8,12 +8,16 @@ import { AuthService } from '../../../shared/services/auth.service';
 })
 export class SocialComponent implements OnInit {
   invitations: [];
+  friends: [];
   constructor(private authservice: AuthService) { }
+
+  accept(nickname) {
+    this.authservice.addFriend(nickname, this.authservice.user.nickname);
+  }
 
   ngOnInit() {
   this.invitations = this.authservice.user.invitations ? this.authservice.user.invitations : []; 
-  console.log(this.authservice.user);
-  console.log(this.authservice.user.friends ? this.authservice.user.friends : 'tu nas pas damis');
-  console.log(this.invitations);
+  this.friends = this.authservice.user.friends;
+  console.log('friends => ', this.friends);
   }
 }
