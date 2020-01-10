@@ -55,14 +55,14 @@ export class Game {
   }
 
   addToGameStream = (event: any): void => {
-    // if (event.eventType === 'score') {
-    //   this.observer.next({
-    //     ...event,
-    //     monster: this.monster,
-    //   });
-    // } else {
-    this.observer.next(event);
-    // }
+    if (event.eventType === 'score') {
+      this.observer.next({
+        ...event,
+        monster: this.monster,
+      });
+    } else {
+      this.observer.next(event);
+    }
   };
 
   handleKeys(key: string): void {

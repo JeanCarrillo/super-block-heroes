@@ -62,6 +62,8 @@ export class GameComponent implements OnInit, OnDestroy {
         break;
       }
       case 'score': {
+        this.game.monster.x = event.monster.x;
+        this.game.monster.isHeadingTo = event.monster.isHeadingTo;
         this.game.handlePlayerAction(event.playerIndex, event.data);
         break;
       }
