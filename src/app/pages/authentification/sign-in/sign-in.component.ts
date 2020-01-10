@@ -17,7 +17,8 @@ export class SignInComponent {
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
+
 
   forgotPW = () => {
     window.alert('This feature will be enable soon!');

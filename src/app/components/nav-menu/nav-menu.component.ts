@@ -12,10 +12,10 @@ export class NavMenuComponent implements OnInit {
     //   text: 'Store',
     //   link: 'store',
     // },
-    // {
-    //   text: 'Social',
-    //   link: 'social',
-    // },
+    {
+      text: 'Social',
+      link: 'social',
+    },
     {
       text: 'Lobby',
       link: 'home',

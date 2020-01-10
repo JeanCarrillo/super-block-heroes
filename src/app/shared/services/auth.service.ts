@@ -23,16 +23,13 @@ export class AuthService {
 
   inviteUser(userId: number, userSendingInvitNickname: string) {
     const data = { nickname: userSendingInvitNickname };
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.getToken()}`,
-      }),
-    };
     console.log('data: ', data);
     console.log('id ', userId);
     console.log(this.API_SERVER + '/users/invite/' + userId);
-    this.http.put(this.API_SERVER + '/users/invite/' + userId, data, httpOptions);
+    this.http.put(this.API_SERVER + '/users/invite/' + userId, data).subscribe(
+      res => console.log('res', res),
+      err => console.log('err', err)
+    );
   }
 
   async register(user: any) {
