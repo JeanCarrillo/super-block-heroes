@@ -17,7 +17,7 @@ body {
 app-root {
   min-height: 100%;
   min-width: 100%;
-  display: grid;
+  display: flex;
 }
 
 app-game {
@@ -37,5 +37,7 @@ app-login {
 }
 
 app-game-lobby {
+  min-height: 100%;
+  min-width: 100%;
   background-image: url(assets/img/backgrounds/4/background.png);
 }

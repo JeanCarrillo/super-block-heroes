@@ -1,10 +1,11 @@
-<app-user-card
-  *ngFor="let player of socketService.room.players"
-  class="usercardlobby"
-  [nickname]="player.nickname"
-  [gold]="player.gold"
-  [hero]="player.hero"
-></app-user-card>
+<div class="usercardlobby">
+  <app-user-card
+    *ngFor="let player of socketService.room.players"
+    [nickname]="player.nickname"
+    [gold]="player.gold"
+    [hero]="player.hero"
+  ></app-user-card>
+</div>
 <div class="messagesgeneral">
   <div class="messages">
     <p
@@ -24,10 +25,10 @@
     (keyup.enter)="submitChat()"
   />
 </div>
+<h1 class="counter">
+  {{ socketService.startTimer }}
+</h1>
 <div class="buttonlobby">
-  <h1>
-    {{ socketService.startTimer }}
-  </h1>
   <app-button text="Play" size="2" (click)="launchGame()"></app-button>
   <app-button text="Back" url="/home" size="2"></app-button>
 </div>

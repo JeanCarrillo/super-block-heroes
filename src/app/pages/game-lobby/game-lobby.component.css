@@ -7,19 +7,22 @@
   border-radius: 10%;
   margin-left: 41%;
   margin-top: 1.25rem;
+  text-align: center;
 }
 
 .usercardlobby {
-  display: inline-block;
-  margin-left: 9.375rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* margin-left: 9.375rem; */
+  margin-bottom: 1.875rem;
 }
 
 .messagesgeneral {
   border-width: 0.3125rem;
   border-style: inset;
   border-color: black;
-  margin-top: 1.875rem;
-  margin-left: 18.75rem;
+  margin: auto;
   width: 43.75rem;
   height: 15rem;
   background-color: rgba(255, 255, 255, 0.7);
@@ -27,7 +30,7 @@
   position: relative;
 }
 
-.messages{
+.messages {
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -37,4 +40,11 @@ span {
   color: rgb(207, 0, 0);
   font-style: italic;
   font-size: small;
+}
+
+.counter {
+  position: absolute;
+  top: 45vh;
+  left: 50vw;
+  font-size: 10em;
 }
