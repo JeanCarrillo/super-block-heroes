@@ -1,9 +1,7 @@
 import { Player } from './player';
 import { Monster } from './monster';
-
 import { KEYS } from '../constants/keyboard';
 import { Observable } from 'rxjs';
-
 export class Game {
   victory = false;
   defeat = false;
@@ -18,7 +16,6 @@ export class Game {
   gameStream$: Observable<any[]> = Observable.create(observer => {
     this.observer = observer;
   });
-
   constructor(monster: any, users: any, myPlayerIndex: number) {
     this.myPlayerIndex = myPlayerIndex;
     for (let i = 0; i < users.length; i += 1) {
@@ -39,7 +36,6 @@ export class Game {
       this.addToGameStream,
       myPlayerIndex
     );
-
     // Calculate players positions
     // Example: player 1 owns 0% to 25% of the board, player 2 25-50% etc.
     // Saved in this.positions;
@@ -53,19 +49,10 @@ export class Game {
       });
     }
   }
-
-  addToGameStream = (event: any): void => {
-    if (event.eventType === 'score') {
-      this.observer.next({
-        ...event,
-        monster: this.monster,
-      });
-    } else {
-      this.observer.next(event);
-    }
+  addToGameStream = event => {
+    this.observer.next(event);
   };
-
-  handleKeys(key: string): void {
+  handleKeys(key): void {
     // TODO: keep local multiplayer keys?
     // for (let i = 0; i < this.players.length; i++) {
     if (!this.players[this.myPlayerIndex].gameOver && !this.victory) {
@@ -93,7 +80,6 @@ export class Game {
     }
     // }
   }
-
   // Player callback
   // If a player scores, check monster position and handle damage if monster is within player range
   handlePlayerAction = (playerIndex: number, score: number): void => {
@@ -111,7 +97,6 @@ export class Game {
       this.monster.handleDamage(score);
     }
   };
-
   handlePlayerCapacity = (playerIndex: number, capacity: string): void => {
     this.players[playerIndex].hero.changeStatus('Throw');
     switch (capacity) {
@@ -164,7 +149,6 @@ export class Game {
         break;
     }
   };
-
   // Monster callback
   handleMonsterAction = (act?: boolean) => {
     // Monster action
@@ -175,8 +159,7 @@ export class Game {
           this.monster.x < this.playersPositions[i].max
         ) {
           this.players[i].hero.changeStatus('GetHit');
-          // TODO: change value and effect ?
-          this.players[i].loopDelay -= 30;
+          this.players[i].loopDelay -= 50;
         }
       }
     } else {
@@ -187,7 +170,6 @@ export class Game {
       return true;
     }
   };
-
   // Returns index of player facing monster
   whichPlayerHasMonster(): number {
     for (let i = 0; i < this.players.length; i++) {
@@ -201,10 +183,8 @@ export class Game {
     }
     return -1;
   }
-
   loop(): void {
     let defeat = true;
-
     this.playerFacingMonster = this.whichPlayerHasMonster();
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.players.length; i++) {
@@ -218,11 +198,9 @@ export class Game {
         defeat = false;
       }
     }
-
     if (defeat) {
       this.defeat = true;
     }
-
     if (this.monster.currentLife > 0) {
       this.monster.move();
     } else {

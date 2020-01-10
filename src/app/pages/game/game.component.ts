@@ -2,9 +2,7 @@ import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { DbService } from '../../shared/services/db.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SocketService } from 'src/app/shared/services/socket.service';
-
 import { Game } from '../../shared/models/game';
-
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -13,19 +11,16 @@ import { Game } from '../../shared/models/game';
 export class GameComponent implements OnInit, OnDestroy {
   interval: any;
   game: Game;
-
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     this.game.handleKeys(event.key);
   }
-
   constructor(
     private dbService: DbService,
     private authService: AuthService,
     private socketService: SocketService
   ) {}
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.game = new Game(
       this.socketService.room.monster,
       this.socketService.room.players,
@@ -38,11 +33,9 @@ export class GameComponent implements OnInit, OnDestroy {
       this.socketService.sendEvent('gameEvent', event);
     });
     this.interval = setInterval(() => this.gameLoop(), 20);
-
     console.log(this.game.players);
   }
-
-  handleGameEvent(event: any): void {
+  handleGameEvent(event: any) {
     console.log({ event });
     switch (event.eventType) {
       case 'board': {
@@ -50,7 +43,7 @@ export class GameComponent implements OnInit, OnDestroy {
         break;
       }
       case 'gameOver': {
-        this.game.players[event.playerIndex].handleGameOver();
+        this.game.players[event.playerIndex].gameOver = true;
         break;
       }
       case 'currentBlocks': {
@@ -62,8 +55,6 @@ export class GameComponent implements OnInit, OnDestroy {
         break;
       }
       case 'score': {
-        this.game.monster.x = event.monster.x;
-        this.game.monster.isHeadingTo = event.monster.isHeadingTo;
         this.game.handlePlayerAction(event.playerIndex, event.data);
         break;
       }
@@ -73,7 +64,6 @@ export class GameComponent implements OnInit, OnDestroy {
       }
     }
   }
-
   private gameLoop(): void {
     this.game.loop();
     if (this.game.victory || this.game.defeat) {
@@ -81,12 +71,10 @@ export class GameComponent implements OnInit, OnDestroy {
       this.authService.postGame(this.game);
     }
   }
-
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     clearInterval(this.interval);
   }
-
-  sendInvitation = (i: number): void => {
+  sendInvitation = i => {
     this.authService.getUser(this.game.players[i].name).subscribe((player: any) => {
       if (player.id) {
         this.authService.inviteUser(

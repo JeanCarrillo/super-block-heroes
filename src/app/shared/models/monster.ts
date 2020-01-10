@@ -26,7 +26,6 @@ export class Monster {
   isHeadingTo: number;
   addToGameStream: any;
   myPlayerIndex: number;
-
   constructor(monster: any, handleMonsterAction: any, addToGameStream: any, myPlayerIndex: number) {
     this.handleMonsterAction = handleMonsterAction;
     // Initial values
@@ -62,8 +61,7 @@ export class Monster {
     this.addToGameStream = addToGameStream;
     this.myPlayerIndex = myPlayerIndex;
   }
-
-  public move(): void {
+  public move() {
     const now = Date.now();
     // Handle freeze capacity timer
     if (this.isFrozen) {
@@ -107,10 +105,9 @@ export class Monster {
       }
     }
   }
-
-  private attack(): void {
-    // TODO: something depending on monster
-    // need to update database and create capacities
+  private attack() {
+    // TO DO: something depending on monster
+    // need to update database
     const isPlayerAlive = this.handleMonsterAction();
     if (isPlayerAlive) {
       this.attackTime = Date.now();
@@ -119,8 +116,7 @@ export class Monster {
       this.handleMonsterAction(true);
     }
   }
-
-  private animate(): void {
+  private animate() {
     if (this.sprite < this.sprites[this.status].end) {
       this.sprite += 1;
     } else {
@@ -133,13 +129,11 @@ export class Monster {
       this.sprite = this.sprites[this.status].start;
     }
   }
-
-  private changeStatus(status: string): void {
+  private changeStatus(status: string) {
     this.status = status;
     this.sprite = this.sprites[this.status].start;
   }
-
-  public handleDamage(hitpoints: number): void {
+  public handleDamage(hitpoints: number) {
     this.currentLife -= hitpoints;
     this.sendEvent('monsterLife', this.currentLife);
     if (this.currentLife > 0) {
@@ -148,8 +142,7 @@ export class Monster {
       this.changeStatus('Death');
     }
   }
-
-  public handleCapacity(capacity: string, options?: any): void {
+  public handleCapacity(capacity: string, options?: any) {
     switch (capacity) {
       case 'Frost Blast': {
         this.frozenTime = Date.now();
@@ -165,8 +158,7 @@ export class Monster {
         break;
     }
   }
-
-  private sendEvent(eventType: string, data: any): void {
+  private sendEvent(eventType: string, data: any) {
     this.addToGameStream({
       playerIndex: this.myPlayerIndex,
       eventType,

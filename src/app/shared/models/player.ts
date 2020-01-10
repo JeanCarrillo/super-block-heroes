@@ -3,7 +3,6 @@ import { Board } from './board';
 import { Block } from './block';
 import { Piece } from './piece';
 import { Hero } from './hero';
-
 export class Player {
   isFastForwarding = false;
   gameOver = false;
@@ -44,7 +43,6 @@ export class Player {
   myPlayerIndex: number;
   test = true;
   isMyPlayer: boolean;
-
   constructor(
     user: any,
     playerNum: number,
@@ -70,7 +68,6 @@ export class Player {
     this.hero = new Hero(user.hero, this.setGameOver);
     this.currentBlocks = [];
   }
-
   public loop(): void {
     this.hero.facingMonster = this.facingMonster;
     this.hero.move();
@@ -104,7 +101,6 @@ export class Player {
       }
     }
   }
-
   // If there is no currentBlocks, creates a new piece
   // => calls Piece constructor to get the shape and color
   // => then recreates it with individual blocks (added to currentBlocks)
@@ -127,7 +123,6 @@ export class Player {
     }
     this.sendEvent('currentBlocks', this.currentBlocks);
   }
-
   // direction: number of indexes to rotate
   // => direction 1 : rotate right, direction -1 : rotate left
   public rotateCurrentPiece(direction: number): void {
@@ -168,7 +163,6 @@ export class Player {
     }
     this.sendEvent('currentBlocks', this.currentBlocks);
   }
-
   // Y + 1 to all currentBlocks and currentPiece (fall by 1)
   private letCurrentBlocksFall(): void {
     if (!this.currentPiece) {
@@ -180,7 +174,6 @@ export class Player {
     this.currentPiece.y += 1;
     this.sendEvent('currentBlocks', this.currentBlocks);
   }
-
   // When current blocks collide with matrix or existing blocks
   // => add them to the board.tiles matrix permanently
   // => game over check
@@ -205,7 +198,6 @@ export class Player {
       this.checkCompletedLines();
     }
   }
-
   // Checks board.tiles matrix for full lines
   // => add all indexes to an array
   // => call deleteRows method to clear them
@@ -229,7 +221,6 @@ export class Player {
     }
     this.sendEvent('board', this.board.tiles);
   }
-
   // delete all lines in the rowsToDelete array from the board.tiles matrix
   // => replace them by empty lines (filled by 0) at the 0 index of the matrix (top)
   public deleteRows(rowsToDelete: number[]): void {
@@ -239,7 +230,6 @@ export class Player {
       this.board.tiles.splice(0, 0, emptyRow);
     }
   }
-
   // Score calculation
   // TODO: something more complex ;-)
   private handleScore(nbOfRows: number): void {
@@ -249,19 +239,19 @@ export class Player {
         score = 10;
         break;
       case 2:
-        score = 30;
+        score = 24;
         break;
       case 3:
-        score = 60;
+        score = 39;
         break;
       case 4:
-        score = 100;
+        score = 56;
         break;
     }
     this.sendEvent('score', score);
+    this.handlePlayerAction(this.playerNum, score);
   }
-
-  public handleGameOver(): void {
+  private handleGameOver(): void {
     if (this.hero.status === 'Death') {
       return;
     }
@@ -269,12 +259,10 @@ export class Player {
     this.currentBlocks = [];
     this.currentPiece = null;
   }
-
   public setGameOver = (): void => {
     this.gameOver = true;
     this.sendEvent('gameOver', null);
   };
-
   // Returns true if something is colliding
   // Y axis only
   private isColliding(x: number, y: number, dirY: number): boolean {
@@ -286,7 +274,6 @@ export class Player {
     }
     return false;
   }
-
   public useCapacity(): void {
     const now = Date.now();
     if (now - this.capacityTime > this.capacityCooldown) {
@@ -299,14 +286,12 @@ export class Player {
       }
     }
   }
-
   // Used for Holy Block capacity, changes to I piece
   public changeBlock(): void {
     this.currentBlocks = [];
     this.currentPiece = null;
     this.nextPiece = 'I';
   }
-
   // Linked to Keyboard events : actions
   // Moves current blocks left/right, X axis only, no Y axis checks
   public moveCurrentBlocks(x: number): void {
@@ -327,7 +312,6 @@ export class Player {
       }
     }
   }
-
   // Method used when moving current blocks (key pressed)
   // checks left and right, returns false if illegal move (out of matrix or existing block)
   // X axis only
@@ -340,7 +324,6 @@ export class Player {
     }
     return true;
   }
-
   // When key is pressed
   // => current blocks fall until collision (fast forward)
   // TO DO: DEBUG
@@ -367,7 +350,6 @@ export class Player {
       this.isFastForwarding = false;
     }
   }
-
   private sendEvent(eventType: string, data?: any) {
     this.addToGameStream({
       playerIndex: this.myPlayerIndex,

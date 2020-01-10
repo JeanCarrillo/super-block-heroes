@@ -1,16 +1,13 @@
 <div>
-    <h1>Invitations</h1>
-    <div *ngFor="let invitation of invitations; index as i">
-        <div>{{ invitation }}</div>
-        <app-button
-            text="Accept"
-            [callback]="accept.bind(this, invitation)"
-        ></app-button>
-    </div>
+  <h1>Invitations</h1>
+  <div *ngFor="let invitation of authservice.user.invitations; index as i">
+    <div>{{ invitation }}</div>
+    <app-button text="Accept" [callback]="accept.bind(this, invitation)"></app-button>
+  </div>
 </div>
 <div>
-    <h1>Friends</h1>
-    <div *ngFor="let friend of friends; index as i">
-        <div>{{ friend }}</div>
-    </div>
+  <h1>Friends</h1>
+  <div *ngFor="let friend of authservice.user.friends; index as i">
+    <div>{{ friend }}</div>
+  </div>
 </div>

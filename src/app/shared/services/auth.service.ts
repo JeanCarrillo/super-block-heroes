@@ -34,11 +34,25 @@ export class AuthService {
 
   addFriend(nickname: string, userSendingInvitNickname: string) {
     const data = { nickname: userSendingInvitNickname };
-    console.log("data: ", data);
+    console.log('data: ', data);
     console.log('id ', nickname);
     console.log(this.API_SERVER + '/users/addFriend/' + nickname);
-    this.http.put(this.API_SERVER + '/users/addFriend/' + nickname, data)
-    .subscribe(res=>console.log('res',res),(err)=>console.log('err',err));
+    this.http.put(this.API_SERVER + '/users/addFriend/' + nickname, data).subscribe(() => {
+      console.log('test');
+    });
+    const decoded = jwt_decode(this.getToken());
+    setTimeout(() => {
+      this.http
+        .get(this.API_SERVER + '/users/nickname/' + decoded.nickname)
+        .subscribe(res => this.setUser(res));
+    }, 200);
+  }
+
+  getMyUser() {
+    const decoded = jwt_decode(this.getToken());
+    this.http
+      .get(this.API_SERVER + '/users/nickname/' + decoded.nickname)
+      .subscribe(res => this.setUser(res));
   }
 
   async register(user: any) {
