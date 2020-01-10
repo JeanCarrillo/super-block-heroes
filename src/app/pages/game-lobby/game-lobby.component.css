@@ -45,8 +45,12 @@ span {
 }
 
 .counter {
-  position: absolute;
-  top: 45vh;
-  left: 50vw;
   font-size: 10em;
+}
+.counterContainer {
+  position: absolute;
+  left: 25vw;
+  top: 25vw;
+  width: 50vw;
+  text-align: center;
 }

@@ -25,9 +25,11 @@
     (keyup.enter)="submitChat()"
   />
 </div>
-<h1 class="counter">
-  {{ socketService.startTimer }}
-</h1>
+<div class="counterContainer">
+  <h1 class="counter">
+    {{ socketService.startTimer }}
+  </h1>
+</div>
 <div class="buttonlobby">
   <app-button text="Play" size="2" (click)="launchGame()"></app-button>
   <app-button text="Back" url="/home" size="2"></app-button>

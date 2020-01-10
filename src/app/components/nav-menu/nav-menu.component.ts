@@ -8,17 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class NavMenuComponent implements OnInit {
   selectedButton = 0;
   buttons = [
-    // {
-    //   text: 'Store',
-    //   link: 'store',
-    // },
-    {
-      text: 'Social',
-      link: 'social',
-    },
     {
       text: 'Lobby',
       link: 'home',
+    },
+    {
+      text: 'Social',
+      link: 'social',
     },
     {
       text: 'Ranking',
