@@ -10,9 +10,6 @@ export class SocialComponent implements OnInit {
   selectedCategory = 'friends';
   constructor(private authservice: AuthService) {}
 
-  accept(nickname) {
-    this.authservice.addFriend(nickname, this.authservice.user.nickname);
-  }
   ngOnInit() {
     this.authservice.getMyUser();
   }

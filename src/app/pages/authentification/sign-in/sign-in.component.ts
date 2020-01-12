@@ -10,15 +10,14 @@ import { ShowPasswordDirective } from '../show-password.directive';
 })
 export class SignInComponent {
   user = {
-    nickname: 'test',
-    email: 'test',
-    password: 'test',
+    nickname: '',
+    email: '',
+    password: '',
   };
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
 
-  constructor(private authService: AuthService) { }
-
+  constructor(private authService: AuthService) {}
 
   forgotPW = () => {
     window.alert('This feature will be enable soon!');
