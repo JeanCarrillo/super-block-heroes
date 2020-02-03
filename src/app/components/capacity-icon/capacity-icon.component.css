@@ -1,5 +1,9 @@
-.capacity {
+.capacity-container {
   width: 4vw;
+}
+
+.capacity {
+  width: 100%;
   height: 4vw;
   background-size: contain;
   border: 1px solid white;
@@ -15,7 +19,6 @@
 }
 
 .capacity-text {
-  position: absolute;
   text-align: center;
   width: 100%;
   font-size: medium;
