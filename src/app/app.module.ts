@@ -13,7 +13,6 @@ import server from './shared/constants/server';
 // authentification
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
-import { ForgotPwComponent } from './pages/authentification/forgot-pw/forgot-pw.component';
 
 // components
 // dumbComponents
@@ -40,8 +39,6 @@ import { GameComponent } from './pages/game/game.component';
 import { GameLobbyComponent } from './pages/game-lobby/game-lobby.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LobbyComponent } from './pages/home/lobby/lobby.component';
-import { MyaccountComponent } from './pages/home/myaccount/myaccount.component';
-import { StoreComponent } from './pages/home/store/store.component';
 import { CollectionComponent } from './pages/home/collection/collection.component';
 import { MonstersListComponent } from './pages/home/collection/monsters-list/monsters-list.component';
 import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-list.component';
@@ -50,7 +47,6 @@ import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { WelcomeComponent } from './pages/authentification/welcome/welcome.component';
 import { ShowPasswordDirective } from './pages/authentification/show-password.directive';
 import { InvitationsComponent } from './pages/home/social/invitations/invitations.component';
 import { FriendsComponent } from './pages/home/social/friends/friends.component';
@@ -65,7 +61,6 @@ const socketConfig: SocketIoConfig = {
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    ForgotPwComponent,
     HomeComponent,
     LobbyComponent,
     NavMenuComponent,
@@ -75,9 +70,7 @@ const socketConfig: SocketIoConfig = {
     ScoreComponent,
     ButtonComponent,
     PlayerContainerComponent,
-    StoreComponent,
     SocialComponent,
-    MyaccountComponent,
     RankingComponent,
     CollectionComponent,
     BackgroundComponent,
@@ -89,7 +82,6 @@ const socketConfig: SocketIoConfig = {
     HeroComponent,
     CapacityIconComponent,
     HeroCardComponent,
-    WelcomeComponent,
     SignInComponent,
     ShowPasswordDirective,
     GameLobbyComponent,
