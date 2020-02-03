@@ -1,11 +1,13 @@
-<div
-  class="cuteButton"
-  [style.backgroundImage]="whichButton()"
-  [style.fontSize.em]="textSize()"
+<button
+  class="btn btn-success loginButton"
   [routerLink]="url"
   (click)="useCallback()"
+  [style.background]='whichBackground()'
 >
   <p class="buttonContainer">
-    <a class="buttonLink">{{ text }}</a>
+    <a
+      class="buttonLink"
+      [style.fontSize.em]="textSize()"
+    >{{ text }}</a>
   </p>
-</div>
+</button>
