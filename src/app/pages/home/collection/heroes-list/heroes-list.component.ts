@@ -20,6 +20,10 @@ export class HeroesListComponent {
     return this.isOwned(heroId) ? '' : 'grayscale(1)';
   }
 
+  msToSeconds(ms: number): number {
+    return Math.floor(ms / 1000);
+  }
+
   setSelectedHero(hero: Hero): void {
     console.log({ hero });
     this.selectedHero = hero;

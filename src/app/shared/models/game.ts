@@ -158,8 +158,13 @@ export class Game {
           this.monster.x > this.playersPositions[i].min &&
           this.monster.x < this.playersPositions[i].max
         ) {
+          // Triggers player animation
           this.players[i].hero.changeStatus('GetHit');
-          this.players[i].loopDelay -= 50;
+          // monster.id = 1-2-3-4
+          // Backend needs a new strength value if we need new monsters
+          this.players[i].addRows(this.monster.id);
+          // Speeds up player
+          // this.players[i].loopDelay -= 50;
         }
       }
     } else {

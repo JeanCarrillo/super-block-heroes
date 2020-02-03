@@ -144,7 +144,7 @@ export class Player {
       }
     }
     // If piece collides after rotating, rotate back and return
-    // TO DO : handle different scenarios ?
+    // TODO: handle different scenarios ?
     if (rotationCollide) {
       this.currentPiece.rotate(-direction);
       return;
@@ -228,6 +228,16 @@ export class Player {
     for (let i = 0; i < rowsToDelete.length; i++) {
       this.board.tiles.splice(rowsToDelete[i], 1);
       this.board.tiles.splice(0, 0, emptyRow);
+    }
+  }
+  // add filled lines, with 1 empty block, to the board (monster capacity)
+  public addRows(rowsToAdd: number): void {
+    const filledRow = new Array(this.rowNumbers).fill(1);
+    const emptyBlockIndex = Math.floor(Math.random() * filledRow.length);
+    filledRow[emptyBlockIndex] = 0;
+    for (let i = 0; i < rowsToAdd; i++) {
+      this.board.tiles.push(filledRow);
+      this.board.tiles.shift();
     }
   }
   // Score calculation
