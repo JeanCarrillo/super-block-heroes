@@ -1,9 +1,5 @@
-<div class="capacity-container"  [class.pulsate-fwd]="progress >= 100 && !demoIcon">
-  <div
-    class="capacity"
-    [style.backgroundImage]="img"
-   
-  >
+<div class="capacity-container" [class.pulsate-fwd]="progress >= 100 && !demoIcon">
+  <div class="capacity" [style.backgroundImage]="img">
     <div class="overlay" [style.height]="getProgress()" [style.backgroundImage]="img"></div>
   </div>
   <p *ngIf="progress >= 100 && !demoIcon" class="capacity-text">Press {{ key }} !</p>

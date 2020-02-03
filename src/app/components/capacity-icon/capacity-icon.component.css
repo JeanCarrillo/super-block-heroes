@@ -19,8 +19,10 @@
 }
 
 .capacity-text {
+  position: absolute;
+  margin-left: -2vw;
   text-align: center;
-  width: 100%;
+  width: 8vw;
   font-size: medium;
   font-weight: 400;
   color: white;
