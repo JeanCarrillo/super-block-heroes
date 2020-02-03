@@ -29,16 +29,13 @@ export class ButtonComponent {
   /*
    * this method choose a button depends on its type
    */
-  private whichButton(): string {
+  private whichBackground(): string {
     switch (this.buttonType) {
-      case 'play': {
-        return 'url(../../../assets/img/buttons/playButton.png)';
-      }
-      case 'login': {
-        return 'url(../../../assets/img/buttons/loginButton.png)';
+      case 'logout': {
+        return 'linear-gradient(#ff1a1a, #b30000)';
       }
       default: {
-        return 'url(../../../assets/img/buttons/menuButton.png)';
+        return 'linear-gradient(#00cc00, #579e3d)';
       }
     }
   }

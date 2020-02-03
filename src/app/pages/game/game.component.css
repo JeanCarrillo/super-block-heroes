@@ -2,6 +2,9 @@
   position: absolute;
   top: 44vh;
   left: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h5 {
