@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { KEYS } from '../../shared/constants/keyboard';
 
 @Component({
   selector: 'app-capacity-icon',
@@ -6,12 +7,15 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
   styleUrls: ['./capacity-icon.component.css'],
 })
 export class CapacityIconComponent implements OnInit, OnChanges {
+  @Input() demoIcon: boolean;
   @Input() capacityName: string;
   @Input() progress: number;
   img: string;
+  key: string;
   constructor() {}
 
   ngOnInit(): void {
+    this.key = KEYS[0].CAPACITY.toUpperCase();
     this.img = this.formatImg(this.capacityName);
   }
 
