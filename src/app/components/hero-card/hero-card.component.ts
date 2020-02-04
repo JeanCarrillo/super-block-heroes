@@ -28,9 +28,6 @@ export class HeroCardComponent implements OnInit, OnDestroy {
   init(): void {
     this.name = this.inputHero.name;
     this.img = `url(/assets/img/heroes/${this.name.replace(' ', '')}.png)`;
-    if (this.name === 'Satyr') {
-      this.img = `url(/assets/img/heroes/Paladin.png)`;
-    }
     this.sprite = heroSprites[this.status].start;
   }
 
@@ -57,7 +54,7 @@ export class HeroCardComponent implements OnInit, OnDestroy {
   }
 
   getWidth(): string {
-    return this.width+"vw";
+    return this.width + 'vw';
   }
 
   changeStatus(): void {

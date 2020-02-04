@@ -2,18 +2,8 @@
   width: auto;
 }
 
-/* .capacityalign{
-position: absolute;
-width: 4vw;
-height: 4vw;
-} */
-
 .capacityalign {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-}
-
-.test {
-  height: 87vh;
 }

@@ -3,5 +3,7 @@
     class="sprite"
     [style.backgroundImage]="img"
     [style.backgroundPosition]="getBackgroundPosition()"
-  ></div>
+  >
+    <div *ngIf="hero.status === 'Throw'" class="anim-glow"></div>
+  </div>
 </div>

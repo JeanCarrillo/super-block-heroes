@@ -14,9 +14,6 @@ export class HeroComponent implements OnInit {
 
   ngOnInit(): void {
     this.img = `url(/assets/img/heroes/${this.hero.name.replace(' ', '')}.png)`;
-    if (this.hero.name === 'Satyr') {
-      this.img = `url(/assets/img/heroes/Paladin.png)`;
-    }
   }
 
   getBackgroundPosition(): string {

@@ -25,8 +25,9 @@
   width: 8vw;
   font-size: medium;
   font-weight: 400;
-  color: white;
   z-index: 3;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .pulsate-fwd {
