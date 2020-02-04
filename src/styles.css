@@ -31,14 +31,27 @@ app-home {
     min-height: 100%;
     min-width: 100%;
     background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
+    opacity: 0.8;
 }
 
 app-login {
-    background-image: url(assets/img/backgrounds/4/background.png);
+    background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
+    opacity: 0.8;
 }
 
 app-game-lobby {
     min-height: 100%;
     min-width: 100%;
-    background-image: url(assets/img/backgrounds/4/background.png);
+    background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
+    opacity: 0.8;
+}
+
+app-sign-in {
+    background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
+    opacity: 0.8;
+}
+
+app-sign-up {
+    background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
+    opacity: 0.8;
 }

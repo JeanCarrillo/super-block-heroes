@@ -5,8 +5,6 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-image: url('/assets/img/backgrounds/Cartoon_Forest_BG_01.png');
-    opacity: 0.8;
 }
 
 .loginCard {
