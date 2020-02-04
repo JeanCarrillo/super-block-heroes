@@ -3,9 +3,12 @@
 }
 
 .ranking {
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgb(0, 0, 0);
+    opacity: 0.86;
+    padding: 2rem;
+    border-radius: 5px;
+    border: rgb(0, 0, 0);
+    box-shadow: 10px 5px 5px rgb(0,0,0);
 }
 
 .shimmer {
@@ -99,6 +102,7 @@
     width: auto;
     table-layout: fixed;
     border-collapse: collapse;
+    color: #fff;
 }
 
 .highscore-table tbody {
