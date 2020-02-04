@@ -3,41 +3,42 @@
 @import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
 
 html {
-  min-height: 100%;
-  min-width: 100%;
-  display: flex;
-  flex-grow: 1;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-grow: 1;
 }
+
 body {
-  min-height: 100%;
-  min-width: 100%;
-  font-family: 'Righteous', cursive;
+    min-height: 100%;
+    min-width: 100%;
+    font-family: 'Righteous', cursive;
 }
 
 app-root {
-  min-height: 100%;
-  min-width: 100%;
-  display: flex;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
 }
 
 app-game {
-  min-height: 100%;
-  min-width: 100%;
-  display: flex;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
 }
 
 app-home {
-  min-height: 100%;
-  min-width: 100%;
-  background-image: url(assets/img/backgrounds/4/background.png);
+    min-height: 100%;
+    min-width: 100%;
+    background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
 }
 
 app-login {
-  background-image: url(assets/img/backgrounds/4/background.png);
+    background-image: url(assets/img/backgrounds/4/background.png);
 }
 
 app-game-lobby {
-  min-height: 100%;
-  min-width: 100%;
-  background-image: url(assets/img/backgrounds/4/background.png);
+    min-height: 100%;
+    min-width: 100%;
+    background-image: url(assets/img/backgrounds/4/background.png);
 }

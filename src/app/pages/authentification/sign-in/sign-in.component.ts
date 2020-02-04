@@ -3,6 +3,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 // import { Monster } from 'src/app/shared/models/monster';
 import { ShowPasswordDirective } from '../show-password.directive';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -17,7 +18,7 @@ export class SignInComponent {
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, public router: Router) {}
 
   forgotPW = () => {
     window.alert('This feature will be enable soon!');

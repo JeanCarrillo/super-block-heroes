@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lobby',
@@ -7,5 +8,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./lobby.component.css'],
 })
 export class LobbyComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, public router: Router) {
+  }
 }
