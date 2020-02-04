@@ -5,32 +5,14 @@
     </div>
 
     <p>Nickname</p>
-    <input
-      type="text"
-      [(ngModel)]="user.nickname"
-      class="input"
-      placeholder="Nickname"
-      (keyup.enter)="signin()"
-    />
+    <input type="text" [(ngModel)]="user.nickname" class="input" placeholder="Nickname" (keyup.enter)="signin()" />
 
     <p>Email</p>
-    <input
-      type="text"
-      [(ngModel)]="user.email"
-      class="input"
-      placeholder="user@email.com"
-      (keyup.enter)="signup()"
-    />
-
-    <p>Pseudo</p>
-    <input
-      type="password"
-      [(ngModel)]="user.password"
-      class="input"
-      placeholder="Password"
-      (keyup.enter)="signin()"
-    />
-
+    <input type="text" [(ngModel)]="user.email" class="input" placeholder="user@email.com" (keyup.enter)="signup()" />
+    <div class="pwdContainer">
+      <p>Password</p>
+    </div>
+    <input type="password" [(ngModel)]="user.password" class="input" placeholder="Password" (keyup.enter)="signin()" showPassword />
     <div class="btnContainer">
       <app-button buttonType="login" text="Sign Up" (click)="signup()" size="1.4"></app-button>
     </div>

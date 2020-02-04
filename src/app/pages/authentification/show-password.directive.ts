@@ -24,8 +24,9 @@ export class ShowPasswordDirective {
   setup() {
     const parent = this.el.nativeElement.parentNode;
     const span = document.createElement('span');
-    span.innerHTML = `Show password`;
+    span.innerHTML = 'Show password';
     span.style.cursor = 'pointer';
+    span.style.color = 'white';
     span.addEventListener('click', event => {
       this.toggle(span);
     });

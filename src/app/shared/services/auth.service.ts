@@ -5,6 +5,7 @@ import { DbService } from './db.service';
 import server from '../constants/server';
 
 import * as jwt_decode from 'jwt-decode';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -77,28 +78,35 @@ export class AuthService {
 
   login(user: any) {
     this.user = user;
-    this.http
-      .post(this.API_SERVER + '/auth/login', {
-        password: this.user.password,
-        email: this.user.email,
-        nickname: this.user.nickname,
-      })
-      .subscribe(async (res: any) => {
-        if (!res.access_token) {
-          return;
-        }
-        localStorage.setItem('token', res.access_token);
-        // this.token = res.access_token;
-        console.log({ res });
-        const decoded = jwt_decode(res.access_token);
-        console.log({ decoded });
-        this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).subscribe(res => {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(this.API_SERVER + '/auth/login', {
+          password: this.user.password,
+          email: this.user.email,
+          nickname: this.user.nickname,
+        })
+        .subscribe(async (res: any) => {
+          let access = false;
+          if (!res.access_token) {
+            console.log('access denied');
+            access = false
+            reject(access);
+          }
+          localStorage.setItem('token', res.access_token);
+          // this.token = res.access_token;
           console.log({ res });
-          this.setUser(res);
-          this.router.navigate(['/home']);
+          const decoded = jwt_decode(res.access_token);
+          console.log({ decoded });
+          this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).subscribe(res => {
+            console.log({ res });
+            this.setUser(res);
+            access = true
+            resolve(access);
+          });
         });
-        // await this.setUser(res);
-      });
+
+
+    })
   }
 
   updateUser(data: any) {

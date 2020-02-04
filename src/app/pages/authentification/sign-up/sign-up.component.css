@@ -42,7 +42,8 @@ p {
 
 .btnContainer {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
+    margin-top: 1rem;
 }
 
 span {
@@ -52,4 +53,12 @@ span {
 
 span:hover {
     cursor: pointer;
+}
+
+.pwdContainer {
+    display: flex;
+}
+
+button {
+    margin-left: 1rem;
 }

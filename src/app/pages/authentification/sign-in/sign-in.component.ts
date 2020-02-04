@@ -17,6 +17,7 @@ export class SignInComponent {
   };
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
+  errors = false;
 
   constructor(private authService: AuthService, public router: Router) {}
 
@@ -24,8 +25,15 @@ export class SignInComponent {
     window.alert('This feature will be enable soon!');
   };
 
-  signin = async () => {
-    await this.authService.login(this.user);
+  signin =  () => {
+   this.authService.login(this.user)
+   .then((res) => {
+     this.errors = true;
+     res && this.errors && this.router.navigate(['/home']);
+   })
+   .catch((err) => {
+      this.errors = true;
+   });
   };
 
   showPassword = () => {
