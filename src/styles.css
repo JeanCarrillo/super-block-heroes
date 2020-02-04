@@ -35,6 +35,8 @@ app-home {
 }
 
 app-login {
+    min-height: 100%;
+    min-width: 100%;
     background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
     opacity: 0.8;
 }
@@ -47,11 +49,15 @@ app-game-lobby {
 }
 
 app-sign-in {
+    min-height: 100%;
+    min-width: 100%;
     background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
     opacity: 0.8;
 }
 
 app-sign-up {
+    min-height: 100%;
+    min-width: 100%;
     background-image: url(assets/img/backgrounds/Cartoon_Forest_BG_01.png);
     opacity: 0.8;
 }
