@@ -10,14 +10,25 @@ import { LobbyComponent } from './pages/home/lobby/lobby.component';
 import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
 import { GameLobbyComponent } from './pages/game-lobby/game-lobby.component';
-
+import { GameResolverService } from './shared/services/game-resolver.service';
+import { MonsterResolverService } from './shared/services/monster-resolver.service';
+import { HeroesResolverService } from './shared/services/heroes-resolver.service';
+ 
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'game-lobby', component: GameLobbyComponent },
   {
     path: 'home',
+    // Guard
+    // Resolver
     component: HomeComponent,
+    resolve: {
+      game: GameResolverService,
+      monster: MonsterResolverService,
+      heroes: HeroesResolverService,
+      // @TODO: resolve socketService
+    },
     children: [
       {
         path: '',

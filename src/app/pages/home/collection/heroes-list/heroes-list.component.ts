@@ -11,10 +11,11 @@ import { Hero } from 'src/app/shared/models/hero';
   styleUrls: ['./heroes-list.component.css'],
 })
 export class HeroesListComponent {
+  constructor(private dbService: DbService, private authService: AuthService) {
+  }
+
   selectedHero: Hero = this.authService.user.hero;
   availableHeroes: Hero[];
-
-  constructor(private dbService: DbService, private authService: AuthService) {}
 
   getFilter(heroId: number): string {
     return this.isOwned(heroId) ? '' : 'grayscale(1)';

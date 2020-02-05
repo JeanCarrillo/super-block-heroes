@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DbService } from './db.service';
 import server from '../constants/server';
+import { tap } from 'rxjs/operators';
 
 import * as jwt_decode from 'jwt-decode';
 import { Observable } from 'rxjs';
@@ -49,15 +50,14 @@ export class AuthService {
     }, 200);
   }
 
-  getMyUser() {
+  getMyUser(): Observable<any> {
     const decoded = jwt_decode(this.getToken());
-    
-    this.http
-      .get(this.API_SERVER + '/users/nickname/' + decoded.nickname)
-      .subscribe(res => {
-        this.setUser(res)
-        console.log('setUser() , ', res);
-      });
+    return this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname)
+      .pipe(
+        tap(async res => {
+           await this.setUser(res);
+          console.log('setUser() , ', res);
+        }));
   }
 
   async register(user: any) {

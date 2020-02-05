@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.css'],
 })
-export class LobbyComponent implements OnInit{
+export class LobbyComponent {
   constructor(private authService: AuthService, public router: Router) {
   }
   ngOninit() {

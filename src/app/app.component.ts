@@ -3,6 +3,7 @@ import { DbService } from './shared/services/db.service';
 import { Router } from '@angular/router';
 import { SocketService } from './shared/services/socket.service';
 import { AuthService } from './shared/services/auth.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,18 +18,23 @@ export class AppComponent implements OnInit {
     private authService: AuthService
   ) {}
   async ngOnInit() {
-    const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+    // DAns ton resolver
+    // return forkJoin(.., .., ..)
+    // await this.authService.getMyUser();
+    // await this.dbService.getMonsters();
+    // await this.dbService.getHeroes();
+    // await this.socketService.getRoom();
 
+    // dans un guard
+    
+    const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
     if (token === null) {
-        await this.router.navigate(['/sign-in']);
-      }
-      else {
-        console.log('token', token);
-        await this.authService.getMyUser();
-        await this.dbService.getMonsters();
-        await this.dbService.getHeroes();
-        await this.socketService.getRoom();  
-        await this.router.navigate(['/home']);
-      }
+      console.log('no token');
+       this.router.navigate(['/sign-in']);
+    }
+    else {
+      console.log('token', token);
+      await this.router.navigate(['/home']);
+    }
   }
 }
