@@ -3,28 +3,33 @@
     <div class="row">
 
       <div class="col-8 ranking">
-        <div class="shimmer">TOP 10 PLAYERS</div>
+        <div id="containShimmer">
+          <div class="shimmer">TOP 10 PLAYERS</div>
+        </div>
         <table class="highscore-table table-hover">
           <thead>
-              <tr>
-                  <th scope="col">&nbsp;</th>
-                  <th scope="col">Player</th>
-                  <th scope="col">Hero</th>
-                  <th scope="col">Highscore</th>
-              </tr>
+            <tr>
+              <th scope="col">&nbsp;</th>
+              <th scope="col">Player</th>
+              <th scope="col">Hero</th>
+              <th scope="col">Highscore</th>
+            </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let user of dbService.highscores; index as i">
-                  <th scope="row">{{ i + 1 }}</th>
-                  <td>{{ user.nickname }}</td>
-                  <td>
-                    <app-hero-card
-                      [inputHero]="user.hero"
-                      [width]= "5"
-                    ></app-hero-card>
-                  </td>
-                  <td>{{ user.highscore }}</td>
-              </tr>
+            <tr
+            [class.myUser]="user.nickname === authService.user.nickname"
+            *ngFor="let user of dbService.highscores; index as i"
+            >
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ user.nickname }}</td>
+              <td>
+                <app-hero-card
+                  [inputHero]="user.hero"
+                  [width]= "5"
+                ></app-hero-card>
+              </td>
+              <td>{{ user.highscore }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
