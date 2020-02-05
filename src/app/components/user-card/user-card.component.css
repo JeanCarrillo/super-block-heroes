@@ -3,7 +3,7 @@
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.3);
     border: 1px, solid, #495057;
     border-radius: 10px;
 }
@@ -21,4 +21,8 @@ img {
 
 li {
     list-style: none;
+}
+
+.topCard {
+    border-radius: 10px;
 }
