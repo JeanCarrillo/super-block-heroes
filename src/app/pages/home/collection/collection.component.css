@@ -14,3 +14,11 @@
 .nav-link.active {
   background-color: rgba(255, 255, 255, 0.3);
 }
+
+.backgeneral{
+  background-color: black;
+  opacity: 0.86;
+  border-radius: 5px;
+  border: black;
+  box-shadow: 10px 5px 5px black;
+}

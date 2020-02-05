@@ -4,6 +4,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
     background: transparent;
+    color: aliceblue
 }
 
 .heroListName {
@@ -39,6 +40,7 @@
 
 .capacityProperty {
     margin-bottom: 0;
+    color: aliceblue
 }
 
 .buy-button {
@@ -47,4 +49,12 @@
 
 .heroesPrice {
     margin-top: 2rem;
+}
+
+.backgeneral{
+    background-color: black;
+    opacity: 0.86;
+    border-radius: 5px;
+    border: black;
+    box-shadow: 10px 5px 5px black;
 }
