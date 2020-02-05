@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { heroSprites } from '../../../shared/constants/sprites';
-import { MonsterService } from 'src/app/shared/services/monster.service';
 import { Monster } from 'src/app/shared/models/monster';
 import { Hero } from 'src/app/shared/models/hero';
 
@@ -9,7 +8,7 @@ import { Hero } from 'src/app/shared/models/hero';
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css'],
 })
-export class HeroComponent implements OnInit, AfterViewInit {
+export class HeroComponent implements OnInit {
   // @ViewChild('hero', { static: false }) heroRef: ElementRef;
   @Input() hero: Hero;
   @Input() monster: Monster;
@@ -17,26 +16,10 @@ export class HeroComponent implements OnInit, AfterViewInit {
   // initialX: number;
   // initialY: number;
 
-  constructor(private monsterService: MonsterService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.img = `url(/assets/img/heroes/${this.hero.name.replace(' ', '')}.png)`;
-    // setInterval(() => {
-    //   if (this.monsterService.ref) {
-    //     console.log(
-    //       'gg1',
-    //       this.monsterService.ref.nativeElement.offsetLeft,
-    //       this.monsterService.ref.nativeElement.offsetTop
-    //     );
-    //   }
-    // }, 1000);
-  }
-
-  ngAfterViewInit(): void {
-    // console.log(this.heroRef.nativeElement.offsetLeft);
-    // console.log(this.heroRef.nativeElement.offsetTop);
-    // this.initialX = this.heroRef.nativeElement.offsetLeft;
-    // this.initialY = this.heroRef.nativeElement.offsetTop;
   }
 
   getBackgroundPosition(): string {
@@ -55,24 +38,4 @@ export class HeroComponent implements OnInit, AfterViewInit {
       left: '',
     };
   }
-
-  // getCurrentPosition(direction: string): string {
-  //   if (this.hero.status === 'Attack') {
-  //     if (direction === 'top') {
-  //       return `${window.innerHeight - this.monsterService.ref.nativeElement.offsetTop}px`;
-  //     }
-  //     if (direction === 'left') {
-  //       return `calc(${this.monster.x}vw - 30px)`;
-  //     }
-  //   }
-  //   if (this.heroRef) {
-  //     if (direction === 'top') {
-  //       return `${this.initialY}px`;
-  //     }
-  //     if (direction === 'left') {
-  //       return `${this.initialX}px`;
-  //     }
-  //   }
-  //   return '0px';
-  // }
 }

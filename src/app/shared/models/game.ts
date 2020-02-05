@@ -49,10 +49,10 @@ export class Game {
       });
     }
 
-    // TEMP
-    setInterval(() => {
-      this.handlePlayerAction(0, 10);
-    }, 2000);
+    // DEV: TEST PLAYER ATTACK MOVE
+    // setInterval(() => {
+    //   this.handlePlayerAction(0, 10);
+    // }, 2000);
   }
   addToGameStream = event => {
     this.observer.next(event);

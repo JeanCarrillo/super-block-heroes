@@ -1,13 +1,12 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Monster } from '../../../shared/models/monster';
-import { MonsterService } from 'src/app/shared/services/monster.service';
 
 @Component({
   selector: 'app-monster',
   templateUrl: './monster.component.html',
   styleUrls: ['./monster.component.css'],
 })
-export class MonsterComponent implements OnInit, AfterViewInit {
+export class MonsterComponent implements OnInit {
   @ViewChild('monster', { static: false }) monsterRef: ElementRef;
 
   @Input() monster: Monster;
@@ -15,17 +14,13 @@ export class MonsterComponent implements OnInit, AfterViewInit {
   paddingBottom: string;
   marginTop: string;
 
-  constructor(private monsterService: MonsterService) {}
+  constructor() {}
 
   ngOnInit(): void {
     const { name, sprites } = this.monster;
     this.monsterImg = `url(/assets/img/monsters/${name.replace(' ', '')}.png)`;
     this.paddingBottom = sprites.paddingBottom + '%';
     this.marginTop = 100 - sprites.paddingBottom + '%';
-  }
-
-  ngAfterViewInit(): void {
-    this.monsterService.setRef(this.monsterRef);
   }
 
   getPosition(): string {
