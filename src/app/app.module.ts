@@ -8,7 +8,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AppComponent } from './app.component';
 
 // server ip/port
-import server from './shared/constants/server';
+import { environment } from '../environments/environment';
 
 // authentification
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
@@ -52,7 +52,7 @@ import { InvitationsComponent } from './pages/home/social/invitations/invitation
 import { FriendsComponent } from './pages/home/social/friends/friends.component';
 
 const socketConfig: SocketIoConfig = {
-  url: `${server.ip}:${server.port}`,
+  url: `${environment.APIEndpoint}:${environment.APIPort}`,
   options: {},
 };
 

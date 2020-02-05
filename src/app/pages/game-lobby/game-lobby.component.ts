@@ -13,9 +13,9 @@ export class GameLobbyComponent implements OnInit {
   chatInput = '';
   constructor(
     public router: Router,
-    private authService: AuthService,
-    private socketService: SocketService,
-    private dbService: DbService
+    public authService: AuthService,
+    public socketService: SocketService,
+    public dbService: DbService
   ) {}
 
   ngOnInit(): void {

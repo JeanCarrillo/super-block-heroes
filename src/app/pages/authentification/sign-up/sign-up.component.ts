@@ -18,7 +18,7 @@ export class SignUpComponent implements OnInit {
     password: '',
   };
   faUser = faUser;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     // this.monster = this.authService.monsters[1];

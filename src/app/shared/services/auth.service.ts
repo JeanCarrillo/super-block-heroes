@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DbService } from './db.service';
-import server from '../constants/server';
+import { environment } from '../../../environments/environment';
 
 import * as jwt_decode from 'jwt-decode';
 
@@ -13,7 +13,7 @@ export class AuthService {
   token: string = this.getToken();
   user: any = null;
 
-  private API_SERVER = `http://${server.ip}:${server.port}`;
+  private API_SERVER = `${environment.APIEndpoint}:${environment.APIPort}`;
 
   constructor(private http: HttpClient, private router: Router, private dbService: DbService) {}
 

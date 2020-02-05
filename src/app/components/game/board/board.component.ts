@@ -33,11 +33,11 @@ export class BoardComponent implements OnInit {
     return false;
   }
 
-  private getBoardBackgroundColor(): string {
+  public getBoardBackgroundColor(): string {
     return this.facingMonster ? 'rgba(252, 99, 71, 0.2)' : 'rgba(255, 255, 255, 0.2)';
   }
 
-  private getColBackground(x: number): string {
+  public getColBackground(x: number): string {
     for (const block of this.currentBlocks) {
       if (block.x === x) {
         return 'rgba(255, 255, 255, 0.2)';

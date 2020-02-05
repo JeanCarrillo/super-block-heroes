@@ -7,7 +7,7 @@ import { AuthService } from '../../../../shared/services/auth.service';
   styleUrls: ['./invitations.component.css'],
 })
 export class InvitationsComponent implements OnInit {
-  constructor(private authservice: AuthService) {}
+  constructor(public authservice: AuthService) {}
 
   ngOnInit() {}
 

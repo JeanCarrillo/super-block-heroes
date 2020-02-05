@@ -10,7 +10,7 @@
       [(ngModel)]="user.nickname"
       class="input"
       placeholder="Nickname"
-      (keyup.enter)="signin()"
+      (keyup.enter)="signup()"
     />
 
     <p>Email</p>
@@ -22,13 +22,13 @@
       (keyup.enter)="signup()"
     />
 
-    <p>Pseudo</p>
+    <p>Password</p>
     <input
       type="password"
       [(ngModel)]="user.password"
       class="input"
       placeholder="Password"
-      (keyup.enter)="signin()"
+      (keyup.enter)="signup()"
     />
 
     <div class="btnContainer">

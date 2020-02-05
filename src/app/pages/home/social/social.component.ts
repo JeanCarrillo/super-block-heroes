@@ -8,7 +8,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 })
 export class SocialComponent implements OnInit {
   selectedCategory = 'friends';
-  constructor(private authservice: AuthService) {}
+  constructor(public authservice: AuthService) {}
 
   ngOnInit() {
     this.authservice.getMyUser();

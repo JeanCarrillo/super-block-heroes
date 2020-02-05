@@ -4,7 +4,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 // import { Monster } from 'src/app/shared/models/monster';
 import { ShowPasswordDirective } from '../show-password.directive';
 import { Router } from '@angular/router';
-import { dev } from '../../../shared/constants/dev';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,14 +13,14 @@ import { dev } from '../../../shared/constants/dev';
 })
 export class SignInComponent {
   user = {
-    nickname: dev ? 'test' : '',
+    nickname: environment.testMode ? 'test' : '',
     email: '',
-    password: dev ? 'test' : '',
+    password: environment.testMode ? 'test' : '',
   };
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
 
-  constructor(private authService: AuthService, public router: Router) {}
+  constructor(public authService: AuthService, public router: Router) {}
 
   forgotPW = () => {
     window.alert('This feature will be enable soon!');

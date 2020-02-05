@@ -10,8 +10,8 @@ import { SocketService } from './shared/services/socket.service';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private dbService: DbService,
-    private socketService: SocketService,
+    public dbService: DbService,
+    public socketService: SocketService,
     private router: Router
   ) {}
   async ngOnInit() {

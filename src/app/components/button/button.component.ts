@@ -16,20 +16,20 @@ export class ButtonComponent {
 
   constructor() {}
 
-  private useCallback(): void {
+  public useCallback(): void {
     if (!this.disabled) {
       this.callback();
     }
   }
 
-  private textSize(): number {
+  public textSize(): number {
     return this.selected ? this.size * 1.3 : this.size;
   }
 
   /*
    * this method choose a button depends on its type
    */
-  private whichBackground(): string {
+  public whichBackground(): string {
     switch (this.buttonType) {
       case 'logout': {
         return 'linear-gradient(#ff1a1a, #b30000)';

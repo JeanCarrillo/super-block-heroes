@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  APIEndpoint: 'http://superblockheroes.online',
+  APIPort: 3000,
+  testMode: false,
 };

@@ -10,7 +10,7 @@ export class MonstersListComponent {
   monsters: any[] = [];
   selectedMonster = 0;
 
-  constructor(private dbService: DbService) {}
+  constructor(public dbService: DbService) {}
 
   setSelectedMonster(index: number): void {
     this.selectedMonster = index;

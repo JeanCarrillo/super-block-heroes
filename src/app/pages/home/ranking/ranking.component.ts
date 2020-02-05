@@ -5,10 +5,10 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 @Component({
   selector: 'app-ranking',
   templateUrl: './ranking.component.html',
-  styleUrls: ['./ranking.component.css']
+  styleUrls: ['./ranking.component.css'],
 })
 export class RankingComponent implements OnInit {
-  constructor(private dbService: DbService, private authService: AuthService) {}
+  constructor(public dbService: DbService, public authService: AuthService) {}
 
   ngOnInit() {
     this.dbService.getHighscores();
