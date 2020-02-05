@@ -18,11 +18,17 @@ export class AppComponent implements OnInit {
   ) {}
   async ngOnInit() {
     const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
-    await this.authService.checkCredentials(token);
-    await this.router.navigate(['/sign-in']);
-    await this.dbService.getMonsters();
-    await this.dbService.getHeroes();
-    await this.dbService.getMonsters();
-    this.socketService.getRoom();
+
+    if (token === null) {
+        await this.router.navigate(['/sign-in']);
+      }
+      else {
+        console.log('token', token);
+        await this.authService.getMyUser();
+        await this.dbService.getMonsters();
+        await this.dbService.getHeroes();
+        await this.socketService.getRoom();  
+        await this.router.navigate(['/home']);
+      }
   }
 }

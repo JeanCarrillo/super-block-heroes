@@ -51,9 +51,13 @@ export class AuthService {
 
   getMyUser() {
     const decoded = jwt_decode(this.getToken());
+    
     this.http
       .get(this.API_SERVER + '/users/nickname/' + decoded.nickname)
-      .subscribe(res => this.setUser(res));
+      .subscribe(res => {
+        this.setUser(res)
+        console.log('setUser() , ', res);
+      });
   }
 
   async register(user: any) {
@@ -173,5 +177,11 @@ export class AuthService {
       gold: this.user.gold + goldGained,
       games_played: this.user.games_played + 1,
     });
+  }
+
+  logout() {
+    console.log('logOut')
+    localStorage.removeItem('token');
+    this.router.navigate(['/sign-in']);
   }
 }
