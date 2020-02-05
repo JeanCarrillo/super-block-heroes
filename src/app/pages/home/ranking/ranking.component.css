@@ -6,7 +6,7 @@
     background-color: rgb(0, 0, 0);
     opacity: 0.86;
     padding: 2rem;
-    border-radius: 5px;
+    border-radius: 10px;
     border: rgb(0, 0, 0);
     box-shadow: 10px 5px 5px rgb(0,0,0);
 }
@@ -103,6 +103,8 @@
     table-layout: fixed;
     border-collapse: collapse;
     color: #fff;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid #fff;
 }
 
 .highscore-table tbody {

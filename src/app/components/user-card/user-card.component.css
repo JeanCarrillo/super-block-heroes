@@ -7,10 +7,11 @@
     border: 1px, solid, #495057;
     border-radius: 10px;
 }
+
 .card-title {
     text-align: center;
     background-color: #495057;
-    color: white;
+    color: #fff;
     border-radius: 10px;
 }
 
