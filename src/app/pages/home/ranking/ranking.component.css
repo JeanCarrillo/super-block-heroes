@@ -11,13 +11,17 @@
     box-shadow: 10px 5px 5px rgb(0,0,0);
 }
 
+#containShimmer {
+    margin: 0 1em 0 1em;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 .shimmer {
     text-align: center;
     font-weight: 500;
     line-height: 2;
     font-size: 1.5rem;
-    margin: 0;
-    padding: 0 0 1em 0;
+    margin: 0 0 .5em 0;
     letter-spacing: 0.1em;
     color: rgba(255, 255, 255, 0.1);
     background: -webkit-gradient(linear,
@@ -103,11 +107,11 @@
     table-layout: fixed;
     border-collapse: collapse;
     color: #fff;
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 1px solid #fff;
 }
 
 .highscore-table tbody {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid #fff;
     display: block;
     width: 100%;
     overflow-y: auto;
@@ -127,4 +131,8 @@
 .aside {
     max-width: 50%;
     margin: auto;
+}
+
+.myUser {
+    background-color: rgba(255, 255, 255, 0.3);
 }
