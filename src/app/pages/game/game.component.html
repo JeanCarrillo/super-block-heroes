@@ -8,6 +8,7 @@
               <app-player-container
                 *ngFor="let player of game.players; index as i"
                 [player]="player"
+                [monster]="game.monster"
                 class="col"
               ></app-player-container>
               <app-monster [monster]="game.monster"></app-monster>
@@ -17,9 +18,9 @@
               <h5 class="alert-heading">Victory !</h5>
               <div *ngFor="let player of game.players; index as i">
                 <div *ngIf="i !== game.myPlayerIndex" class="otherPlayers">
-                  <span class="playerName">Player : {{ player.name }}</span>  
+                  <span class="playerName">Player : {{ player.name }}</span>
                   <app-button text="Invite" class="inviteBtn"></app-button>
-                </div> 
+                </div>
               </div>
               <app-button text="Back to menu" url="/home" buttonType="login"></app-button>
             </div>
@@ -27,9 +28,13 @@
               <h5 class="alert-heading">Defeat !</h5>
               <div *ngFor="let player of game.players; index as i">
                 <div *ngIf="i !== game.myPlayerIndex" class="otherPlayers">
-                  <span class="playerName">Player : {{ player.name }}</span>  
-                  <app-button text="Invite" [callback]="sendInvitation.bind(this, i)" class="inviteBtn"></app-button>
-                </div> 
+                  <span class="playerName">Player : {{ player.name }}</span>
+                  <app-button
+                    text="Invite"
+                    [callback]="sendInvitation.bind(this, i)"
+                    class="inviteBtn"
+                  ></app-button>
+                </div>
               </div>
               <app-button text="Back to menu" url="/home" buttonType="login"></app-button>
             </div>

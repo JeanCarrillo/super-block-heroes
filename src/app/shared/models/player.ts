@@ -245,9 +245,6 @@ export class Player {
   private handleScore(nbOfRows: number): void {
     let score;
     switch (nbOfRows) {
-      case 1:
-        score = 10;
-        break;
       case 2:
         score = 24;
         break;
@@ -256,6 +253,10 @@ export class Player {
         break;
       case 4:
         score = 56;
+        break;
+      default:
+        // case 1
+        score = 10;
         break;
     }
     this.sendEvent('score', score);

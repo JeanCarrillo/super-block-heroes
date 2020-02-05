@@ -1,6 +1,6 @@
 <app-score [name]="player.name" [score]="player.score" [gameOver]="player.gameOver"></app-score>
 <div class="capacityalign">
-  <app-hero [hero]="player.hero"></app-hero>
+  <app-hero [hero]="player.hero" [monster]="monster"></app-hero>
   <app-capacity-icon
     [capacityName]="player.capacity"
     [progress]="player.capacityCooldownPercentage"

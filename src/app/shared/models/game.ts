@@ -48,6 +48,11 @@ export class Game {
         max: playerMaxPercentage,
       });
     }
+
+    // TEMP
+    setInterval(() => {
+      this.handlePlayerAction(0, 10);
+    }, 2000);
   }
   addToGameStream = event => {
     this.observer.next(event);

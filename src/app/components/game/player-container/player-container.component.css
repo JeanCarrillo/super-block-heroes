@@ -4,6 +4,7 @@
 
 .capacityalign {
   display: flex;
+  height: 8vw;
   justify-content: space-evenly;
   align-items: center;
 }

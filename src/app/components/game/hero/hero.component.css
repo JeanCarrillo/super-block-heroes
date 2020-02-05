@@ -1,4 +1,7 @@
 .sprite-container {
+  position: absolute;
+  transition: all 200ms linear;
+  z-index: 100;
   cursor: pointer;
   width: 8vw;
 }

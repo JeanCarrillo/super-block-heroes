@@ -1,24 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Monster } from '../../../shared/models/monster';
+import { MonsterService } from 'src/app/shared/services/monster.service';
 
 @Component({
   selector: 'app-monster',
   templateUrl: './monster.component.html',
   styleUrls: ['./monster.component.css'],
 })
-export class MonsterComponent implements OnInit {
+export class MonsterComponent implements OnInit, AfterViewInit {
+  @ViewChild('monster', { static: false }) monsterRef: ElementRef;
+
   @Input() monster: Monster;
   monsterImg: string;
   paddingBottom: string;
   marginTop: string;
 
-  constructor() {}
+  constructor(private monsterService: MonsterService) {}
 
   ngOnInit(): void {
     const { name, sprites } = this.monster;
     this.monsterImg = `url(/assets/img/monsters/${name.replace(' ', '')}.png)`;
     this.paddingBottom = sprites.paddingBottom + '%';
     this.marginTop = 100 - sprites.paddingBottom + '%';
+  }
+
+  ngAfterViewInit(): void {
+    this.monsterService.setRef(this.monsterRef);
   }
 
   getPosition(): string {

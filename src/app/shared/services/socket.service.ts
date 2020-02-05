@@ -3,6 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { dev } from '../constants/dev';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +42,7 @@ export class SocketService {
   }
 
   startGame(): void {
-    this.startTimer = '5';
+    this.startTimer = dev ? '0' : '5';
     this.interval = window.setInterval(() => {
       const timeNumber = Number(this.startTimer);
       if (timeNumber > 0) {

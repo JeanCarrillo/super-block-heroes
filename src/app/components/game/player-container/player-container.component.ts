@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Player } from '../../../shared/models/player';
+import { Monster } from 'src/app/shared/models/monster';
 
 @Component({
   selector: 'app-player-container',
@@ -8,6 +9,7 @@ import { Player } from '../../../shared/models/player';
 })
 export class PlayerContainerComponent implements OnInit {
   @Input() player: Player;
+  @Input() monster: Monster;
   constructor() {}
 
   ngOnInit() {}

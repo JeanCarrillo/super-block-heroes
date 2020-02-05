@@ -4,6 +4,8 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 // import { Monster } from 'src/app/shared/models/monster';
 import { ShowPasswordDirective } from '../show-password.directive';
 import { Router } from '@angular/router';
+import { dev } from '../../../shared/constants/dev';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -11,9 +13,9 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent {
   user = {
-    nickname: '',
+    nickname: dev ? 'test' : '',
     email: '',
-    password: '',
+    password: dev ? 'test' : '',
   };
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;

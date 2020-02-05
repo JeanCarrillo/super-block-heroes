@@ -33,10 +33,10 @@ export class GameComponent implements OnInit, OnDestroy {
       this.socketService.sendEvent('gameEvent', event);
     });
     this.interval = setInterval(() => this.gameLoop(), 20);
-    console.log(this.game.players);
+    // console.log(this.game.players);
   }
   handleGameEvent(event: any) {
-    console.log({ event });
+    // console.log({ event });
     switch (event.eventType) {
       case 'board': {
         this.game.players[event.playerIndex].board.tiles = event.data;

@@ -1,5 +1,6 @@
 <div class="row boardMonster m-0" [style.backgroundImage]="getBackgroundImg()">
   <div
+    #monster
     class="sprite-container"
     [style.left]="getPosition()"
     [ngStyle]="{ filter: getContainerFilterFrozen() }"
