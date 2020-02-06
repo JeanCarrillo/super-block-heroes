@@ -18,8 +18,11 @@
       class="input"
       placeholder="Password"
       (keyup.enter)="signin()"
+      showPassword
     />
-    
+      <div *ngIf="errors" class="alert alert-danger" role="alert">
+        Invalid credentials
+    </div>
     <div class="btnContainer">
       <span routerLink="/sign-up">Sign Up</span>
       <app-button buttonType="login" text="Log In" (click)="signin()" size="1.4"></app-button>

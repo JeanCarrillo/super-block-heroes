@@ -29,7 +29,7 @@ export class SocketService {
     return this.socket.fromEvent('message');
   }
 
-  getRoom(): void {
+  getRoom() {
     this.socket.fromEvent('room').subscribe((room: any) => {
       this.myPlayerIndex = room.players.findIndex(
         player => player.nickname === this.authService.user.nickname

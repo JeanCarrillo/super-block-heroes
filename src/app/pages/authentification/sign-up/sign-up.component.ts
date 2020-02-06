@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-// Property `icon` is required for `fa-icon`/`fa-duotone-icon` components.
-
-// import { Monster } from 'src/app/shared/models/monster';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { ShowPasswordDirective } from '../show-password.directive';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,8 +15,8 @@ export class SignUpComponent implements OnInit {
     email: '',
     password: '',
   };
-  faUser = faUser;
-  constructor(public authService: AuthService, private router: Router) {}
+  faEye = faEye;
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     // this.monster = this.authService.monsters[1];

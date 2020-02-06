@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DbService } from './shared/services/db.service';
 import { Router } from '@angular/router';
-import { SocketService } from './shared/services/socket.service';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +8,14 @@ import { SocketService } from './shared/services/socket.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    public dbService: DbService,
-    public socketService: SocketService,
-    private router: Router
-  ) {}
+  constructor(public dbService: DbService, private router: Router) {}
   async ngOnInit() {
-    this.router.navigate(['/sign-in']);
-    await this.dbService.getHeroes();
-    await this.dbService.getMonsters();
-    this.socketService.getRoom();
+    // TODO: GUARDS
+    const token = localStorage.getItem('token') || null;
+    if (token === null) {
+      this.router.navigate(['/sign-in']);
+    } else {
+      await this.router.navigate(['/home']);
+    }
   }
 }

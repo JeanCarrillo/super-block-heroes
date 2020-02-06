@@ -5,6 +5,8 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { ShowPasswordDirective } from '../show-password.directive';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { DbService } from 'src/app/shared/services/db.service';
+import { SocketService } from 'src/app/shared/services/socket.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,15 +21,36 @@ export class SignInComponent {
   };
   faEye = faEye;
   showPasswordDirective = ShowPasswordDirective;
+  errors = false;
 
-  constructor(public authService: AuthService, public router: Router) {}
+  constructor(
+    public authService: AuthService,
+    public router: Router,
+    public dbService: DbService,
+    public socketService: SocketService
+  ) {}
 
   forgotPW = () => {
     window.alert('This feature will be enable soon!');
   };
 
-  signin = async () => {
-    await this.authService.login(this.user);
+  signin = () => {
+    this.authService
+      .login(this.user)
+      .then(res => {
+        this.errors = false;
+
+        if (res && !this.errors) {
+          this.authService.getMyUser();
+          this.dbService.getMonsters();
+          this.dbService.getHeroes();
+          this.socketService.getRoom();
+          this.router.navigate(['/home']);
+        }
+      })
+      .catch(err => {
+        this.errors = true;
+      });
   };
 
   showPassword = () => {

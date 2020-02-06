@@ -3,8 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DbService } from './db.service';
 import { environment } from '../../../environments/environment';
+import { tap } from 'rxjs/operators';
 
 import * as jwt_decode from 'jwt-decode';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -48,17 +50,20 @@ export class AuthService {
     }, 200);
   }
 
-  getMyUser() {
+  getMyUser(): Observable<any> {
     const decoded = jwt_decode(this.getToken());
-    this.http
-      .get(this.API_SERVER + '/users/nickname/' + decoded.nickname)
-      .subscribe(res => this.setUser(res));
+    return this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).pipe(
+      tap(res => {
+        this.setUser(res);
+        console.log('setUser() , ', res);
+      })
+    );
   }
 
   async register(user: any) {
     this.user = user;
     await this.http
-      .post(this.API_SERVER + '/auth/register', {
+      .post(this.API_SERVER + '/auth/token', {
         nickname: this.user.nickname,
         password: this.user.password,
         email: this.user.email,
@@ -75,30 +80,43 @@ export class AuthService {
       );
   }
 
+  checkCredentials(token: string) {
+    console.log('onInit Token', token);
+    this.http
+      .post(this.API_SERVER + '/auth/token', {
+        token,
+      })
+      .subscribe(res => {
+        console.log('checkCredentials');
+      });
+  }
+
   login(user: any) {
     this.user = user;
-    this.http
-      .post(this.API_SERVER + '/auth/login', {
-        password: this.user.password,
-        email: this.user.email,
-        nickname: this.user.nickname,
-      })
-      .subscribe(async (res: any) => {
-        if (!res.access_token) {
-          return;
-        }
-        localStorage.setItem('token', res.access_token);
-        // this.token = res.access_token;
-        console.log({ res });
-        const decoded = jwt_decode(res.access_token);
-        console.log({ decoded });
-        this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).subscribe(res => {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(this.API_SERVER + '/auth/login', {
+          password: this.user.password,
+          email: this.user.email,
+          nickname: this.user.nickname,
+        })
+        .subscribe(async (res: any) => {
+          if (!res.access_token) {
+            console.log('access denied');
+            reject(false);
+          }
+          localStorage.setItem('token', res.access_token);
+          // this.token = res.access_token;
           console.log({ res });
-          this.setUser(res);
-          this.router.navigate(['/home']);
+          const decoded = jwt_decode(res.access_token);
+          console.log({ decoded });
+          this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).subscribe(res => {
+            console.log({ res });
+            this.setUser(res);
+            resolve(true);
+          });
         });
-        // await this.setUser(res);
-      });
+    });
   }
 
   updateUser(data: any) {
@@ -120,20 +138,8 @@ export class AuthService {
   }
 
   setUser(user: any) {
-    // TEMP UNTIL BACKEND MANY TO MANY RESOLVED
-    const heroId = user.hero.id;
-    let capacity;
-    for (const cap of this.dbService.capacities) {
-      if (cap.id === heroId) {
-        capacity = cap;
-        break;
-      }
-    }
-    user.hero.capacity = capacity;
-    // END TEMP
     user.inventory = JSON.parse(user.inventory);
     this.user = user;
-    console.log({ user });
   }
 
   postGame(game: any): void {
@@ -156,5 +162,11 @@ export class AuthService {
       gold: this.user.gold + goldGained,
       games_played: this.user.games_played + 1,
     });
+  }
+
+  logout() {
+    console.log('logOut');
+    localStorage.removeItem('token');
+    this.router.navigate(['/sign-in']);
   }
 }

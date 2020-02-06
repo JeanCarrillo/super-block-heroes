@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  APIEndpoint: 'localhost',
+  APIEndpoint: 'http://localhost',
   APIPort: 3000,
   testMode: true,
 };

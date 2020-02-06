@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-collection',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollectionComponent implements OnInit {
   selectedCategory = 'heroes';
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   setSelectedCategory(str: string): void {
     this.selectedCategory = str;

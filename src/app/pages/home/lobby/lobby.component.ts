@@ -8,5 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./lobby.component.css'],
 })
 export class LobbyComponent {
-  constructor(public authService: AuthService, public router: Router) {}
+  constructor(private authService: AuthService, public router: Router) {}
+  ngOninit() {}
+
+  logout = () => {
+    this.authService.logout();
+  };
 }

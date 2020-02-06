@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="LogOut">
-  <app-button text="Log Out" url="/sign-in" size="1"></app-button>
-</div>
+    <app-button text="Log Out" size="1" [callback]="logout.bind(this)"></app-button>
+  </div>
   <div class="row justify-content-between">
     <div class="col-4">
       <app-logo></app-logo>

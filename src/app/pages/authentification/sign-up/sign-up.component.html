@@ -12,7 +12,6 @@
       placeholder="Nickname"
       (keyup.enter)="signup()"
     />
-
     <p>Email</p>
     <input
       type="text"
@@ -21,16 +20,17 @@
       placeholder="user@email.com"
       (keyup.enter)="signup()"
     />
-
-    <p>Password</p>
+    <div class="pwdContainer">
+      <p>Password</p>
+    </div>
     <input
       type="password"
       [(ngModel)]="user.password"
       class="input"
       placeholder="Password"
       (keyup.enter)="signup()"
+      showPassword
     />
-
     <div class="btnContainer">
       <app-button buttonType="login" text="Sign Up" (click)="signup()" size="1.4"></app-button>
     </div>

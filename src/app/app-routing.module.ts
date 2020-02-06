@@ -10,7 +10,10 @@ import { LobbyComponent } from './pages/home/lobby/lobby.component';
 import { SignUpComponent } from './pages/authentification/sign-up/sign-up.component';
 import { SignInComponent } from './pages/authentification/sign-in/sign-in.component';
 import { GameLobbyComponent } from './pages/game-lobby/game-lobby.component';
-
+import { GameResolverService } from './shared/services/game-resolver.service';
+import { MonsterResolverService } from './shared/services/monster-resolver.service';
+import { HeroesResolverService } from './shared/services/heroes-resolver.service';
+ 
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-in', component: SignInComponent },
@@ -18,6 +21,11 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    resolve: {
+      heroes: HeroesResolverService,
+      monster: MonsterResolverService,
+      game: GameResolverService
+    },
     children: [
       {
         path: '',

@@ -3,18 +3,16 @@ import { AuthService } from '../../../../shared/services/auth.service';
 import { DbService } from 'src/app/shared/services/db.service';
 import { Hero } from 'src/app/shared/models/hero';
 
-// TODO: bug when selecting hero (not bought? not enough gold?)
-
 @Component({
   selector: 'app-heroes-list',
   templateUrl: './heroes-list.component.html',
   styleUrls: ['./heroes-list.component.css'],
 })
 export class HeroesListComponent {
-  selectedHero: any = this.authService.user.hero;
-  availableHeroes: any[];
+  constructor(private dbService: DbService, private authService: AuthService) {}
 
-  constructor(public dbService: DbService, public authService: AuthService) {}
+  selectedHero: Hero = this.authService.user.hero;
+  availableHeroes: Hero[];
 
   getFilter(heroId: number): string {
     return this.isOwned(heroId) ? '' : 'grayscale(1)';
@@ -25,7 +23,6 @@ export class HeroesListComponent {
   }
 
   setSelectedHero(hero: Hero): void {
-    console.log({ hero });
     this.selectedHero = hero;
     if (this.isOwned(hero.id)) {
       this.setUserHero(hero);
@@ -46,7 +43,6 @@ export class HeroesListComponent {
     const user = this.authService.user;
     user.gold = user.gold - hero.price;
     user.inventory.heroes.push(hero.id);
-    console.log({ user });
     this.authService.updateUser({
       gold: user.gold,
       inventory: JSON.stringify(user.inventory),
