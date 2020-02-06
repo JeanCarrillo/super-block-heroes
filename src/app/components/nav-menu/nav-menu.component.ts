@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-menu.component.css'],
 })
 export class NavMenuComponent implements OnInit {
+  constructor (public authService: AuthService) {}
+  
+  ngOnInit() {
+    const invitNotif = `${this.authService.user.invitations.length}`;
+    console.log('Invitations', invitNotif)
+  }
+
   selectedButton = 0;
   buttons = [
     {
@@ -15,6 +23,7 @@ export class NavMenuComponent implements OnInit {
     {
       text: 'Social',
       link: 'social',
+      notifs: this.authService.user.invitations.length,
     },
     {
       text: 'Ranking',
@@ -25,10 +34,6 @@ export class NavMenuComponent implements OnInit {
       link: 'collection',
     },
   ];
-
-  constructor() {}
-
-  ngOnInit() {}
 
   setSelectedButton = (index: number): void => {
     this.selectedButton = index;

@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button.component.css'],
 })
 export class ButtonComponent {
+  @Input() notifs: number;
   @Input() disabled: boolean;
   @Input() buttonType: string;
   @Input() size = 1;
