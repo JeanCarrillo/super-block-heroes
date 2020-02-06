@@ -11,7 +11,7 @@ import { Hero } from 'src/app/shared/models/hero';
 export class HeroesListComponent {
   constructor(public dbService: DbService, public authService: AuthService) {}
 
-  selectedHero: Hero = this.authService.user.hero;
+  selectedHero: any = this.authService.user.hero;
   availableHeroes: Hero[];
 
   getFilter(heroId: number): string {
