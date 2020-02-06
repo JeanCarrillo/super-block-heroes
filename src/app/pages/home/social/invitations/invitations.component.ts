@@ -11,7 +11,9 @@ export class InvitationsComponent implements OnInit {
 
   ngOnInit() {}
 
-  accept = nickname => {
+  accept = (nickname) => {
+    console.log('nickname', nickname);
+    console.log('this.authservice.user.nickname', this.authservice.user.nickname);
     this.authservice.addFriend(nickname, this.authservice.user.nickname);
   };
 }
