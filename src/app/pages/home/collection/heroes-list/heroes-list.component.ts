@@ -39,7 +39,7 @@ export class HeroesListComponent {
   }
 
   canBuy(price: number): boolean {
-    return this.authService.user.gold > price;
+    return this.authService.user.gold >= price;
   }
 
   buyHero(hero: Hero): void {
