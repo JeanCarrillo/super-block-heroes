@@ -63,7 +63,7 @@ export class AuthService {
   async register(user: any) {
     this.user = user;
     await this.http
-      .post(this.API_SERVER + '/auth/token', {
+      .post(this.API_SERVER + '/auth/register', {
         nickname: this.user.nickname,
         password: this.user.password,
         email: this.user.email,
@@ -78,17 +78,6 @@ export class AuthService {
         },
         err => window.alert('Account already exists')
       );
-  }
-
-  checkCredentials(token: string) {
-    console.log('onInit Token', token);
-    this.http
-      .post(this.API_SERVER + '/auth/token', {
-        token,
-      })
-      .subscribe(res => {
-        console.log('checkCredentials');
-      });
   }
 
   login(user: any) {
