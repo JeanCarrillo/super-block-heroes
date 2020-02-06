@@ -3,6 +3,8 @@ import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { tap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
@@ -28,16 +30,17 @@ export class SocketService {
     return this.socket.fromEvent('message');
   }
 
-  getRoom(): void {
-    this.socket.fromEvent('room').subscribe((room: any) => {
-      this.myPlayerIndex = room.players.findIndex(
-        player => player.nickname === this.authService.user.nickname
-      );
-      if (room.started && !this.room.started) {
-        this.startGame();
-      }
-      this.room = room;
-    });
+  getRoom() {
+    this.socket.fromEvent('room')
+      .subscribe((room: any) => {
+        this.myPlayerIndex = room.players.findIndex(
+          player => player.nickname === this.authService.user.nickname
+        );
+        if (room.started && !this.room.started) {
+          this.startGame();
+        }
+        this.room = room;
+      });
   }
 
   startGame(): void {

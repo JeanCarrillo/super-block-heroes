@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { DbService } from 'src/app/shared/services/db.service';
 import { Hero } from 'src/app/shared/models/hero';
@@ -10,8 +10,12 @@ import { Hero } from 'src/app/shared/models/hero';
   templateUrl: './heroes-list.component.html',
   styleUrls: ['./heroes-list.component.css'],
 })
-export class HeroesListComponent {
+export class HeroesListComponent implements OnInit {
   constructor(private dbService: DbService, private authService: AuthService) {
+  }
+  
+  ngOnInit() {
+    console.log('on Init user' ,this.authService.user);
   }
 
   selectedHero: Hero = this.authService.user.hero;
@@ -26,7 +30,7 @@ export class HeroesListComponent {
   }
 
   setSelectedHero(hero: Hero): void {
-    console.log({ hero });
+    console.log('selectedHero: ', { hero });
     this.selectedHero = hero;
     if (this.isOwned(hero.id)) {
       this.setUserHero(hero);

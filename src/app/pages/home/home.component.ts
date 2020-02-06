@@ -11,5 +11,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.socketService.sendEvent('mainMenu');
+    this.socketService.getRoom();
   }
 }

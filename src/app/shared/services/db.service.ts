@@ -25,20 +25,32 @@ export class DbService {
         tap(async heroes => {
           console.log({ heroes });
           this.heroes = heroes;
-          await this.getCapacities();
+          await this.getCapacities()
+          .subscribe(res => {
+            console.log('capacities getHeroes()', res);
+            // this.authService.setUser(); //@TODO: Set user.hero.capacities
+          });
         }));
   }
 
-  async getCapacities() {
+ getCapacities(): Observable<any> {
     return this.http.get(this.API_SERVER + '/capacities')
-      .subscribe(capacities => {
+    .pipe(
+      tap( capacities => {
         console.log({ capacities });
-        this.capacities = capacities;
-        for (let i = 0; i < this.heroes.length; i++) {
-          this.heroes[i].capacity = this.capacities[i];
-        }
-        return true;
-      });
+          this.capacities = capacities;
+          for (let i = 0; i < this.heroes.length; i++) {
+            this.heroes[i].capacity = this.capacities[i];
+          }
+      }));
+      // .subscribe(capacities => {
+      //   console.log({ capacities });
+      //   this.capacities = capacities;
+      //   for (let i = 0; i < this.heroes.length; i++) {
+      //     this.heroes[i].capacity = this.capacities[i];
+      //   }
+      //   return true;
+      // });
   }
 
   getMonsters(): Observable<Monster[]> {

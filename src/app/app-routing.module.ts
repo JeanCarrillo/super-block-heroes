@@ -20,14 +20,11 @@ const routes: Routes = [
   { path: 'game-lobby', component: GameLobbyComponent },
   {
     path: 'home',
-    // Guard
-    // Resolver
     component: HomeComponent,
     resolve: {
-      game: GameResolverService,
-      monster: MonsterResolverService,
       heroes: HeroesResolverService,
-      // @TODO: resolve socketService
+      monster: MonsterResolverService,
+      game: GameResolverService
     },
     children: [
       {

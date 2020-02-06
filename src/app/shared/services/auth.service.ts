@@ -54,8 +54,8 @@ export class AuthService {
     const decoded = jwt_decode(this.getToken());
     return this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname)
       .pipe(
-        tap(async res => {
-           await this.setUser(res);
+        tap(res => {
+          this.setUser(res);
           console.log('setUser() , ', res);
         }));
   }
@@ -142,11 +142,13 @@ export class AuthService {
 
   setUser(user: any) {
     // TEMP UNTIL BACKEND MANY TO MANY RESOLVED
+    console.log('this.dbService.capacities', this.dbService.capacities);
     const heroId = user.hero.id;
     let capacity;
     for (const cap of this.dbService.capacities) {
       if (cap.id === heroId) {
         capacity = cap;
+        console.log('cap', cap);
         break;
       }
     }
