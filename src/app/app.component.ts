@@ -26,13 +26,12 @@ export class AppComponent implements OnInit {
     // await this.socketService.getRoom();
 
     // dans un guard
-    
-    const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+
+    const token = localStorage.getItem('token') || null;
     if (token === null) {
       console.log('no token');
-       this.router.navigate(['/sign-in']);
-    }
-    else {
+      this.router.navigate(['/sign-in']);
+    } else {
       console.log('token', token);
       await this.router.navigate(['/home']);
     }

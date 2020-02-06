@@ -43,9 +43,9 @@ import { CollectionComponent } from './pages/home/collection/collection.componen
 import { MonstersListComponent } from './pages/home/collection/monsters-list/monsters-list.component';
 import { HeroesListComponent } from './pages/home/collection/heroes-list/heroes-list.component';
 
-//fontawsome
+// fontawsome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-//bootstrap
+// bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShowPasswordDirective } from './pages/authentification/show-password.directive';
 import { InvitationsComponent } from './pages/home/social/invitations/invitations.component';

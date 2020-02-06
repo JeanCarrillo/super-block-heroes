@@ -52,12 +52,12 @@ export class AuthService {
 
   getMyUser(): Observable<any> {
     const decoded = jwt_decode(this.getToken());
-    return this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname)
-      .pipe(
-        tap(res => {
-          this.setUser(res);
-          console.log('setUser() , ', res);
-        }));
+    return this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).pipe(
+      tap(res => {
+        this.setUser(res);
+        console.log('setUser() , ', res);
+      })
+    );
   }
 
   async register(user: any) {
@@ -82,11 +82,13 @@ export class AuthService {
 
   checkCredentials(token: string) {
     console.log('onInit Token', token);
-    this.http.post(this.API_SERVER + '/auth/token', {
-      token
-    }).subscribe(res => {
-      console.log('checkCredentials');
-    });
+    this.http
+      .post(this.API_SERVER + '/auth/token', {
+        token,
+      })
+      .subscribe(res => {
+        console.log('checkCredentials');
+      });
   }
 
   login(user: any) {
@@ -99,11 +101,9 @@ export class AuthService {
           nickname: this.user.nickname,
         })
         .subscribe(async (res: any) => {
-          let access = false;
           if (!res.access_token) {
             console.log('access denied');
-            access = false
-            reject(access);
+            reject(false);
           }
           localStorage.setItem('token', res.access_token);
           // this.token = res.access_token;
@@ -113,13 +113,10 @@ export class AuthService {
           this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).subscribe(res => {
             console.log({ res });
             this.setUser(res);
-            access = true
-            resolve(access);
+            resolve(true);
           });
         });
-
-
-    })
+    });
   }
 
   updateUser(data: any) {
@@ -141,22 +138,8 @@ export class AuthService {
   }
 
   setUser(user: any) {
-    // TEMP UNTIL BACKEND MANY TO MANY RESOLVED
-    console.log('this.dbService.capacities', this.dbService.capacities);
-    const heroId = user.hero.id;
-    let capacity;
-    for (const cap of this.dbService.capacities) {
-      if (cap.id === heroId) {
-        capacity = cap;
-        console.log('cap', cap);
-        break;
-      }
-    }
-    user.hero.capacity = capacity;
-    // END TEMP
     user.inventory = JSON.parse(user.inventory);
     this.user = user;
-    console.log({ user });
   }
 
   postGame(game: any): void {
@@ -182,7 +165,7 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logOut')
+    console.log('logOut');
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']);
   }
