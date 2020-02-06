@@ -9,7 +9,7 @@ import { Hero } from 'src/app/shared/models/hero';
   styleUrls: ['./heroes-list.component.css'],
 })
 export class HeroesListComponent {
-  constructor(private dbService: DbService, private authService: AuthService) {}
+  constructor(public dbService: DbService, public authService: AuthService) {}
 
   selectedHero: Hero = this.authService.user.hero;
   availableHeroes: Hero[];
