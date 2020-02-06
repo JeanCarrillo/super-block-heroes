@@ -12,6 +12,5 @@ export class RankingComponent implements OnInit {
 
   ngOnInit() {
     this.dbService.getHighscores();
-    console.log(this.authService.user);
   }
 }

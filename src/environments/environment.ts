@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  APIEndpoint: 'http://localhost',
+  // APIEndpoint: 'http://localhost',
+  APIEndpoint: 'https://www.superblockheroes.online',
   APIPort: 3000,
   testMode: true,
 };

@@ -25,9 +25,6 @@ export class AuthService {
 
   inviteUser(userId: number, userSendingInvitNickname: string) {
     const data = { nickname: userSendingInvitNickname };
-    console.log('data: ', data);
-    console.log('id ', userId);
-    console.log(this.API_SERVER + '/users/invite/' + userId);
     this.http.put(this.API_SERVER + '/users/invite/' + userId, data).subscribe(
       res => console.log('res', res),
       err => console.log('err', err)
@@ -36,12 +33,10 @@ export class AuthService {
 
   addFriend(nickname: string, userSendingInvitNickname: string) {
     const data = { nickname: userSendingInvitNickname };
-    console.log('data: ', data);
-    console.log('id ', nickname);
-    console.log(this.API_SERVER + '/users/addFriend/' + nickname);
-    this.http.put(this.API_SERVER + '/users/addFriend/' + nickname, data).subscribe(() => {
-      console.log('test');
-    });
+    this.http.put(this.API_SERVER + '/users/addFriend/' + nickname, data)
+    // .subscribe(() => {
+    //   console.log('test');
+    // });
     const decoded = jwt_decode(this.getToken());
     setTimeout(() => {
       this.http
@@ -55,7 +50,6 @@ export class AuthService {
     return this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).pipe(
       tap(res => {
         this.setUser(res);
-        console.log('setUser() , ', res);
       })
     );
   }
@@ -91,16 +85,11 @@ export class AuthService {
         })
         .subscribe(async (res: any) => {
           if (!res.access_token) {
-            console.log('access denied');
             reject(false);
           }
           localStorage.setItem('token', res.access_token);
-          // this.token = res.access_token;
-          console.log({ res });
           const decoded = jwt_decode(res.access_token);
-          console.log({ decoded });
           this.http.get(this.API_SERVER + '/users/nickname/' + decoded.nickname).subscribe(res => {
-            console.log({ res });
             this.setUser(res);
             resolve(true);
           });
@@ -145,7 +134,6 @@ export class AuthService {
     const goldGained = victory
       ? Math.floor((game.monster.startingLife / 10) * (gameDuration / 1000))
       : 10;
-    console.log({ goldGained });
     this.updateUser({
       highscore: this.user.highscore < goldGained ? goldGained : this.user.highscore,
       gold: this.user.gold + goldGained,
@@ -154,7 +142,6 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logOut');
     localStorage.removeItem('token');
     this.router.navigate(['/sign-in']);
   }

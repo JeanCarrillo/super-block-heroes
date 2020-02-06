@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -6,14 +6,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css'],
 })
-export class NavMenuComponent implements OnInit {
+export class NavMenuComponent {
   constructor (public authService: AuthService) {}
   
-  ngOnInit() {
-    const invitNotif = `${this.authService.user.invitations.length}`;
-    console.log('Invitations', invitNotif)
-  }
-
   selectedButton = 0;
   buttons = [
     {

@@ -11,7 +11,6 @@ import { SocketService } from './socket.service';
 export class GameResolverService implements Resolve<AuthService> {
   constructor(private authService: AuthService, private socketService: SocketService) {}
   resolve(): Observable<any> {
-    console.log('GameResolver');
     return this.authService.getMyUser();
   }
 }

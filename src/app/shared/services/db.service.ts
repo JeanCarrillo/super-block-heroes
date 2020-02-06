@@ -22,7 +22,6 @@ export class DbService {
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.API_SERVER + '/heroes').pipe(
       tap(async heroes => {
-        console.log({ heroes });
         this.heroes = heroes;
       })
     );
@@ -31,7 +30,6 @@ export class DbService {
   getMonsters(): Observable<Monster[]> {
     return this.http.get<Monster[]>(this.API_SERVER + '/monsters').pipe(
       tap(monsters => {
-        console.log('monsters :', this.monsters);
         this.monsters = monsters;
         for (const monster of this.monsters) {
           monster.sprites = JSON.parse(monster.sprites);
@@ -50,7 +48,6 @@ export class DbService {
 
   async getHighscores() {
     await this.http.get(this.API_SERVER + '/users/highscores').subscribe(highscores => {
-      console.log({ highscores });
       this.highscores = highscores;
     });
   }

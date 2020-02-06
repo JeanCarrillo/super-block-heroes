@@ -11,7 +11,6 @@ import { DbService } from './db.service';
 export class MonsterResolverService implements Resolve<DbService> {
   constructor(private dbService: DbService) {}
   resolve(): Observable<any> {
-    console.log('MonsterResolver');
     return this.dbService.getMonsters();
   }
 }

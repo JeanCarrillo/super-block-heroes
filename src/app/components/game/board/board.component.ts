@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Board } from '../../../shared/models/board';
 import { Block } from '../../../shared/models/block';
 
@@ -7,20 +7,14 @@ import { Block } from '../../../shared/models/block';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent {
   @Input() board: Board;
   @Input() currentBlocks: Block[];
   @Input() facingMonster: boolean;
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.board);
-  }
-
   public getBlock(y: number, x: number): any {
-    // (4) [Block, Block, Block, Block]
-    // 0: Block {color: 6, x: 5, y: 8}
     const { board, currentBlocks } = this;
     if (board.tiles[y][x] !== 0) {
       return board.tiles[y][x];

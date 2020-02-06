@@ -11,7 +11,6 @@ import { DbService } from './db.service';
 export class HeroesResolverService implements Resolve<DbService> {
   constructor(private dbService: DbService) {}
   resolve(): Observable<any> {
-    console.log('HeroResolver');
     return this.dbService.getHeroes();
   }
 }
