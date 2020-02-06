@@ -5,13 +5,14 @@ import { Component, Input } from '@angular/core';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css'],
 })
+
 export class ButtonComponent {
   @Input() disabled: boolean;
-  @Input() buttonType: string;
-  @Input() size = 1;
+  @Input() size: number = 1;
   @Input() url: string;
   @Input() selected: boolean;
   @Input() text: string;
+  @Input() backgrnd: string;
   @Input() callback: any = () => {};
 
   constructor() {}
@@ -26,17 +27,10 @@ export class ButtonComponent {
     return this.selected ? this.size * 1.3 : this.size;
   }
 
-  /*
-   * this method choose a button depends on its type
-   */
-  private whichBackground(): string {
-    switch (this.buttonType) {
-      case 'logout': {
-        return 'linear-gradient(#ff1a1a, #b30000)';
-      }
-      default: {
-        return 'linear-gradient(#00cc00, #579e3d)';
-      }
+  public backgroundColor(): string {
+    if(this.backgrnd === "red") {
+      return 'linear-gradient(#f79da6, #d7091d)';
     }
+    return 'linear-gradient(#13f446, #118a2d)';
   }
 }
