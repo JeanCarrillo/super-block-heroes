@@ -10,6 +10,7 @@ import { Game } from '../../shared/models/game';
 })
 export class GameComponent implements OnInit, OnDestroy {
   interval: any;
+  clicked = false;
   game: Game;
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -33,7 +34,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.socketService.sendEvent('gameEvent', event);
     });
     this.interval = setInterval(() => this.gameLoop(), 20);
-    // console.log(this.game.players);
+    console.log(this.authService.user);
   }
   handleGameEvent(event: any) {
     // console.log({ event });
@@ -75,6 +76,7 @@ export class GameComponent implements OnInit, OnDestroy {
     clearInterval(this.interval);
   }
   sendInvitation = i => {
+    this.clicked = true;
     this.authService.getUser(this.game.players[i].name).subscribe((player: any) => {
       if (player.id) {
         this.authService.inviteUser(
