@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="LogOut">
-    <app-button text="Log Out" size="1" [callback]="logout.bind(this)"></app-button>
+    <app-button text="Log Out" size="1" backgrnd="red" [callback]="logout.bind(this)"></app-button>
   </div>
   <div class="row justify-content-between">
     <div class="col-4">
@@ -18,36 +18,10 @@
   </div>
   <div class="row">
     <div class="offset-1 col-3">
-      <img class="lootbox" src="assets/img/lobby/lootbox.jpg" routerLink="/home/collection"/>
+      <img class="lootbox" src="assets/img/lobby/lootbox.jpg" routerLink="/home/collection" />
     </div>
-    <!-- <div class="col-3">
-      <img
-        class="plus"
-        data-toggle="modal"
-        data-target="#exampleModalCenter"
-        src="assets/img/lobby/plus.png"
-      />
-    </div>
-    <div class="col-3">
-      <img
-        class="plus"
-        data-toggle="modal"
-        data-target="#exampleModalCenter"
-        src="assets/img/lobby/plus.png"
-      />
-    </div>
-    <div class="col-3">
-      <img
-        class="plus"
-        data-toggle="modal"
-        data-target="#exampleModalCenter"
-        src="assets/img/lobby/plus.png"
-      />
-    </div> -->
     <div class="offset-4 col-4">
-      <app-button text="Play" url="/game-lobby" size="2"></app-button>
+      <app-button url="/game-lobby" text="Play" size="2"></app-button>
     </div>
   </div>
-  <!-- <div class="row justify-content-end">
-  </div> -->
 </div>
