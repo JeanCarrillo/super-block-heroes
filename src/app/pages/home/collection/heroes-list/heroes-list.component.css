@@ -45,6 +45,13 @@
 
 .buy-button {
     cursor: pointer;
+    background-color: #e2de35;;
+    color: #000;
+    border-radius: 5px;
+    font-weight: 500;
+    margin: 0 0 .8em .5em;
+    padding: .2em .4em .2em .4em;
+
 }
 
 .heroesPrice {
