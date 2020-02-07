@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-social',
@@ -8,7 +9,11 @@ import { AuthService } from '../../../shared/services/auth.service';
 })
 export class SocialComponent implements OnInit {
   selectedCategory = 'friends';
-  constructor(public authservice: AuthService) {}
+  authService: any;
+  constructor(
+    public authservice: AuthService,
+    public router: Router
+  ) {}
 
   ngOnInit() {
     this.authservice.getMyUser();
@@ -17,4 +22,9 @@ export class SocialComponent implements OnInit {
   setSelectedCategory(str: string): void {
     this.selectedCategory = str;
   }
+
+  logout = () => {
+    this.authService.logout();
+  };
+
 }
