@@ -1,12 +1,17 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item" class="menucenter" (click)="setSelectedCategory('friends')">
-      <span class="nav-link" [class.active]="selectedCategory === 'friends'">Friends</span>
-  </li>
-  <li class="nav-item" class="menucenter" (click)="setSelectedCategory('invitations')">
-      <span class="nav-link" [class.active]="selectedCategory === 'invitations'">Invitations</span>
-  </li>
-</ul>
+<div class="container-fluid">
 
+  <div class="LogOut">
+    <app-button text="Log Out" size="1" backgrnd="red" [callback]="logout.bind(this)"></app-button>
+  </div>
+  <ul class="nav nav-tabs">
+    <li class="nav-item" class="menucenter" (click)="setSelectedCategory('friends')">
+        <span class="nav-link" [class.active]="selectedCategory === 'friends'">Friends</span>
+    </li>
+    <li class="nav-item" class="menucenter" (click)="setSelectedCategory('invitations')">
+        <span class="nav-link" [class.active]="selectedCategory === 'invitations'">Invitations</span>
+    </li>
+  </ul>
 
-<app-friends *ngIf="selectedCategory === 'friends'" class="backgeneral"></app-friends>
-<app-invitations *ngIf="selectedCategory === 'invitations'" class="backgeneral"></app-invitations>
+  <app-friends *ngIf="selectedCategory === 'friends'" class="backgeneral"></app-friends>
+  <app-invitations *ngIf="selectedCategory === 'invitations'" class="backgeneral"></app-invitations>
+</div>
