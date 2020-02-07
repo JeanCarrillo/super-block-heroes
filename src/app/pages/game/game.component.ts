@@ -10,7 +10,7 @@ import { Game } from '../../shared/models/game';
 })
 export class GameComponent implements OnInit, OnDestroy {
   interval: any;
-  clicked = false;
+  invitesClicked = [];
   game: Game;
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -22,6 +22,9 @@ export class GameComponent implements OnInit, OnDestroy {
     public socketService: SocketService
   ) {}
   ngOnInit() {
+    for (const player of this.socketService.room.players) {
+      this.invitesClicked.push(false);
+    }
     this.game = new Game(
       this.socketService.room.monster,
       this.socketService.room.players,
@@ -74,7 +77,7 @@ export class GameComponent implements OnInit, OnDestroy {
     clearInterval(this.interval);
   }
   sendInvitation = i => {
-    this.clicked = true;
+    this.invitesClicked[i] = true;
     this.authService.getUser(this.game.players[i].name).subscribe((player: any) => {
       if (player.id) {
         this.authService.inviteUser(

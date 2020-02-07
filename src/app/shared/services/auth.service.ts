@@ -33,7 +33,7 @@ export class AuthService {
 
   addFriend(nickname: string, userSendingInvitNickname: string) {
     const data = { nickname: userSendingInvitNickname };
-    this.http.put(this.API_SERVER + '/users/addFriend/' + nickname, data)
+    this.http.put(this.API_SERVER + '/users/addFriend/' + nickname, data);
     // .subscribe(() => {
     //   console.log('test');
     // });
@@ -54,24 +54,25 @@ export class AuthService {
     );
   }
 
-  async register(user: any) {
+  register(user: any) {
     this.user = user;
-    await this.http
-      .post(this.API_SERVER + '/auth/register', {
-        nickname: this.user.nickname,
-        password: this.user.password,
-        email: this.user.email,
-        hero: 1,
-      })
-      .subscribe(
-        async (res: any) => {
-          if (res.email && res.nickname) {
-            this.login(this.user);
-            return;
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(this.API_SERVER + '/auth/register', {
+          nickname: this.user.nickname,
+          password: this.user.password,
+          email: this.user.email,
+          hero: 1,
+        })
+        .subscribe(
+          (res: any) => {
+            resolve(true);
+          },
+          (error: any) => {
+            reject(false);
           }
-        },
-        err => window.alert('Account already exists')
-      );
+        );
+    });
   }
 
   login(user: any) {

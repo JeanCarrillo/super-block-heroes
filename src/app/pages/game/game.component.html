@@ -30,7 +30,7 @@
                 <div *ngIf="i !== game.myPlayerIndex" class="otherPlayers">
                   <span class="playerName">Player : {{ player.name }}</span>
                   <app-button
-                    *ngIf="!clicked"
+                    *ngIf="!invitesClicked[i]"
                     text="Invite"
                     [callback]="sendInvitation.bind(this, i)"
                     class="inviteBtn"
