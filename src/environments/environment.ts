@@ -7,7 +7,7 @@ export const environment = {
   // APIEndpoint: 'http://localhost',
   APIEndpoint: 'https://www.superblockheroes.online',
   APIPort: 3000,
-  testMode: true,
+  testMode: false,
 };
 
 /*
